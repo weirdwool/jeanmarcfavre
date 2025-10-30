@@ -1,0 +1,185 @@
+---
+// src/components/VimeoShowcaseGrid.astro
+import '../styles/vimeo.css';
+import '../styles/slider.css';
+
+interface Props {
+  showcaseId: string;
+}
+
+const { showcaseId } = Astro.props;
+
+// Use a unique ID for the wrapper to prevent conflicts if multiple grids are on the same page
+const uniqueId = `vimeo-grid-${Math.random().toString(36).substring(2, 9)}`;
+---
+
+<!-- Wrapper for the entire component, now using vimeo-wrapper -->
+<div class="vimeo-wrapper" id={uniqueId} data-showcase-id={showcaseId}>
+  <!-- Loading placeholder, now a reusable class -->
+  <div class="vimeo-loading-placeholder">
+    <p>Chargement des vidéos...</p>
+    <div class="loading-spinner"></div>
+  </div>
+
+  <!-- The main container for the videos -->
+  <div class="vimeo-grid-container" style="display: none;">
+    <p class="error-message" style="display: none;"></p>
+    <!-- Inner container for the videos, becomes a grid on desktop -->
+    <div class="vimeo-grid-inner">
+      {/* Videos will be populated by JS */}
+    </div>
+  </div>
+  
+  <!-- Navigation arrows for the mobile slider layout -->
+  <div class="nav-wrapper" style="display: none;">
+    <div class="slider-navigation-arrows">
+      <button class="slider-arrow prev-arrow" aria-label="Previous Video">
+      ⟵
+      </button>
+      <button class="slider-arrow next-arrow" aria-label="Next Video">
+      ⟶
+      </button>
+    </div>
+  </div>
+</div>
+
+<script is:inline define:vars={{ uniqueId: uniqueId }}>
+  document.addEventListener('DOMContentLoaded', async () => {
+    const vimeoGridWrapper = document.getElementById(uniqueId);
+
+    if (!vimeoGridWrapper) {
+ 
+      return;
+    }
+
+    const showcaseId = vimeoGridWrapper.dataset.showcaseId;
+    const loadingPlaceholder = vimeoGridWrapper.querySelector('.vimeo-loading-placeholder');
+    const vimeoGridContainer = vimeoGridWrapper.querySelector('.vimeo-grid-container');
+    const errorMessageElement = vimeoGridContainer.querySelector('.error-message');
+    const navWrapper = vimeoGridWrapper.querySelector('.nav-wrapper');
+    const sliderNavigationArrows = navWrapper.querySelector('.slider-navigation-arrows');
+    const prevButton = sliderNavigationArrows.querySelector('.prev-arrow');
+    const nextButton = sliderNavigationArrows.querySelector('.next-arrow');
+
+    if (!showcaseId) {
+ 
+      if (loadingPlaceholder) {
+        loadingPlaceholder.innerHTML = '<p class="error-message">Erreur: ID de vitrine Vimeo manquant.</p>';
+        loadingPlaceholder.style.color = 'red';
+      }
+      return;
+    }
+
+    let videos = [];
+    let errorMessage = null;
+
+    try {
+        const apiResponse = await fetch(`${window.location.origin}/api/vimeo-showcase/${showcaseId}.json`);
+
+        if (!apiResponse.ok) {
+            const errorData = await apiResponse.json();
+            errorMessage = errorData.error || `Échec du chargement des vidéos (Statut: ${apiResponse.status})`;
+     
+        } else {
+            const data = await apiResponse.json();
+            // Limit to the latest 9 videos
+            videos = (data.videos || []).slice(0, 9);
+        }
+         } catch (error) {
+       errorMessage = 'Erreur réseau ou impossible de se connecter à l\'API.';
+     }
+
+    loadingPlaceholder.style.display = 'none';
+    vimeoGridContainer.style.display = 'block';
+
+    if (errorMessage || videos.length === 0) {
+        errorMessageElement.textContent = errorMessage || 'Aucune vidéo trouvée pour cette vitrine.';
+        errorMessageElement.style.display = 'block';
+        vimeoGridContainer.querySelector('.vimeo-grid-inner').style.display = 'none';
+        navWrapper.style.display = 'none';
+    }
+    else {
+        const vimeoGridInner = vimeoGridContainer.querySelector('.vimeo-grid-inner');
+        
+        vimeoGridInner.innerHTML = videos.map((video) => `
+          <div class="vimeo-grid-card">
+            <div class="vimeo-grid-player-container">
+              <div class="vimeo-grid-thumbnail-wrapper" data-video-id="${video.id}" data-embed-html='${video.embedHtml.replace(/'/g, "&apos;")}' title="Play ${video.name}">
+                ${video.thumbnail ? `<img src="${video.thumbnail}" alt="${video.name}" width="640" height="360" loading="lazy" />` : ''}
+                <div class="vimeo-grid-play-icon-overlay">
+                  <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                    <path d="M8 5v14l11-7z"/>
+                  </svg>
+                </div>
+              </div>
+              <div class="vimeo-grid-embed-player-active" style="display: none;">
+                <div class="vimeo-grid-iframe-wrapper"></div>
+              </div>
+            </div>
+            <h3 class="vimeo-grid-video-title">${video.name}</h3>
+          </div>
+        `).join('');
+
+        const handleVideoPlay = (card) => {
+          const thumbnailWrapper = card.querySelector('.vimeo-grid-thumbnail-wrapper');
+          const videoPlayerActive = card.querySelector('.vimeo-grid-embed-player-active');
+          const iframeWrapper = videoPlayerActive.querySelector('.vimeo-grid-iframe-wrapper');
+          const embedHtml = thumbnailWrapper.dataset.embedHtml;
+
+          if (thumbnailWrapper && videoPlayerActive && iframeWrapper && embedHtml) {
+            thumbnailWrapper.style.display = 'none';
+            videoPlayerActive.style.display = 'block';
+            iframeWrapper.innerHTML = embedHtml;
+
+            const iframe = iframeWrapper.querySelector('iframe');
+            if (iframe && !iframe.src.includes('autoplay=1')) {
+              iframe.src = iframe.src + (iframe.src.includes('?') ? '&' : '?') + 'autoplay=1';
+            }
+          }
+        };
+
+        const videoCards = vimeoGridInner.querySelectorAll('.vimeo-grid-card');
+        videoCards.forEach(card => {
+          const playIconOverlay = card.querySelector('.vimeo-grid-play-icon-overlay');
+          if (playIconOverlay) {
+            playIconOverlay.addEventListener('click', (event) => {
+              event.stopPropagation();
+              handleVideoPlay(card);
+            });
+          }
+        });
+
+        const checkScreenSize = () => {
+          const isDesktop = window.matchMedia("(min-width: 768px)").matches;
+          if (isDesktop) {
+            navWrapper.style.display = 'none';
+            // Disable scroll logic for desktop grid
+          } else {
+            navWrapper.style.display = 'block';
+            // Enable scroll logic for mobile slider
+            if (prevButton && nextButton) {
+              const getScrollAmount = () => {
+                const firstCard = vimeoGridInner.querySelector('.vimeo-grid-card');
+                return firstCard ? firstCard.offsetWidth : 350;
+              };
+
+              const prevHandler = () => {
+                vimeoGridContainer.scrollBy({ left: -getScrollAmount(), behavior: 'smooth' });
+              };
+
+              const nextHandler = () => {
+                vimeoGridContainer.scrollBy({ left: getScrollAmount(), behavior: 'smooth' });
+              };
+              
+              prevButton.addEventListener('click', prevHandler);
+              nextButton.addEventListener('click', nextHandler);
+            }
+          }
+        };
+        
+        // Initial check and a listener for screen size changes
+        checkScreenSize();
+        window.addEventListener('resize', checkScreenSize);
+    }
+  });
+</script>

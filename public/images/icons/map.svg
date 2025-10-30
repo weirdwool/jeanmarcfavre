@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+
+<svg
+   width="800"
+   height="800"
+   viewBox="0 0 24 24"
+   version="1.1"
+   id="svg1"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs1" />
+  <title
+     id="title1">Map-Pin</title>
+  <g
+     id="Page-1"
+     stroke="none"
+     stroke-width="1"
+     fill="none"
+     fill-rule="evenodd">
+    <g
+       id="Map-Pin">
+      <rect
+         id="Rectangle"
+         fill-rule="nonzero"
+         x="0"
+         y="0"
+         width="24"
+         height="24" />
+      <path
+         d="m 19,9.8 c 0,3.9585 -5.3372,8.781 -6.6908,9.9405 -0.1793,0.1535 -0.4391,0.1535 -0.6184,0 C 10.3372,18.581 5,13.7585 5,9.8 5,6.04446 8.13401,3 12,3 c 3.866,0 7,3.04446 7,6.8 z"
+         id="Path"
+         stroke="#0c0310"
+         stroke-width="2"
+         stroke-linecap="round" />
+      <circle
+         id="Oval"
+         stroke="#0c0310"
+         stroke-width="2"
+         stroke-linecap="round"
+         cx="12"
+         cy="10"
+         r="2" />
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,417 @@
+/*
+  This file contains the common styles for both the Vimeo video slider
+  and other components like a video grid.
+  Styles are split into sections for clarity.
+*/
+
+/* =========================================================
+   1. COMMON VIMEO STYLES
+   These styles can be used for any Vimeo-related component.
+   ========================================================= */
+.vimeo-wrapper {
+  position: relative;
+  width: 100%;
+  min-height: 350px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Loading and error states */
+.vimeo-loading-placeholder {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  color: #a6a6a6;
+  font-size: 1.2rem;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: inherit;
+  z-index: 10;
+}
+
+.loading-spinner {
+  border: 4px solid rgba(0, 0, 0, 0.1);
+  border-top: 4px solid var(--primary-color);
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  animation: spin 1s linear infinite;
+  margin-top: 15px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.error-message {
+    color: red;
+    text-align: center;
+    padding: 20px;
+    border: 1px solid red;
+    background-color: #ffeaea;
+    margin: 20px auto;
+    border-radius: 8px;
+}
+
+/* Base style for the container that holds the thumbnail or player */
+.vimeo-slider-player-container, .vimeo-grid-player-container {
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%; /* 16:9 aspect ratio */
+  background-color: #000;
+  overflow: hidden;
+}
+
+/* Styles for the video iframe when it's active */
+.vimeo-slider-embed-player-active, .vimeo-grid-embed-player-active {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: none; /* Controlled by JS */
+  margin: 0;
+  padding: 0;
+}
+
+.vimeo-slider-iframe-wrapper, .vimeo-grid-iframe-wrapper {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center; 
+  padding: 4rem;
+}
+
+.vimeo-slider-iframe-wrapper iframe, .vimeo-grid-iframe-wrapper iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  margin: 0;
+  padding: 0;
+  display: block;
+}
+
+.video-feed-header {
+  padding: 20px;
+}
+
+.video-feed .title-wrapper  {
+  padding: 20px;
+  max-width: 1600px;
+  margin: auto;
+  border-bottom: 1px solid var(--primary-color);
+}
+
+/* =========================================================
+   2. SLIDER-SPECIFIC STYLES
+   These styles are unique to the slider component.
+   ========================================================= */
+
+.vimeo-slider-container {
+  width: 100%;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.vimeo-slider-container::-webkit-scrollbar {
+  display: none;
+  width: 0 !important;
+  height: 0 !important;
+  background: transparent;
+}
+.vimeo-slider-container::-webkit-scrollbar-track {
+  display: none;
+}
+.vimeo-slider-container::-webkit-scrollbar-thumb {
+  display: none;
+}
+
+.vimeo-slider-inner {
+  display: flex;
+  padding: 0; /* Remove all padding */
+  align-items: flex-start;
+  gap: 0; /* Remove all gaps */
+}
+
+.vimeo-slider-card {
+  flex: 0 0 auto !important;
+  scroll-snap-align: start;
+  background-color: transparent;
+  overflow: hidden;
+  width: 350px !important; /* Base width for a single card */
+  padding: 20px; /* Add padding all around each card */
+}
+
+@media (min-width: 768px) {
+  .vimeo-slider-card {
+    width: calc((100% - 1.5rem) / 2) !important; /* Tablet width for the slider */
+  }
+}
+
+@media (min-width: 1024px) {
+  .vimeo-slider-card {
+    width: calc((100% - (1.5rem * 2)) / 3) !important; /* Desktop width for the slider */
+  }
+}
+
+/* Wrapper for the thumbnail image and play icon */
+.vimeo-slider-thumbnail-wrapper {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  background-color: #000;
+  overflow: hidden;
+  cursor: pointer;
+  display: block;
+}
+
+.vimeo-slider-thumbnail-wrapper img {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.vimeo-slider-thumbnail-wrapper:hover img {
+  opacity: 0.8;
+}
+
+/* Styles for the play icon that appears over the thumbnail */
+.vimeo-slider-play-icon-overlay {
+  position: absolute !important;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) scale(1) !important;
+  width: 52px !important;
+  height: 32px !important;
+  background-color: rgba(0, 0, 0, 0.95);
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  pointer-events: auto;
+  cursor: pointer;
+  opacity: 0.9;
+  transition: transform 0.2s ease-in-out, opacity 0.3s ease-in-out, background-color 0.2s ease-in-out;
+  z-index: 1;
+}
+
+.vimeo-slider-play-icon-overlay svg {
+  width: 30px !important;
+  height: 30px !important;
+}
+
+.vimeo-slider-play-icon-overlay:hover {
+  background-color: var(--primary-color);
+  opacity: 1;
+}
+
+/* Video title styles */
+.vimeo-slider-video-title {
+  font-size: 1rem !important;
+  margin-top: 1rem;
+  color: #a6a6a6;
+  font-weight: 300;
+  text-align: center;
+  padding: 0;
+}
+
+/* =========================================================
+   3. GRID-SPECIFIC STYLES
+   These styles are unique to the grid component.
+   They are mobile-first, and switch to a grid on larger screens.
+   ========================================================= */
+
+.vimeo-grid-container {
+  /* Mobile-first: slider layout */
+  width: 100%;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.vimeo-grid-container::-webkit-scrollbar {
+  display: none;
+}
+
+.vimeo-grid-inner {
+  /* Mobile-first: flex for horizontal scrolling */
+  display: flex;
+  padding: 0; /* Remove all padding */
+  align-items: flex-start;
+  gap: 0; /* Remove all gaps */
+}
+
+.vimeo-grid-card {
+  flex: 0 0 auto !important; /* Prevents stretching */
+  scroll-snap-align: start;
+  width: 350px !important; /* Base width for mobile slider */
+  background-color: transparent;
+  overflow: hidden;
+  padding: 20px; /* Add padding all around each card */
+}
+
+/* grid layout Desktop  */
+@media (min-width: 768px) {
+  .vimeo-grid-container {
+    overflow-x: hidden;
+  }
+  .vimeo-grid-inner {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0; /* Remove all gaps */
+    padding: 0;
+    margin: 0; /* Remove margin */
+    /* Optional: Add max-width and center if you want the grid to not span full screen width */
+    max-width: 1500px; /* Example: limit the grid width */
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .vimeo-grid-card {
+    width: 100% !important; /* Fills the grid cell */
+    scroll-snap-align: none; /* No snapping for grid layout */
+    padding: 20px; /* Add padding all around each card */
+  }
+}
+
+@media (min-width: 1024px) {
+  .vimeo-grid-inner {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0; /* Remove all gaps */
+  }
+}
+
+/* --- Common card elements for the grid, using new classes --- */
+.vimeo-grid-player-container {
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%; /* 16:9 aspect ratio */
+  background-color: #000;
+  overflow: hidden;
+}
+
+.vimeo-grid-thumbnail-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #000;
+  overflow: hidden;
+  cursor: pointer;
+  display: block;
+}
+
+.vimeo-grid-thumbnail-wrapper img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.vimeo-grid-thumbnail-wrapper:hover img {
+  opacity: 0.8;
+}
+
+.vimeo-grid-embed-player-active {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: none;
+  margin: 0;
+  padding: 0;
+}
+
+.vimeo-grid-iframe-wrapper {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.vimeo-grid-iframe-wrapper iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  margin: 0;
+  padding: 0;
+  display: block;
+}
+
+.vimeo-grid-play-icon-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(1);
+  width: 52px;
+  height: 32px;
+  background-color: rgba(0, 0, 0, 0.95);
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  pointer-events: auto;
+  cursor: pointer;
+  opacity: 0.9;
+  transition: transform 0.2s ease-in-out, opacity 0.3s ease-in-out, background-color 0.2s ease-in-out;
+  z-index: 1;
+}
+
+.vimeo-grid-play-icon-overlay svg {
+  width: 30px;
+  height: 30px;
+}
+
+.vimeo-grid-play-icon-overlay:hover {
+  background-color: var(--primary-color);
+  opacity: 1;
+}
+
+.vimeo-grid-video-title {
+  font-size: 1rem;
+  margin-top: 1rem;
+  color: #a6a6a6;
+  font-weight: 300;
+  text-align: center;
+  padding: 0;
+}
+
+

@@ -1,0 +1,121 @@
+<nav class="menu menu-default">
+   <div class="menu-column">
+      <a href="/" class="logo logo-desktop">
+      <img src="/logo/signature-500x173.png" alt="Signature de Jean-Marc Favre" width="200" height="120">
+      </a>
+   </div>
+   <div class="menu-column menu-nav menu-default-nav hover-effect">
+      <ul>
+         <li><a href="/">Accueil</a></li>
+         <li><a href="/a-propos">À propos</a></li>
+         <li><a href="/photo">Photo</a></li>
+         <li><a href="/drone">Drone</a></li>
+         <li><a href="/video">Vidéo</a></li>
+         <li><a href="/engagements">Mes Engagements</a></li>
+         <li><a href="/blog">Blog</a></li>
+         <li><a href="/contact">Contact</a></li>
+      </ul>
+   </div>
+</nav>
+
+<nav class="menu menu-burger">
+   <div class="menu-column">
+      <a href="/" class="logo logo-mobile">
+      <img src="/logo/signature-500x173.png" alt="Signature de Jean-Marc Favre" width="200" height="120">
+      </a>
+   </div>
+   <input type="checkbox" id="overlay-input" />
+   <label for="overlay-input" id="overlay-button">
+      <div class="burger-box">
+         <span></span>
+      </div>
+   </label>
+   <div id="overlay">
+      <div class="menu-column menu-nav menu-overlay-nav hover-effect">
+         <ul>
+            <li><a href="/">Accueil</a></li>
+            <li><a href="/a-propos">À propos</a></li>
+            <li><a href="/photo">Photo</a></li>
+            <li><a href="/drone">Drone</a></li>
+            <li><a href="/video">Vidéo</a></li>
+            <li><a href="/engagements">Mes Engagements</a></li>
+            <li><a href="/blog">Blog</a></li>
+            <li><a href="/shop">Shop</a></li>
+            <li><a href="/contact">Contact</a></li>
+            <li><a href="/mentions-legales">Mentions légales</a></li>
+         </ul>
+         <div class="socials-wrapper">
+            <a href="https://www.linkedin.com/in/jean-marc-favre-38653923/" target="_blank" aria-label="Linkedin">
+                           <img src="/images/icons/linkedin.svg" alt="Linkedin" class="icon" width="24" height="24">
+            </a>
+            <a href="https://www.instagram.com/wooloomooloo_jeanmarcfavre/" target="_blank" aria-label="Instagram">
+                           <img src="/images/icons/instagram.svg" alt="Instagram" class="icon" width="24" height="24">
+            </a>
+            <a href="https://www.facebook.com/jmfavre74" target="_blank" aria-label="Facebook">
+                           <img src="/images/icons/facebook.svg" alt="Facebook" class="icon" width="24" height="24">
+            </a>
+            <a href="https://vimeo.com/wooloomoolootv" target="_blank" aria-label="Vimeo">
+                           <img src="/images/icons/vimeo.svg" alt="Vimeo" class="icon" width="24" height="24">
+            </a>
+            <a href="https://www.youtube.com/channel/UCd_1Z_BMT7yLnsGuzrCtrkw" target="_blank" aria-label="YouTube">
+                           <img src="/images/icons/youtube.svg" alt="YouTube" class="icon" width="24" height="24">
+            </a>
+         </div>
+      </div>
+   </div>
+</nav>
+
+<script is:inline>
+  document.addEventListener('DOMContentLoaded', () => {
+    const menu = document.querySelector('.menu-default');
+    const logos = document.querySelectorAll('.menu .logo');
+    const overlayInput = document.getElementById('overlay-input');
+    const body = document.body;
+
+    const scrollThreshold = 100;
+
+    const handleScroll = () => {
+      const scrollY = window.scrollY;
+
+      // Desktop shrink effect
+      if (menu && window.innerWidth >= 1325) {
+        const desktopLogo = menu.querySelector('.logo-desktop');
+        if (scrollY > scrollThreshold) {
+          menu.classList.add('shrink');
+          if (desktopLogo) desktopLogo.classList.add('shrink');
+        } else {
+          menu.classList.remove('shrink');
+          if (desktopLogo) desktopLogo.classList.remove('shrink');
+        }
+      }
+
+      // Mobile logo hide/show at top only
+      if (window.innerWidth < 1325) {
+        const atTop = scrollY <= 50; // Allow some tolerance
+        logos.forEach(logo => {
+          if (atTop) {
+            logo.classList.remove('hidden-on-scroll');
+          } else {
+            logo.classList.add('hidden-on-scroll');
+          }
+        });
+      }
+    };
+
+    // Disable scroll when overlay is open on mobile
+    const handleOverlayChange = () => {
+      if (window.innerWidth < 1325) {
+        if (overlayInput.checked) {
+          body.style.overflow = 'hidden';
+        } else {
+          body.style.overflow = '';
+        }
+      }
+    };
+
+    overlayInput.addEventListener('change', handleOverlayChange);
+
+    window.addEventListener('scroll', handleScroll);
+    handleScroll(); // Run on page load
+  });
+</script>

@@ -1,0 +1,102 @@
+---
+interface Props {
+  type: 'LocalBusiness' | 'BlogPosting' | 'ImageGallery';
+  data?: any;
+}
+
+const { type, data = {} } = Astro.props;
+
+const baseSchema = {
+  "@context": "https://schema.org",
+};
+
+let schema;
+
+if (type === 'LocalBusiness') {
+  schema = {
+    ...baseSchema,
+    "@type": "ProfessionalService",
+    "name": "Jean-Marc Favre - Photographe & Pilote de Drone",
+    "image": "https://www.jeanmarcfavre.com/images/jmf2-998x665.jpg",
+    "description": "Photographe professionnel et pilote de drone certifié à Annecy. 40 ans d'expérience en photographie sportive, événementielle, drone et vidéo.",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Annecy",
+      "addressRegion": "Auvergne-Rhône-Alpes",
+      "addressCountry": "FR"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": 45.899247,
+      "longitude": 6.129384
+    },
+    "url": "https://www.jeanmarcfavre.com",
+    "telephone": "+33607596969",
+    "email": "contact@jeanmarcfavre.com",
+    "priceRange": "€€",
+    "areaServed": [
+      "Annecy", "Haute-Savoie", "Auvergne-Rhône-Alpes", "Chambéry", 
+      "Chamonix", "Megève", "Courchevel", "Albertville", "Thonon-les-Bains",
+      "Aix-les-Bains", "La Clusaz", "Le Grand-Bornand"
+    ],
+    "serviceType": [
+      "Photographie professionnelle",
+      "Pilote de drone certifié",
+      "Vidéographie",
+      "Photographie de mariage",
+      "Photographie d'entreprise",
+      "Photographie aérienne",
+      "Photographie d'événements",
+      "Photographie sportive"
+    ],
+    "knowsAbout": [
+      "Photographie",
+      "Drone",
+      "Vidéo",
+      "Sports extrêmes",
+      "Photographie aérienne"
+    ]
+  };
+} else if (type === 'BlogPosting') {
+  schema = {
+    ...baseSchema,
+    "@type": "BlogPosting",
+    "headline": data.title,
+    "image": data.image,
+    "datePublished": data.datePublished,
+    "dateModified": data.dateModified || data.datePublished,
+    "author": {
+      "@type": "Person",
+      "name": "Jean-Marc Favre",
+      "url": "https://www.jeanmarcfavre.com"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Jean-Marc Favre Photographie",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://www.jeanmarcfavre.com/logo/signature-500x173.png"
+      }
+    },
+    "description": data.description,
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": data.url
+    }
+  };
+} else if (type === 'ImageGallery') {
+  schema = {
+    ...baseSchema,
+    "@type": "ImageGallery",
+    "name": data.name,
+    "description": data.description,
+    "author": {
+      "@type": "Person",
+      "name": "Jean-Marc Favre"
+    }
+  };
+}
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />
+

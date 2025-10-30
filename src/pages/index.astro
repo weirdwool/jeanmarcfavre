@@ -1,0 +1,512 @@
+---
+import Layout from '../layouts/Layout.astro';
+import StructuredData from '../components/StructuredData.astro';
+import { getCollection, type CollectionEntry } from 'astro:content';
+
+// Existing: Fetch and sort engagements
+const allEngagements = await getCollection('engagements');
+allEngagements.sort((a: CollectionEntry<'engagements'>, b: CollectionEntry<'engagements'>) => a.data.title.localeCompare(b.data.title));
+
+// Fetch recent blog posts
+const allBlogPosts = await getCollection('blog');
+allBlogPosts.sort((a: CollectionEntry<'blog'>, b: CollectionEntry<'blog'>) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
+const recentPosts = allBlogPosts.slice(0, 8); // Get 8 most recent posts
+
+// Helper function to generate clean blog post URLs
+function getBlogPostUrl(post: CollectionEntry<'blog'>) {
+  const pubDate = post.data.pubDate;
+  const year = pubDate.getFullYear().toString();
+  const month = (pubDate.getMonth() + 1).toString().padStart(2, '0');
+  const day = pubDate.getDate().toString().padStart(2, '0');
+  const cleanSlug = post.slug.replace(/^\d{4}-\d{2}-\d{2}-/, '');
+  return `/blog/${year}/${month}/${day}/${cleanSlug}/`;
+}
+
+---
+
+<Layout 
+  isIndexPage={true} 
+  title="Jean-Marc Favre - Photographe Drone Annecy | 40 ans d'Expérience Photo Vidéo"
+  description="Photographe professionnel et pilote de drone certifié à Annecy. 40 ans d'expérience en photographie sportive, événementielle et aérienne. Services photo, vidéo et drone en Haute-Savoie."
+  image="/images/jmf2-998x665.jpg"
+  canonical="/"
+>
+   <StructuredData type="LocalBusiness" />
+   <section class="index-hero-video-banner">
+      <div class="video-spacer">
+         <div class="index-hero-content">
+            <div class="side-border left"></div>
+            <div class="side-border right"></div>
+            <div class="top-border"></div>
+            <div class="bottom-border"></div>
+            <h1 class="hero-title text-shadow fade-in mb-1">Jean-Marc Favre</h1>
+            <div class="hero-subtitle text-shadow fade-in">
+               <span>Photo</span>
+               <span>Drone</span>
+               <span>Vidéo</span>
+            </div>
+         </div>
+      </div>
+      <div class="index-hero-video">
+         <video class="index-hero-video" autoplay loop muted playsinline poster="/images/parallax/131024-besancon-1-1200x800.jpg">
+            <source src="/videos/Woo-ShowReel.m4v" type="video/mp4">
+            Your browser does not support the video tag.
+         </video>
+         <div class="index-hero-overlay"></div>
+      </div>
+   </section>
+
+   <div class="container pt-5 pb-5">
+
+      <section class="intro-section container-content">
+         <div class="row">
+            <div class="col-md-4">
+               <h2><b>Clichés</b> d'une vie</h2>
+            </div>
+            <div class="col-md-8 text-wrapper">
+               <p>Avec <b>40 années d'aventures visuelles</b> à mon actif, j'ai exploré le globe, l'appareil photo toujours en main. Ma passion pour l'image m'a permis de voyager à travers plus de 45 pays et d'y faire d'innombrables rencontres passionnantes et enrichissantes. <br><br>Chaque jour, je continue de nourrir cette passion, cherchant à la partager à travers mon travail professionnel.</p>
+               <a href="/a-propos.html" class="link" aria-label="Accéder a la page à propos de Jean-Marc Favre">À propos</a>
+            </div>
+         </div>
+      </section>
+
+      <section class="services-section pt-5 pb-2">
+         <div class="container-medium feature-grid">
+            <a href="/photo/" class="feature-card">
+               <img src="/images/jmf4-998x664.jpg" alt="Photo" />
+               <div class="feature-overlay">
+                  <h2>Photo</h2>
+                  <span class="feature-link" aria-label="Accéder a la page Photo">En savoir plus</span>
+               </div>
+            </a>
+            <a href="/drone/" class="feature-card">
+               <img src="/images/parallax/131024-besancon-1-1200x800.jpg" alt="Drone" />
+               <div class="feature-overlay">
+                  <h2>Drone</h2>
+                  <span class="feature-link" aria-label="Accéder a la page Drone">En savoir plus</span>
+               </div>
+            </a>
+            <a href="/video/" class="feature-card">
+               <img src="/images/jmf2-998x665.jpg" alt="Vidéo" />
+               <div class="feature-overlay">
+                  <h2>Vidéo</h2>
+                  <span class="feature-link" aria-label="Accéder a la page Vidéo">En savoir plus</span>
+               </div>
+            </a>
+         </div>
+      </section>
+   </div>
+
+<section class="parallax-banner" style="background-image: url('/images/parallax/MICHAUD-Seb-158.jpg');">
+   <div class="parallax-banner-overlay"></div> 
+   <img 
+      src="/images/parallax/MICHAUD-Seb-158.jpg" 
+      alt="Seb Michaud en ski" 
+      class="parallax-mobile-img" 
+      loading="lazy"
+   >
+</section>
+
+   <div class="container pt-5 pb-5">
+
+      <section class="engagements-section">
+         <div class="container-content">
+            <div class="text-wrap mb-2">
+               <div class="title-wrapper link-flex">
+                  <h2>Mes Engagements</h2>
+                  <a class="link" href="/engagements" aria-label="Découvrir mes engagements">Découvrir</a>
+               </div>
+               <div class="text-wrapper">
+                  <p>Impliqué de manière active et constante dans la vie de ma ville et de ma région, je m'efforce chaque jour de contribuer à leur essor. Mon engagement va au-delà de ma passion pour l'image; il s'inscrit dans <b>une volonté de soutenir et de mettre en lumière les initiatives locales, les événements culturels et les projets communautaires.</b></p>
+                  <p>Chacun des individus avec lesquels je travaille, qu'il s'agisse de chefs étoilés, de sportifs extrêmes, d'acteurs institutionnels ou de mes chers amis, représente bien plus qu'un simple sujet photographique ou vidéo. Ces rencontres sont pour moi des instants précieux d'échange humain et d'enrichissement personnel, teintés de complicité et de compréhension mutuelle.</p>
+               </div>
+            </div>
+         </div>
+        
+         <div class="container-slider slider-wrapper">
+            <div class="engagements-slider-track slider-track">
+               {allEngagements.map((item: CollectionEntry<'engagements'>) => ( 
+               <a href={`/engagements/${item.slug}`} class="engagement-item slider-item">
+                  <div class="engagement-image-wrapper">
+                     {item.data.main_image && (
+                     <img
+                        src={item.data.main_image}
+                        alt={item.data.title}
+                        width="400"
+                        height="300"
+                        loading="lazy"
+                        />
+                     )}
+                     <div class="gradient-overlay"></div>
+                  </div>
+                  
+                  <div class="engagement-item-header">
+                     <h2 class="engagement-item-title">{item.data.title}</h2>
+                     <h3 class="engagement-item-subtitle">{item.data.subtitle}</h3>
+                  </div>
+              </a>
+               ))}
+            </div>
+
+            
+            <div>
+               <div class="separation-line-gradient"></div>
+               <div class="slider-navigation-arrows">
+                  <button id="prevEngagement" class="slider-arrow prev-arrow" aria-label="Engagement précédent">
+                  ⟵
+                  </button>
+                  <button id="nextEngagement" class="slider-arrow next-arrow" aria-label="Engagement suivant">
+                  ⟶
+                  </button>
+               </div>
+            </div>
+         </div>
+      </section>
+
+   </div>
+
+   <section class="parallax-banner" style="background-image: url('/images/parallax/030517-tanjung-rizal-bali-230-2000x1338.jpg');">
+   <div class="parallax-banner-overlay"></div> 
+   <img 
+      src="/images/parallax/030517-tanjung-rizal-bali-230-2000x1338.jpg" 
+      alt="Lac d'annecy en hiver" 
+      class="parallax-mobile-img" 
+      loading="lazy"
+   >
+</section>
+
+
+   <div class="container clients-container pt-5 pb-5">
+      <section class="container-medium">
+         <div class="row align-center">
+            <div class="col-md-6">
+               <div class="text-wrap">
+                  <h2 class="title-wrapper">Ils m’ont fait confiance</h2>
+                  <div class="text-wrapper">
+                     <p>Au fil de ma carrière, j'ai eu le privilège de collaborer avec une multitude de marques et d'organisations, des startups innovantes aux leaders de leur secteur. Ces partenariats sont le reflet de la confiance accordée à mon approche artistique et technique.</p>
+                     <p><b>Pour discuter d'une collaboration ou pour tout autre renseignement, n'hésitez pas à <a href="/contact" class="link-text">me contacter</a>.</b></p>
+                  </div>
+               </div>
+            </div>
+            <div class="col-md-6">
+               <div class="brand-logos-gallery">
+                  <img src="/logo/logos-clients/atomic.svg" alt="Atomic Logo">
+                  <img src="/logo/logos-clients/bicsport.png" alt="Bic Sport Logo">
+                  <img src="/logo/logos-clients/bogner-fire-ice.png" alt="Bogner Fire Ice Logo">
+                  <img src="/logo/logos-clients/cebe.svg" alt="Cebe Logo">
+                  <img src="/logo/logos-clients/coca-cola.svg" alt="Coca-Cola Logo">
+                  <img src="/logo/logos-clients/columbia.svg" alt="Columbia Logo">
+                  <img src="/logo/logos-clients/degre7.png" alt="Degre 7 Logo">
+                  <img src="/logo/logos-clients/dynastar.svg" alt="Dynastar Logo">
+                  <img src="/logo/logos-clients/eider.svg" alt="Eider Logo">
+                  <img src="/logo/logos-clients/framatome.png" alt="Framatome Logo">
+                  <img src="/logo/logos-clients/france-tv.png" alt="France TV Logo">
+                  <img src="/logo/logos-clients/fusalp.png" alt="Fusalp Logo">
+                  <img src="/logo/logos-clients/gold-and-wood.png" alt="Gold and Wood Logo">
+                  <img src="/logo/logos-clients/grand-annecy.png" alt="Grand Annecy Logo">
+                  <img src="/logo/logos-clients/intersport.png" alt="Intersport Logo">
+                  <img src="/logo/logos-clients/julbo.svg" alt="Julbo Logo">
+                  <img src="/logo/logos-clients/lacoste.svg" alt="Lacoste Logo">
+                  <img src="/logo/logos-clients/m6.png" alt="M6 Logo">
+                  <img src="/logo/logos-clients/mobalpa.svg" alt="Mobalpa Logo">
+                  <img src="/logo/logos-clients/montagne-tv.png" alt="Montagne TV Logo">
+                  <img src="/logo/logos-clients/oakley.svg" alt="Oakley Logo">
+                  <img src="/logo/logos-clients/orange.png" alt="Orange Logo">
+                  <img src="/logo/logos-clients/oxbow.svg" alt="Oxbow Logo">
+                  <img src="/logo/logos-clients/phenix.png" alt="Phenix Logo">
+                  <img src="/logo/logos-clients/quiksilver.svg" alt="Quiksilver Logo">
+                  <img src="/logo/logos-clients/ripcurl.png" alt="Rip Curl Logo">
+                  <img src="/logo/logos-clients/rossignol.png" alt="Rossignol Logo">
+                  <img src="/logo/logos-clients/salomon.svg" alt="Salomon Logo">
+                  <img src="/logo/logos-clients/sig.png" alt="Sig Logo">
+                  <img src="/logo/logos-clients/sun-valley.png" alt="Sun Valley Logo">
+                  <img src="/logo/logos-clients/superbolide.png" alt="Superbolide Logo">
+                  <img src="/logo/logos-clients/umbro.png" alt="Umbro Logo">
+                  <img src="/logo/logos-clients/ugitec.png" alt="Ugitec Logo">
+                  <img src="/logo/logos-clients/dauphine.png" alt="Dauphine Logo">
+                  <img src="/logo/logos-clients/la-clusaz.png" alt="La Clusaz Logo">
+                  <img src="/logo/logos-clients/la-rosiere.png" alt="La Rosiere Logo">
+                  <img src="/logo/logos-clients/le-grand-bornand.png" alt="Le Grand Bornand Logo">
+                  <img src="/logo/logos-clients/les-salins.png" alt="Les Salins Logo">
+                  <img src="/logo/logos-clients/manigod.png" alt="Manigod Logo">
+                  <img src="/logo/logos-clients/val-thorens.png" alt="Val Thorens Logo">
+               </div>
+            </div>
+         </div>
+      </section>
+      <section class="container slider-wrapper">
+         <h3 class="text-center mt-3 temoignages">Témoignages</h3>
+         <div class="testimonial-slider-track slider-track">
+            <div class="testimonial-item slider-item">
+               <p class="testimonial-text">
+                  "Jean-Marc a ce talent de pouvoir capter l'instant , l'émotion qui a fait son succès dans l'essor des sports de glisse dont il est devenu l'uno des photographes iconiques. Avec le drone, son talent s'est élargi dans la vidéo. Depuis très longtemps, Jean-Marc m'accompagne dans tous mes projets et ne compte ni son énergie, ni son temps pour mettre en valeur mon travail. Au-delà d'être devenu un ami proche, il est devenu le partenaire systématique de toutes mes évolutions professionnelles. Pour moi il n'y a pas photo justement, c'est Jean Marc et puis c'est tout !!!"
+               </p>
+               <p class="testimonial-author"><strong>Rémi Forsans</strong></p>
+               <p class="testimonial-job">Fondateur OSV et iDÉE</p>
+            </div>
+            <div class="testimonial-item slider-item">
+               <p class="testimonial-text">
+                  « Résolument tourné vers le sport, l’environnement et le bien-vivre Jean-Marc s’exerce toujours à la pointe artistique de l’excellence. Sa vision aiguisée est très précieuse pour la Fondation Eau Neige et Glace qu’il soutient généreusement depuis plus de 10 ans. L’amitié est comme l’eau des montagnes : tout en découle ! »
+               </p>
+               <p class="testimonial-author"><strong>Serge Martinot</strong></p>
+               <p class="testimonial-job">Président de la Fondation Eau Neige et Glace</p>
+            </div>
+            <div class="testimonial-item slider-item">
+               <p class="testimonial-text">
+                  "C'est toujours un plaisir de travailler avec Jean-Marc: professionnalisme, disponibilité et bonne humeur sont toujours au rendez-vous. C'est un grand professionnel dont nous apprécions les qualités techniques, artistiques et humaines. Il sait s’adapter à nos contraintes et nos délais dans des contextes variés: aussi à l'aise avec un drone que dans une réunion publique, un cocktail ou sur un chantier!"
+               </p>
+               <p class="testimonial-author"><strong>Véronique Bonnard</strong></p>
+               <p class="testimonial-job">Dir. Comm. Grand Annecy</p>
+            </div>
+            <div class="testimonial-item slider-item">
+               <p class="testimonial-text">
+                  "Jean Marc fait preuve d’un grand professionnalisme et de créativité artistique. Je travaille avec lui depuis nombreuses années et il a su évoluer avec les outils de son temps. Il sait s’adapter à la demande : Photos produits, mise en valeur de l’environnement et visites virtuelles. A l’arrivée les photos ou les vidéos sont d’une grande qualité. Un vrai professionnel de l’image"
+               </p>
+               <p class="testimonial-author"><strong>Florence Saki</strong></p>
+               <p class="testimonial-job">Dir. Comm. et Pôle Tourisme Groupe Salin</p>
+            </div>
+            <div class="testimonial-item slider-item">
+               <p class="testimonial-text">
+                  "Notre rencontre avec Jean-Marc Favre a été un véritable cadeau pour MEEO ! Son écoute, son optimisme communicatif, sa capacité à s’émerveiller et voir le beau partout … qualités humaines auxquelles s’ajoutent l’œil discret de sa caméra ont été autant d’atouts pour que grands et petits se sentent en confiance et se livrent au naturel ! Par ses images, Jean- Marc a retranscrit avec tant de sensibilité, de respect et d’émotions le quotidien des enfants, le combat de leurs parents et de l’Association !!! Merci au nom de tous !"
+               </p>
+               <p class="testimonial-author"><strong>Félicie Petit</strong></p>
+               <p class="testimonial-job">Co-fondatrice et directrice de l'école MéeO</p>
+            </div>
+            <div class="testimonial-item slider-item">
+               <p class="testimonial-text">
+                  "Jean Marc Favre, pour celles et ceux qui aiment le milieu de la glisse et de la photo, son nom est une légende. L’homme au what milliards de parutions et je ne sais combien de couvertures… Sans parler de son oeil d’expert, Jean Marc c’est surtout l’humain, l’homme qui se cache derrière la camera. J’ai eu la chance de faire travailler Jean Marc en tant que pilote de drone sur des événements comme l’Evian Masters ou encore des pubs pour Orange : au delà d’avoir la garantie d’un travail de qualité, c’était surtout une belle aventure humaine et vraie."
+               </p>
+               <p class="testimonial-author"><strong>Frank Pedretti</strong></p>
+               <p class="testimonial-job">Multiglisseur et présentateur France2</p>
+            </div>
+         </div>
+         <div class="slider-navigation-arrows">
+            <button id="prevTestimonial" class="slider-arrow prev-arrow" aria-label="Previous testimonial">
+            ⟵
+            </button>
+            <button id="nextTestimonial" class="slider-arrow next-arrow" aria-label="Next testimonial">
+            ⟶
+            </button>
+         </div>
+      </section>
+   </div>
+
+<section class="parallax-banner" style="background-image: url('/images/parallax/180218-nazare-surf-725-1142x758.jpg');">
+   <div class="parallax-banner-overlay"></div> 
+   <img 
+      src="/images/parallax/180218-nazare-surf-725-1142x758.jpg" 
+      alt="Nazaré surf background image" 
+      class="parallax-mobile-img" 
+      loading="lazy"
+   >
+</section>
+
+
+
+   <div class="container pt-5 pb-5">
+
+      <section class="blog-section">
+         <div class="container-content">
+            <div class="row align-center">
+               <div class="col-md-8">
+                  <div class="text-wrap mb-2">
+                     
+                     <div class="title-wrapper link-flex">
+                        <h2>Blog</h2>
+                       <a class="link" href="/blog" aria-label="Découvrir tous les articles">Accéder aux articles</a>
+                     </div>
+                     <div class="text-wrapper">
+                        <p>Pour celles et ceux qui souhaitent explorer mon univers, je vous invite à plonger dans les coulisses de mon travail.</p>
+                        <p>Découvrez <b>mes dernières réalisations, des récits de projets passés et des aperçus rapides de mon quotidien derrière l'objectif</b>, chaque article vous guidant vers les galeries et vidéos associées.</p>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-md-4 diapo-jmf">
+                  <div class="image-wrapper">
+                     <img src="images/collages/blog-760x881.png" alt="Portrait de Jean-Marc Favre dans un diaporama">
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div class="container-slider slider-wrapper">
+            <div class="blog-slider-track slider-track">
+               {recentPosts.map((post: CollectionEntry<'blog'>) => (
+                  <a href={getBlogPostUrl(post)} class="blog-item slider-item">
+                     <div class="blog-image-wrapper">
+                        {post.data.main_image && (
+                        <img
+                           src={post.data.main_image}
+                           alt={post.data.title}
+                           width="400"
+                           height="300"
+                           loading="lazy"
+                           />
+                        )}
+                        <div class="gradient-overlay"></div>
+                     </div>
+                     
+                     <div class="blog-item-header">
+                        <h3 class="blog-item-title">{post.data.title}</h3>
+                        <p class="blog-item-meta">
+                           {post.data.pubDate.toLocaleDateString('fr-FR', { 
+                              year: 'numeric', 
+                              month: 'long', 
+                              day: 'numeric' 
+                           })}
+                           {post.data.location && (
+                              <span>, {post.data.location}</span>
+                           )}
+                        </p>
+                     </div>
+                 </a>
+               ))}
+               
+               {/* View All Posts Item */}
+               <a href="/blog" class="blog-item blog-view-all slider-item">
+                  <div class="blog-view-all-content">
+                     <h3 class="blog-view-all-title">Voir tous les posts</h3>
+                     <p class="blog-view-all-subtitle">Découvrir l'ensemble de mes publications</p>
+                  </div>
+               </a>
+            </div>
+
+            <div>
+               <div class="separation-line-gradient"></div>
+               <div class="slider-navigation-arrows">
+                  <button id="prevBlog" class="slider-arrow prev-arrow" aria-label="Article précédent">
+                  ⟵
+                  </button>
+                  <button id="nextBlog" class="slider-arrow next-arrow" aria-label="Article suivant">
+                  ⟶
+                  </button>
+               </div>
+            </div>
+         </div>
+      </section>
+
+
+   </div>
+
+
+
+
+</Layout>
+<script type="module">
+   // Function to initialize a single slider
+   function initializeSlider(
+     trackSelector,
+     prevButtonId,
+     nextButtonId,
+     scrollAmount
+   ) {
+     const sliderTrack = document.querySelector(trackSelector);
+     const prevButton = document.getElementById(prevButtonId);
+     const nextButton = document.getElementById(nextButtonId);
+   
+     if (!sliderTrack || !prevButton || !nextButton) {
+       return;
+     }
+   
+     nextButton.addEventListener('click', () => {
+       sliderTrack.scrollBy({
+         left: scrollAmount,
+         behavior: 'smooth',
+       });
+     });
+   
+     prevButton.addEventListener('click', () => {
+       sliderTrack.scrollBy({
+         left: -scrollAmount,
+         behavior: 'smooth',
+       });
+     });
+   
+     // Optional: Hide/show arrows based on scroll position
+     const updateArrowVisibility = () => {
+       // Small tolerance for floating point inaccuracies
+       const tolerance = 1;
+   
+       if (sliderTrack.scrollLeft <= tolerance) {
+         prevButton.disabled = true;
+       } else {
+         prevButton.disabled = false;
+       }
+   
+       if (
+         sliderTrack.scrollLeft + sliderTrack.clientWidth >=
+         sliderTrack.scrollWidth - tolerance
+       ) {
+         nextButton.disabled = true;
+       } else {
+         nextButton.disabled = false;
+       }
+     };
+   
+     sliderTrack.addEventListener('scroll', updateArrowVisibility);
+     // Initial check on load
+     updateArrowVisibility();
+   }
+   
+   // Initialize the "Engagements" slider
+   document.addEventListener('DOMContentLoaded', () => {
+     let engagementScrollAmount = 0;
+     const firstEngagementItem = document.querySelector('.engagements-slider-track .slider-item');
+     if (firstEngagementItem) {
+       // Calculate scroll amount based on item width + right margin
+       const itemWidth = firstEngagementItem.offsetWidth;
+       const itemStyle = getComputedStyle(firstEngagementItem);
+       const marginRight = parseFloat(itemStyle.marginRight) || 0;
+       engagementScrollAmount = itemWidth + marginRight;
+     } else {
+         engagementScrollAmount = 400; // Fallback if no item found
+     }
+   
+     initializeSlider(
+       '.engagements-slider-track',
+       'prevEngagement',
+       'nextEngagement',
+       engagementScrollAmount
+     );
+   
+     // Initialize the "Testimonials" slider
+     let testimonialScrollAmount = 0;
+     // CORRECTED SELECTOR HERE: Use '.testimonial-slider-track .testimonial-card'
+     const firstTestimonialItem = document.querySelector('.testimonial-slider-track .testimonial-card');
+     if (firstTestimonialItem) {
+       // Calculate scroll amount based on item width + right margin
+       const itemWidth = firstTestimonialItem.offsetWidth;
+       const itemStyle = getComputedStyle(firstTestimonialItem);
+       const marginRight = parseFloat(itemStyle.marginRight) || 0;
+       testimonialScrollAmount = itemWidth + marginRight;
+     } else {
+         testimonialScrollAmount = 400; // Fallback if no item found
+     }
+   
+     initializeSlider(
+       '.testimonial-slider-track', // CORRECTED SELECTOR HERE
+       'prevTestimonial',
+       'nextTestimonial',
+       testimonialScrollAmount
+     );
+
+     // Initialize the "Blog" slider
+     let blogScrollAmount = 0;
+     const firstBlogItem = document.querySelector('.blog-slider-track .slider-item');
+     if (firstBlogItem) {
+       // Calculate scroll amount based on item width + right margin
+       const itemWidth = firstBlogItem.offsetWidth;
+       const itemStyle = getComputedStyle(firstBlogItem);
+       const marginRight = parseFloat(itemStyle.marginRight) || 0;
+       blogScrollAmount = itemWidth + marginRight;
+     } else {
+         blogScrollAmount = 400; // Fallback if no item found
+     }
+   
+     initializeSlider(
+       '.blog-slider-track',
+       'prevBlog',
+       'nextBlog',
+       blogScrollAmount
+     );
+   });
+</script>

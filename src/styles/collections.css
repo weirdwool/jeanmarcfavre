@@ -1,0 +1,482 @@
+/* ========================================
+   PHOTO.ASTRO - COLLECTIONS SLIDERS
+   ======================================== */
+
+.collections-photo .title-wrapper {
+  border-bottom: 1px solid var(--primary-color);
+  padding-bottom: 1rem;
+  margin-bottom: 3rem;
+}
+
+.collections-slider-header {
+  padding: 20px;
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
+.collections-photo .title-wrapper {
+  margin-bottom: 0;
+}
+
+.collections-slider-card {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  border-radius: 15px;
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  flex-shrink: 0;
+  width: 300px;
+  height: 300px;
+  aspect-ratio: 1;
+}
+
+.collections-slider-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.collections-slider-card:hover img {
+  transform: scale(1.02);
+}
+
+.collections-slider-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.7) 0%,
+    rgba(0, 0, 0, 0.7) 20%,
+    transparent 100%
+  );
+  padding: 25px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 8px;
+  color: white;
+}
+
+.collections-slider-title {
+  color: white;
+  font-size: 1.4rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin: 0;
+  line-height: 1;
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.collections-slider-link {
+  color: var(--primary-color);
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  text-align: center;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  opacity: 0;
+  transform: translateY(0.5rem);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.collections-slider-link::after {
+  content: '⟶';
+  transition: transform 0.2s ease;
+  display: inline-block;
+  margin-bottom: 6px;
+  font-size: 18px;
+}
+
+.collections-slider-link:hover::after {
+  transform: translateX(4px);
+}
+
+.collections-slider-card:hover .collections-slider-title {
+  transform: translateY(-0.5rem);
+}
+
+.collections-slider-card:hover .collections-slider-link {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ========================================
+   COLLECTIONS-X.ASTRO - MAIN LAYOUT
+   ======================================== */
+
+.container-collections {
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* h1 and separation-line-gradient */
+
+.collections-content-area {
+  display: flex;
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.collections-nav-container {
+  flex: 0 0 250px;
+  min-height: 400px;
+}
+
+.collections-content-container {
+  flex: 1;
+  min-width: 0;
+}
+
+/* ========================================
+   NO GALLERY SELECTED MESSAGE
+   ======================================== */
+
+.no-gallery-message {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+  text-align: center;
+  padding: 2rem;
+}
+
+.no-gallery-content h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: var(--primary-color);
+}
+
+.no-gallery-content p {
+  font-size: 1.1rem;
+  color: rgb(120, 120, 120);
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+/* ========================================
+   GALLERY CONTENT AREAS
+   ======================================== */
+
+.collections-gallery-content-area {
+  display: none;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.collections-gallery-content-area.active {
+  display: block;
+  opacity: 1;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.collections-gallery-content-area:not(.active) {
+  display: none !important;
+}
+
+/* ========================================
+   LIGHTROOM GALLERIES
+   ======================================== */
+
+.collections-lightroom-gallery {
+  width: 100%;
+  height: 80vh;
+  border-radius: 0;
+  overflow: hidden;
+  padding: 0;
+  margin: 0;
+}
+
+.collections-lightroom-gallery iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  pointer-events: auto;
+}
+
+/* ========================================
+   MOBILE DROPDOWN SELECTS
+   ======================================== */
+
+.category-tabs-mobile {
+  display: block;
+}
+
+.category-tabs-mobile .gallery-select:last-child {
+  margin-bottom: 0;
+}
+
+.category-tabs-mobile .gallery-select {
+  transition: all 0.3s ease;
+}
+
+.gallery-select {
+  position: relative;
+  width: 100%;
+  padding: 0.8rem 1rem;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  color: #eee;
+  font-size: 1rem;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-bottom: 1rem;
+}
+
+.gallery-select:hover {
+  border-color: var(--primary-color);
+}
+
+.gallery-select:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 2px rgba(var(--primary-color-rgb), 0.3);
+}
+
+.gallery-select option {
+  background: #333;
+  color: white;
+}
+
+/* Custom dropdown arrow for mobile selects */
+.gallery-select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23eee' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  background-size: 1.2rem;
+  padding-right: 3rem;
+}
+
+.gallery-select:hover,
+.gallery-select:focus {
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23dd8100' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e");
+}
+
+
+
+/* ========================================
+   SIDEBAR NAVIGATION
+   ======================================== */
+
+.collections-sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.collections-sidebar-button {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  color: #eee;
+  font-size: 1rem;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.collections-sidebar-button:hover {
+  border-color: var(--primary-color);
+}
+
+.collections-sidebar-button.active {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+  color: white;
+}
+
+/* ========================================
+   DROPDOWN MENUS
+   ======================================== */
+
+.collections-dropdown {
+  position: relative;
+}
+
+.collections-dropdown-trigger {
+  position: relative;
+  padding-right: 2.5rem !important;
+}
+
+.collections-dropdown-trigger::after {
+  content: '⌄';
+  position: absolute;
+  right: 1rem;
+  top: 35%;
+  transform: translateY(-45%);
+  font-size: 1.2rem;
+  color: #eee;
+  transition: transform 0.2s ease;
+}
+
+.collections-dropdown-trigger:hover::after {
+  color: var(--primary-color);
+}
+
+.collections-dropdown-trigger.active {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+  color: #eee;
+}
+
+.collections-dropdown-trigger.active:hover::after {
+  color: grey;
+}
+
+.collections-dropdown-submenu.active + .collections-dropdown-trigger::after,
+.collections-dropdown:has(.collections-dropdown-submenu.active) .collections-dropdown-trigger::after {
+  transform: translateY(-0%) rotate(180deg);
+}
+
+.collections-dropdown-submenu {
+  display: none;
+  margin-left: 1rem;
+  margin-top: 0.5rem;
+}
+
+.collections-dropdown-submenu.active {
+  display: block;
+}
+
+.collections-dropdown-submenu .submenu-item {
+  font-size: 0.9rem;
+  padding: 0.7rem 0.8rem;
+  margin-bottom: 0.3rem;
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.collections-dropdown-submenu .submenu-item:hover {
+  border-color: var(--primary-color);
+}
+
+.collections-dropdown-submenu .submenu-item.active {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+  color: #eee;
+}
+
+/* ========================================
+   ANIMATIONS
+   ======================================== */
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ========================================
+   UTILITY STYLES
+   ======================================== */
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* ========================================
+   RESPONSIVE DESIGN
+   ======================================== */
+
+/* Desktop styles - hide mobile dropdowns, show sidebar */
+@media (min-width: 1200px) {
+  .category-tabs-mobile {
+    display: none;
+  }
+  
+  .collections-sidebar-nav {
+    display: flex;
+  }
+}
+
+/* Mobile and tablet styles */
+@media (max-width: 1199px) {
+  .category-tabs-mobile {
+    display: block;
+  }
+  
+  .collections-sidebar-nav {
+    display: none;
+  }
+  
+  .collections-content-area {
+    flex-direction: column;
+  }
+  
+  .collections-nav-container {
+    flex: none;
+    min-height: auto;
+  }
+  
+  .collections-lightroom-gallery {
+    height: 60vh;
+    min-height: 400px;
+  }
+  
+  .collections-lightroom-gallery iframe {
+    display: block;
+    -webkit-overflow-scrolling: touch;
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+    will-change: transform;
+  }
+}
+
+/* Photo slider mobile adjustments */
+@media (max-width: 768px) {
+  .collections-slider-card {
+    width: 280px;
+    height: 280px;
+    aspect-ratio: 1;
+  }
+  
+  .collections-slider-overlay {
+    padding: 20px 15px;
+  }
+  
+  .collections-slider-title {
+    font-size: 1.2rem;
+  }
+  
+  .collections-slider-link {
+    font-size: 0.8rem;
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Photo slider desktop behavior */
+@media (min-width: 769px) {
+  .collections-slider-link {
+    opacity: 0;
+    transform: translateY(0.5rem);
+  }
+}

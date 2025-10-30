@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://jeanmarcfavre.com/sitemap-index.xml
+

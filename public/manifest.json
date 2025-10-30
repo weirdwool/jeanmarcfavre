@@ -1,0 +1,17 @@
+{
+  "name": "Jean-Marc Favre - Photographe Drone Annecy",
+  "short_name": "JMF Photo",
+  "description": "Photographe professionnel et pilote de drone à Annecy",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#000000",
+  "icons": [
+    {
+      "src": "/logo/signature-500x173.png",
+      "sizes": "500x173",
+      "type": "image/png"
+    }
+  ]
+}
+

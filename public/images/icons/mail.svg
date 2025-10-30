@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+
+<svg
+   width="800"
+   height="800"
+   viewBox="0 0 24 24"
+   version="1.1"
+   id="svg1"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs1" />
+  <title
+     id="title1">Mail</title>
+  <g
+     id="Page-1"
+     stroke="none"
+     stroke-width="1"
+     fill="none"
+     fill-rule="evenodd">
+    <g
+       id="Mail">
+      <rect
+         id="Rectangle"
+         fill-rule="nonzero"
+         x="0"
+         y="0"
+         width="24"
+         height="24" />
+      <rect
+         id="rect1"
+         stroke="#0c0310"
+         stroke-width="2"
+         stroke-linecap="round"
+         x="4"
+         y="5"
+         width="16"
+         height="14"
+         rx="2" />
+      <path
+         d="m 20,7 -7.7,5.775 c -0.1778,0.1333 -0.4222,0.1333 -0.6,0 L 4,7"
+         id="Path"
+         stroke="#0c0310"
+         stroke-width="2"
+         stroke-linecap="round" />
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,524 @@
+---
+import Layout from '../layouts/Layout.astro';
+import StructuredData from '../components/StructuredData.astro';
+import { getCollection, type CollectionEntry, type SchemaContext } from 'astro:content';
+import { collections } from '../content/config';
+
+const blogSchema = typeof collections.blog.schema === 'function'
+? collections.blog.schema({} as SchemaContext)
+: collections.blog.schema;
+const ALL_ALLOWED_TAGS = Object.keys(blogSchema!.shape.tags.unwrap().shape);
+
+const posts = await getCollection('blog');
+
+posts.sort((a: CollectionEntry<'blog'>, b: CollectionEntry<'blog'>) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
+
+// Define the type for entries after adding `activeTags`
+type BlogEntryWithTags = CollectionEntry<'blog'> & {
+activeTags: string[];
+};
+
+const postsWithFormattedTags: BlogEntryWithTags[] = posts.map((entry: CollectionEntry<'blog'>) => {
+const activeTags = entry.data.tags
+? Object.entries(entry.data.tags)
+.filter(([, isActive]) => isActive)
+.map(([tagKey]) => tagKey)
+: [];
+return {
+...entry,
+activeTags: activeTags,
+};
+});
+---
+
+<Layout 
+  title="Blog Photo Drone Annecy | Actualités Photographie - Jean-Marc Favre"
+  description="Blog d'un photographe professionnel à Annecy. Actualités, projets photo et drone, conseils, coulisses des shootings en Haute-Savoie. Plus de 40 ans d'expérience."
+  image="/images/collages/blog-760x881.png"
+  canonical="/blog/"
+>
+   <div class="header-spacer"></div>
+   <div class="blog-container">
+
+      <aside class="sidebar align-center">
+        <div class="title-wrapper">
+            <h1>Blog</h1>
+            <p class="text-uppercase mt-1">Les récits quotidiens d'un passionné d'images</p>
+        </div>
+
+        <div class="separation-line-gradient"></div>
+
+        <div class="filter-wrapper">
+            <p class="text-uppercase mb-1"><strong>Catégories</strong></p>
+            <div class="tags-list">
+               <button class="filter-button is-active" data-tag="all">Tout</button>
+               {ALL_ALLOWED_TAGS.map(tag => (
+               <button class="filter-button" data-tag={tag}>{tag.charAt(0).toUpperCase() + tag.slice(1)}</button>
+               ))}
+            </div>
+        </div>
+
+
+        <div class="search-input-wrapper">
+               <input type="search" id="search-input" placeholder="Rechercher un post..." />
+               <img src="/images/icons/search.svg" alt="Search icon" class="search-icon" />
+        </div>
+         
+       
+
+        <div class="image-wrapper">
+            <img src="/images/collages/blog-760x881.png" alt="portrait de Jean-Marc Favre">
+        </div>
+        
+      </aside>
+
+      <div class="main-content-area">
+
+         <main class="posts-grid" id="posts-grid-container">
+            {postsWithFormattedTags.length > 0 ? (
+            // CRITICAL CHANGE HERE: Explicitly type 'post' using the new type
+            postsWithFormattedTags.map((post: BlogEntryWithTags) => {
+            const pubDate = post.data.pubDate;
+            const year = pubDate.getFullYear().toString();
+            const month = (pubDate.getMonth() + 1).toString().padStart(2, '0');
+            const day = pubDate.getDate().toString().padStart(2, '0');
+            const cleanSlug = post.slug.replace(/^\d{4}-\d{2}-\d{2}-/, '');
+            const postUrl = `/blog/${year}/${month}/${day}/${cleanSlug}/`;
+            return (
+
+            <article class="post-card"
+            data-tags={post.activeTags.join(' ')} 
+            data-title={post.data.title.toLowerCase()}
+            data-location={post.data.location ? post.data.location.toLowerCase() : ''}
+            >
+            <a href={postUrl} class="post-link">
+               <div class="image-wrapper">
+                  <img src={post.data.main_image} alt={post.data.title} />
+                  <div class="post-card-img-overlay"></div>
+               </div>
+               
+               <div class="post-card-header">
+                <h2>{post.data.title}</h2>
+                
+                <div class="post-meta">
+                  <time datetime={post.data.pubDate.toISOString()}>{post.data.pubDate.toLocaleDateString('fr-FR', { year: 'numeric', month: 'long', day: 'numeric' })}</time>
+                  {post.data.location && (
+                    <span>{post.data.location}</span>
+                  )}
+                </div>
+               
+                
+               </div>
+            </a>
+            </article>
+
+            );
+            })
+            ) : (
+            <p>Aucun article de blog trouvé pour le moment. Vérifiez votre dossier `src/content/blog` et `config.ts` !</p>
+            )}
+         </main>
+         
+
+         <div class="pagination-section mt-3 mb-3">
+          
+            <div class="pagination-controls">
+               <button id="prev-page-btn" class="pagination-btn" disabled>Précédent</button>
+               <div id="page-numbers" class="page-numbers"></div>
+               <button id="next-page-btn" class="pagination-btn">Suivant</button>
+            </div>
+         </div>
+
+      </div>
+
+   </div>
+
+   <div id="blog-modal-overlay" class="blog-modal-overlay">
+      
+      <div class="blog-modal-wrapper">
+         <div class="blog-modal-close-container">
+            <button class="blog-modal-close-button">&times;</button>
+         </div>
+
+         <div class="blog-modal-content">
+            <div class="blog-modal-body row">
+               <div class="col-md-6 modal-image-column">
+                  <div class="image-wrapper">
+                     <img id="modal-post-image" src="" alt="Image de l'article" />
+                  </div>
+               </div>
+               <div class="col-md-6 modal-content-column">
+                   <div class="title-wrapper">
+                     <h2 id="modal-post-title" class="modal-post-title"></h2>
+                     <div class="modal-date-location">
+                       <time id="modal-post-date" class="modal-post-date post-date"></time>
+                       <span id="modal-post-location" class="modal-post-location post-location"></span>
+                     </div>
+                     <div id="modal-post-tags" class="modal-post-tags post-tags"></div>
+                   </div>
+                   <div id="modal-post-main-content" class="modal-post-main-content"></div>
+               </div>
+            </div>
+            <div id="modal-post-media-extras" class="modal-post-media-extras post-media-extras"></div>
+         </div>
+         
+         <div id="modal-post-navigation" class="post-navigation"></div>
+      </div>
+
+   </div>
+
+</Layout>
+
+<script is:inline>
+   document.addEventListener('DOMContentLoaded', () => {
+     const modalOverlay = document.getElementById('blog-modal-overlay');
+     const modalCloseButton = document.querySelector('.blog-modal-close-button');
+     const modalImage = document.getElementById('modal-post-image');
+     const modalTitle = document.getElementById('modal-post-title');
+     const modalDate = document.getElementById('modal-post-date');
+     const modalLocation = document.getElementById('modal-post-location');
+     const modalTags = document.getElementById('modal-post-tags');
+     const modalMainContent = document.getElementById('modal-post-main-content');
+     const modalMediaExtras = document.getElementById('modal-post-media-extras');
+     const modalNavigation = document.getElementById('modal-post-navigation');
+   
+     const initialPostCards = document.querySelectorAll('.post-card');
+     const postsGridContainer = document.getElementById('posts-grid-container');
+   
+     const POSTS_PER_PAGE = 12;
+     let currentPage = 1;
+   
+     const prevPageBtn = document.getElementById('prev-page-btn');
+     const nextPageBtn = document.getElementById('next-page-btn');
+     const pageNumbersContainer = document.getElementById('page-numbers');
+   
+     const allOriginalPostCardClones = Array.from(initialPostCards).map(card => card.cloneNode(true));
+   
+     let filteredPostsForPagination = [];
+   
+     // Helper function to normalize strings (lowercase and remove accents)
+     const normalizeString = (str) => {
+        return str
+            .toLowerCase()
+            .normalize("NFD") // Normalize to NFD (Normalization Form Canonical Decomposition)
+            .replace(/[\u0300-\u036f]/g, ""); // Remove diacritics (accents)
+     };
+   
+     const openModal = async (postUrl) => {
+       try {
+         const response = await fetch(postUrl);
+         if (!response.ok) {
+           throw new Error(`HTTP error! Status: ${response.status}`);
+         }
+         const html = await response.text();
+         const parser = new DOMParser();
+         const doc = parser.parseFromString(html, 'text/html');
+   
+         const extractedTitle = doc.querySelector('.single-post-container h1')?.textContent || '';
+         const extractedDateElement = doc.querySelector('.single-post-container .pub-date time');
+         const extractedDateText = extractedDateElement?.textContent || '';
+         const extractedDateTime = extractedDateElement?.getAttribute('datetime') || '';
+         const extractedLocationText = doc.querySelector('.single-post-container .post-location')?.textContent || '';
+         
+         const extractedImageElement = doc.querySelector('.single-post-container .image-wrapper img');
+         const extractedImageSrc = extractedImageElement?.getAttribute('src') || '';
+         const extractedImageAlt = extractedImageElement?.getAttribute('alt') || '';
+         
+         const extractedTagsHTML = doc.querySelector('.single-post-container .post-tags')?.innerHTML || '';
+         const extractedMainContentHTML = doc.querySelector('.single-post-container .post-content')?.innerHTML || '';
+         const extractedMediaExtrasHTML = doc.querySelector('.single-post-container .post-media-extras')?.innerHTML || '';
+         const extractedNavigationHTML = doc.querySelector('.single-post-container .post-navigation')?.innerHTML || '';
+   
+         modalTitle.textContent = extractedTitle;
+         modalDate.textContent = extractedDateText;
+         modalDate.setAttribute('datetime', extractedDateTime);
+         
+         // Set location text and handle visibility
+         if (extractedLocationText) {
+             modalLocation.textContent = extractedLocationText;
+             modalLocation.style.display = 'inline';
+         } else {
+             modalLocation.textContent = '';
+             modalLocation.style.display = 'none';
+         }
+   
+   
+         if (extractedImageSrc) {
+             modalImage.src = extractedImageSrc;
+             modalImage.alt = extractedImageAlt;
+             modalImage.style.display = 'block';
+         } else {
+             modalImage.src = '';
+             modalImage.alt = '';
+             modalImage.style.display = 'none';
+         }
+   
+         modalTags.innerHTML = extractedTagsHTML;
+         modalMainContent.innerHTML = extractedMainContentHTML;
+         modalMediaExtras.innerHTML = extractedMediaExtrasHTML;
+         modalNavigation.innerHTML = extractedNavigationHTML;
+   
+         modalOverlay.classList.add('is-open');
+         document.body.style.overflow = 'hidden';
+   
+       } catch (error) {
+         modalTitle.textContent = 'Erreur de chargement';
+         modalDate.textContent = '';
+         modalLocation.textContent = '';
+         modalImage.src = ''; modalImage.style.display = 'none';
+         modalTags.innerHTML = '';
+         modalMainContent.innerHTML = '<p>Impossible de charger le contenu de l\'article. Veuillez réessayer plus tard.</p>';
+         modalMediaExtras.innerHTML = '';
+         modalNavigation.innerHTML = '';
+         modalOverlay.classList.add('is-open');
+       }
+     };
+   
+     const closeModal = () => {
+       modalOverlay.classList.remove('is-open');
+       document.body.style.overflow = '';
+       setTimeout(() => {
+         modalTitle.textContent = '';
+         modalDate.textContent = '';
+         modalLocation.textContent = '';
+         modalImage.src = '';
+         modalImage.alt = '';
+         modalImage.style.display = 'none';
+         modalTags.innerHTML = '';
+         modalMainContent.innerHTML = '';
+         modalMediaExtras.innerHTML = '';
+         modalNavigation.innerHTML = '';
+       }, 300);
+     };
+   
+     const attachModalClickListeners = (cardsToAttachTo) => {
+       cardsToAttachTo.forEach(card => {
+         const link = card.querySelector('.post-link');
+         link.removeEventListener('click', handlePostLinkClick);
+         link.addEventListener('click', handlePostLinkClick);
+       });
+     };
+   
+     const handlePostLinkClick = (event) => {
+        // Check if screen width is mobile (less than 768px)
+        if (window.innerWidth < 768) {
+          // On mobile, let the link work normally (open in new page)
+          return;
+        }
+        
+        // On desktop/tablet, prevent default and open modal
+        event.preventDefault();
+        const postUrl = event.currentTarget.href;
+        openModal(postUrl);
+     };
+   
+     modalNavigation.addEventListener('click', (event) => {
+         const targetLink = event.target.closest('.nav-link');
+         if (targetLink) {
+             event.preventDefault();
+             const newPostUrl = targetLink.href;
+             openModal(newPostUrl);
+         }
+     });
+   
+     modalCloseButton.addEventListener('click', closeModal);
+     modalOverlay.addEventListener('click', (event) => {
+       if (event.target === modalOverlay) {
+         closeModal();
+       }
+     });
+     document.addEventListener('keydown', (event) => {
+       if (event.key === 'Escape' && modalOverlay.classList.contains('is-open')) {
+         closeModal();
+       }
+     });
+   
+     const filterButtons = document.querySelectorAll('.filter-button');
+     const searchInput = document.getElementById('search-input');
+     let currentSearchQuery = '';
+     const selectedTags = new Set();
+   
+     const applyFilters = () => {
+       const normalizedQuery = normalizeString(currentSearchQuery);
+       const tempFilteredCards = [];
+   
+       allOriginalPostCardClones.forEach(card => {
+         const cardTags = card.dataset.tags ? card.dataset.tags.split(' ').map(tag => normalizeString(tag)) : [];
+         const cardTitle = normalizeString(card.dataset.title || '');
+         const cardLocation = normalizeString(card.dataset.location || '');
+   
+         let isVisibleByTags = false;
+         // If 'all' is selected OR no specific tags are selected, show all by tags
+         if (selectedTags.has('all') || selectedTags.size === 0) {
+           isVisibleByTags = true;
+         } else {
+           // Convert selected tags to an array of normalized strings for easier iteration
+           const normalizedSelectedTagsArray = Array.from(selectedTags).map(tag => normalizeString(tag));
+           
+           // --- CRITICAL CHANGE FOR "AND" LOGIC ---
+           // A post is visible by tags ONLY IF it contains *every* currently selected tag
+           isVisibleByTags = normalizedSelectedTagsArray.every(selectedTag =>
+             cardTags.includes(selectedTag)
+           );
+           // ---------------------------------------
+         }
+   
+         let isVisibleBySearch = true;
+         if (normalizedQuery.length > 0) {
+           isVisibleBySearch = cardTitle.includes(normalizedQuery) ||
+                               cardLocation.includes(normalizedQuery) ||
+                               cardTags.some(tag => tag.includes(normalizedQuery));
+         }
+   
+         if (isVisibleByTags && isVisibleBySearch) {
+           tempFilteredCards.push(card);
+         }
+       });
+   
+       filteredPostsForPagination = tempFilteredCards;
+       currentPage = 1;
+   
+       updatePaginationControls();
+       renderCurrentPagePosts();
+     };
+   
+     const renderCurrentPagePosts = () => {
+         const startIndex = (currentPage - 1) * POSTS_PER_PAGE;
+         const endIndex = startIndex + POSTS_PER_PAGE;
+         const postsToDisplay = filteredPostsForPagination.slice(startIndex, endIndex);
+   
+         postsGridContainer.innerHTML = '';
+   
+         if (postsToDisplay.length > 0) {
+             postsToDisplay.forEach(card => {
+                 postsGridContainer.appendChild(card);
+             });
+                     attachModalClickListeners(postsToDisplay);
+         } else {
+             const noPostsMessage = document.createElement('p');
+             noPostsMessage.textContent = 'Aucun article de blog trouvé correspondant à vos critères.';
+             postsGridContainer.appendChild(noPostsMessage);
+         }
+     };
+
+     // Handle window resize to update modal behavior
+     window.addEventListener('resize', () => {
+       // Re-attach click listeners when screen size changes
+       const currentPostCards = document.querySelectorAll('.post-card');
+       attachModalClickListeners(Array.from(currentPostCards));
+     });
+   
+     const updatePaginationControls = () => {
+         const totalPages = Math.ceil(filteredPostsForPagination.length / POSTS_PER_PAGE);
+   
+         prevPageBtn.disabled = currentPage === 1;
+         nextPageBtn.disabled = currentPage === totalPages || totalPages === 0;
+   
+         pageNumbersContainer.innerHTML = '';
+         if (totalPages > 1) {
+             for (let i = 1; i <= totalPages; i++) {
+                 const pageBtn = document.createElement('button');
+                 pageBtn.classList.add('page-number-btn');
+                 if (i === currentPage) {
+                     pageBtn.classList.add('is-active');
+                 }
+                 pageBtn.textContent = i;
+                 pageBtn.dataset.page = i;
+                 pageBtn.addEventListener('click', () => {
+                     currentPage = i;
+                     renderCurrentPagePosts();
+                     updatePaginationControls();
+                     window.scrollTo({ top: postsGridContainer.offsetTop - 50, behavior: 'smooth' });
+                 });
+                 pageNumbersContainer.appendChild(pageBtn);
+             }
+         }
+   
+         const paginationSection = document.querySelector('.pagination-section');
+         if (paginationSection) {
+             if (totalPages <= 1 && filteredPostsForPagination.length > 0) {
+                 paginationSection.style.display = 'none';
+             } else if (filteredPostsForPagination.length === 0) {
+                 paginationSection.style.display = 'none';
+             } else {
+                 paginationSection.style.display = 'flex';
+             }
+         }
+     };
+   
+     prevPageBtn.addEventListener('click', () => {
+         if (currentPage > 1) {
+             currentPage--;
+             renderCurrentPagePosts();
+             updatePaginationControls();
+             window.scrollTo({ top: postsGridContainer.offsetTop - 50, behavior: 'smooth' });
+         }
+     });
+   
+     nextPageBtn.addEventListener('click', () => {
+         const totalPages = Math.ceil(filteredPostsForPagination.length / POSTS_PER_PAGE);
+         if (currentPage < totalPages) {
+             currentPage++;
+             renderCurrentPagePosts();
+             updatePaginationControls();
+             window.scrollTo({ top: postsGridContainer.offsetTop - 50, behavior: 'smooth' });
+         }
+     });
+   
+     filterButtons.forEach(button => {
+       button.addEventListener('click', () => {
+         const tag = button.dataset.tag;
+   
+         if (tag === 'all') {
+           selectedTags.clear();
+           selectedTags.add('all');
+   
+           filterButtons.forEach(btn => {
+             if (btn.dataset.tag !== 'all') {
+               btn.classList.remove('is-active');
+             }
+           });
+           button.classList.add('is-active');
+   
+         } else {
+           selectedTags.delete('all');
+           filterButtons.forEach(btn => {
+             if (btn.dataset.tag === 'all') {
+               btn.classList.remove('is-active');
+             }
+           });
+   
+           if (selectedTags.has(tag)) {
+             selectedTags.delete(tag);
+             button.classList.remove('is-active');
+           } else {
+             selectedTags.add(tag);
+             button.classList.add('is-active');
+           }
+   
+           if (selectedTags.size === 0) {
+             selectedTags.add('all');
+             filterButtons.forEach(btn => {
+                 if (btn.dataset.tag === 'all') {
+                     btn.classList.add('is-active');
+                 }
+             });
+           }
+         }
+         applyFilters();
+       });
+     });
+   
+     searchInput.addEventListener('input', (event) => {
+         currentSearchQuery = event.target.value;
+         applyFilters();
+     });
+   
+     const initialToutButton = document.querySelector('.filter-button[data-tag="all"]');
+     if (initialToutButton) {
+         initialToutButton.classList.add('is-active');
+         selectedTags.add('all');
+     }
+     applyFilters();
+   });
+</script>

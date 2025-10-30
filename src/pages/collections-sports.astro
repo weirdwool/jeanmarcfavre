@@ -1,0 +1,1271 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout 
+  title="Galerie Photo Sports Extrêmes | Ski, Surf, Parapente - Jean-Marc Favre"
+  description="Collection de photographies de sports extrêmes à Annecy et dans les Alpes. Ski freeride, surf, parapente, escalade. 40 ans de photographie sportive."
+  preloadImage="/galeries/sports/best-of/images/large/MICHAUD-Seb-158.jpg"
+  canonical="/collections-sports/"
+>
+   <div class="header-spacer"></div>
+
+   <div class="container-collections">
+      <h1 class="text-center">Collections Sports</h1>
+      <div class="separation-line-gradient"></div>
+
+      <div class="collections-content-area">
+        <nav class="collections-nav-container">
+          <div class="category-tabs-mobile">
+            <select class="gallery-select" id="sports-category-select">
+              <option value="">Choisir ...</option>
+              <option value="best-of">Best Of</option>
+              <option value="sports-nautiques">Sports Nautiques</option>
+              <option value="sports-hiver">Sports d'Hiver</option>
+              <option value="sports-terrestres">Sports Terrestres</option>
+              <option value="sports-aeriens">Sports Aériens</option>
+              <option value="sports-collectifs">Sports Collectifs</option>
+              <option value="sports-mecaniques">Sports Mécaniques</option>
+            </select>
+            <select class="gallery-select" id="sports-subcategory-select" style="display: none;">
+              <option value="">Choisir une galerie...</option>
+            </select>
+          </div>
+          
+          <div class="collections-sidebar-nav">
+            <button class="collections-sidebar-button" data-target="sports-bestof-gallery">Best Of</button>
+            
+            <div class="collections-dropdown">
+              <button class="collections-sidebar-button collections-dropdown-trigger" data-target="sports-nautiques">Sports Nautiques</button>
+              <div class="collections-dropdown-submenu">
+                <button class="collections-sidebar-button submenu-item" data-target="sports-apnee-gallery">Apnée</button>
+                <button class="collections-sidebar-button submenu-item" data-target="sports-kayak-gallery">Kayak</button>
+                <button class="collections-sidebar-button submenu-item" data-target="sports-kitesurf-gallery">Kite Surf</button>
+                <button class="collections-sidebar-button submenu-item" data-target="sports-paddleboard-gallery">Paddle Board</button>
+                <button class="collections-sidebar-button submenu-item" data-target="sports-surf-gallery">Surf</button>
+                <button class="collections-sidebar-button submenu-item" data-target="sports-funboard-gallery">Funboard</button>
+                <button class="collections-sidebar-button submenu-item" data-target="sports-voile-gallery">Voile</button>
+                <button class="collections-sidebar-button submenu-item" data-target="sports-wakeboard-gallery">Wakeboard</button>
+                <button class="collections-sidebar-button submenu-item" data-target="sports-wakefoil-gallery">Wakefoil</button>
+                <button class="collections-sidebar-button submenu-item" data-target="sports-wakesurf-gallery">Wake Surf</button>
+              </div>
+            </div>
+        
+            <div class="collections-dropdown">
+              <button class="collections-sidebar-button collections-dropdown-trigger" data-target="sports-hiver">Sports d'Hiver</button>
+              <div class="collections-dropdown-submenu">
+                <button class="collections-sidebar-button submenu-item" data-target="sports-ice-climbing-gallery">Ice Climbing</button>
+                <button class="collections-sidebar-button submenu-item" data-target="sports-musher-gallery">Musher</button>
+                <button class="collections-sidebar-button submenu-item" data-target="sports-raquette-gallery">Raquette</button>
+                <button class="collections-sidebar-button submenu-item" data-target="sports-skicross-gallery">Ski Cross</button>
+                <button class="collections-sidebar-button submenu-item" data-target="sports-ski-freeride-gallery">Ski Freeride</button>
+                <button class="collections-sidebar-button submenu-item" data-target="sports-snowboard-freeride-gallery">Snowboard Freeride</button>
+                <button class="collections-sidebar-button submenu-item" data-target="sports-snowhawk-gallery">Snowhawk</button>
+              </div>
+            </div>
+        
+            <div class="collections-dropdown">
+              <button class="collections-sidebar-button collections-dropdown-trigger" data-target="sports-terrestres">Sports Terrestres</button>
+              <div class="collections-dropdown-submenu">
+                <button class="collections-sidebar-button submenu-item" data-target="sports-equitation-gallery">Équitation</button>
+                <button class="collections-sidebar-button submenu-item" data-target="sports-escalade-gallery">Escalade</button>
+                <button class="collections-sidebar-button submenu-item" data-target="sports-golf-gallery">Golf</button>
+                <button class="collections-sidebar-button submenu-item" data-target="sports-longboard-gallery">Longboard</button>
+                <button class="collections-sidebar-button submenu-item" data-target="sports-nordic-walking-gallery">Nordic Walking</button>
+                <button class="collections-sidebar-button submenu-item" data-target="sports-skateboard-gallery">Skateboard</button>
+                <button class="collections-sidebar-button submenu-item" data-target="sports-trail-gallery">Trail</button>
+                <button class="collections-sidebar-button submenu-item" data-target="sports-vtt-gallery">VTT</button>
+              </div>
+            </div>
+        
+            <div class="collections-dropdown">
+              <button class="collections-sidebar-button collections-dropdown-trigger" data-target="sports-aeriens">Sports Aériens</button>
+              <div class="collections-dropdown-submenu">
+                <button class="collections-sidebar-button submenu-item" data-target="sports-parapente-gallery">Parapente</button>
+                <button class="collections-sidebar-button submenu-item" data-target="sports-wingsuit-gallery">Wingsuit</button>
+              </div>
+            </div>
+        
+            <div class="collections-dropdown">
+              <button class="collections-sidebar-button collections-dropdown-trigger" data-target="sports-collectifs">Sports Collectifs</button>
+              <div class="collections-dropdown-submenu">
+                <button class="collections-sidebar-button submenu-item" data-target="sports-beach-rugby-gallery">Beach Rugby</button>
+                <button class="collections-sidebar-button submenu-item" data-target="sports-beach-volley-gallery">Beach Volley</button>
+                <button class="collections-sidebar-button submenu-item" data-target="sports-football-gallery">Football</button>
+                <button class="collections-sidebar-button submenu-item" data-target="sports-rugby-gallery">Rugby</button>
+              </div>
+            </div>
+        
+            <div class="collections-dropdown">
+              <button class="collections-sidebar-button collections-dropdown-trigger" data-target="sports-mecaniques">Sports Mécaniques</button>
+              <div class="collections-dropdown-submenu">
+                <button class="collections-sidebar-button submenu-item" data-target="sports-fmx-gallery">FMX</button>
+                <button class="collections-sidebar-button submenu-item" data-target="sports-hill-climbing-gallery">Hill Climbing</button>
+                <button class="collections-sidebar-button submenu-item" data-target="sports-moto-custom-gallery">Moto Custom</button>
+                <button class="collections-sidebar-button submenu-item" data-target="sports-moto-gp-gallery">Moto GP</button>
+                <button class="collections-sidebar-button submenu-item" data-target="sports-motocross-gallery">Motocross</button>
+                <button class="collections-sidebar-button submenu-item" data-target="sports-trial-gallery">Trial</button>
+              </div>
+            </div>
+          </div>
+        </nav>
+
+        <div class="collections-content-container">
+          {/* Default message when no gallery is selected */}
+          <div id="no-gallery-selected" class="no-gallery-message">
+            <div class="no-gallery-content">
+              <h2>Choisir une galerie</h2>
+              <p>Sélectionnez une catégorie dans le menu pour découvrir les photos.</p>
+            </div>
+          </div>
+          
+        <div id="sports-bestof-gallery" class="collections-gallery-content-area">
+          <div class="gallery-header">
+           <h3 class="visually-hidden">Best Of</h3>
+            <div class="gallery-actions">
+              <button class="gallery-action-btn" onclick="shareGallery('/galeries/sports/best-of/index.html')" title="Partager la galerie">
+                <svg viewBox="0 0 24 24">
+                  <path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"/>
+                </svg>
+              </button>
+              <a href="/galeries/sports/best-of/index.html" target="_blank" class="gallery-action-btn" title="Ouvrir dans un nouvel onglet">
+                <svg viewBox="0 0 24 24">
+                  <path d="M14,3V5H17.59L7.76,14.83L9.17,16.24L19,6.41V10H21V3M19,19H5V5H12V3H5C3.89,3 3,3.9 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V12H19V19Z"/>
+                </svg>
+              </a>
+        </div>
+          </div>
+          <div class="collections-lightroom-gallery">
+                 <iframe
+                    src="/galeries/sports/best-of/index.html"
+                    frameborder="0"
+                    allowfullscreen
+                 ></iframe>
+              </div>
+        </div>
+        
+        {/* Sports Nautiques */}
+        <div id="sports-surf-gallery" class="collections-gallery-content-area">
+          <div class="gallery-header">
+            <h3 class="visually-hidden">Surf</h3>
+            <div class="gallery-actions">
+              <button class="gallery-action-btn" onclick="shareGallery('/galeries/sports/surf/index.html')" title="Partager la galerie">
+                <svg viewBox="0 0 24 24">
+                  <path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"/>
+                </svg>
+              </button>
+              <a href="/galeries/sports/surf/index.html" target="_blank" class="gallery-action-btn" title="Ouvrir dans un nouvel onglet">
+                <svg viewBox="0 0 24 24">
+                  <path d="M14,3V5H17.59L7.76,14.83L9.17,16.24L19,6.41V10H21V3M19,19H5V5H12V3H5C3.89,3 3,3.9 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V12H19V19Z"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+          <div class="collections-lightroom-gallery">
+            <iframe src="/galeries/sports/surf/index.html" frameborder="0" allowfullscreen></iframe>
+          </div>
+        </div>
+
+        <div id="sports-kitesurf-gallery" class="collections-gallery-content-area">
+          <div class="gallery-header">
+            <h3 class="visually-hidden">Kite Surf</h3>
+            <div class="gallery-actions">
+              <button class="gallery-action-btn" onclick="shareGallery('/galeries/sports/kitesurf/index.html')" title="Partager la galerie">
+                <svg viewBox="0 0 24 24">
+                  <path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"/>
+                </svg>
+              </button>
+              <a href="/galeries/sports/kitesurf/index.html" target="_blank" class="gallery-action-btn" title="Ouvrir dans un nouvel onglet">
+                <svg viewBox="0 0 24 24">
+                  <path d="M14,3V5H17.59L7.76,14.83L9.17,16.24L19,6.41V10H21V3M19,19H5V5H12V3H5C3.89,3 3,3.9 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V12H19V19Z"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+          <div class="collections-lightroom-gallery">
+            <iframe src="/galeries/sports/kitesurf/index.html" frameborder="0" allowfullscreen></iframe>
+          </div>
+        </div>
+
+        <div id="sports-wakeboard-gallery" class="collections-gallery-content-area">
+          <div class="gallery-header">
+            <h3 class="visually-hidden">Wakeboard</h3>
+            <div class="gallery-actions">
+              <button class="gallery-action-btn" onclick="shareGallery('/galeries/sports/wakeboard/index.html')" title="Partager la galerie">
+                <svg viewBox="0 0 24 24">
+                  <path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"/>
+                </svg>
+              </button>
+              <a href="/galeries/sports/wakeboard/index.html" target="_blank" class="gallery-action-btn" title="Ouvrir dans un nouvel onglet">
+                <svg viewBox="0 0 24 24">
+                  <path d="M14,3V5H17.59L7.76,14.83L9.17,16.24L19,6.41V10H21V3M19,19H5V5H12V3H5C3.89,3 3,3.9 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V12H19V19Z"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+          <div class="collections-lightroom-gallery">
+            <iframe src="/galeries/sports/wakeboard/index.html" frameborder="0" allowfullscreen></iframe>
+          </div>
+        </div>
+
+        <div id="sports-apnee-gallery" class="collections-gallery-content-area">
+          <div class="gallery-header">
+            <h3 class="visually-hidden">Apnée</h3>
+            <div class="gallery-actions">
+              <button class="gallery-action-btn" onclick="shareGallery('/galeries/sports/apnee/index.html')" title="Partager la galerie">
+                <svg viewBox="0 0 24 24">
+                  <path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"/>
+                </svg>
+              </button>
+              <a href="/galeries/sports/apnee/index.html" target="_blank" class="gallery-action-btn" title="Ouvrir dans un nouvel onglet">
+                <svg viewBox="0 0 24 24">
+                  <path d="M14,3V5H17.59L7.76,14.83L9.17,16.24L19,6.41V10H21V3M19,19H5V5H12V3H5C3.89,3 3,3.9 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V12H19V19Z"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+          <div class="collections-lightroom-gallery">
+            <iframe src="/galeries/sports/apnee/index.html" frameborder="0" allowfullscreen></iframe>
+          </div>
+        </div>
+
+        <div id="sports-kayak-gallery" class="collections-gallery-content-area">
+          <div class="gallery-header">
+            <h3 class="visually-hidden">Kayak</h3>
+            <div class="gallery-actions">
+              <button class="gallery-action-btn" onclick="shareGallery('/galeries/sports/kayak/index.html')" title="Partager la galerie">
+                <svg viewBox="0 0 24 24">
+                  <path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"/>
+                </svg>
+              </button>
+              <a href="/galeries/sports/kayak/index.html" target="_blank" class="gallery-action-btn" title="Ouvrir dans un nouvel onglet">
+                <svg viewBox="0 0 24 24">
+                  <path d="M14,3V5H17.59L7.76,14.83L9.17,16.24L19,6.41V10H21V3M19,19H5V5H12V3H5C3.89,3 3,3.9 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V12H19V19Z"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+          <div class="collections-lightroom-gallery">
+            <iframe src="/galeries/sports/kayak/index.html" frameborder="0" allowfullscreen></iframe>
+          </div>
+        </div>
+
+        <div id="sports-paddleboard-gallery" class="collections-gallery-content-area">
+          <div class="gallery-header">
+            <h3 class="visually-hidden">Paddle Board</h3>
+            <div class="gallery-actions">
+              <button class="gallery-action-btn" onclick="shareGallery('/galeries/sports/paddleboard/index.html')" title="Partager la galerie">
+                <svg viewBox="0 0 24 24">
+                  <path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"/>
+                </svg>
+              </button>
+              <a href="/galeries/sports/paddleboard/index.html" target="_blank" class="gallery-action-btn" title="Ouvrir dans un nouvel onglet">
+                <svg viewBox="0 0 24 24">
+                  <path d="M14,3V5H17.59L7.76,14.83L9.17,16.24L19,6.41V10H21V3M19,19H5V5H12V3H5C3.89,3 3,3.9 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V12H19V19Z"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+          <div class="collections-lightroom-gallery">
+            <iframe src="/galeries/sports/paddleboard/index.html" frameborder="0" allowfullscreen></iframe>
+          </div>
+        </div>
+
+        <div id="sports-funboard-gallery" class="collections-gallery-content-area">
+          <div class="gallery-header">
+            <h3 class="visually-hidden">Funboard</h3>
+            <div class="gallery-actions">
+              <button class="gallery-action-btn" onclick="shareGallery('/galeries/sports/funboard/index.html')" title="Partager la galerie">
+                <svg viewBox="0 0 24 24">
+                  <path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"/>
+                </svg>
+              </button>
+              <a href="/galeries/sports/funboard/index.html" target="_blank" class="gallery-action-btn" title="Ouvrir dans un nouvel onglet">
+                <svg viewBox="0 0 24 24">
+                  <path d="M14,3V5H17.59L7.76,14.83L9.17,16.24L19,6.41V10H21V3M19,19H5V5H12V3H5C3.89,3 3,3.9 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V12H19V19Z"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+          <div class="collections-lightroom-gallery">
+            <iframe src="/galeries/sports/funboard/index.html" frameborder="0" allowfullscreen></iframe>
+          </div>
+        </div>
+
+        <div id="sports-voile-gallery" class="collections-gallery-content-area">
+          <div class="gallery-header">
+            <h3 class="visually-hidden">Voile</h3>
+            <div class="gallery-actions">
+              <button class="gallery-action-btn" onclick="shareGallery('/galeries/sports/voile/index.html')" title="Partager la galerie">
+                <svg viewBox="0 0 24 24">
+                  <path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"/>
+                </svg>
+              </button>
+              <a href="/galeries/sports/voile/index.html" target="_blank" class="gallery-action-btn" title="Ouvrir dans un nouvel onglet">
+                <svg viewBox="0 0 24 24">
+                  <path d="M14,3V5H17.59L7.76,14.83L9.17,16.24L19,6.41V10H21V3M19,19H5V5H12V3H5C3.89,3 3,3.9 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V12H19V19Z"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+          <div class="collections-lightroom-gallery">
+            <iframe src="/galeries/sports/voile/index.html" frameborder="0" allowfullscreen></iframe>
+          </div>
+        </div>
+
+        <div id="sports-wakefoil-gallery" class="collections-gallery-content-area">
+          <div class="gallery-header">
+            <h3 class="visually-hidden">Wakefoil</h3>
+            <div class="gallery-actions">
+              <button class="gallery-action-btn" onclick="shareGallery('/galeries/sports/wakefoil/index.html')" title="Partager la galerie">
+                <svg viewBox="0 0 24 24">
+                  <path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"/>
+                </svg>
+              </button>
+              <a href="/galeries/sports/wakefoil/index.html" target="_blank" class="gallery-action-btn" title="Ouvrir dans un nouvel onglet">
+                <svg viewBox="0 0 24 24">
+                  <path d="M14,3V5H17.59L7.76,14.83L9.17,16.24L19,6.41V10H21V3M19,19H5V5H12V3H5C3.89,3 3,3.9 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V12H19V19Z"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+          <div class="collections-lightroom-gallery">
+            <iframe src="/galeries/sports/wakefoil/index.html" frameborder="0" allowfullscreen></iframe>
+          </div>
+        </div>
+
+        <div id="sports-wakesurf-gallery" class="collections-gallery-content-area">
+          <div class="gallery-header">
+            <h3 class="visually-hidden">Wake Surf</h3>
+            <div class="gallery-actions">
+              <button class="gallery-action-btn" onclick="shareGallery('/galeries/sports/wakesurf/index.html')" title="Partager la galerie">
+                <svg viewBox="0 0 24 24">
+                  <path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9= 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"/>
+                </svg>
+              </button>
+              <a href="/galeries/sports/wakesurf/index.html" target="_blank" class="gallery-action-btn" title="Ouvrir dans un nouvel onglet">
+                <svg viewBox="0 0 24 24">
+                  <path d="M14,3V5H17.59L7.76,14.83L9.17,16.24L19,6.41V10H21V3M19,19H5V5H12V3H5C3.89,3 3,3.9 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V12H19V19Z"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+          <div class="collections-lightroom-gallery">
+            <iframe src="/galeries/sports/wakesurf/index.html" frameborder="0" allowfullscreen></iframe>
+          </div>
+        </div>
+
+        {/* Sports d'Hiver */}
+        <div id="sports-ski-freeride-gallery" class="collections-gallery-content-area">
+          <div class="gallery-header">
+            <h3 class="visually-hidden">Ski Freeride</h3>
+            <div class="gallery-actions">
+              <button class="gallery-action-btn" onclick="shareGallery('/galeries/sports/ski-freeride/index.html')" title="Partager la galerie">
+                <svg viewBox="0 0 24 24">
+                  <path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"/>
+                </svg>
+              </button>
+              <a href="/galeries/sports/ski-freeride/index.html" target="_blank" class="gallery-action-btn" title="Ouvrir dans un nouvel onglet">
+                <svg viewBox="0 0 24 24">
+                  <path d="M14,3V5H17.59L7.76,14.83L9.17,16.24L19,6.41V10H21V3M19,19H5V5H12V3H5C3.89,3 3,3.9 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V12H19V19Z"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+          <div class="collections-lightroom-gallery">
+            <iframe src="/galeries/sports/ski-freeride/index.html" frameborder="0" allowfullscreen></iframe>
+          </div>
+        </div>
+
+        <div id="sports-ice-climbing-gallery" class="collections-gallery-content-area">
+          <div class="gallery-header">
+            <h3 class="visually-hidden">Ice Climbing</h3>
+            <div class="gallery-actions">
+              <button class="gallery-action-btn" onclick="shareGallery('/galeries/sports/ice-climbing/index.html')" title="Partager la galerie">
+                <svg viewBox="0 0 24 24">
+                  <path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"/>
+                </svg>
+              </button>
+              <a href="/galeries/sports/ice-climbing/index.html" target="_blank" class="gallery-action-btn" title="Ouvrir dans un nouvel onglet">
+                <svg viewBox="0 0 24 24">
+                  <path d="M14,3V5H17.59L7.76,14.83L9.17,16.24L19,6.41V10H21V3M19,19H5V5H12V3H5C3.89,3 3,3.9 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V12H19V19Z"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+          <div class="collections-lightroom-gallery">
+            <iframe src="/galeries/sports/ice-climbing/index.html" frameborder="0" allowfullscreen></iframe>
+          </div>
+        </div>
+
+        <div id="sports-musher-gallery" class="collections-gallery-content-area">
+          <div class="gallery-header">
+            <h3 class="visually-hidden">Musher</h3>
+            <div class="gallery-actions">
+              <button class="gallery-action-btn" onclick="shareGallery('/galeries/sports/musher/index.html')" title="Partager la galerie">
+                <svg viewBox="0 0 24 24">
+                  <path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"/>
+                </svg>
+              </button>
+              <a href="/galeries/sports/musher/index.html" target="_blank" class="gallery-action-btn" title="Ouvrir dans un nouvel onglet">
+                <svg viewBox="0 0 24 24">
+                  <path d="M14,3V5H17.59L7.76,14.83L9.17,16.24L19,6.41V10H21V3M19,19H5V5H12V3H5C3.89,3 3,3.9 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V12H19V19Z"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+          <div class="collections-lightroom-gallery">
+            <iframe src="/galeries/sports/musher/index.html" frameborder="0" allowfullscreen></iframe>
+          </div>
+        </div>
+
+        <div id="sports-raquette-gallery" class="collections-gallery-content-area">
+          <div class="gallery-header">
+            <h3 class="visually-hidden">Raquette</h3>
+            <div class="gallery-actions">
+              <button class="gallery-action-btn" onclick="shareGallery('/galeries/sports/raquette/index.html')" title="Partager la galerie">
+                <svg viewBox="0 0 24 24">
+                  <path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"/>
+                </svg>
+              </button>
+              <a href="/galeries/sports/raquette/index.html" target="_blank" class="gallery-action-btn" title="Ouvrir dans un nouvel onglet">
+                <svg viewBox="0 0 24 24">
+                  <path d="M14,3V5H17.59L7.76,14.83L9.17,16.24L19,6.41V10H21V3M19,19H5V5H12V3H5C3.89,3 3,3.9 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V12H19V19Z"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+          <div class="collections-lightroom-gallery">
+            <iframe src="/galeries/sports/raquette/index.html" frameborder="0" allowfullscreen></iframe>
+          </div>
+        </div>
+
+        <div id="sports-skicross-gallery" class="collections-gallery-content-area">
+          <div class="gallery-header">
+            <h3 class="visually-hidden">Ski Cross</h3>
+            <div class="gallery-actions">
+              <button class="gallery-action-btn" onclick="shareGallery('/galeries/sports/skicross/index.html')" title="Partager la galerie">
+                <svg viewBox="0 0 24 24">
+                  <path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"/>
+                </svg>
+              </button>
+              <a href="/galeries/sports/skicross/index.html" target="_blank" class="gallery-action-btn" title="Ouvrir dans un nouvel onglet">
+                <svg viewBox="0 0 24 24">
+                  <path d="M14,3V5H17.59L7.76,14.83L9.17,16.24L19,6.41V10H21V3M19,19H5V5H12V3H5C3.89,3 3,3.9 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V12H19V19Z"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+          <div class="collections-lightroom-gallery">
+            <iframe src="/galeries/sports/skicross/index.html" frameborder="0" allowfullscreen></iframe>
+          </div>
+        </div>
+
+        <div id="sports-snowboard-freeride-gallery" class="collections-gallery-content-area">
+          <div class="gallery-header">
+            <h3 class="visually-hidden">Snowboard Freeride</h3>
+            <div class="gallery-actions">
+              <button class="gallery-action-btn" onclick="shareGallery('/galeries/sports/snowboard-freeride/index.html')" title="Partager la galerie">
+                <svg viewBox="0 0 24 24">
+                  <path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"/>
+                </svg>
+              </button>
+              <a href="/galeries/sports/snowboard-freeride/index.html" target="_blank" class="gallery-action-btn" title="Ouvrir dans un nouvel onglet">
+                <svg viewBox="0 0 24 24">
+                  <path d="M14,3V5H17.59L7.76,14.83L9.17,16.24L19,6.41V10H21V3M19,19H5V5H12V3H5C3.89,3 3,3.9 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V12H19V19Z"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+          <div class="collections-lightroom-gallery">
+            <iframe src="/galeries/sports/snowboard-freeride/index.html" frameborder="0" allowfullscreen></iframe>
+          </div>
+        </div>
+
+        <div id="sports-snowhawk-gallery" class="collections-gallery-content-area">
+          <div class="gallery-header">
+            <h3 class="visually-hidden">Snowhawk</h3>
+            <div class="gallery-actions">
+              <button class="gallery-action-btn" onclick="shareGallery('/galeries/sports/snowhawk/index.html')" title="Partager la galerie">
+                <svg viewBox="0 0 24 24">
+                  <path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"/>
+                </svg>
+              </button>
+              <a href="/galeries/sports/snowhawk/index.html" target="_blank" class="gallery-action-btn" title="Ouvrir dans un nouvel onglet">
+                <svg viewBox="0 0 24 24">
+                  <path d="M14,3V5H17.59L7.76,14.83L9.17,16.24L19,6.41V10H21V3M19,19H5V5H12V3H5C3.89,3 3,3.9 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V12H19V19Z"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+          <div class="collections-lightroom-gallery">
+            <iframe src="/galeries/sports/snowhawk/index.html" frameborder="0" allowfullscreen></iframe>
+          </div>
+        </div>
+
+        {/* Sports Mécaniques - Motocross */}
+        <div id="sports-motocross-gallery" class="collections-gallery-content-area">
+          <div class="gallery-header">
+            <h3 class="visually-hidden">Motocross</h3>
+            <div class="gallery-actions">
+              <button class="gallery-action-btn" onclick="shareGallery('/galeries/sports/motocross/index.html')" title="Partager la galerie">
+                <svg viewBox="0 0 24 24">
+                  <path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"/>
+                </svg>
+              </button>
+              <a href="/galeries/sports/motocross/index.html" target="_blank" class="gallery-action-btn" title="Ouvrir dans un nouvel onglet">
+                <svg viewBox="0 0 24 24">
+                  <path d="M14,3V5H17.59L7.76,14.83L9.17,16.24L19,6.41V10H21V3M19,19H5V5H12V3H5C3.89,3 3,3.9 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V12H19V19Z"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+          <div class="collections-lightroom-gallery">
+            <iframe src="/galeries/sports/motocross/index.html" frameborder="0" allowfullscreen></iframe>
+          </div>
+        </div>
+
+        {/* Sports Terrestres */}
+        <div id="sports-escalade-gallery" class="collections-gallery-content-area">
+          <div class="gallery-header">
+            <h3 class="visually-hidden">Escalade</h3>
+            <div class="gallery-actions">
+              <button class="gallery-action-btn" onclick="shareGallery('/galeries/sports/escalade/index.html')" title="Partager la galerie">
+                <svg viewBox="0 0 24 24">
+                  <path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"/>
+                </svg>
+              </button>
+              <a href="/galeries/sports/escalade/index.html" target="_blank" class="gallery-action-btn" title="Ouvrir dans un nouvel onglet">
+                <svg viewBox="0 0 24 24">
+                  <path d="M14,3V5H17.59L7.76,14.83L9.17,16.24L19,6.41V10H21V3M19,19H5V5H12V3H5C3.89,3 3,3.9 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V12H19V19Z"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+          <div class="collections-lightroom-gallery">
+            <iframe src="/galeries/sports/escalade/index.html" frameborder="0" allowfullscreen></iframe>
+          </div>
+        </div>
+
+        <div id="sports-equitation-gallery" class="collections-gallery-content-area">
+          <div class="gallery-header">
+            <h3 class="visually-hidden">Équitation</h3>
+            <div class="gallery-actions">
+              <button class="gallery-action-btn" onclick="shareGallery('/galeries/sports/equitation/index.html')" title="Partager la galerie">
+                <svg viewBox="0 0 24 24">
+                  <path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"/>
+                </svg>
+              </button>
+              <a href="/galeries/sports/equitation/index.html" target="_blank" class="gallery-action-btn" title="Ouvrir dans un nouvel onglet">
+                <svg viewBox="0 0 24 24">
+                  <path d="M14,3V5H17.59L7.76,14.83L9.17,16.24L19,6.41V10H21V3M19,19H5V5H12V3H5C3.89,3 3,3.9 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V12H19V19Z"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+          <div class="collections-lightroom-gallery">
+            <iframe src="/galeries/sports/equitation/index.html" frameborder="0" allowfullscreen></iframe>
+          </div>
+        </div>
+
+        <div id="sports-golf-gallery" class="collections-gallery-content-area">
+          <div class="gallery-header">
+            <h3 class="visually-hidden">Golf</h3>
+            <div class="gallery-actions">
+              <button class="gallery-action-btn" onclick="shareGallery('/galeries/sports/golf/index.html')" title="Partager la galerie">
+                <svg viewBox="0 0 24 24">
+                  <path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"/>
+                </svg>
+              </button>
+              <a href="/galeries/sports/golf/index.html" target="_blank" class="gallery-action-btn" title="Ouvrir dans un nouvel onglet">
+                <svg viewBox="0 0 24 24">
+                  <path d="M14,3V5H17.59L7.76,14.83L9.17,16.24L19,6.41V10H21V3M19,19H5V5H12V3H5C3.89,3 3,3.9 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V12H19V19Z"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+          <div class="collections-lightroom-gallery">
+            <iframe src="/galeries/sports/golf/index.html" frameborder="0" allowfullscreen></iframe>
+          </div>
+        </div>
+
+        <div id="sports-longboard-gallery" class="collections-gallery-content-area">
+          <div class="gallery-header">
+            <h3 class="visually-hidden">Longboard</h3>
+            <div class="gallery-actions">
+              <button class="gallery-action-btn" onclick="shareGallery('/galeries/sports/longboard/index.html')" title="Partager la galerie">
+                <svg viewBox="0 0 24 24">
+                  <path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"/>
+                </svg>
+              </button>
+              <a href="/galeries/sports/longboard/index.html" target="_blank" class="gallery-action-btn" title="Ouvrir dans un nouvel onglet">
+                <svg viewBox="0 0 24 24">
+                  <path d="M14,3V5H17.59L7.76,14.83L9.17,16.24L19,6.41V10H21V3M19,19H5V5H12V3H5C3.89,3 3,3.9 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V12H19V19Z"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+          <div class="collections-lightroom-gallery">
+            <iframe src="/galeries/sports/longboard/index.html" frameborder="0" allowfullscreen></iframe>
+          </div>
+        </div>
+
+        <div id="sports-nordic-walking-gallery" class="collections-gallery-content-area">
+          <div class="gallery-header">
+            <h3 class="visually-hidden">Nordic Walking</h3>
+            <div class="gallery-actions">
+              <button class="gallery-action-btn" onclick="shareGallery('/galeries/sports/nordic-walking/index.html')" title="Partager la galerie">
+                <svg viewBox="0 0 24 24">
+                  <path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"/>
+                </svg>
+              </button>
+              <a href="/galeries/sports/nordic-walking/index.html" target="_blank" class="gallery-action-btn" title="Ouvrir dans un nouvel onglet">
+                <svg viewBox="0 0 24 24">
+                  <path d="M14,3V5H17.59L7.76,14.83L9.17,16.24L19,6.41V10H21V3M19,19H5V5H12V3H5C3.89,3 3,3.9 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V12H19V19Z"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+          <div class="collections-lightroom-gallery">
+            <iframe src="/galeries/sports/nordic-walking/index.html" frameborder="0" allowfullscreen></iframe>
+          </div>
+        </div>
+
+        <div id="sports-skateboard-gallery" class="collections-gallery-content-area">
+          <div class="gallery-header">
+            <h3 class="visually-hidden">Skateboard</h3>
+            <div class="gallery-actions">
+              <button class="gallery-action-btn" onclick="shareGallery('/galeries/sports/skateboard/index.html')" title="Partager la galerie">
+                <svg viewBox="0 0 24 24">
+                  <path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"/>
+                </svg>
+              </button>
+              <a href="/galeries/sports/skateboard/index.html" target="_blank" class="gallery-action-btn" title="Ouvrir dans un nouvel onglet">
+                <svg viewBox="0 0 24 24">
+                  <path d="M14,3V5H17.59L7.76,14.83L9.17,16.24L19,6.41V10H21V3M19,19H5V5H12V3H5C3.89,3 3,3.9 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V12H19V19Z"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+          <div class="collections-lightroom-gallery">
+            <iframe src="/galeries/sports/skateboard/index.html" frameborder="0" allowfullscreen></iframe>
+          </div>
+        </div>
+
+        <div id="sports-vtt-gallery" class="collections-gallery-content-area">
+          <div class="gallery-header">
+            <h3 class="visually-hidden">VTT</h3>
+            <div class="gallery-actions">
+              <button class="gallery-action-btn" onclick="shareGallery('/galeries/sports/vtt/index.html')" title="Partager la galerie">
+                <svg viewBox="0 0 24 24">
+                  <path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"/>
+                </svg>
+              </button>
+              <a href="/galeries/sports/vtt/index.html" target="_blank" class="gallery-action-btn" title="Ouvrir dans un nouvel onglet">
+                <svg viewBox="0 0 24 24">
+                  <path d="M14,3V5H17.59L7.76,14.83L9.17,16.24L19,6.41V10H21V3M19,19H5V5H12V3H5C3.89,3 3,3.9 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V12H19V19Z"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+          <div class="collections-lightroom-gallery">
+            <iframe src="/galeries/sports/vtt/index.html" frameborder="0" allowfullscreen></iframe>
+          </div>
+        </div>
+        <div id="sports-trail-gallery" class="collections-gallery-content-area">
+          <div class="gallery-header">
+            <h3 class="visually-hidden">Trail</h3>
+            <div class="gallery-actions">
+              <button class="gallery-action-btn" onclick="shareGallery('/galeries/sports/trail/index.html')" title="Partager la galerie">
+                <svg viewBox="0 0 24 24">
+                  <path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"/>
+                </svg>
+              </button>
+              <a href="/galeries/sports/trail/index.html" target="_blank" class="gallery-action-btn" title="Ouvrir dans un nouvel onglet">
+                <svg viewBox="0 0 24 24">
+                  <path d="M14,3V5H17.59L7.76,14.83L9.17,16.24L19,6.41V10H21V3M19,19H5V5H12V3H5C3.89,3 3,3.9 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V12H19V19Z"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+          <div class="collections-lightroom-gallery">
+            <iframe src="/galeries/sports/trail/index.html" frameborder="0" allowfullscreen></iframe>
+          </div>
+        </div>
+
+        {/* Sports Aériens */}
+        <div id="sports-parapente-gallery" class="collections-gallery-content-area">
+          <div class="gallery-header">
+            <h3 class="visually-hidden">Parapente</h3>
+            <div class="gallery-actions">
+              <button class="gallery-action-btn" onclick="shareGallery('/galeries/sports/parapente/index.html')" title="Partager la galerie">
+                <svg viewBox="0 0 24 24">
+                  <path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"/>
+                </svg>
+              </button>
+              <a href="/galeries/sports/parapente/index.html" target="_blank" class="gallery-action-btn" title="Ouvrir dans un nouvel onglet">
+                <svg viewBox="0 0 24 24">
+                  <path d="M14,3V5H17.59L7.76,14.83L9.17,16.24L19,6.41V10H21V3M19,19H5V5H12V3H5C3.89,3 3,3.9 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V12H19V19Z"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+          <div class="collections-lightroom-gallery">
+            <iframe src="/galeries/sports/parapente/index.html" frameborder="0" allowfullscreen></iframe>
+          </div>
+        </div>
+
+        <div id="sports-wingsuit-gallery" class="collections-gallery-content-area">
+          <div class="gallery-header">
+            <h3 class="visually-hidden">Wingsuit</h3>
+            <div class="gallery-actions">
+              <button class="gallery-action-btn" onclick="shareGallery('/galeries/sports/wingsuit/index.html')" title="Partager la galerie">
+                <svg viewBox="0 0 24 24">
+                  <path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"/>
+                </svg>
+              </button>
+              <a href="/galeries/sports/wingsuit/index.html" target="_blank" class="gallery-action-btn" title="Ouvrir dans un nouvel onglet">
+                <svg viewBox="0 0 24 24">
+                  <path d="M14,3V5H17.59L7.76,14.83L9.17,16.24L19,6.41V10H21V3M19,19H5V5H12V3H5C3.89,3 3,3.9 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V12H19V19Z"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+          <div class="collections-lightroom-gallery">
+            <iframe src="/galeries/sports/wingsuit/index.html" frameborder="0" allowfullscreen></iframe>
+          </div>
+        </div>
+
+        {/* Sports Collectifs */}
+        <div id="sports-football-gallery" class="collections-gallery-content-area">
+          <div class="gallery-header">
+            <h3 class="visually-hidden">Football</h3>
+            <div class="gallery-actions">
+              <button class="gallery-action-btn" onclick="shareGallery('/galeries/sports/football/index.html')" title="Partager la galerie">
+                <svg viewBox="0 0 24 24">
+                  <path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"/>
+                </svg>
+              </button>
+              <a href="/galeries/sports/football/index.html" target="_blank" class="gallery-action-btn" title="Ouvrir dans un nouvel onglet">
+                <svg viewBox="0 0 24 24">
+                  <path d="M14,3V5H17.59L7.76,14.83L9.17,16.24L19,6.41V10H21V3M19,19H5V5H12V3H5C3.89,3 3,3.9 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V12H19V19Z"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+          <div class="collections-lightroom-gallery">
+            <iframe src="/galeries/sports/football/index.html" frameborder="0" allowfullscreen></iframe>
+          </div>
+        </div>
+
+        <div id="sports-rugby-gallery" class="collections-gallery-content-area">
+          <div class="gallery-header">
+            <h3 class="visually-hidden">Rugby</h3>
+            <div class="gallery-actions">
+              <button class="gallery-action-btn" onclick="shareGallery('/galeries/sports/rugby/index.html')" title="Partager la galerie">
+                <svg viewBox="0 0 24 24">
+                  <path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"/>
+                </svg>
+              </button>
+              <a href="/galeries/sports/rugby/index.html" target="_blank" class="gallery-action-btn" title="Ouvrir dans un nouvel onglet">
+                <svg viewBox="0 0 24 24">
+                  <path d="M14,3V5H17.59L7.76,14.83L9.17,16.24L19,6.41V10H21V3M19,19H5V5H12V3H5C3.89,3 3,3.9 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V12H19V19Z"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+          <div class="collections-lightroom-gallery">
+            <iframe src="/galeries/sports/rugby/index.html" frameborder="0" allowfullscreen></iframe>
+          </div>
+        </div>
+
+        <div id="sports-beach-rugby-gallery" class="collections-gallery-content-area">
+          <div class="gallery-header">
+            <h3 class="visually-hidden">Beach Rugby</h3>
+            <div class="gallery-actions">
+              <button class="gallery-action-btn" onclick="shareGallery('/galeries/sports/beach-rugby/index.html')" title="Partager la galerie">
+                <svg viewBox="0 0 24 24">
+                  <path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"/>
+                </svg>
+              </button>
+              <a href="/galeries/sports/beach-rugby/index.html" target="_blank" class="gallery-action-btn" title="Ouvrir dans un nouvel onglet">
+                <svg viewBox="0 0 24 24">
+                  <path d="M14,3V5H17.59L7.76,14.83L9.17,16.24L19,6.41V10H21V3M19,19H5V5H12V3H5C3.89,3 3,3.9 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V12H19V19Z"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+          <div class="collections-lightroom-gallery">
+            <iframe src="/galeries/sports/beach-rugby/index.html" frameborder="0" allowfullscreen></iframe>
+          </div>
+        </div>
+
+        <div id="sports-beach-volley-gallery" class="collections-gallery-content-area">
+          <div class="gallery-header">
+            <h3 class="visually-hidden">Beach Volley</h3>
+            <div class="gallery-actions">
+              <button class="gallery-action-btn" onclick="shareGallery('/galeries/sports/beach-volley/index.html')" title="Partager la galerie">
+                <svg viewBox="0 0 24 24">
+                  <path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"/>
+                </svg>
+              </button>
+              <a href="/galeries/sports/beach-volley/index.html" target="_blank" class="gallery-action-btn" title="Ouvrir dans un nouvel onglet">
+                <svg viewBox="0 0 24 24">
+                  <path d="M14,3V5H17.59L7.76,14.83L9.17,16.24L19,6.41V10H21V3M19,19H5V5H12V3H5C3.89,3 3,3.9 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V12H19V19Z"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+          <div class="collections-lightroom-gallery">
+            <iframe src="/galeries/sports/beach-volley/index.html" frameborder="0" allowfullscreen></iframe>
+          </div>
+        </div>
+
+        {/* Sports Mécaniques - Complete */}
+        <div id="sports-fmx-gallery" class="collections-gallery-content-area">
+          <div class="gallery-header">
+            <h3 class="visually-hidden">FMX</h3>
+            <div class="gallery-actions">
+              <button class="gallery-action-btn" onclick="shareGallery('/galeries/sports/fmx/index.html')" title="Partager la galerie">
+                <svg viewBox="0 0 24 24">
+                  <path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"/>
+                </svg>
+              </button>
+              <a href="/galeries/sports/fmx/index.html" target="_blank" class="gallery-action-btn" title="Ouvrir dans un nouvel onglet">
+                <svg viewBox="0 0 24 24">
+                  <path d="M14,3V5H17.59L7.76,14.83L9.17,16.24L19,6.41V10H21V3M19,19H5V5H12V3H5C3.89,3 3,3.9 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V12H19V19Z"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+          <div class="collections-lightroom-gallery">
+            <iframe src="/galeries/sports/fmx/index.html" frameborder="0" allowfullscreen></iframe>
+          </div>
+        </div>
+
+        <div id="sports-hill-climbing-gallery" class="collections-gallery-content-area">
+          <div class="gallery-header">
+            <h3 class="visually-hidden">Hill Climbing</h3>
+            <div class="gallery-actions">
+              <button class="gallery-action-btn" onclick="shareGallery('/galeries/sports/hill-climbing/index.html')" title="Partager la galerie">
+                <svg viewBox="0 0 24 24">
+                  <path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"/>
+                </svg>
+              </button>
+              <a href="/galeries/sports/hill-climbing/index.html" target="_blank" class="gallery-action-btn" title="Ouvrir dans un nouvel onglet">
+                <svg viewBox="0 0 24 24">
+                  <path d="M14,3V5H17.59L7.76,14.83L9.17,16.24L19,6.41V10H21V3M19,19H5V5H12V3H5C3.89,3 3,3.9 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V12H19V19Z"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+          <div class="collections-lightroom-gallery">
+            <iframe src="/galeries/sports/hill-climbing/index.html" frameborder="0" allowfullscreen></iframe>
+          </div>
+        </div>
+
+        <div id="sports-trial-gallery" class="collections-gallery-content-area">
+          <div class="gallery-header">
+            <h3 class="visually-hidden">Trial</h3>
+            <div class="gallery-actions">
+              <button class="gallery-action-btn" onclick="shareGallery('/galeries/sports/trial/index.html')" title="Partager la galerie">
+                <svg viewBox="0 0 24 24">
+                  <path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"/>
+                </svg>
+              </button>
+              <a href="/galeries/sports/trial/index.html" target="_blank" class="gallery-action-btn" title="Ouvrir dans un nouvel onglet">
+                <svg viewBox="0 0 24 24">
+                  <path d="M14,3V5H17.59L7.76,14.83L9.17,16.24L19,6.41V10H21V3M19,19H5V5H12V3H5C3.89,3 3,3.9 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V12H19V19Z"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+          <div class="collections-lightroom-gallery">
+            <iframe src="/galeries/sports/trial/index.html" frameborder="0" allowfullscreen></iframe>
+          </div>
+        </div>
+
+        <div id="sports-moto-custom-gallery" class="collections-gallery-content-area">
+          <div class="gallery-header">
+            <h3 class="visually-hidden">Moto Custom</h3>
+            <div class="gallery-actions">
+              <button class="gallery-action-btn" onclick="shareGallery('/galeries/sports/moto-custom/index.html')" title="Partager la galerie">
+                <svg viewBox="0 0 24 24">
+                  <path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"/>
+                </svg>
+              </button>
+              <a href="/galeries/sports/moto-custom/index.html" target="_blank" class="gallery-action-btn" title="Ouvrir dans un nouvel onglet">
+                <svg viewBox="0 0 24 24">
+                  <path d="M14,3V5H17.59L7.76,14.83L9.17,16.24L19,6.41V10H21V3M19,19H5V5H12V3H5C3.89,3 3,3.9 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V12H19V19Z"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+          <div class="collections-lightroom-gallery">
+            <iframe src="/galeries/sports/moto-custom/index.html" frameborder="0" allowfullscreen></iframe>
+          </div>
+        </div>
+
+        <div id="sports-moto-gp-gallery" class="collections-gallery-content-area">
+          <div class="gallery-header">
+            <h3 class="visually-hidden">Moto GP</h3>
+            <div class="gallery-actions">
+              <button class="gallery-action-btn" onclick="shareGallery('/galeries/sports/moto-gp/index.html')" title="Partager la galerie">
+                <svg viewBox="0 0 24 24">
+                  <path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"/>
+                </svg>
+              </button>
+              <a href="/galeries/sports/moto-gp/index.html" target="_blank" class="gallery-action-btn" title="Ouvrir dans un nouvel onglet">
+                <svg viewBox="0 0 24 24">
+                  <path d="M14,3V5H17.59L7.76,14.83L9.17,16.24L19,6.41V10H21V3M19,19H5V5H12V3H5C3.89,3 3,3.9 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V12H19V19Z"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+          <div class="collections-lightroom-gallery">
+            <iframe src="/galeries/sports/moto-gp/index.html" frameborder="0" allowfullscreen></iframe>
+          </div>
+        </div>
+
+        </div>
+
+        
+      </div>
+      <div class="back-link">
+        <a href="/photo">Retour à la page PHOTO</a>
+      </div>
+    </div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const sidebarButtons = document.querySelectorAll('.collections-sidebar-nav .collections-sidebar-button');
+    const galleryContents = document.querySelectorAll('.collections-gallery-content-area');
+    
+    function showGallery(targetId) {
+      // Remove active from all sidebar buttons
+      sidebarButtons.forEach(button => button.classList.remove('active'));
+      
+      // Hide all galleries
+      galleryContents.forEach(content => content.classList.remove('active'));
+      
+      // Hide the no-gallery message
+      const noGalleryMessage = document.getElementById('no-gallery-selected');
+      if (noGalleryMessage) {
+        noGalleryMessage.style.display = 'none';
+      }
+      
+      // Add active to the corresponding sidebar button
+      const activeButton = document.querySelector(`[data-target="${targetId}"]`);
+      if (activeButton) {
+        activeButton.classList.add('active');
+      }
+      
+      // Show target gallery
+      const targetContent = document.getElementById(targetId);
+      if (targetContent) {
+        targetContent.classList.add('active');
+      }
+    }
+    
+    function showNoGalleryMessage() {
+      // Hide all galleries
+      galleryContents.forEach(content => content.classList.remove('active'));
+      
+      // Show the no-gallery message
+      const noGalleryMessage = document.getElementById('no-gallery-selected');
+      if (noGalleryMessage) {
+        noGalleryMessage.style.display = 'flex';
+      }
+    }
+    
+    // Handle sidebar buttons (excluding dropdown triggers and submenu items)
+    sidebarButtons.forEach(button => {
+      if (!button.classList.contains('collections-dropdown-trigger') && !button.classList.contains('submenu-item')) {
+        button.addEventListener('click', (e) => {
+          e.preventDefault();
+          const targetId = button.dataset.target;
+          
+          // Best Of should show the gallery directly
+          if (targetId === 'sports-bestof-gallery') {
+            showGallery(targetId);
+          } else {
+            // For other category buttons, show "Choisir une galerie" message
+            showNoGalleryMessage();
+          }
+        });
+      }
+    });
+    
+    // Handle dropdown toggles
+    const dropdownTriggers = document.querySelectorAll('.collections-dropdown-trigger');
+    dropdownTriggers.forEach(trigger => {
+      trigger.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        
+        // Remove active state from all buttons
+        sidebarButtons.forEach(button => button.classList.remove('active'));
+        
+        // Add active state to clicked dropdown trigger
+        trigger.classList.add('active');
+        
+        const submenu = trigger.nextElementSibling;
+        if (submenu) {
+          // Close all other dropdowns first
+          document.querySelectorAll('.collections-dropdown-submenu').forEach(menu => {
+            if (menu !== submenu) {
+              menu.classList.remove('active');
+            }
+          });
+          // Toggle the clicked dropdown
+          submenu.classList.toggle('active');
+        }
+        
+        // Show "Choisir une galerie" message when clicking category buttons
+        showNoGalleryMessage();
+      });
+    });
+    
+    // Handle submenu items
+    const submenuItems = document.querySelectorAll('.submenu-item');
+    submenuItems.forEach(item => {
+      item.addEventListener('click', (e) => {
+        showGallery(item.dataset.target);
+      });
+    });
+
+    // Mobile dropdown functionality
+    const sportsCategorySelect = document.getElementById('sports-category-select');
+    const sportsSubcategorySelect = document.getElementById('sports-subcategory-select');
+    
+    // Define subcategories for each category
+    const subcategories = {
+      'best-of': [
+        { value: 'sports-bestof-gallery', text: 'Best Of' }
+      ],
+      'sports-nautiques': [
+        { value: 'sports-surf-gallery', text: 'Surf' },
+        { value: 'sports-kitesurf-gallery', text: 'Kite Surf' },
+        { value: 'sports-wakeboard-gallery', text: 'Wakeboard' },
+        { value: 'sports-apnee-gallery', text: 'Apnée' },
+        { value: 'sports-kayak-gallery', text: 'Kayak' },
+        { value: 'sports-paddleboard-gallery', text: 'Paddle Board' },
+        { value: 'sports-funboard-gallery', text: 'Funboard' },
+        { value: 'sports-voile-gallery', text: 'Voile' },
+        { value: 'sports-wakefoil-gallery', text: 'Wakefoil' },
+        { value: 'sports-wakesurf-gallery', text: 'Wake Surf' }
+      ],
+      'sports-hiver': [
+        { value: 'sports-ski-freeride-gallery', text: 'Ski Freeride' },
+        { value: 'sports-ice-climbing-gallery', text: 'Ice Climbing' },
+        { value: 'sports-musher-gallery', text: 'Musher' },
+        { value: 'sports-raquette-gallery', text: 'Raquette' },
+        { value: 'sports-skicross-gallery', text: 'Ski Cross' },
+        { value: 'sports-snowboard-freeride-gallery', text: 'Snowboard Freeride' },
+        { value: 'sports-snowhawk-gallery', text: 'Snowhawk' }
+      ],
+      'sports-terrestres': [
+        { value: 'sports-trail-gallery', text: 'Trail' },
+        { value: 'sports-vtt-gallery', text: 'VTT' },
+        { value: 'sports-escalade-gallery', text: 'Escalade' },
+        { value: 'sports-equitation-gallery', text: 'Équitation' },
+        { value: 'sports-golf-gallery', text: 'Golf' },
+        { value: 'sports-longboard-gallery', text: 'Longboard' },
+        { value: 'sports-nordic-walking-gallery', text: 'Nordic Walking' },
+        { value: 'sports-skateboard-gallery', text: 'Skateboard' }
+      ],
+      'sports-aeriens': [
+        { value: 'sports-parapente-gallery', text: 'Parapente' },
+        { value: 'sports-wingsuit-gallery', text: 'Wingsuit' }
+      ],
+      'sports-collectifs': [
+        { value: 'sports-football-gallery', text: 'Football' },
+        { value: 'sports-rugby-gallery', text: 'Rugby' },
+        { value: 'sports-beach-rugby-gallery', text: 'Beach Rugby' },
+        { value: 'sports-beach-volley-gallery', text: 'Beach Volley' }
+      ],
+      'sports-mecaniques': [
+        { value: 'sports-motocross-gallery', text: 'Motocross' },
+        { value: 'sports-fmx-gallery', text: 'FMX' },
+        { value: 'sports-hill-climbing-gallery', text: 'Hill Climbing' },
+        { value: 'sports-trial-gallery', text: 'Trial' },
+        { value: 'sports-moto-custom-gallery', text: 'Moto Custom' },
+        { value: 'sports-moto-gp-gallery', text: 'Moto GP' }
+      ]
+    };
+
+    // Update subcategory dropdown when category changes
+    if (sportsCategorySelect && sportsSubcategorySelect) {
+      sportsCategorySelect.addEventListener('change', (event) => {
+        const selectedCategory = event.target.value;
+        
+        if (!selectedCategory) {
+          // If empty selection, hide subcategory dropdown
+          sportsSubcategorySelect.style.display = 'none';
+          return;
+        }
+        
+        const subcategoryOptions = subcategories[selectedCategory] || [];
+        
+        // Clear and populate subcategory dropdown
+        sportsSubcategorySelect.innerHTML = '';
+        
+        // Show/hide second dropdown based on number of subcategories
+        if (subcategoryOptions.length > 1) {
+          // Show subcategory dropdown for categories with multiple options
+          sportsSubcategorySelect.style.display = 'block';
+          // Add placeholder option
+          const placeholderOption = document.createElement('option');
+          placeholderOption.value = '';
+          placeholderOption.textContent = 'Choisir une galerie...';
+          placeholderOption.selected = true; // Make sure it's selected
+          sportsSubcategorySelect.appendChild(placeholderOption);
+          
+          subcategoryOptions.forEach(option => {
+            const optionElement = document.createElement('option');
+            optionElement.value = option.value;
+            optionElement.textContent = option.text;
+            sportsSubcategorySelect.appendChild(optionElement);
+          });
+          
+          // Show "Choisir une galerie" message when category is selected (unless we have a hash)
+          if (!window.location.hash) {
+            showNoGalleryMessage();
+          }
+        } else {
+          // Hide subcategory dropdown for categories with only one option (like Best Of)
+          sportsSubcategorySelect.style.display = 'none';
+          // Show "Choisir une galerie" message instead of showing Best Of directly (unless we have a hash)
+          if (!window.location.hash) {
+            showNoGalleryMessage();
+          }
+        }
+      });
+
+      // Handle subcategory selection
+      sportsSubcategorySelect.addEventListener('change', (event) => {
+        if (event.target.value) {
+          showGallery(event.target.value);
+        } else {
+          // Show "Choisir une galerie" message when "Choisir ..." is selected
+          showNoGalleryMessage();
+        }
+      });
+      
+      // Handle initial load and hash navigation
+      if (window.location.hash) {
+        const hashId = window.location.hash.substring(1);
+        console.log('Hash navigation for:', hashId);
+        
+        // Check if it's a gallery hash
+        if (document.getElementById(hashId)) {
+          console.log('Found gallery element for:', hashId);
+          showGallery(hashId);
+          
+          // Update mobile dropdowns to match the hash
+          for (const [category, galleries] of Object.entries(subcategories)) {
+            const galleryFound = galleries.find(g => g.value === hashId);
+            if (galleryFound) {
+              // Update mobile dropdowns
+              sportsCategorySelect.value = category;
+              // Trigger the change event to update subcategory dropdown
+              const changeEvent = new Event('change');
+              sportsCategorySelect.dispatchEvent(changeEvent);
+              if (subcategories[category].length > 1) {
+                sportsSubcategorySelect.value = hashId;
+              }
+              break;
+            }
+          }
+        } 
+        // Check if it's a category hash (like #sports-nautiques)
+        else if (subcategories[hashId]) {
+          console.log('Found category in subcategories for:', hashId);
+          // Show "Choisir une galerie" message for category hashes
+          showNoGalleryMessage();
+          
+          // Update mobile dropdowns
+          sportsCategorySelect.value = hashId;
+          const changeEvent = new Event('change');
+          sportsCategorySelect.dispatchEvent(changeEvent);
+          
+          // Update desktop sidebar
+          // Remove active state from all buttons
+          sidebarButtons.forEach(button => button.classList.remove('active'));
+          
+          // Find and activate the category dropdown trigger
+          const categoryTrigger = document.querySelector(`[data-target="${hashId}"]`);
+          if (categoryTrigger) {
+            categoryTrigger.classList.add('active');
+            
+            // Open the dropdown if it has subcategories
+            if (subcategories[hashId].length > 1) {
+              const submenu = categoryTrigger.nextElementSibling;
+              if (submenu) {
+                submenu.classList.add('active');
+              }
+            }
+          }
+        }
+        // Check if it's a direct category without subcategories (like #sports-bestof-gallery)
+        else if (document.querySelector(`[data-target="${hashId}"]`)) {
+          // Show the gallery directly
+          showGallery(hashId);
+          
+          // Update mobile dropdown to match the hash
+          for (const [category, galleries] of Object.entries(subcategories)) {
+            const galleryFound = galleries.find(g => g.value === hashId);
+            if (galleryFound) {
+              sportsCategorySelect.value = category;
+              const changeEvent = new Event('change');
+              sportsCategorySelect.dispatchEvent(changeEvent);
+              break;
+            }
+          }
+          
+          // If not found in subcategories, it's a direct category
+          if (!sportsCategorySelect.value) {
+            // Map gallery hashes to their categories
+            const galleryToCategoryMap = {
+              'sports-bestof-gallery': 'best-of',
+              'sports-parapente-gallery': 'sports-aeriens',
+              'sports-football-gallery': 'sports-collectifs',
+              'sports-ski-freeride-gallery': 'sports-hiver',
+              'sports-motocross-gallery': 'sports-mecaniques',
+              'sports-trail-gallery': 'sports-terrestres'
+            };
+            
+            const category = galleryToCategoryMap[hashId];
+            if (category) {
+              sportsCategorySelect.value = category;
+              const changeEvent = new Event('change');
+              sportsCategorySelect.dispatchEvent(changeEvent);
+            }
+          }
+        }
+      } else {
+        // Show "Choisir une galerie" message when no hash
+        showNoGalleryMessage();
+      }
+    }
+
+    // Share gallery function
+    window.shareGallery = (url) => {
+      if (navigator.share) {
+        navigator.share({
+          title: 'Galerie Sports - Jean-Marc Favre',
+          url: url
+        }).catch(console.error);
+      } else {
+        navigator.clipboard.writeText(url).then(() => {
+          alert('Lien copié dans le presse-papiers !');
+        }).catch(() => {
+          alert('Impossible de copier le lien. URL: ' + url);
+        });
+      }
+    };
+  });
+</script>
+
+</Layout>
+

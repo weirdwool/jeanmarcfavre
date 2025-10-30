@@ -1,0 +1,478 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getCollection, type CollectionEntry } from 'astro:content'; // Import CollectionEntry
+const allEngagements = await getCollection('engagements');
+// Explicitly type 'a' and 'b' as CollectionEntry<'engagements'>
+allEngagements.sort((a: CollectionEntry<'engagements'>, b: CollectionEntry<'engagements'>) => a.data.title.localeCompare(b.data.title));
+---
+<Layout 
+  title="Engagements Associatifs Annecy | Projets Solidaires - Jean-Marc Favre"
+  description="Mes engagements photographiques avec les associations d'Annecy : MéeO, Glisse en Coeur, BAAR Rugby, Espérance III. Photographie solidaire et associative."
+  preloadImage="/images/parallax/061128-Annecy-01.jpg"
+  canonical="/engagements/"
+>
+
+   <section class="header-banner">
+      <div class="header-banner-spacer">
+         <div class="header-banner-content">
+            <div class="side-border left"></div>
+            <div class="side-border right"></div>
+            <div class="top-border"></div>
+            <div class="bottom-border"></div>
+            <h1 class="text-shadow fade-in">Mes Engagements</h1>
+         </div>
+      </div>
+      <div class="header-banner-image">
+         <img src="/images/parallax/061128-Annecy-01.jpg" alt="Vue aérienne d'Annecy">
+         <div class="header-banner-overlay"></div>
+      </div>
+   </section>
+
+   <div class="header-fixed-gradient"></div>
+
+   <div class="container">
+      
+     <div class="container-medium-slider">
+
+        <!-- Unified Engagements Container -->
+        <div class="gts-container">
+          <div class="engagement-grid" id="engagements-grid">
+            {allEngagements.map((engagement: CollectionEntry<'engagements'>) => (
+              <a href={`/engagements/${engagement.slug}`} class="card">
+                <div class="card-image">
+                  {engagement.data.main_image && (
+                    <img
+                      src={engagement.data.main_image}
+                      alt={engagement.data.title}
+                    />
+                  )}
+                </div>
+                <div class="card-content">
+                  <div class="title-wrapper">
+                    <h4 class="card-category">{engagement.data.subtitle || 'Engagement'}</h4>
+                    <h5 class="card-title">{engagement.data.title}</h5>
+                  </div>
+                  <p class="card-description">{engagement.data.description}</p>
+                  <div class="link">
+                    <span>En savoir plus</span>
+                  </div>
+                </div>
+              </a>
+            ))}
+          </div>
+
+          <!-- Navigation arrows (only visible on mobile) -->
+          <div class="nav-wrapper">
+            <div class="separation-line-gradient"></div>
+            <div class="slider-navigation-arrows" data-target-id="engagements-grid">
+              <button class="slider-arrow prev-arrow" aria-label="Previous Engagement">⟵</button>
+              <button class="slider-arrow next-arrow" aria-label="Next Engagement">⟶</button>
+            </div>
+          </div>
+        </div>
+     </div>
+   </div>
+
+   <section class="parallax-banner" style="background-image: url('/images/parallax/130818-Sevrier-42.jpg');">
+      <div class="parallax-banner-overlay"></div>
+      <img 
+         src="/images/parallax/130818-Sevrier-42.jpg" 
+         alt="Marche Nordique au petit port, annecy le vieux" 
+         class="parallax-mobile-img" 
+         loading="lazy"
+         >
+   </section>
+
+   <div class="container">
+      <section class="container-medium-slider">
+
+         <div class="grid-title-wrapper">
+            <h2>Associations et artistes</h2>
+            <div class="separation-line-gradient"></div>
+            <p>Je les aide</p>
+         </div>
+
+         <!-- Unified Associations Container -->
+                 <div class="gts-container">
+          <div class="engagement-grid" id="associations-grid">
+             <div class="card">
+               <div class="card-image">
+                 <img src="/images/engagements/231015-apne-e-solidaire-37-733x489.jpg" alt="Association Apnée Solid'Air">
+               </div>
+               <div class="card-content">
+                 <div class="title-wrapper">
+                   <h4 class="card-category">Association</h4>
+                   <h5 class="card-title">Apnée Solid'Air</h5>
+                 </div>
+                 <p class="card-description">En faveur de la recherche sur les maladies rares et de la sensibilisation au don d'organes, Christophe Jobazé et ses amis s'investissent activement à travers deux événements majeurs chaque année.</p>
+                 <a href="https://apneesolidair.org/" class="link">
+                   <span>Visiter le site</span>
+                 </a>
+                 <a href="/galeries/engagements/apnee-solidair/index.html" target="_blank" class="link">
+                   <span>Galerie Photo</span>
+                 </a>
+               </div>
+             </div>
+             
+             <div class="card">
+               <div class="card-image">
+                 <img src="/images/engagements/220626-cml-evacuation-de-chets-12-733x550.jpg" alt="Team I clean my Lake">
+               </div>
+               <div class="card-content">
+                 <div class="title-wrapper">
+                   <h4 class="card-category">Association</h4>
+                   <h5 class="card-title">I clean my Lake</h5>
+                 </div>
+                 <p class="card-description">Petite association des rives du lac d'Annecy, I Clean My Lake s'engage dans le nettoyage des rives du lac et des cours d'eau du bassin. En 2023, l'association a retiré près de 900 kg de déchets des pentes du Veyrier.</p>
+                 <a href="https://www.instagram.com/wooloomooloo_jeanmarcfavre/" class="link">
+                   <span>Visiter Instagram</span>
+                 </a>
+                 <a href="/galeries/engagements/icml/index.html" target="_blank" class="link">
+                   <span>Galerie Photo</span>
+                 </a>
+               </div>
+             </div>
+             
+             <div class="card">
+               <div class="card-image">
+                 <img src="/images/engagements/margara-pierre-8-733x489.jpg" alt="Portrait de Pierre Margara">
+               </div>
+               <div class="card-content">
+                 <div class="title-wrapper">
+                   <h4 class="card-category">Artiste Sculpteur</h4>
+                   <h5 class="card-title">Pierre Margara</h5>
+                 </div>
+                 <p class="card-description">Pierre Margara sublime la beauté, la pureté et la sérénité à travers sa maîtrise fabuleuse de la matière. Son art se distingue par la fluidité des formes, les courbes, ainsi que par la transformation ou la suppression stratégique de certains éléments.</p>
+                 <a href="https://pierremargara-sculpteur.com/" class="link">
+                   <span>Visiter le site</span>
+                 </a>
+                 <a href="/galeries/engagements/pierre-margara/index.html" target="_blank" class="link">
+                   <span>Galerie Photo</span>
+                 </a>
+               </div>
+             </div>
+             
+             <div class="card">
+               <div class="card-image">
+                 <img src="/images/engagements/autoportrait-Maje-80x80-733x737.jpg" alt="Portrait de Majerowicz">
+               </div>
+               <div class="card-content">
+                 <div class="title-wrapper">
+                   <h4 class="card-category">Artiste Peintre</h4>
+                   <h5 class="card-title">Majerowicz</h5>
+                 </div>
+                 <p class="card-description">Majerowicz nous convie à explorer un univers imaginaire et richement coloré, choisissant de célébrer la vie quelles que soient les circonstances. Un monde où la fête occupe une place prépondérante.</p>
+                 <a href="https://majerowicz.fr/" class="link">
+                   <span>Visiter le site</span>
+                 </a>
+                 <a href="/galeries/engagements/majerowicz/index.html" target="_blank" class="link">
+                   <span>Galerie Photo</span>
+                 </a>
+               </div>
+             </div>
+           </div>
+
+           <!-- Navigation arrows (only visible on mobile) -->
+           <div class="nav-wrapper">
+             <div class="separation-line-gradient"></div>
+             <div class="slider-navigation-arrows" data-target-id="associations-grid">
+               <button class="slider-arrow prev-arrow" aria-label="Previous Association">⟵</button>
+               <button class="slider-arrow next-arrow" aria-label="Next Association">⟶</button>
+             </div>
+           </div>
+         </div>
+      </section>
+   </div>
+
+   <section class="parallax-banner" style="background-image: url('/images/parallax/101204-NordicWalking-048.jpg');">
+      <div class="parallax-banner-overlay"></div>
+      <img 
+         src="/images/parallax/101204-NordicWalking-048.jpg" 
+         alt="Marche Nordique au petit port, annecy le vieux" 
+         class="parallax-mobile-img" 
+         loading="lazy"
+         >
+   </section>
+
+   <div class="container">
+      <section class="container-medium-slider">
+         <div class="grid-container">
+
+            <div class="grid-title-wrapper">
+               <h2>Mes amis</h2>
+               <div class="separation-line-gradient"></div>
+               <p>Les découvrir</p>
+            </div>
+
+            <!-- Unified Friends Container -->
+                    <div class="gts-container">
+          <div class="engagement-grid" id="friends-grid">
+                <div class="card">
+                  <div class="card-image">
+                    <img src="/images/engagements/lautredou-716x716.webp" alt="Peintre Jean-Yves Lautrédou">
+                  </div>
+                  <div class="card-content">
+                    <div class="title-wrapper">
+                      <h4 class="card-category">Artiste Peintre</h4>
+                      <h5 class="card-title">Lautredou</h5>
+                    </div>
+                    <p class="card-description">Jean Yves a su se distinguer dans le monde artistique grâce à ses toiles vibrantes de force et d'émotion. Amis depuis plus de 45 ans, il a été un soutien indéfectible dès les premiers instants de ma carrière.</p>
+                    <a href="https://www.lautredou.com/" class="link">
+                      <span>Visiter le site</span>
+                    </a>
+                  </div>
+                </div>
+                
+                <div class="card">
+                  <div class="card-image">
+                    <img src="/images/engagements/oxbow-team-jean-marc-favre-716x477.webp" alt="Photoshoot pour la marque Oxbow">
+                  </div>
+                  <div class="card-content">
+                    <div class="title-wrapper">
+                      <h4 class="card-category">Fashion</h4>
+                      <h5 class="card-title">Oxbow</h5>
+                    </div>
+                    <p class="card-description">J'ai eu la chance de participer au lancement de la marque en 1985/86. En 2023, Oxbow revient vers moi pour réaliser les images de sa collection vintage 2024 à la Grave.</p>
+                    <a href="https://www.oxbowshop.com/fr/collections/collector" class="link">
+                      <span>Visiter le site</span>
+                    </a>
+                  </div>
+                </div>
+                
+                <div class="card">
+                  <div class="card-image">
+                    <img src="/images/engagements/superbolide-lebeau-jean-marc-favre-716x716.webp" alt="Philippe Lebeau pour la marque de lunettes Superbolide">
+                  </div>
+                  <div class="card-content">
+                    <div class="title-wrapper">
+                      <h4 class="card-category">Eyewear</h4>
+                      <h5 class="card-title">Superbolide</h5>
+                    </div>
+                    <p class="card-description">Philippe Leabeau, passionné de motos vintage, dirige aujourd'hui une petite entreprise spécialisée dans les lunettes de sport.</p>
+                    <a href="https://superbolide.com/" class="link">
+                      <span>Visiter le site</span>
+                    </a>
+                  </div>
+                </div>
+                
+                <div class="card">
+                  <div class="card-image">
+                    <img src="/images/engagements/grizzly-loubet-jean-marc-favre-716x537.webp" alt="L'équipe du restaurant le Grizzly">
+                  </div>
+                  <div class="card-content">
+                    <div class="title-wrapper">
+                      <h4 class="card-category">Gastronomie</h4>
+                      <h5 class="card-title">Le Grizzly</h5>
+                    </div>
+                    <p class="card-description">Edouard Loubet, ami de longue date et chef étoilé renommé, revisite la cuisine du terroir au Grizzly, perle gastronomique perchée au sommet du plateau de Beauregard.</p>
+                    <a href="https://legrizzlybeauregard.fr/" class="link">
+                      <span>Visiter le site</span>
+                    </a>
+                  </div>
+                </div>
+                
+                <div class="card">
+                  <div class="card-image">
+                    <img src="/images/engagements/blacailloux-jean-marc-favre-716x537.webp" alt="Domaine de Blacailloux">
+                  </div>
+                  <div class="card-content">
+                    <div class="title-wrapper">
+                      <h4 class="card-category">Viticulture et Hôtellerie</h4>
+                      <h5 class="card-title">Blacailloux</h5>
+                    </div>
+                    <p class="card-description">Exploitation viticole en Provence, c'est également un lieu d'accueil pour vos séminaires ou simplement pour votre détente. Je travaille aux côtés de Florence depuis plus de 15 ans, initialement chez Coca-Cola, puis aux Salins du Midi, et maintenant chez Blacailloux.</p>
+                    <a href="https://blacailloux.fr/" class="link">
+                      <span>Visiter le site</span>
+                    </a>
+                  </div>
+                </div>
+                
+                <div class="card">
+                  <div class="card-image">
+                    <img src="/images/engagements/cotton-club-jean-marc-favre-716x716.webp" alt="Chanteuse du groupe de jazz Cotton Club">
+                  </div>
+                  <div class="card-content">
+                    <div class="title-wrapper">
+                      <h4 class="card-category">Musique</h4>
+                      <h5 class="card-title">Cotton Club</h5>
+                    </div>
+                    <p class="card-description">Laissez le Cotton Club Jazz enchanter vos soirées et événements avec ses mélodies swing et jazzy. Ce groupe apporte une touche de glamour et d'élégance pour des instants inoubliablement raffinés.</p>
+                    <a href="https://cottonclubjazz.com/" class="link">
+                      <span>Visiter le site</span>
+                    </a>
+                  </div>
+                </div>
+                
+                <div class="card">
+                  <div class="card-image">
+                    <img src="/images/engagements/karine-leflanchec-apnee-jean-marc-favre-716x477.webp" alt="Karine Le Flanchec">
+                  </div>
+                  <div class="card-content">
+                    <div class="title-wrapper">
+                      <h4 class="card-category">Sport</h4>
+                      <h5 class="card-title">Karine Le Flanchec</h5>
+                    </div>
+                    <p class="card-description">Ma sœur de cœur, Karine, multifacette et rayonnante, excelle en tant qu'apnéiste, coach, naturopathe et professeure de fitness. Désormais, elle plonge avec une détermination hors du commun dans le monde compétitif de l'apnée, prête à faire des vagues.</p>
+                    <a href="https://www.instagram.com/karineleflanchec/" class="link">
+                      <span>Visiter Instagram</span>
+                    </a>
+                  </div>
+                </div>
+                
+                <div class="card">
+                  <div class="card-image">
+                    <img src="/images/engagements/team-laprod-jean-marc-favre-716x716.webp" alt="Team de Laprod">
+                  </div>
+                  <div class="card-content">
+                    <div class="title-wrapper">
+                      <h4 class="card-category">Production maritime</h4>
+                      <h5 class="card-title">Laprod</h5>
+                    </div>
+                    <p class="card-description">Petite équipe de production, spécialisée dans le contenu maritime, qu'il soit à voile ou à moteur, toujours réalisé dans la bonne humeur. J'ai eu le plaisir de collaborer avec eux sur plusieurs films.</p>
+                    <a href="https://www.laprod-films.com/" class="link">
+                      <span>Visiter le site</span>
+                    </a>
+                  </div>
+                </div>
+                
+                <div class="card">
+                  <div class="card-image">
+                    <img src="/images/engagements/130508-equitation-56-624x416.webp" alt="Domaine Ane Blanc">
+                  </div>
+                  <div class="card-content">
+                    <div class="title-wrapper">
+                      <h4 class="card-category">Centre équestre</h4>
+                      <h5 class="card-title">Domaine Ane Blanc</h5>
+                    </div>
+                    <p class="card-description">Laissez-vous guider à travers l'univers équestre de la région de Cessenon-sur-Orb, au-dessus de Béziers, par Meilie, une cavalière émérite et pédagogue exceptionnelle. Son expertise vous accompagnera à chaque foulée.</p>
+                    <a href="https://www.domaineaneblanc.com/" class="link">
+                      <span>Visiter le site</span>
+                    </a>
+                  </div>
+                </div>
+                
+                <div class="card">
+                  <div class="card-image">
+                    <img src="/images/engagements/claire-buart.webp" alt="Portrait de Claire Buart">
+                  </div>
+                  <div class="card-content">
+                    <div class="title-wrapper">
+                      <h4 class="card-category">Coaching</h4>
+                      <h5 class="card-title">Claire Buart</h5>
+                    </div>
+                    <p class="card-description">Claire Buart, artiste peintre talentueuse, capture l'essence de la beauté à travers ses toiles vibrantes et expressives. Son art reflète une sensibilité unique et une maîtrise technique remarquable.</p>
+                    <a href="https://www.clairebuart.com/" class="link">
+                      <span>Visiter le site</span>
+                    </a>
+                  </div>
+                </div>
+                
+                <div class="card">
+                  <div class="card-image">
+                    <img src="/images/engagements/220320-gec-94-1200x800.jpg" alt="Fond Donation Enfance">
+                  </div>
+                  <div class="card-content">
+                    <div class="title-wrapper">
+                      <h4 class="card-category">Association</h4>
+                      <h5 class="card-title">Fond Donation Enfance</h5>
+                    </div>
+                    <p class="card-description">Les événements caritatifs Glisse en Cœur, Vendée Cœur, et Danse en Cœur soutiennent les associations œuvrant pour le bien-être des enfants en cotisant des fonds et sensibilisant le public pour apporter un changement significatif et positif.</p>
+                    <a href="https://fonds-dotation-enfance.com/" class="link">
+                      <span>Visiter le site</span>
+                    </a>
+                  </div>
+                </div>
+                
+                <div class="card">
+                  <div class="card-image">
+                    <img src="/images/engagements/grand-annecy-624x512.webp" alt="Grand Annecy">
+                  </div>
+                  <div class="card-content">
+                    <div class="title-wrapper">
+                      <h4 class="card-category">Institutionnel</h4>
+                      <h5 class="card-title">Grand Annecy</h5>
+                    </div>
+                    <p class="card-description">Depuis de nombreuses années, je collabore étroitement avec la communauté de communes d'Annecy, fournissant des images et des vidéos pour leurs divers projets.</p>
+                    <a href="https://inspire.cool/linkedin/" class="link">
+                      <span>Visiter le site</span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Navigation arrows (only visible on mobile) -->
+              <div class="nav-wrapper">
+                <div class="separation-line-gradient"></div>
+                <div class="slider-navigation-arrows" data-target-id="friends-grid">
+                  <button class="slider-arrow prev-arrow" aria-label="Previous Friend">⟵</button>
+                  <button class="slider-arrow next-arrow" aria-label="Next Friend">⟶</button>
+                </div>
+              </div>
+            </div>
+         </div>
+      </section>
+   </div>
+   <section class="parallax-banner" style="background-image: url('/images/parallax/140224-AnnecyLeVieux-003.jpg');">
+      <div class="parallax-banner-overlay"></div>
+      <img 
+         src="/images/parallax/140224-AnnecyLeVieux-003.jpg" 
+         alt="Vue depuis Annecy le vieux" 
+         class="parallax-mobile-img" 
+         loading="lazy"
+         >
+   </section>
+</Layout>
+<script>
+   document.addEventListener('DOMContentLoaded', () => {
+     const sliderNavs = document.querySelectorAll('.slider-navigation-arrows');
+   
+     sliderNavs.forEach(nav => {
+       const htmlNav = nav as HTMLElement;
+       const targetGridId = htmlNav.dataset.targetId;
+       const targetGrid = document.getElementById(targetGridId!) as HTMLElement | null;
+   
+       if (targetGrid) {
+         const prevArrow = nav.querySelector('.prev-arrow') as HTMLButtonElement | null;
+         const nextArrow = nav.querySelector('.next-arrow') as HTMLButtonElement | null;
+   
+         // --- IMPROVED SCROLL AMOUNT CALCULATION ---
+         const firstCard = targetGrid.querySelector('.card') as HTMLElement | null;
+         let scrollAmount = 0;
+   
+         if (firstCard) {
+           // Get the actual computed width of the card + its right margin
+           const cardWidth = firstCard.offsetWidth;
+           const cardMarginRight = parseFloat(getComputedStyle(firstCard).marginRight) || 0;
+           scrollAmount = cardWidth + cardMarginRight;
+         } else {
+           // Fallback if no card is found (e.g., empty grid or structure issue)
+           // Or if you prefer to scroll by a percentage of the container width as a fallback
+           scrollAmount = targetGrid.clientWidth * 0.8; // Fallback to 80% of grid width
+         }
+         // ------------------------------------------
+   
+         // Check if the grid is actually scrollable (optional but good for robustness)
+         // This can help prevent arrow functionality on desktop where it's a grid
+         const isScrollable = targetGrid.scrollWidth > targetGrid.clientWidth;
+   
+         if (prevArrow && isScrollable) {
+           prevArrow.addEventListener('click', () => {
+             targetGrid.scrollBy({
+               left: -scrollAmount,
+               behavior: 'smooth'
+             });
+           });
+         }
+   
+         if (nextArrow && isScrollable) {
+           nextArrow.addEventListener('click', () => {
+             targetGrid.scrollBy({
+               left: scrollAmount,
+               behavior: 'smooth'
+             });
+           });
+         }
+       }
+     });
+   });
+</script>

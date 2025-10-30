@@ -1,0 +1,106 @@
+---
+import '../styles/navigation.css';
+import '../styles/global.css';
+import '../styles/pages.css';
+import '../styles/blog.css';
+import '../styles/slider.css';
+import '../styles/collections.css';
+
+import Menu from '../components/Menu.astro';
+import Footer from '../components/Footer.astro';
+
+
+interface Props {
+  isIndexPage?: boolean;
+  title?: string;
+  preloadImage?: string;
+  description?: string;
+  image?: string;
+  canonical?: string;
+}
+
+const { 
+  isIndexPage = false, 
+  title = 'Jean-Marc Favre - Photographe Drone Annecy | Photo Vidéo Haute-Savoie', 
+  preloadImage,
+  description = 'Photographe professionnel et pilote de drone certifié à Annecy. 40 ans d\'expérience en photo, vidéo et drone. Services pour entreprises, mariages et événements en Haute-Savoie.',
+  image = '/images/jmf2-998x665.jpg',
+  canonical
+} = Astro.props;
+
+const siteUrl = 'https://jeanmarcfavre.com';
+const currentPath = canonical || Astro.url.pathname;
+const fullUrl = new URL(currentPath, siteUrl).href;
+const fullImageUrl = new URL(image, siteUrl).href;
+---
+
+<!doctype html>
+<html lang="fr">
+
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="description" content={description} />
+        
+        <!-- Open Graph / Facebook -->
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content={fullUrl} />
+        <meta property="og:title" content={title} />
+        <meta property="og:description" content={description} />
+        <meta property="og:image" content={fullImageUrl} />
+        <meta property="og:locale" content="fr_FR" />
+        
+        <!-- Twitter -->
+        <meta property="twitter:card" content="summary_large_image" />
+        <meta property="twitter:url" content={fullUrl} />
+        <meta property="twitter:title" content={title} />
+        <meta property="twitter:description" content={description} />
+        <meta property="twitter:image" content={fullImageUrl} />
+        
+        <!-- Canonical URL -->
+        <link rel="canonical" href={fullUrl} />
+        
+        <link rel="icon" type="image/png" href="/logo/signature-500x173-black.png" />
+        <link rel="manifest" href="/manifest.json" />
+        <meta name="generator" content={Astro.generator} />
+        <title>{title}</title>
+        {preloadImage && (
+            <link rel="preload" as="image" href={preloadImage} fetchpriority="high" />
+        )}
+    </head>
+
+    <body class:list={{ 'is-index-page': isIndexPage }}>
+        <Menu />
+        <main>
+    		<slot />
+  		</main>
+        <Footer />
+
+
+
+        <script>
+          document.addEventListener("DOMContentLoaded", () => {
+            if (window.innerWidth <= 1024) return;
+
+            const elements = document.querySelectorAll(".container section");
+
+            elements.forEach(el => {
+              el.classList.add("fade-on-scroll");
+            });
+
+            const observer = new IntersectionObserver((entries, observer) => {
+              entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                  entry.target.classList.add("visible");
+                  observer.unobserve(entry.target);
+                }
+              });
+            }, {
+              threshold: 0.1,
+            });
+
+            elements.forEach(el => observer.observe(el));
+          });
+        </script>
+    </body>
+</html>
