@@ -1,6 +1,6 @@
 ---
 interface Props {
-  type: 'LocalBusiness' | 'BlogPosting' | 'ImageGallery';
+  type: 'LocalBusiness' | 'BlogPosting' | 'ImageGallery' | 'BreadcrumbList';
   data?: any;
 }
 
@@ -94,6 +94,12 @@ if (type === 'LocalBusiness') {
       "@type": "Person",
       "name": "Jean-Marc Favre"
     }
+  };
+} else if (type === 'BreadcrumbList') {
+  schema = {
+    ...baseSchema,
+    "@type": "BreadcrumbList",
+    "itemListElement": data.breadcrumbs || []
   };
 }
 ---
