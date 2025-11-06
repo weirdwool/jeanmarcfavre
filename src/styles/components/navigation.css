@@ -435,26 +435,15 @@ footer {
 }
 
 /* ========================================
-   MEDIA QUERY: Footer Tablet (768px and above)
-   ======================================== */
-@media (min-width: 768px) {
-  /* Navigation columns side by side */
-  .footer-navs {
-    flex-direction: row;
-    gap: 3rem;
-    justify-content: center;
-  }
-
-  /* Larger contact labels on tablet+ */
-  .contact-label {
-    font-size: 0.8rem;
-  }
-}
-
-/* ========================================
    MEDIA QUERY: Footer Desktop (1200px and above)
    ======================================== */
 @media (min-width: 1200px) {
+  /* Navigation columns side by side */
+  .footer-navs {
+    flex-direction: row;
+    gap: 4rem;
+  }
+
   /* Footer row layout */
   .footer-row {
     flex-direction: row;
@@ -466,10 +455,6 @@ footer {
     border-bottom: none; /* Remove mobile border */
     padding-bottom: 0;
     margin-bottom: 0;
-  }
-
-  .footer-navs {
-    gap: 4rem;
   }
   
   .footer-nav {
