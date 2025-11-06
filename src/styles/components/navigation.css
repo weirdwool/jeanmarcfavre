@@ -255,6 +255,47 @@ input[type="checkbox"]:checked ~ #overlay .menu-overlay-nav .socials-wrapper {
   transform: translateX(20px);
 }
 
+/* ========================================
+   MEDIA QUERY: Desktop Menu (1500px and above)
+   ======================================== */
+@media (min-width: 1500px) {
+  /* Logo adjustments for desktop */
+  .logo-desktop {
+    height: 80px;
+  }
+
+  .logo-desktop.shrink {
+    height: 50px; 
+  }
+
+  /* Hide mobile burger menu */
+  .menu-burger {
+    display: none !important;
+  }
+
+  /* Show desktop menu */
+  .menu-default {
+    width: 100%;
+    max-width: 100%;
+    text-align: center;
+    padding: 20px;
+    display: grid !important;
+    grid-template-columns: 1fr 3fr;
+    align-items: center;
+    justify-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 10;
+  }
+
+  .menu-default-nav ul {
+    display: flex;
+    gap: 50px;
+    align-items: center;
+  }
+}
+
 /* 
 FOOTER - Mobile First
 */
@@ -293,6 +334,12 @@ footer {
   border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Mobile default */
   padding-bottom: 2rem;
   margin-bottom: 2rem;
+}
+
+.footer-navs {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
 }
 
 .footer-nav {
@@ -388,55 +435,41 @@ footer {
 }
 
 /* ========================================
-   MEDIA QUERY: Desktop (1200px and above)
+   MEDIA QUERY: Footer Tablet (768px and above)
+   ======================================== */
+@media (min-width: 768px) {
+  /* Navigation columns side by side */
+  .footer-navs {
+    flex-direction: row;
+    gap: 3rem;
+    justify-content: center;
+  }
+
+  /* Larger contact labels on tablet+ */
+  .contact-label {
+    font-size: 0.8rem;
+  }
+}
+
+/* ========================================
+   MEDIA QUERY: Footer Desktop (1200px and above)
    ======================================== */
 @media (min-width: 1200px) {
-  /* Logo adjustments for desktop */
-  .logo-desktop {
-    height: 80px;
-  }
-
-  .logo-desktop.shrink {
-    height: 50px; 
-  }
-
-  /* Hide mobile burger menu */
-  .menu-burger {
-    display: none !important;
-  }
-
-  /* Show desktop menu */
-  .menu-default {
-    width: 100%;
-    max-width: 100%;
-    text-align: center;
-    padding: 20px;
-    display: grid !important;
-    grid-template-columns: 1fr 3fr;
-    align-items: center;
-    justify-items: center;
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 10;
-  }
-
-  .menu-default-nav ul {
-    display: flex;
-    gap: 50px;
-    align-items: center;
-  }
-
-  /* Footer adjustments for desktop */
+  /* Footer row layout */
   .footer-row {
     flex-direction: row;
-    gap: 12rem;
+    gap: 8rem;
+    align-items: flex-start;
   }
 
   .footer-brand-wrapper {
     border-bottom: none; /* Remove mobile border */
     padding-bottom: 0;
     margin-bottom: 0;
+  }
+
+  .footer-navs {
+    gap: 4rem;
   }
   
   .footer-nav {
