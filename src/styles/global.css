@@ -10,18 +10,18 @@
 }
 
 :root {
-  --primary-color-rgb-components: 221, 129, 0; /* Add this new variable */
-  --primary-color: rgb(var(--primary-color-rgb-components)); /* Keep this if you need the opaque primary color elsewhere */
+  --primary-color-rgb-components: 221, 129, 0;
+  --primary-color: rgb(var(--primary-color-rgb-components));
   --secondary-color: #6d6d6d;
   --background-color: rgb(0, 0, 0);
   --main-gradient: linear-gradient(175deg, #e7591c, #dd8100);
 
-  font-size: 16px;
+  font-size: 18px; /* Slightly larger for better mobile readability */
 }
 
 @media (min-width: 1024px) {
   :root {
-    font-size: 18px; /* On larger screens, 1rem becomes 18px */
+    font-size: 20px; /* Comfortable reading size on desktop */
   }
 }
 
@@ -32,14 +32,24 @@ html {
 
 body {
   background-color: var(--background-color);
-  color: #c3c3c3;
+  color: #cecece;
   width: 100%;
   height: 100%;
   overflow-x: hidden;
   font-family: 'Montserrat', sans-serif;
-  font-size: 1.1rem;
   font-weight: 200;
-  line-height: 1.4;
+}
+
+/* Paragraph styling for better readability */
+p {
+  margin: 0;
+  line-height: 1.75;
+}
+
+@media (min-width: 1024px) {
+  p {
+    line-height: 1.8;
+  }
 }
 
 .fade-on-scroll {
@@ -151,168 +161,28 @@ address {
 }
 }
 
-/* Two-Column Text Layout */
+/* Two-Column Text Layout - Mobile First */
 .two-column-text {
-  columns: 2; 
-  column-gap: 2rem; 
-  column-fill: balance;
+  columns: 1; /* Single column on mobile */
+  column-gap: 0;
   padding: 20px;
 }
 
-@media (max-width: 1024px) {
+@media (min-width: 1024px) {
   .two-column-text {
-    columns: 1; 
-    column-gap: 0;
-    margin-right: 0;
+    columns: 2; 
+    column-gap: 2rem; 
+    column-fill: balance;
   }
 }
 
-/* --- Utility Classes --- */
+/* --- Base Element Styles --- */
 b, strong {
   font-weight: 500;
 }
-.text-normal {
-  font-weight: normal;
-}
-
-.text-underline {
-  text-decoration: underline;
-  text-underline-offset: 0.1em;
-}
-
-.text-center {
-  text-align: center;
-}
-
-.text-left {
-  text-align: left;
-}
-
-.text-right {
-  text-align: right;
-}
-
-.text-uppercase {
-  text-transform: uppercase;
-}
-
-.visually-hidden {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  margin: -1px;
-  padding: 0;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  border: 0;
-  white-space: nowrap;
-}
-
-/* Display Utilities */
-.d-inline-block {
-  display: inline-block;
-}
-
-.d-flex {
-  display: flex;
-  align-items: flex-end;
-  gap: 3rem;
-}
 
 
-/* Margin Utilities */
-.mb-1 {
-  margin-bottom: 1rem;
-}
-
-.mb-2 {
-  margin-bottom: 2rem;
-}
-
-.mb-3 {
-  margin-bottom: 3rem;
-}
-
-.mb-4 {
-  margin-bottom: 4rem;
-}
-
-.mb-5 {
-  margin-bottom: 5rem;
-}
-
-.mt-1 {
-  margin-top: 1rem;
-}
-
-.mt-2 {
-  margin-top: 2rem;
-}
-
-.mt-3 {
-  margin-top: 3rem;
-}
-
-
-.mr-4 {
-    margin-right: 4rem;
-}
-
-
-.pb-2 {
-  padding-bottom: 2rem;
-}
-
-.pb-3 {
-  padding-bottom: 3rem;
-}
-
-.pb-4 {
-  padding-bottom: 4rem;
-}
-
-.pb-5 {
-  padding-bottom: 5rem;
-}
-
-.pt-1 {
-  padding-top: 1rem;
-}
-
-.pt-2 {
-  padding-top: 2rem;
-}
-
-.pt-3 {
-  padding-top: 3rem;
-}
-
-.pt-4 {
-  padding-top: 4rem;
-}
-
-.pt-5 {
-  padding-top: 5rem;
-}
-
-
-.padding-2 {
-    padding: 2rem;
-}
-
-.padding-20 {
-    padding: 20px;
-}
-
-/* Spacing Utilities (Flex column with gap) */
-.spacing-1 {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-
-/* --- Container Classes --- */
+/* --- Container Classes - Simple & Clean --- */
 .container {
   width: 100%;
   background-color: var(--background-color);
@@ -321,19 +191,13 @@ b, strong {
 .container-medium {
   max-width: 1400px;
   margin: 0 auto;
-  padding: 20px; 
-  display: flex; 
-  flex-direction: column;
-  gap: 2rem;
+  padding: 20px;
 }
 
 .container-content {
   max-width: 1100px;
   margin: 0 auto;
   padding: 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
 }
 
 /* --- Layout Columns --- */
@@ -358,7 +222,7 @@ b, strong {
 }
 
 
-@media (min-width: 940px) {
+@media (min-width: 1024px) {
   .col-md-4 {
     /* Calculate width with the 4rem gap in mind for 3 columns:
        (100% - (number_of_gaps * gap_value)) / number_of_columns
@@ -385,9 +249,14 @@ b, strong {
   }
 }
 
-@media (max-width: 940px) {
+/* Mobile reverse - Mobile First */
+.mob-rev {
+  flex-direction: column-reverse;
+}
+
+@media (min-width: 1024px) {
   .mob-rev {
-    flex-direction: column-reverse;
+    flex-direction: row;
   }
 }
 
@@ -416,7 +285,7 @@ a:hover {
   font-weight: 600;
   align-items: center;
   text-decoration: none;
-  font-size: 14px;
+  font-size: 0.8rem;
   text-transform: uppercase;
   letter-spacing: 1px;
   transition: all 0.3s ease;
@@ -564,20 +433,31 @@ a:hover {
   display: block; /* Ensure proper rendering */
 }
 
-/* Mobile fixes for Lightroom galleries */
-@media (max-width: 1023px) {
+/* Mobile Lightroom galleries - Mobile First */
+.lightroom-gallery {
+  height: 60vh;
+  min-height: 400px;
+  max-height: 600px;
+}
+
+.lightroom-gallery iframe {
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+  will-change: transform;
+  -webkit-overflow-scrolling: touch;
+}
+
+@media (min-width: 1024px) {
   .lightroom-gallery {
-    height: 60vh;
-    min-height: 400px;
-    max-height: 600px;
+    height: 1000px;
+    min-height: auto;
+    max-height: none;
   }
   
   .lightroom-gallery iframe {
-    /* Additional mobile fixes */
-    transform: translateZ(0);
-    -webkit-transform: translateZ(0);
-    will-change: transform;
-    -webkit-overflow-scrolling: touch;
+    transform: none;
+    -webkit-transform: none;
+    will-change: auto;
   }
 }
 
@@ -616,75 +496,62 @@ figcaption {
   transition: transform 0.5s ease;
 }
 
-/* parallax banner */
+/* Parallax Banner - Mobile First */
 .parallax-banner {
-  background-attachment: fixed; /* Desktop parallax effect */
-  background-position: center center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-color: var(--background-color);
-  min-height: 50vh; /* Keep desktop height */
+  position: relative;
   width: 100%;
-
-  display: flex; /* Still flex to center content if any, or overlay */
+  min-height: 40vh; /* Mobile default */
+  background-color: var(--background-color);
+  overflow: hidden;
+  display: flex;
   align-items: center;
   justify-content: center;
-  position: relative; /* IMPORTANT: Establishes positioning context for absolute children */
-  overflow: hidden; /* Ensures content outside of bounds is clipped */
 }
 
 .parallax-banner-overlay {
-  content: '';
   position: absolute;
-  inset: 0; /* Shortcut for top: 0; right: 0; bottom: 0; left: 0; */
-  background-color: rgba(0, 0, 0, 0.3);
-  z-index: 1; /* Ensure it's above the image */
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.1);
+  z-index: 1;
 }
 
+/* Mobile: Show image element */
 .parallax-banner .parallax-mobile-img {
-    display: none; /* Hidden by default on desktop */
+  display: block;
+  width: 100%;
+  height: 100%; 
+  object-fit: cover; 
+  position: absolute; 
+  top: 0;
+  left: 0;
+  z-index: 0;
 }
 
-/* Mobile */
-@media (max-width: 940px) {
+/* Desktop: Use CSS background with parallax */
+@media (min-width: 1024px) {
   .parallax-banner {
-    background-image: none !important;
-    background-attachment: scroll; 
-    min-height: 40vh; 
-    height: auto;
-    display: block; 
-    padding: 0; 
-    background-color: var(--background-color);
+    background-attachment: fixed; /* Parallax effect */
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-height: 50vh;
   }
 
   .parallax-banner .parallax-mobile-img {
-    display: block; /* Make the mobile image visible */
-    width: 100%;
-    height: 100%; 
-    object-fit: cover; 
-    position: absolute; 
-    top: 0;
-    left: 0;
-    z-index: 0; /* Place it below the overlay */
+    display: none; /* Hide image element on desktop */
   }
 
   .parallax-banner-overlay {
-    position: absolute; 
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.1); 
-    z-index: 1; /* Ensure it's above the image */
+    background-color: rgba(0, 0, 0, 0.3);
   }
 }
 
-/* --- Feature Grid (Reusable) --- */
+/* --- Feature Grid - Mobile First --- */
 .feature-grid {
   display: grid;
+  grid-template-columns: 1fr; /* Single column on mobile */
   gap: 1.5rem;
-  grid-template-columns: 1fr; /* Stack vertically */
-  justify-items: center; /* Center the cards horizontally */
+  justify-items: center;
 }
 
 .feature-card {
@@ -716,7 +583,7 @@ figcaption {
   bottom: 0;
   left: 0;
   right: 0;
-  padding: 3rem;
+  padding: 3rem; /* Mobile default */
   background: linear-gradient(
     to top,
     rgba(0, 0, 0, 0.7) 0%,
@@ -738,17 +605,17 @@ figcaption {
   transition: transform 0.3s ease;
 }
 
-.feature-link  {
+.feature-link {
   color: var(--primary-color);
   text-align: inherit;
   position: relative;
-  margin-top: 0.5rem;
+  margin-top: 0.5rem; /* Visible on mobile */
   font-weight: 600;
   display: inline-flex;
   align-items: center;
   gap: 8px;
   text-decoration: none;
-  font-size: 14px;
+  font-size: 0.8rem;
   text-transform: uppercase;
   letter-spacing: 1px;
   transition: all 0.3s ease;
@@ -757,7 +624,7 @@ figcaption {
 .feature-link::after {
   content: '⟶'; 
   transition: transform 0.2s ease;
-  display: inline-block; /* Needed for transform to work properly */
+  display: inline-block;
   margin-bottom: 6px;
   font-size: 18px;
 }
@@ -766,26 +633,28 @@ figcaption {
   transform: translateX(4px);
 }
 
-.feature-card:hover .feature-link {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-@media (min-width: 940px) {
-  .feature-overlay {
-    padding: 2rem;
-  }
-  
+/* Desktop */
+@media (min-width: 1024px) {
   .feature-grid {
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 2rem;
   }
 
+  .feature-overlay {
+    padding: 2rem;
+  }
+
+  /* Hide link initially, show on hover */
   .feature-link {
     opacity: 0;
     transform: translateY(0.5rem);
     transition: opacity 0.3s ease, transform 0.3s ease;
     margin-top: 0;
+  }
+
+  .feature-card:hover .feature-link {
+    opacity: 1;
+    transform: translateY(0);
   }
 
   .feature-card:hover h2,

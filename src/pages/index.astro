@@ -123,7 +123,7 @@ function getBlogPostUrl(post: CollectionEntry<'blog'>) {
             </div>
          </div>
         
-         <div class="container-slider slider-wrapper">
+         <div class="container-slider-slider slider-wrapper">
             <div class="engagements-slider-track slider-track">
                {allEngagements.map((item: CollectionEntry<'engagements'>) => ( 
                <a href={`/engagements/${item.slug}`} class="engagement-item slider-item">
@@ -328,7 +328,7 @@ function getBlogPostUrl(post: CollectionEntry<'blog'>) {
                </div>
             </div>
          </div>
-         <div class="container-slider slider-wrapper">
+         <div class="container-slider-slider slider-wrapper">
             <div class="blog-slider-track slider-track">
                {recentPosts.map((post: CollectionEntry<'blog'>) => (
                   <a href={getBlogPostUrl(post)} class="blog-item slider-item">

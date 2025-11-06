@@ -16,6 +16,11 @@ a-propos.astro
   .diapo {
       margin-left: 0;
     }
+
+  .text-nerva {
+    font-size: 0.85rem;
+    line-height: 1.5;
+  }
   
   .author-nerva {
     font-style: italic;
@@ -24,13 +29,22 @@ a-propos.astro
     color: var(--primary-color); 
   }
   
-  @media (max-width: 940px) {
+  /* Mobile defaults */
+  .debuts .title-wrapper {
+    padding: 20px;
+  }
+
+  .debuts .image-wrapper img {
+    max-height: 700px;
+  }
+
+  @media (min-width: 1024px) {
     .debuts .title-wrapper {
-      padding: 20px;
+      padding: 0;
     }
   
     .debuts .image-wrapper img {
-      max-height: 700px;
+      max-height: none;
     }
   }
   
@@ -44,40 +58,34 @@ blog.astro > blog.css
 contact.astro - Mobile First
 */  
 
-.contact-container {
-  max-width: 900px;
-  margin: 0 auto;
-}
-
 .contact-intro {
   text-align: center;
-  margin-bottom: 3rem;
 }
 
-.contact-intro p {
-  margin: 0.8rem 0;
-}
 
-/* Contact Info - Mobile First (Clean & Simple) */
-.contact-info {
+
+/* Contact Page - Mobile First (Clean & Simple) */
+.contact-details {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
   gap: 2.5rem;
-  margin: 3rem 0;
-  padding: 2rem 0;
+  margin: 3rem auto;
+  padding: 2rem 20px;
+  max-width: 1400px;
 }
 
-.contact-card {
+.contact-method {
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
   gap: 1rem;
-  align-self: flex-start; /* Align to top */
 }
 
 /* Simple Icon Styling */
-.contact-card__icon {
+.contact-method__icon {
   width: 50px;
   height: 50px;
   display: flex;
@@ -86,20 +94,21 @@ contact.astro - Mobile First
   color: var(--primary-color);
 }
 
-.contact-card__icon svg {
+.contact-method__icon svg {
   width: 32px;
   height: 32px;
   stroke-width: 1.5;
 }
 
-/* Card Content */
-.contact-card__content {
+/* Contact Info */
+.contact-method__info {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  align-items: center; /* Center on mobile */
 }
 
-.contact-card__content h3 {
+.contact-method__info h3 {
   font-size: 0.85rem;
   font-weight: 600;
   text-transform: uppercase;
@@ -108,7 +117,7 @@ contact.astro - Mobile First
   margin: 0;
 }
 
-.contact-card__content a {
+.contact-method__info a {
   color: #ffffff;
   text-decoration: none;
   font-size: 1.15rem;
@@ -117,11 +126,11 @@ contact.astro - Mobile First
   transition: color 0.2s ease;
 }
 
-.contact-card__content a:hover {
+.contact-method__info a:hover {
   color: var(--primary-color);
 }
 
-.contact-card__content p {
+.contact-method__info p {
   margin: 0;
   line-height: 1.6;
   font-size: 1.15rem;
@@ -137,19 +146,20 @@ contact.astro - Mobile First
 
 /* Desktop (1200px+) */
 @media (min-width: 1200px) {
-  .contact-info {
+  .contact-details {
     flex-direction: row;
     justify-content: center;
     gap: 5rem;
-    margin: 4rem 0;
+    margin: 4rem auto; /* Keep auto for horizontal centering! */
+    align-items: flex-start;
   }
 
-  .contact-card__icon {
+  .contact-method__icon {
     width: 60px;
     height: 60px;
   }
 
-  .contact-card__icon svg {
+  .contact-method__icon svg {
     width: 36px;
     height: 36px;
   }

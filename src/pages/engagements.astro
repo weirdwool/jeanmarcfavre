@@ -29,8 +29,8 @@ allEngagements.sort((a: CollectionEntry<'engagements'>, b: CollectionEntry<'enga
      <div class="container-medium-slider">
 
         <!-- Unified Engagements Container -->
-        <div class="gts-container">
-          <div class="engagement-grid" id="engagements-grid">
+        <div class="container-slider-grid">
+          <div class="engagement-grid" id="engagements-grid" data-layout="slider">
             {allEngagements.map((engagement: CollectionEntry<'engagements'>) => (
               <a href={`/engagements/${engagement.slug}`} class="card">
                 <div class="card-image">
@@ -87,8 +87,8 @@ allEngagements.sort((a: CollectionEntry<'engagements'>, b: CollectionEntry<'enga
          </div>
 
          <!-- Unified Associations Container -->
-                 <div class="gts-container">
-          <div class="engagement-grid" id="associations-grid">
+                 <div class="container-slider-grid">
+          <div class="engagement-grid" id="associations-grid" data-layout="grid">
              <div class="card">
                <div class="card-image">
                  <img src="/images/engagements/231015-apne-e-solidaire-37-733x489.jpg" alt="Association Apnée Solid'Air">
@@ -199,8 +199,8 @@ allEngagements.sort((a: CollectionEntry<'engagements'>, b: CollectionEntry<'enga
             </div>
 
             <!-- Unified Friends Container -->
-                    <div class="gts-container">
-          <div class="engagement-grid" id="friends-grid">
+                    <div class="container-slider-grid">
+          <div class="engagement-grid" id="friends-grid" data-layout="grid">
                 <div class="card">
                   <div class="card-image">
                     <img src="/images/engagements/lautredou-716x716.webp" alt="Peintre Jean-Yves Lautrédou">
@@ -406,15 +406,7 @@ allEngagements.sort((a: CollectionEntry<'engagements'>, b: CollectionEntry<'enga
          </div>
       </section>
    </div>
-   <section class="parallax-banner" style="background-image: url('/images/parallax/140224-AnnecyLeVieux-003.jpg');">
-      <div class="parallax-banner-overlay"></div>
-      <img 
-         src="/images/parallax/140224-AnnecyLeVieux-003.jpg" 
-         alt="Vue depuis Annecy le vieux" 
-         class="parallax-mobile-img" 
-         loading="lazy"
-         >
-   </section>
+
 </Layout>
 <script>
    document.addEventListener('DOMContentLoaded', () => {

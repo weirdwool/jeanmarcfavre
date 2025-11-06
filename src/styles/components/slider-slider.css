@@ -1,0 +1,450 @@
+/* ========================================
+   SLIDERS - Always Stay Sliders
+   For: Homepage sliders, Collections sliders
+   ======================================== */
+
+/* Slider Global: Navigation and containers */
+.nav-wrapper {
+  width: 90%;
+  margin: auto;
+  padding: 1rem 0;
+}
+
+.slider-navigation-arrows {
+  display: flex;
+  gap: 2rem;
+  justify-content: flex-end;
+  margin-right: 5vw;
+  width: 100%;
+  max-width: 1400px;
+  margin-left: auto;
+  box-sizing: border-box;
+  padding-right: 20px;
+}
+
+.slider-arrow {
+  background-color: transparent;
+  color: var(--primary-color);
+  border: none;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  cursor: pointer;
+  transition: color 0.3s ease, filter 0.3s ease, transform 0.3s ease, cursor 0.3s ease;
+}
+
+.slider-arrow:hover:not(:disabled) {
+  filter: brightness(0.8);
+}
+
+.slider-arrow:active {
+  transform: scale(0.95);
+}
+
+.slider-arrow:disabled {
+  color: var(--primary-color);
+  filter: brightness(0.5); 
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Container for sliders */
+.container-medium-slider {
+  max-width: 1400px;
+  margin: 0;
+  padding: 3rem 0; 
+  display: flex; 
+  flex-direction: column;
+  gap: 2rem;
+  background-color: var(--background-color);
+}
+
+@media (min-width: 1024px) {
+  .container-medium-slider {
+    padding: 3rem 20px;
+    margin: 0 auto;
+  }
+}
+
+/* Slider Container */
+.container-slider-slider {
+  width: 100%;
+  margin: 0;
+  display: flex; 
+  flex-direction: column;
+  gap: 0rem;
+}
+
+.slider-wrapper {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+/* Slider Track - Mobile First */
+.slider-track {
+  display: flex;
+  gap: 1.5rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  padding: 1.5rem 5vw; 
+  box-sizing: border-box;
+}
+
+.slider-track::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+/* Slider Items - Fixed width for peek effect */
+.slider-item {
+  display: flex;
+  flex-shrink: 0;
+  flex-direction: column;
+  color: inherit;
+  flex: 0 0 300px; /* Fixed width - shows 1 + peek on mobile */
+}
+
+@media (min-width: 1024px) {
+  .slider-track {
+    gap: 2rem;
+  }
+
+  .slider-item {
+    flex: 0 0 350px; /* Slightly wider on desktop */
+  }
+}
+
+/* ========================================
+   INDEX PAGE SLIDERS
+   ======================================== */
+
+/* Engagements Slider on index */
+.engagement-item {
+  width: 400px;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  text-decoration: none;
+  color: inherit;
+}
+
+.engagement-image-wrapper {
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  width: 100%;
+  height: 250px;
+}
+
+.engagement-image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.engagement-item:hover .engagement-image-wrapper img {
+  transform: scale(1.01);
+}
+
+.engagement-image-wrapper .gradient-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 60%;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.7) 0%,
+    rgba(0, 0, 0, 0.7) 20%,
+    transparent 100%
+  );
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  padding: 2rem;
+}
+
+.engagement-item-header {
+  padding: 1rem 0;
+  text-align: left;
+}
+
+.engagement-item-subtitle {
+  margin: 0 0 0.5rem 0;
+  padding: 0;
+  color: #898989;
+  font-size: 0.9rem;
+  font-weight: 400;
+}
+
+.engagement-item-subtitle::before {
+  content: "";
+  display: block;
+  width: 40px;
+  height: 1px;
+  background-color: var(--primary-color);
+  margin: 1rem 0 0.5rem;
+}
+
+.engagement-item-title {
+  margin: 0;
+  padding: 0;
+  color: whitesmoke;
+  font-size: 1.2rem;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+/* Testimonials Slider on index */
+.temoignages {
+  color: var(--primary-color);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  white-space: nowrap;
+}
+
+.temoignages::before {
+  content: '';
+  flex-grow: 1;
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    var(--background-color) 0%,
+    var(--primary-color) 100%
+  );
+}
+
+.temoignages::after {
+  content: '';
+  flex-grow: 1;
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    var(--primary-color) 0%,
+    var(--background-color) 100%
+  );
+} 
+
+.testimonial-item {
+  justify-content: space-between;
+  width: 400px; 
+  height: auto; 
+  border-radius: 20px;
+  border: 1px solid var(--secondary-color);
+  background: rgba(255, 255, 255, 0.05);
+  padding: 2rem;
+}
+
+.testimonial-text {
+  font-size: 0.85rem;
+  font-weight: normal;
+  text-align: center;
+  color: rgb(155, 155, 155);
+  margin-bottom: 1rem;
+  line-height: 1.5;
+}
+
+.testimonial-author {
+  font-size: 1rem;
+  font-weight: 400;
+  margin-top: auto;
+  color: var(--primary-color);
+  text-align: right;
+}
+
+.testimonial-job {
+  font-size: 0.8rem;
+  color: darkgrey;
+  text-align: right;
+  font-style: italic;
+}
+
+/* Blog Slider on index */
+.blog-item {
+  width: 400px;
+  height: auto;
+  position: relative;
+  overflow: hidden;
+}
+
+.blog-image-wrapper {
+  position: relative;
+  border-radius: 20px;
+  height: 250px;
+  overflow: hidden;
+}
+
+.blog-image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.blog-item:hover .blog-image-wrapper img {
+  transform: scale(1.01);
+}
+
+.blog-image-wrapper .gradient-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 60%;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.7) 0%,
+    rgba(0, 0, 0, 0.7) 20%,
+    transparent 100%
+  );
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  padding: 2rem;
+}
+
+.blog-item-header {
+  padding: 1rem 0;
+  text-align: left;
+}
+
+.blog-item-title {
+  margin: 0 0 0.5rem 0;
+  padding: 0;
+  color: whitesmoke;
+  font-size: 1.2rem;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.blog-item-meta {
+  margin: 0;
+  padding: 0;
+  color: #898989;
+  font-size: 0.9rem;
+  font-weight: 400;
+}
+
+/* Special "View All Posts" card */
+.blog-view-all {
+  width: 400px;
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  color: inherit;
+  border-radius: 20px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  min-height: 300px;
+  transition: all 0.3s ease;
+}
+
+.blog-view-all:hover {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.04) 100%);
+  border-color: var(--primary-color);
+}
+
+.blog-view-all-content {
+  text-align: center;
+  padding: 2rem;
+}
+
+.blog-view-all-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--primary-color);
+  margin: 0 0 0.5rem 0;
+}
+
+.blog-view-all-subtitle {
+  font-size: 0.9rem;
+  color: #898989;
+  margin: 0;
+}
+
+/* ========================================
+   COLLECTIONS SLIDERS (Photo Page)
+   ======================================== */
+
+/* Collections Slider Cards */
+.collections-slider-card {
+  width: 400px;
+  height: auto;
+  position: relative;
+  overflow: hidden;
+  border-radius: 20px;
+  display: block;
+  text-decoration: none;
+}
+
+.collections-slider-card img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s ease;
+}
+
+.collections-slider-card:hover img {
+  transform: scale(1.02);
+}
+
+.collections-slider-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 2rem;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.85) 0%,
+    rgba(0, 0, 0, 0.7) 40%,
+    transparent 100%
+  );
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  height: 100%;
+  transition: all 0.3s ease;
+}
+
+.collections-slider-title {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  transition: transform 0.3s ease;
+}
+
+.collections-slider-link {
+  color: var(--primary-color);
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  opacity: 0.8;
+  transition: opacity 0.2s ease;
+}
+
+.collections-slider-card:hover .collections-slider-link {
+  opacity: 1;
+}
+

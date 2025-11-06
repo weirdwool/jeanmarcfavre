@@ -49,20 +49,21 @@ Slider Global : Navigation and containers
 }
 
 /* container for narrower grid to slider */
+/* Mobile First */
 .container-medium-slider {
   max-width: 1400px;
-  margin: 0 auto;
-  padding: 3rem 20px; 
+  margin: 0;
+  padding: 3rem 0; 
   display: flex; 
   flex-direction: column;
   gap: 2rem;
   background-color: var(--background-color);
 }
 
-@media (max-width: 768px) {
+@media (min-width: 1024px) {
   .container-medium-slider {
-    padding: 3rem 0;
-    margin: 0;
+    padding: 3rem 20px;
+    margin: 0 auto;
   }
 }
 
@@ -108,15 +109,22 @@ Slider Global : Navigation and containers
   color: inherit; 
 }
 
- /* Mobile */
-@media (max-width: 768px) {
+/* Mobile defaults */
+.slider-track {
+  gap: 1.5rem;
+}
+
+.slider-item {
+  flex: 0 0 300px; /* Fixed width - shows 1 + peek on mobile */
+}
+
+@media (min-width: 1024px) {
   .slider-track {
-    gap: 1.5rem;
+    gap: 2rem;
   }
 
   .slider-item {
-     flex: 0 0 90%; /* On small screens, items take up 90% width */
-      width: auto; /* Allow flex-basis to control width */
+    flex: 0 0 350px; /* Slightly wider on desktop */
   }
 }
 
@@ -251,11 +259,12 @@ INDEX SLIDERS
 }
 
 .testimonial-text {
-  font-size: 0.95rem;
+  font-size: 0.85rem;
   font-weight: normal;
   text-align: center;
-  color: rgb(217, 217, 217);
+  color: rgb(155, 155, 155);
   margin-bottom: 1rem;
+  line-height: 1.5;
 }
 
 .testimonial-author {
@@ -446,129 +455,123 @@ engagment.astro */
 /* Showcase Grid - Desktop Grid Layout */
 /* .showcase-grid inherits from .grid-3 */
 
-/* Engagement Grid */
+/* ========================================
+   SHOWCASE & ENGAGEMENT GRIDS
+   Mobile First with Data Attributes
+   ======================================== */
+
+/* Base text alignment */
 .engagement-grid {
   text-align: center;
 }
 
-/* Desktop Grid Layout */
-@media (min-width: 769px) {
-  .showcase-grid,
-  .engagement-grid {
+/* MOBILE (default): Everything is a slider */
+.showcase-grid,
+.engagement-grid {
+  display: flex;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  gap: 20px;
+  padding: 0 15px;
+  align-items: stretch;
+}
+
+.showcase-grid::-webkit-scrollbar,
+.engagement-grid::-webkit-scrollbar {
+  display: none;
+}
+
+.showcase-grid .card,
+.engagement-grid .card {
+  flex: 0 0 320px; /* Fixed width - shows 1 card + peek on mobile */
+  min-height: 700px;
+  display: flex;
+  flex-direction: column;
+  align-self: stretch;
+}
+
+/* Card flexbox structure for equal heights */
+.showcase-grid .card .card-content,
+.engagement-grid .card .card-content {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  height: 100%;
+}
+
+.showcase-grid .card .card-content-text,
+.engagement-grid .card .card-content-text {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.showcase-grid .card .card-description,
+.engagement-grid .card .card-description {
+  flex: 1;
+  min-height: 0;
+}
+
+.showcase-grid .card .card-bottom-section,
+.engagement-grid .card .card-bottom-section {
+  margin-top: auto;
+  flex-shrink: 0;
+}
+
+/* Navigation arrows visible on mobile */
+.nav-wrapper {
+  display: block;
+}
+
+/* ========================================
+   DESKTOP (1024px+): Grid Conversion
+   ======================================== */
+@media (min-width: 1024px) {
+  /* Items with data-layout="grid" become grids */
+  .showcase-grid[data-layout="grid"],
+  .engagement-grid[data-layout="grid"] {
     display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
+    overflow-x: visible;
+    padding: 0 20px;
+  }
+
+  .showcase-grid[data-layout="grid"] .card,
+  .engagement-grid[data-layout="grid"] .card {
+    flex: none;
+    max-width: none;
+    margin-right: 0;
+  }
+
+  /* Hide arrows for grids */
+  .showcase-grid[data-layout="grid"] + .nav-wrapper,
+  .engagement-grid[data-layout="grid"] + .nav-wrapper {
+    display: none;
+  }
+
+  /* Items with data-layout="slider" stay as sliders */
+  /* They keep all their mobile flex properties */
+}
+
+/* ========================================
+   LARGE DESKTOP (1400px+): More columns
+   ======================================== */
+@media (min-width: 1400px) {
+  /* 3 columns for showcase grids */
+  .showcase-grid[data-layout="grid"] {
     grid-template-columns: repeat(3, 1fr);
     gap: 30px;
   }
   
-  /* Only the associations and friends sections should be 4 columns */
-  #associations-grid,
-  #friends-grid {
+  /* 4 columns for associations/friends grids */
+  #associations-grid[data-layout="grid"],
+  #friends-grid[data-layout="grid"] {
     grid-template-columns: repeat(4, 1fr);
-  }
-  
-  /* Hide navigation arrows on desktop */
-  .nav-wrapper {
-    display: none;
-  }
-}
-
-@media (max-width: 1400px) {
-  .showcase-grid,
-  .engagement-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 25px;
-  }
-  
-  #associations-grid,
-  #friends-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
-@media (max-width: 1200px) {
-  .showcase-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 25px;
-  }
-  
-  .engagement-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 25px;
-  }
-  
-  #associations-grid,
-  #friends-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 25px;
-  }
-}
-
-/* Mobile Slider Layout */
-@media (max-width: 768px) {
-  .showcase-grid,
-  .engagement-grid {
-    display: flex;
-    overflow-x: auto;
-    scroll-behavior: smooth;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-    gap: 20px;
-    padding: 0 15px;
-    grid-template-columns: none;
-    align-items: stretch; /* Ensure all cards stretch to same height */
-  }
-  
-  .showcase-grid::-webkit-scrollbar,
-  .engagement-grid::-webkit-scrollbar {
-    display: none;
-  }
-  
-  .showcase-grid .card,
-  .engagement-grid .card {
-    flex: 0 0 calc(100vw - 60px);
-    max-width: 350px;
-    margin-right: 0;
-    min-height: 700px; /* Set minimum height to ensure consistency */
-    display: flex;
-    flex-direction: column;
-    align-self: stretch; /* Force card to stretch to container height */
-  }
-  
-  /* Ensure card content takes full available height */
-  .showcase-grid .card .card-content,
-  .engagement-grid .card .card-content {
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-    height: 100%; /* Take full height of card */
-  }
-  
-  /* Ensure text content takes available space */
-  .showcase-grid .card .card-content-text,
-  .engagement-grid .card .card-content-text {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    min-height: 0; /* Allow text to shrink */
-  }
-  
-  /* Ensure description takes remaining space */
-  .showcase-grid .card .card-description,
-  .engagement-grid .card .card-description {
-    flex: 1;
-    min-height: 0; /* Allow description to shrink */
-  }
-  
-  /* Ensure bottom section stays at bottom */
-  .showcase-grid .card .card-bottom-section,
-  .engagement-grid .card .card-bottom-section {
-    margin-top: auto; /* Push to bottom */
-    flex-shrink: 0; /* Prevent shrinking */
-  }
-  
-  /* Show navigation arrows on mobile */
-  .nav-wrapper {
-    display: block;
+    gap: 30px;
   }
 }
 
@@ -722,28 +725,50 @@ engagment.astro */
 }
 
 
-/* Responsive Design */
-@media (max-width: 768px) {
+/* Responsive Design - Mobile First */
+.showcase-title {
+  font-size: 28px;
+  letter-spacing: 2px;
+}
+
+.showcase-subtitle {
+  font-size: 16px;
+}
+
+.card-content {
+  padding: 20px;
+}
+
+.card-title {
+  font-size: 20px;
+}
+
+.slider-navigation-arrows {
+  margin-right: 2rem;
+  padding-right: 20px; 
+}
+
+@media (min-width: 1024px) {
   .showcase-title {
-    font-size: 28px;
-    letter-spacing: 2px;
+    font-size: 36px;
+    letter-spacing: 3px;
   }
   
   .showcase-subtitle {
-    font-size: 16px;
-  }
-  
-  .card-content {
-    padding: 20px;
-  }
-  
-  .card-title {
     font-size: 20px;
   }
   
+  .card-content {
+    padding: 30px;
+  }
+  
+  .card-title {
+    font-size: 24px;
+  }
+  
   .slider-navigation-arrows {
-    margin-right: 2rem;
-    padding-right: 20px; 
+    margin-right: 0;
+    padding-right: 0;
   }
 }
 
