@@ -9,7 +9,8 @@ import ShowcasePhoto from '../components/ShowcasePhoto.astro'; // <--- ADD THIS 
   preloadImage="/images/parallax/296200072.jpg"
   canonical="/photo/"
 >
-   <section class="page-hero">
+
+<section class="page-hero">
       <div class="page-hero__image">
          <img src="/images/parallax/296200072.jpg" alt="Photographie professionnelle par Jean-Marc Favre" loading="eager">
       </div>
@@ -17,11 +18,10 @@ import ShowcasePhoto from '../components/ShowcasePhoto.astro'; // <--- ADD THIS 
       <div class="page-hero__content">
          <h1 class="page-hero__title">Photo</h1>
       </div>
-   </section>
-   
-   <div class="container pt-4 pb-5">
+</section>
 
-      <section class="container-content prestations prestations-photo">
+<section class="prestations-section prestations-photo pt-1 pb-5">
+   <div class="container-content">
          <div class="text-wrap">
             <h2>Photographe Professionnel à Annecy et en Auvergne-Rhône-Alpes</h2>
             <p>
@@ -48,16 +48,15 @@ import ShowcasePhoto from '../components/ShowcasePhoto.astro'; // <--- ADD THIS 
                <b>Si vous recherchez un photographe professionnel, <a class="link-text" href="/contact">contactez-moi</a> pour discuter de votre projet.</b>
             </p>
          </div>
-      </section>
-
-      <section class="pt-1">
-         <ShowcasePhoto />
-      </section>
-   
    </div>
+</section>
+
+<section class="showcase-photo-section pt-1">
+   <ShowcasePhoto />
+</section>
    
 
-   <section class="parallax-banner" style="background-image: url('/images/parallax/170805-Duingt-04.jpg');">
+<section class="parallax-banner" style="background-image: url('/images/parallax/170805-Duingt-04.jpg');">
    <div class="parallax-banner-overlay"></div> 
    <img 
       src="/images/parallax/170805-Duingt-04.jpg" 
@@ -65,20 +64,17 @@ import ShowcasePhoto from '../components/ShowcasePhoto.astro'; // <--- ADD THIS 
       class="parallax-mobile-img" 
       loading="lazy"
    >
-   </section>
+</section>
 
-
-   <div class="container pt-5">
-
-      <section id="collections-visuelles" class="container-slider collections-photo">
-         <div class="collections-visuelles pb-5">
-            <div class="collections-slider-header">
-               <div class="title-wrapper link-flex">
-                  <h2>collections visuelles</h2>
-                  <a class="link" href="/collections-visuelles" aria-label="Découvrir les galeries photo">Voir les galeries</a>
-               </div>
-            </div>
-            <div class="container-slider-slider slider-wrapper">
+<section class="collections-visuelles-section pt-3" id="collections-visuelles">
+   <div class="container-slider-slider">
+      <div class="slider-slider-header slider-slider-header-line">
+         <div class="title-wrapper link-flex">
+            <h2>collections visuelles</h2>
+            <a class="link" href="/collections-visuelles" aria-label="Découvrir les galeries photo">Voir les galeries</a>
+         </div>
+      </div>
+      <div class="slider-slider-wrapper">
                <div class="collections-visuelles-slider-track slider-track">
                   <a href="/collections-visuelles#aeriennes-gallery" class="collections-slider-card slider-item">
                      <img src="/images/collections/visuelles/170822-guerande-55-998x665.jpg" alt="Drone" />
@@ -144,6 +140,9 @@ import ShowcasePhoto from '../components/ShowcasePhoto.astro'; // <--- ADD THIS 
                      </div>
                   </a>
                </div>
+            </div>
+            <div class="slider-navigation">
+               <div class="separation-line-gradient"></div>
                <div class="slider-navigation-arrows">
                   <button id="prevCollectionsVisuelles" class="slider-arrow prev-arrow" aria-label="Collection précédente">
                      ⟵
@@ -153,20 +152,19 @@ import ShowcasePhoto from '../components/ShowcasePhoto.astro'; // <--- ADD THIS 
                   </button>
                </div>
             </div>
-         </div>
-      </section>
+   </div>
+</section>
 
-      
-      <section id="collection-region" class="container-slider collections-photo">
-         <div class="collection-region">
-            <div class="collections-slider-header">
-               <div class="title-wrapper link-flex">
-                  <h2>Collections région AURA</h2>
-                  <a class="link" href="/collections-region-aura" aria-label="Découvrir les galeries photo pour la région AURA">Voir les galeries</a>
-               </div>
-            </div>
-            <div class="container-slider-slider slider-wrapper">
-               <div class="collections-region-slider-track slider-track">
+<section id="collection-region" class="collection-region-section pt-3">
+   <div class="container-slider-slider">
+      <div class="slider-slider-header slider-slider-header-line">
+         <div class="title-wrapper link-flex">
+            <h2>Collections région AURA</h2>
+            <a class="link" href="/collections-region-aura" aria-label="Découvrir les galeries photo pour la région AURA">Voir les galeries</a>
+         </div>
+      </div>
+      <div class="slider-slider-wrapper">
+         <div class="collections-region-slider-track slider-track">
                   <a href="/collections-region-aura#annecy-gallery" class="collections-slider-card slider-item">
                      <img src="/images/collections/region/061128-annecy-1-2000x1083.jpg" alt="Annecy" />
                      <div class="collections-slider-overlay">
@@ -224,6 +222,9 @@ import ShowcasePhoto from '../components/ShowcasePhoto.astro'; // <--- ADD THIS 
                      </div>
                   </a>
                </div>
+            </div>
+            <div class="slider-navigation">
+               <div class="separation-line-gradient"></div>
                <div class="slider-navigation-arrows">
                   <button id="prevCollectionsRegion" class="slider-arrow prev-arrow" aria-label="Collection précédente">
                      ⟵
@@ -233,19 +234,19 @@ import ShowcasePhoto from '../components/ShowcasePhoto.astro'; // <--- ADD THIS 
                   </button>
                </div>
             </div>
+   </div>
+</section>
+
+<section id="collections-sports" class="collections-sports-section pt-3 pb-3">
+   <div class="container-slider-slider">
+      <div class="slider-slider-header slider-slider-header-line">
+         <div class="title-wrapper link-flex">
+            <h2>Collections Sports</h2>
+            <a class="link" href="/collections-sports#sports-bestof-gallery" aria-label="Découvrir les galeries sports">Voir les galeries</a>
          </div>
-      </section>
-      
-      <section id="collections-sports" class="container-slider collections-photo">
-         <div class="collections-sports pt-4 pb-5">
-            <div class="collections-slider-header">
-               <div class="title-wrapper link-flex">
-                  <h2>Collections Sports</h2>
-                  <a class="link" href="/collections-sports#sports-bestof-gallery" aria-label="Découvrir les galeries sports">Voir les galeries</a>
-               </div>
-            </div>
-            <div class="container-slider-slider slider-wrapper">
-               <div class="collections-sports-slider-track slider-track">
+      </div>
+      <div class="slider-slider-wrapper">
+         <div class="collections-sports-slider-track slider-track">
                   <a href="/collections-sports#sports-bestof-gallery" class="collections-slider-card slider-item">
                      <img src="/images/collections/sports/030907-coudrayalex-1-998x1497.jpg" alt="Sports Best Of" />
                      <div class="collections-slider-overlay">
@@ -296,6 +297,9 @@ import ShowcasePhoto from '../components/ShowcasePhoto.astro'; // <--- ADD THIS 
                      </div>
                   </a>
                </div>
+            </div>
+            <div class="slider-navigation">
+               <div class="separation-line-gradient"></div>
                <div class="slider-navigation-arrows">
                   <button id="prevCollectionsSports" class="slider-arrow prev-arrow" aria-label="Collection précédente">
                      ⟵
@@ -305,11 +309,12 @@ import ShowcasePhoto from '../components/ShowcasePhoto.astro'; // <--- ADD THIS 
                   </button>
                </div>
             </div>
-         </div>
-      </section>
-      
-      <section class="container-content">
-         <div class="text-wrap pt-5">
+   </div>
+</section>
+
+<section class="equipment-section pt-2">
+   <div class="container-content">
+      <div class="text-wrap">
             <h2>Mon Équipement</h2>
             <div class="text-wrapper">
                <p>Pour des images d'une clarté remarquable, je travaille avec le <b>matériel photographique Canon de dernière génération, incluant le R3</b>.</p>
@@ -317,7 +322,7 @@ import ShowcasePhoto from '../components/ShowcasePhoto.astro'; // <--- ADD THIS 
                <p>En studio comme en reportage, je maîtrise la lumière grâce à mon équipement d'éclairage complet : <b>flashs Profoto et Multiblitz</b>, complétés par une variété d'accessoires. Cet ensemble technologique me permet de répondre avec excellence à toutes vos exigences photographiques.</p>
             </div>
          </div>
-         <div class="gear-logos pb-3">
+         <div class="gear-logos">
             <a href="https://global.canon/" target="_blank" rel="noopener noreferrer" aria-label="Visit Canon official website">
                <img src="/logo/gear/canon.svg" alt="Canon Logo">
             </a>
@@ -328,8 +333,8 @@ import ShowcasePhoto from '../components/ShowcasePhoto.astro'; // <--- ADD THIS 
                <img src="/logo/gear/multiblitz.svg" alt="Multiblitz Logo">
             </a>
          </div>
-      </section>
    </div>
+</section>
    
    
 </Layout>

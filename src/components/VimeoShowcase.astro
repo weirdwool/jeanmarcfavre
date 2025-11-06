@@ -1,7 +1,7 @@
 ---
-// src/components/VimeoShowcaseGrid.astro
+// src/components/VimeoShowcase.astro
 import '../styles/components/vimeo.css';
-import '../styles/components/slider.css';
+import '../styles/components/slider-grid.css';
 
 interface Props {
   showcaseId: string;
@@ -9,8 +9,8 @@ interface Props {
 
 const { showcaseId } = Astro.props;
 
-// Use a unique ID for the wrapper to prevent conflicts if multiple grids are on the same page
-const uniqueId = `vimeo-grid-${Math.random().toString(36).substring(2, 9)}`;
+// Use a unique ID for the wrapper to prevent conflicts if multiple showcases are on the same page
+const uniqueId = `vimeo-showcase-${Math.random().toString(36).substring(2, 9)}`;
 ---
 
 <!-- Wrapper for the entire component, now using vimeo-wrapper -->
@@ -31,14 +31,11 @@ const uniqueId = `vimeo-grid-${Math.random().toString(36).substring(2, 9)}`;
   </div>
   
   <!-- Navigation arrows for the mobile slider layout -->
-  <div class="nav-wrapper" style="display: none;">
+  <div class="slider-navigation" style="display: none;">
+    <div class="separation-line-gradient"></div>
     <div class="slider-navigation-arrows">
-      <button class="slider-arrow prev-arrow" aria-label="Previous Video">
-      ⟵
-      </button>
-      <button class="slider-arrow next-arrow" aria-label="Next Video">
-      ⟶
-      </button>
+      <button class="slider-arrow prev-arrow" aria-label="Previous Video">⟵</button>
+      <button class="slider-arrow next-arrow" aria-label="Next Video">⟶</button>
     </div>
   </div>
 </div>
@@ -55,14 +52,10 @@ const uniqueId = `vimeo-grid-${Math.random().toString(36).substring(2, 9)}`;
     const showcaseId = vimeoGridWrapper.dataset.showcaseId;
     const loadingPlaceholder = vimeoGridWrapper.querySelector('.vimeo-loading-placeholder');
     const vimeoGridContainer = vimeoGridWrapper.querySelector('.vimeo-grid-container');
-    const errorMessageElement = vimeoGridContainer.querySelector('.error-message');
-    const navWrapper = vimeoGridWrapper.querySelector('.nav-wrapper');
-    const sliderNavigationArrows = navWrapper.querySelector('.slider-navigation-arrows');
-    const prevButton = sliderNavigationArrows.querySelector('.prev-arrow');
-    const nextButton = sliderNavigationArrows.querySelector('.next-arrow');
+    const navWrapper = vimeoGridWrapper.querySelector('.slider-navigation');
 
     if (!showcaseId) {
- 
+      console.error('Showcase ID missing');
       if (loadingPlaceholder) {
         loadingPlaceholder.innerHTML = '<p class="error-message">Erreur: ID de vitrine Vimeo manquant.</p>';
         loadingPlaceholder.style.color = 'red';
@@ -70,23 +63,41 @@ const uniqueId = `vimeo-grid-${Math.random().toString(36).substring(2, 9)}`;
       return;
     }
 
+    if (!vimeoGridContainer || !navWrapper) {
+      console.error('Required elements not found');
+      return;
+    }
+
+    const errorMessageElement = vimeoGridContainer.querySelector('.error-message');
+    const sliderNavigationArrows = navWrapper.querySelector('.slider-navigation-arrows');
+    const prevButton = sliderNavigationArrows?.querySelector('.prev-arrow');
+    const nextButton = sliderNavigationArrows?.querySelector('.next-arrow');
+
     let videos = [];
     let errorMessage = null;
 
     try {
-        const apiResponse = await fetch(`${window.location.origin}/api/vimeo-showcase/${showcaseId}.json`);
+        const apiUrl = `${window.location.origin}/api/vimeo-showcase/${showcaseId}.json`;
+        console.log('Fetching from:', apiUrl);
+        const apiResponse = await fetch(apiUrl);
 
         if (!apiResponse.ok) {
-            const errorData = await apiResponse.json();
+            console.error('API Response not OK:', apiResponse.status);
+            const errorData = await apiResponse.json().catch(() => ({ error: 'Unknown error' }));
             errorMessage = errorData.error || `Échec du chargement des vidéos (Statut: ${apiResponse.status})`;
      
         } else {
             const data = await apiResponse.json();
-            // Limit to the latest 9 videos
-            videos = (data.videos || []).slice(0, 9);
+            console.log('API Response data:', data);
+            // Filter out videos without embedHtml, then limit to 9
+            videos = (data.videos || [])
+              .filter(video => video.embedHtml)
+              .slice(0, 9);
+            console.log('Videos loaded:', videos.length);
         }
          } catch (error) {
-       errorMessage = 'Erreur réseau ou impossible de se connecter à l\'API.';
+       console.error('Fetch error:', error);
+       errorMessage = 'Erreur réseau ou impossible de se connecter à l\'API: ' + error.message;
      }
 
     loadingPlaceholder.style.display = 'none';
@@ -150,7 +161,7 @@ const uniqueId = `vimeo-grid-${Math.random().toString(36).substring(2, 9)}`;
         });
 
         const checkScreenSize = () => {
-          const isDesktop = window.matchMedia("(min-width: 768px)").matches;
+          const isDesktop = window.matchMedia("(min-width: 1024px)").matches;
           if (isDesktop) {
             navWrapper.style.display = 'none';
             // Disable scroll logic for desktop grid
@@ -183,3 +194,4 @@ const uniqueId = `vimeo-grid-${Math.random().toString(36).substring(2, 9)}`;
     }
   });
 </script>
+

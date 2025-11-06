@@ -1,6 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import VimeoShowcaseGrid from "../components/VimeoShowcaseGrid.astro"; 
+import VimeoShowcase from "../components/VimeoShowcase.astro"; 
 import ShowcaseVideo from '../components/ShowcaseVideo.astro';
 ---
 
@@ -22,9 +22,8 @@ import ShowcaseVideo from '../components/ShowcaseVideo.astro';
       </div>
    </section>
 
-   <div class="container container-drone pt-4 pb-3">
-
-      <section class="container-content prestations prestations-video">
+<section class="prestations-section prestations-video pt-4 pb-3">
+   <div class="container-content">
          <div class="text-wrap pb-2">
             <h2>Production & Réalisation Vidéo en Auvergne-Rhône-Alpes</h2>
             <div class="text-wrapper">
@@ -47,13 +46,12 @@ import ShowcaseVideo from '../components/ShowcaseVideo.astro';
                <b><a class="link-text" href="/contact">Contactez-moi</a> pour toute information supplémentaire ainsi que pour discuter de votre projet et obtenir un devis personnalisé ajusté au plus près.</b>
             </p>
          </div>
-      </section>
-
-      <section class="pt-1">
-         <ShowcaseVideo />
-      </section>
-
    </div>
+</section>
+
+<section class="showcase-video-section pt-1">
+   <ShowcaseVideo />
+</section>
    
 
    <section class="parallax-banner" style="background-image: url('/images/parallax/180727-Viaduc_Millau-049.jpg');">
@@ -66,30 +64,23 @@ import ShowcaseVideo from '../components/ShowcaseVideo.astro';
    >
    </section>
 
-
-   <div class="container">
-
-      <!-- Video Grid Feed to slider -->
-      <section class="container-medium-slider">
-         <div class="video-feed video-feed-grid">
-            <div class="video-feed-header">
-               <div class="title-wrapper link-flex">
-                  <h2>Projets clients</h2>
-                  <a class="link"
-                     href="https://vimeo.com/showcase/11819723"
-                     target="_blank"
-                     rel="noopener noreferrer"
-                     aria-label="Voir plus de projets clients">
-                     Voir plus de projets clients
-                  </a>
-               </div> 
-            </div>
-            <VimeoShowcaseGrid showcaseId="11819723" />
+<!-- Video Projects -->
+<section class="video-projects-section">
+   <div class="container-slider-grid">
+      <div class="slider-grid-header">
+         <div class="title-wrapper link-flex">
+            <h2>Projets clients</h2>
+            <a class="link" href="https://vimeo.com/showcase/11819723" target="_blank" aria-label="Voir plus de projets clients">Voir plus de projets clients</a>
          </div>
-      </section>
+      </div>
+      <div class="slider-grid-wrapper">
+         <VimeoShowcase showcaseId="11819723" />
+      </div>
+   </div>
+</section>
 
-
-      <section class="container-content">
+<section class="video-socials-section">
+   <div class="container-content">
          <div class="socials-video">
             <h3 class="text-center mb-2">ACCÉDEZ À MES CONTENUS VIDÉO</h3>
             <div class="socials-wrapper">
@@ -100,68 +91,8 @@ import ShowcaseVideo from '../components/ShowcaseVideo.astro';
                <img src="/images/icons/youtube.svg" alt="YouTube" class="icon" width="40" height="40">
                </a>
             </div>
-         </div>
-      </section>
+      </div>
    </div>
+</section>
+
 </Layout>
-
-<script type="module">
-  const showcaseId = '11819723'; // Vidéo Projets Clients
-  const maxVideos = 9;
-
-  async function fetchVimeoShowcaseVideos() {
-    const loadingEl = document.getElementById('vimeo-video-grid-loading');
-    const grid = document.getElementById('vimeo-video-grid');
-    
-    try {
-      // Fetch from our secure server route instead of Vimeo directly
-      const response = await fetch(`/api/vimeo?album=${showcaseId}&per_page=${maxVideos}`);
-
-
-      if (!response.ok) {
-        throw new Error(`API error: ${response.status}`);
-      }
-
-      const data = await response.json();
-      loadingEl.style.display = 'none';
-      grid.innerHTML = '';
-
-      data.data.forEach(video => {
-        const videoId = video.uri.split('/').pop();
-        const title = video.name;
-        const thumb = video.pictures.sizes.find(size => size.width >= 640)?.link || '';
-
-        const container = document.createElement('div');
-        container.className = 'vimeo-thumb-container';
-        container.innerHTML = `
-          <div class="vimeo-thumb" style="position:relative; cursor:pointer; overflow:hidden; border-radius:8px;">
-            <img src="${thumb}" alt="${title}" style="width:100%; display:block; border-radius:8px;">
-            <div class="vimeo-play-icon" style="position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:60px; height:60px; background-color:rgba(0,0,0,0.6); border-radius:50%; display:flex; justify-content:center; align-items:center;">
-              <svg viewBox="0 0 24 24" width="28" height="28" fill="white"><path d="M8 5v14l11-7z"/></svg>
-            </div>
-          </div>
-        `;
-
-        container.querySelector('.vimeo-thumb').addEventListener('click', () => {
-          container.innerHTML = `
-            <iframe 
-              src="https://player.vimeo.com/video/${videoId}?autoplay=1&muted=0&playsinline=1"
-              style="width:100%; aspect-ratio:16/9; border:none; border-radius:8px;"
-              allow="autoplay; fullscreen"
-              allowfullscreen
-            ></iframe>
-          `;
-        });
-
-        grid.appendChild(container);
-      });
-    } catch (error) {
-      loadingEl.textContent = 'Erreur de chargement des vidéos';
-    }
-  }
-
-  document.addEventListener('DOMContentLoaded', () => {
-    fetchVimeoShowcaseVideos();
-
-  });
-</script>

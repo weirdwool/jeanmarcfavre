@@ -60,12 +60,37 @@ export async function getStaticPaths() {
   return paths;
 }
 
-// Modify the GET handler to receive data from props
-export const GET: APIRoute = ({ props }) => { // Change from ({ params, request }) to ({ props })
-  const { videos } = props; // Destructure videos from props
+// Modify the GET handler to receive data from props OR fetch on-demand in dev
+export const GET: APIRoute = async ({ props, params }) => {
+  let { videos } = props || {};
+
+  // Fallback for dev mode: fetch on-demand if videos not pre-rendered
+  if (!videos && params.id && VIMEO_ACCESS_TOKEN) {
+    try {
+      const response = await fetch(`https://api.vimeo.com/me/albums/${params.id}/videos`, {
+        headers: {
+          'Authorization': `Bearer ${VIMEO_ACCESS_TOKEN}`,
+          'Content-Type': 'application/json',
+        },
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        videos = data.data.map((video: any) => ({
+          id: video.uri.split('/').pop(),
+          name: video.name,
+          description: video.description,
+          thumbnail: video.pictures.sizes.find((size: any) => size.width === 640 || size.width === 960)?.link || video.pictures.sizes[0]?.link,
+          embedHtml: video.embed?.html,
+          link: video.link,
+        }));
+      }
+    } catch (error) {
+      console.error('Dev mode fetch error:', error);
+    }
+  }
 
   if (!videos) {
-    // This case should ideally not happen if getStaticPaths correctly generated props
     return new Response(JSON.stringify({ error: 'Video data not found for this ID.' }), {
       status: 404,
       headers: {

@@ -1,24 +1,104 @@
 /* ========================================
-   SLIDERS - Always Stay Sliders
-   For: Homepage sliders, Collections sliders
+   SLIDER-SLIDER System
+   For: Sliders that ALWAYS stay sliders
+   Mobile First Approach
    ======================================== */
 
-/* Slider Global: Navigation and containers */
-.nav-wrapper {
+/* ========================================
+   OUTER CONTAINER
+   ======================================== */
+.container-slider-slider {
+  width: 100%;
+  background-color: var(--background-color);
+  padding: 3rem 0;
+}
+
+/* ========================================
+   HEADER (Optional)
+   ======================================== */
+.slider-slider-header {
+  margin: 0 auto;
+  padding: 0 20px 3rem 20px;
+}
+
+.slider-slider-header-line::after {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 1px;
+    background-color: var(--primary-color);
+    margin-top: 1rem;
+}
+
+/* ========================================
+   WRAPPER - Contains the actual slider
+   ======================================== */
+.slider-slider-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.slider-slider-wrapper::-webkit-scrollbar {
+  display: none;
+}
+
+/* ========================================
+   SLIDER TRACK & ITEMS
+   ======================================== */
+.slider-track {
+  display: flex;
+  gap: 1.5rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  padding: 0 5vw;
+  box-sizing: border-box;
+}
+
+.slider-track::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+/* Slider Items - Fixed width */
+.slider-item {
+  display: flex;
+  flex-shrink: 0;
+  flex-direction: column;
+  color: inherit;
+  flex: 0 0 300px; /* Fixed width - shows 1 + peek */
+}
+
+@media (min-width: 1024px) {
+  .slider-track {
+    gap: 2rem;
+  }
+
+  .slider-item {
+    flex: 0 0 350px; /* Slightly wider on desktop */
+  }
+}
+
+/* ========================================
+   NAVIGATION ARROWS
+   ======================================== */
+.slider-navigation {
   width: 90%;
-  margin: auto;
-  padding: 1rem 0;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 1rem 0 0 0;
 }
 
 .slider-navigation-arrows {
   display: flex;
   gap: 2rem;
   justify-content: flex-end;
-  margin-right: 5vw;
-  width: 100%;
-  max-width: 1400px;
-  margin-left: auto;
-  box-sizing: border-box;
   padding-right: 20px;
 }
 
@@ -33,7 +113,7 @@
   justify-content: center;
   font-size: 2rem;
   cursor: pointer;
-  transition: color 0.3s ease, filter 0.3s ease, transform 0.3s ease, cursor 0.3s ease;
+  transition: color 0.3s ease, filter 0.3s ease, transform 0.3s ease;
 }
 
 .slider-arrow:hover:not(:disabled) {
@@ -46,88 +126,21 @@
 
 .slider-arrow:disabled {
   color: var(--primary-color);
-  filter: brightness(0.5); 
+  filter: brightness(0.5);
   cursor: not-allowed;
   transform: none;
 }
 
-/* Container for sliders */
-.container-medium-slider {
-  max-width: 1400px;
-  margin: 0;
-  padding: 3rem 0; 
-  display: flex; 
-  flex-direction: column;
-  gap: 2rem;
-  background-color: var(--background-color);
-}
-
-@media (min-width: 1024px) {
-  .container-medium-slider {
-    padding: 3rem 20px;
-    margin: 0 auto;
-  }
-}
-
-/* Slider Container */
-.container-slider-slider {
-  width: 100%;
-  margin: 0;
-  display: flex; 
-  flex-direction: column;
-  gap: 0rem;
-}
-
-.slider-wrapper {
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-}
-
-/* Slider Track - Mobile First */
-.slider-track {
-  display: flex;
-  gap: 1.5rem;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-  padding: 1.5rem 5vw; 
-  box-sizing: border-box;
-}
-
-.slider-track::-webkit-scrollbar {
-  display: none;
-  width: 0;
-  height: 0;
-}
-
-/* Slider Items - Fixed width for peek effect */
-.slider-item {
-  display: flex;
-  flex-shrink: 0;
-  flex-direction: column;
-  color: inherit;
-  flex: 0 0 300px; /* Fixed width - shows 1 + peek on mobile */
-}
-
-@media (min-width: 1024px) {
-  .slider-track {
-    gap: 2rem;
-  }
-
-  .slider-item {
-    flex: 0 0 350px; /* Slightly wider on desktop */
-  }
+/* Separation line above arrows */
+.slider-navigation .separation-line-gradient {
+  margin-bottom: 1rem;
 }
 
 /* ========================================
-   INDEX PAGE SLIDERS
+   HOMEPAGE SLIDERS - Specific Styles
    ======================================== */
 
-/* Engagements Slider on index */
+/* Engagements Slider */
 .engagement-item {
   width: 400px;
   height: auto;
@@ -206,7 +219,7 @@
   line-height: 1.3;
 }
 
-/* Testimonials Slider on index */
+/* Testimonials Slider */
 .temoignages {
   color: var(--primary-color);
   position: relative;
@@ -237,12 +250,12 @@
     var(--primary-color) 0%,
     var(--background-color) 100%
   );
-} 
+}
 
 .testimonial-item {
   justify-content: space-between;
-  width: 400px; 
-  height: auto; 
+  width: 400px;
+  height: auto;
   border-radius: 20px;
   border: 1px solid var(--secondary-color);
   background: rgba(255, 255, 255, 0.05);
@@ -273,7 +286,7 @@
   font-style: italic;
 }
 
-/* Blog Slider on index */
+/* Blog Slider */
 .blog-item {
   width: 400px;
   height: auto;
@@ -339,7 +352,7 @@
   font-weight: 400;
 }
 
-/* Special "View All Posts" card */
+/* Blog "View All" Card */
 .blog-view-all {
   width: 400px;
   height: auto;
@@ -447,4 +460,3 @@
 .collections-slider-card:hover .collections-slider-link {
   opacity: 1;
 }
-

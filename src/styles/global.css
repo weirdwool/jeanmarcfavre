@@ -200,6 +200,12 @@ b, strong {
   padding: 20px;
 }
 
+.container-medium-slider {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
 /* --- Layout Columns --- */
 .row {
   display: flex;
@@ -542,7 +548,7 @@ figcaption {
   }
 
   .parallax-banner-overlay {
-    background-color: rgba(0, 0, 0, 0.3);
+    background-color: rgba(0, 0, 0, 0.5);
   }
 }
 

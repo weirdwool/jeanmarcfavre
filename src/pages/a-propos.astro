@@ -9,11 +9,10 @@ import Layout from '../layouts/Layout.astro';
   canonical="/a-propos/"
 >
 
-   <div class="header-spacer"></div>
+<div class="header-spacer"></div>
    
-   <div class="container mb-5">
-      <section class="a-propos">
-         <div class="container-medium">
+<section class="about-section mb-5">
+   <div class="container-medium">
             <div class="row align-center">
                <div class="col-md-6">
                   <div class="text-wrap">
@@ -35,14 +34,14 @@ import Layout from '../layouts/Layout.astro';
                   </div>
                </div>
             </div>
-         </div>
-         <div class="container-content">
-            <p>Je suis actuellement sous contract avec des entités de renom tels que <b>le Grand Annecy</b>, <b>le Domaine de Blacailloux</b>, ainsi que les <b>promoteurs immobiliers Barrachin et Teractem</b>. Fournisseur attitré pour <b>France TV</b> et <b>FR3</b>, et correspondant dévoué pour <b>Le Dauphiné Libéré</b>, je leur fournis des images aériennes captivantes qui racontent des histoires du ciel. Chaque projet est une opportunité de démontrer mon expertise, en délivrant des résultats de qualité qui captent l'essence des visions les plus ambitieuses de mes clients.</p>
-         </div>
-      </section>
+      </div>
    </div>
+   <div class="container-content">
+      <p>Je suis actuellement sous contract avec des entités de renom tels que <b>le Grand Annecy</b>, <b>le Domaine de Blacailloux</b>, ainsi que les <b>promoteurs immobiliers Barrachin et Teractem</b>. Fournisseur attitré pour <b>France TV</b> et <b>FR3</b>, et correspondant dévoué pour <b>Le Dauphiné Libéré</b>, je leur fournis des images aériennes captivantes qui racontent des histoires du ciel. Chaque projet est une opportunité de démontrer mon expertise, en délivrant des résultats de qualité qui captent l'essence des visions les plus ambitieuses de mes clients.</p>
+   </div>
+</section>
 
-   <section class="parallax-banner" style="background-image: url('/images/parallax/900500125.jpg');">
+<section class="parallax-banner" style="background-image: url('/images/parallax/900500125.jpg');">
    <div class="parallax-banner-overlay"></div> 
    <img 
       src="/images/parallax/900500125.jpg" 
@@ -52,9 +51,9 @@ import Layout from '../layouts/Layout.astro';
    >
 </section>
 
-   <div class="container mt-2">
-      <section class="debuts mb-2">
-         <div class="row mob-rev align-center pt-4 pb-4">
+<section class="debut-section mt-2 mb-2">
+   <div class="container-medium">
+      <div class="row mob-rev align-center pt-4 pb-4">
             <div class="col-md-4 diapo">
                <div class="image-wrapper">
                   <img src="/images/collages/diaporama1-1098x1496.png" alt="Collage representant Jean-Marc Favre">
@@ -79,10 +78,13 @@ import Layout from '../layouts/Layout.astro';
                   </div>
                </div>
             </div>
-         </div>
-      </section>
-      <section class="container-medium sequence">
-         <div class="row mb-5">
+      </div>
+   </div>
+</section>
+
+<section class="sequence-section">
+   <div class="container-medium">
+      <div class="row mb-5">
             <div class="col-md-8">
                <div class="text-wrap">
                   <div class="title-wrapper">
@@ -105,11 +107,11 @@ import Layout from '../layouts/Layout.astro';
                   </figcaption>
                </figure>
             </div>
-         </div>
-      </section>
+      </div>
    </div>
+</section>
 
-   <section class="parallax-banner" style="background-image: url('/images/parallax/jmf1-1530x992.jpg');">
+<section class="parallax-banner" style="background-image: url('/images/parallax/jmf1-1530x992.jpg');">
       <div class="parallax-banner-overlay"></div> 
          <img 
             src="/images/parallax/jmf1-1530x992.jpg" 
@@ -119,16 +121,14 @@ import Layout from '../layouts/Layout.astro';
          >
    </section>
 
-
-   <div class="container debuts mt-2">
-      <section class="container-content photo-presse">
-         <div class="text-wrap mt-3 mb-5">
+<section class="archive-section mt-2">
+   <div class="container-content">
+      <div class="text-wrap mt-3 mb-5">
             <h2>Presse <b><i>&</i></b> Archives</h2>
             <p>Au fil de ma carrière, mes photographies ont été largement diffusées et utilisées à travers divers médias. On les retrouve notamment dans des articles et reportages de magazines, en couvertures de publications variées, ainsi que pour des campagnes publicitaires et l'illustration d'ouvrages de référence.</p>
             <a class="link" href="/presse-archives" aria-label="Accéder aux archives">Accéder aux archives</a>
-         </div>
-      </section>
+      </div>
    </div>
-
+</section>
 
 </Layout>

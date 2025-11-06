@@ -54,14 +54,14 @@ allEngagements.sort((a: CollectionEntry<'engagements'>, b: CollectionEntry<'enga
               </a>
             ))}
           </div>
+        </div>
 
-          <!-- Navigation arrows (only visible on mobile) -->
-          <div class="nav-wrapper">
-            <div class="separation-line-gradient"></div>
-            <div class="slider-navigation-arrows" data-target-id="engagements-grid">
-              <button class="slider-arrow prev-arrow" aria-label="Previous Engagement">⟵</button>
-              <button class="slider-arrow next-arrow" aria-label="Next Engagement">⟶</button>
-            </div>
+        <!-- Navigation arrows (only visible on mobile) -->
+        <div class="slider-navigation">
+          <div class="separation-line-gradient"></div>
+          <div class="slider-navigation-arrows" data-target-id="engagements-grid">
+            <button class="slider-arrow prev-arrow" aria-label="Previous Engagement">⟵</button>
+            <button class="slider-arrow next-arrow" aria-label="Next Engagement">⟶</button>
           </div>
         </div>
      </div>
@@ -78,16 +78,15 @@ allEngagements.sort((a: CollectionEntry<'engagements'>, b: CollectionEntry<'enga
    </section>
 
    <div class="container">
-      <section class="container-medium-slider">
+      <section class="container-slider-grid">
 
-         <div class="grid-title-wrapper">
+         <div class="slider-grid-header">
             <h2>Associations et artistes</h2>
             <div class="separation-line-gradient"></div>
             <p>Je les aide</p>
          </div>
 
-         <!-- Unified Associations Container -->
-                 <div class="container-slider-grid">
+         <div class="slider-grid-wrapper">
           <div class="engagement-grid" id="associations-grid" data-layout="grid">
              <div class="card">
                <div class="card-image">
@@ -165,14 +164,14 @@ allEngagements.sort((a: CollectionEntry<'engagements'>, b: CollectionEntry<'enga
                </div>
              </div>
            </div>
+         </div>
 
-           <!-- Navigation arrows (only visible on mobile) -->
-           <div class="nav-wrapper">
-             <div class="separation-line-gradient"></div>
-             <div class="slider-navigation-arrows" data-target-id="associations-grid">
-               <button class="slider-arrow prev-arrow" aria-label="Previous Association">⟵</button>
-               <button class="slider-arrow next-arrow" aria-label="Next Association">⟶</button>
-             </div>
+         <!-- Navigation arrows (only visible on mobile) -->
+         <div class="slider-navigation">
+           <div class="separation-line-gradient"></div>
+           <div class="slider-navigation-arrows" data-target-id="associations-grid">
+             <button class="slider-arrow prev-arrow" aria-label="Previous Association">⟵</button>
+             <button class="slider-arrow next-arrow" aria-label="Next Association">⟶</button>
            </div>
          </div>
       </section>
@@ -189,17 +188,15 @@ allEngagements.sort((a: CollectionEntry<'engagements'>, b: CollectionEntry<'enga
    </section>
 
    <div class="container">
-      <section class="container-medium-slider">
-         <div class="grid-container">
+      <section class="container-slider-grid">
 
-            <div class="grid-title-wrapper">
+            <div class="slider-grid-header">
                <h2>Mes amis</h2>
                <div class="separation-line-gradient"></div>
                <p>Les découvrir</p>
             </div>
 
-            <!-- Unified Friends Container -->
-                    <div class="container-slider-grid">
+            <div class="slider-grid-wrapper">
           <div class="engagement-grid" id="friends-grid" data-layout="grid">
                 <div class="card">
                   <div class="card-image">
@@ -393,17 +390,17 @@ allEngagements.sort((a: CollectionEntry<'engagements'>, b: CollectionEntry<'enga
                   </div>
                 </div>
               </div>
+            </div>
 
-              <!-- Navigation arrows (only visible on mobile) -->
-              <div class="nav-wrapper">
-                <div class="separation-line-gradient"></div>
-                <div class="slider-navigation-arrows" data-target-id="friends-grid">
-                  <button class="slider-arrow prev-arrow" aria-label="Previous Friend">⟵</button>
-                  <button class="slider-arrow next-arrow" aria-label="Next Friend">⟶</button>
-                </div>
+            <!-- Navigation arrows (only visible on mobile) -->
+            <div class="slider-navigation">
+              <div class="separation-line-gradient"></div>
+              <div class="slider-navigation-arrows" data-target-id="friends-grid">
+                <button class="slider-arrow prev-arrow" aria-label="Previous Friend">⟵</button>
+                <button class="slider-arrow next-arrow" aria-label="Next Friend">⟶</button>
               </div>
             </div>
-         </div>
+
       </section>
    </div>
 

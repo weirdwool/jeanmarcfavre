@@ -165,6 +165,7 @@ Common css for photo.astro, drone.astro and video.astro
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  padding: 2rem 0 3rem 0;
 }
 
 .gear-logos img {

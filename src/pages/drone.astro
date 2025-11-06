@@ -1,7 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import VimeoShowcaseGrid from "../components/VimeoShowcaseGrid.astro";
-import VimeoShowcaseSlider from "../components/VimeoShowcaseSlider.astro"; 
+import VimeoShowcase from "../components/VimeoShowcase.astro"; 
 
 ---
 
@@ -23,9 +22,8 @@ import VimeoShowcaseSlider from "../components/VimeoShowcaseSlider.astro";
       </div>
    </section>
 
-   <div class="container pt-3 pb-3">
-
-      <section class="container-content prestations prestations-drone">
+<section class="prestations-section prestations-drone pt-3 pb-3">
+   <div class="container-content">
          <div class="text-wrap">
             <h2>Pilote de Drone Professionnel à Annecy et en Auvergne-Rhône-Alpes</h2>
             <div class="text-wrapper">
@@ -71,26 +69,25 @@ import VimeoShowcaseSlider from "../components/VimeoShowcaseSlider.astro";
                <b><a class="link-text" href="/contact">Contactez-moi</a> pour toute information supplémentaire ainsi que pour discuter de votre projet et obtenir un devis personnalisé.</b>
             </p>
          </div>
-         
-      </section>
-
-
-      <!-- drone Feed Slider -->
-      <section class="container-slider-slider">
-         <div class="video-feed video-feed-slider">
-            <div class="video-feed-header">
-               <div class="title-wrapper link-flex">
-                  <h2>Projets clients</h2>
-                  <a class="link" href="https://vimeo.com/showcase/11819722" target="_blank" aria-label="Voir plus de projets clients">Voir plus de projets clients</a>
-               </div>
-            </div>
-            <VimeoShowcaseSlider showcaseId="11819722" />
-         </div>
-      </section>
-
    </div>
+</section>
 
-   <section class="parallax-banner" style="background-image: url('/images/parallax/131024-besancon-1-1200x800.jpg');">
+<!-- drone Feed Slider -->
+<section class="drone-projects-section">
+   <div class="container-slider-slider">
+      <div class="slider-slider-header slider-slider-header-line">
+         <div class="title-wrapper link-flex">
+            <h2>Projets clients</h2>
+            <a class="link" href="https://vimeo.com/showcase/11819722" target="_blank" aria-label="Voir plus de projets clients">Voir plus de projets clients</a>
+         </div>
+      </div>
+      <div class="slider-slider-wrapper">
+         <VimeoShowcase showcaseId="11819722" />
+      </div>
+   </div>
+</section>
+
+<section class="parallax-banner" style="background-image: url('/images/parallax/131024-besancon-1-1200x800.jpg');">
       <div class="parallax-banner-overlay"></div> 
       <img 
          src="/images/parallax/131024-besancon-1-1200x800.jpg" 
@@ -98,22 +95,22 @@ import VimeoShowcaseSlider from "../components/VimeoShowcaseSlider.astro";
          class="parallax-mobile-img" 
          loading="lazy"
       >
-   </section> 
+   </section>
 
-   <div class="container container-drone pt-4 pb-3">
-
-      <section class="container-content">
-         <div class="text-wrapper text-center mb-3">
+<section class="drone-info-section pt-4">
+   <div class="container-content">
+      <div class="text-wrapper text-center mb-3">
             <p>En 2011, je découvre grâce à mon ami «Nocomp», pionnier dans le monde du drone, cette pratique qui me rappelle les sensations des sports extrêmes que j'affectionnais tant. Inspiré par cette nouvelle passion, je deviens <b>pilote de drone certifié en 2012, assuré et inscrit auprès de la Direction Générale de l'Aviation Civile (DGAC) ainsi que sur la plateforme Alphatango.</b></p>
-            <p>Je pilote des aéronefs homologués par la DGAC, ce qui me permet d’opérer sous les <b>scénarios de vol S1 et S3</b>. Depuis 2020, je suis également qualifié pour opérer dans la <b>catégorie Spécifique</b> , adaptée à des missions plus complexes. Fort de cette expertise, je vous promets des prestations de haute qualité, réalisées en toute sécurité et dans le respect total de la régulation de l'espace aérien.</p>
-         </div>
-      </section>
+            <p>Je pilote des aéronefs homologués par la DGAC, ce qui me permet d'opérer sous les <b>scénarios de vol S1 et S3</b>. Depuis 2020, je suis également qualifié pour opérer dans la <b>catégorie Spécifique</b> , adaptée à des missions plus complexes. Fort de cette expertise, je vous promets des prestations de haute qualité, réalisées en toute sécurité et dans le respect total de la régulation de l'espace aérien.</p>
+      </div>
+   </div>
 
-      <div class="separation-line-gradient"></div>
+   <div class="separation-line-gradient"></div>
+</section>
 
-
-      <section class="container-content">
-         <div class="text-wrap mt-3">
+<section class="equipement-section">
+   <div class="container-content">
+      <div class="text-wrap mt-3">
             <h2>Mon Équipement</h2>
             <div class="text-wrapper">
                <p>Mon arsenal de drones, soigneusement sélectionné, est composé <strong>exclusivement de modèles de chez DJI</strong>, marque reconnue pour son excellence en termes de qualité d'image et de fiabilité. Chaque <b>plan est capturé avec précision en 4K</b>, et finalisé par un  <b>montage dynamique en interne</b>. </p>
@@ -126,29 +123,27 @@ import VimeoShowcaseSlider from "../components/VimeoShowcaseSlider.astro";
                <img src="/logo/gear/dji.svg" alt="Dji Logo">
             </a>
          </div>
-      </section>
+   </div>
+</section>
 
-      <!-- Drone Grid Feed to slider-->
-      <section class="container-medium-slider">
-         <div class="video-feed video-feed-grid">
-            <div class="video-feed-header">
-               <div class="title-wrapper link-flex">
-                  <h2>Drone shorts</h2>
-                  <a 
-                  class="link" 
-                  href="https://vimeo.com/showcase/11819719" 
-                  target="_blank" 
-                  aria-label="Voir toutes les vidéos">
-                  Voir toutes les vidéos
-                  </a>
-               </div>
-            </div>
-            <VimeoShowcaseGrid showcaseId="11819719" />
+<!-- Drone Shorts -->
+<section class="drone-shorts-section">
+   <div class="container-slider-grid">
+      <div class="slider-grid-header slider-grid-header-line">
+         <div class="title-wrapper link-flex">
+            <h2>Drone shorts</h2>
+            <a class="link" href="https://vimeo.com/showcase/11819719" target="_blank" aria-label="Voir toutes les vidéos">Voir toutes les vidéos</a>
          </div>
-      </section>
+      </div>
+      <div class="slider-grid-wrapper">
+         <VimeoShowcase showcaseId="11819719" />
+      </div>
+   </div>
+</section>
 
-      <section class="container-content">
-         <div class="socials-video">
+<section class="drone-socials-section">
+   <div class="container-content">
+      <div class="socials-video">
             <h3 class="text-center mb-2">ACCÉDEZ À MES CONTENUS VIDÉO</h3>
             <div class="socials-wrapper">
                <a href="https://vimeo.com/wooloomoolootv" target="_blank" aria-label="Vimeo">
@@ -158,8 +153,9 @@ import VimeoShowcaseSlider from "../components/VimeoShowcaseSlider.astro";
                <img src="/images/icons/youtube.svg" alt="YouTube" class="icon" width="40" height="40">
                </a>
             </div>
-         </div>
-      </section>
+      </div>
    </div>
+</section>
+
 </Layout>
 
