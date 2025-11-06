@@ -1,450 +1,154 @@
-/* Border animation */
-.side-border, .top-border, .bottom-border {
+/* ========================================
+   PAGE HERO - Modern & Clean Design
+   Mobile First Approach
+   ======================================== */
+
+.page-hero {
+  position: relative;
+  width: 100%;
+  height: 35vh;
+  min-height: 280px;
+  max-height: 500px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 3rem;
+}
+
+/* Background Image Container */
+.page-hero__image {
   position: absolute;
-  background: #ffffff;
-  box-shadow: -2px 2px 12px rgba(0, 0, 0, 0.5);
+  inset: 0; /* top, right, bottom, left all 0 */
+  z-index: 1;
+  overflow: hidden;
 }
 
-.side-border {
-  width: 4px;
-  height: 0;
-  animation-duration: 1s;
-  animation-delay: 0.4s;
-  animation-fill-mode: forwards;
+.page-hero__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
 }
 
-.side-border.left {
-  left: 0;
-  top: 0;
-  animation-name: drawDown;
+/* Overlay - INSIDE the image container */
+.page-hero__overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.4) 0%,
+    rgba(0, 0, 0, 0.5) 60%,
+    rgba(0, 0, 0, 0.7) 100%
+  );
+  pointer-events: none;
 }
 
-.side-border.right {
-  right: 0;
+/* Title Container - ABOVE everything */
+.page-hero__content {
+  position: relative;
+  z-index: 10;
+  padding: 2rem;
+  text-align: center;
+}
+
+/* Title Styling */
+.page-hero__title {
+  font-size: clamp(2rem, 8vw, 3.5rem);
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #ffffff;
+  margin: 0;
+  padding-bottom: 1rem;
+  text-shadow: 
+    0 2px 10px rgba(0, 0, 0, 0.8),
+    0 4px 20px rgba(0, 0, 0, 0.5);
+  animation: heroTitleIn 0.6s ease-out;
+  position: relative;
+}
+
+/* Subtle underline accent */
+.page-hero__title::after {
+  content: '';
+  position: absolute;
   bottom: 0;
-  animation-name: drawUp;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 50px;
+  height: 2px;
+  background: var(--primary-color);
+  box-shadow: 0 0 15px var(--primary-color);
+  animation: accentGrow 0.5s ease-out 0.2s both;
 }
 
-.top-border,
-.bottom-border {
-  height: 4px;
-  width: 0;
-  animation-duration: 1s;
-  animation-delay: 1.4s;
-  animation-fill-mode: forwards;
-}
-
-.top-border {
-  top: 0;
-  right: 0;
-  animation-name: drawLeft;
-}
-
-.bottom-border {
-  bottom: 0;
-  left: 0;
-  animation-name: drawRight;
-}
-
-@keyframes drawDown {
+@keyframes heroTitleIn {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
   to {
-    height: 100%;
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
-@keyframes drawUp {
+@keyframes accentGrow {
+  from {
+    width: 0;
+    opacity: 0;
+  }
   to {
-    height: 100%;
+    width: 50px;
+    opacity: 1;
   }
 }
 
-@keyframes drawLeft {
-  to {
-    width: 100%;
-    right: 0;
+/* ========================================
+   DESKTOP (1200px+)
+   ======================================== */
+@media (min-width: 1200px) {
+  .page-hero {
+    height: 45vh;
+    min-height: 350px;
+    max-height: 600px;
+    margin-bottom: 4rem;
+  }
+
+  /* Lighter overlay on desktop */
+  .page-hero__overlay {
+    background: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.3) 0%,
+      rgba(0, 0, 0, 0.4) 60%,
+      rgba(0, 0, 0, 0.6) 100%
+    );
+  }
+
+  .page-hero__title::after {
+    width: 70px;
+  }
+
+  @keyframes accentGrow {
+    from {
+      width: 0;
+      opacity: 0;
+    }
+    to {
+      width: 70px;
+      opacity: 1;
+    }
   }
 }
 
-@keyframes drawRight {
-  to {
-    width: 100%;
-    left: 0;
-  }
-}
-
-/* Needed if no header-banner */
+/* Clean up - Remove old classes */
 .header-spacer {
   height: 120px;
 }
 
-/* ----- PAGE - Header-Banner ----- */
-.header-banner-spacer {
-  height: 40vh;
-  width: 100vw;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative; /* Needed for z-index layering */
-  z-index: 3;
-}
-
-.header-banner-video {
-  position: fixed;
-  width: 100%;
-  height: 50vh;
-  top: 0;
-  left: 0;
-  z-index: -1; /* IMPORTANT: behind everything */
-  overflow: hidden;
-  pointer-events: none;
-}
-
-.header-banner-video video {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  min-width: 100%;
-  min-height: 100%;
-  transform: translate(-50%, -50%);
-  object-fit: cover;
-}
-
-/* Mobile: Hide videos, show video replacement images instead */
-@media (max-width: 768px) {
-  .header-banner-video {
-    display: none;
-  }
-  
-  .header-banner-video-image {
-    display: block;
-  }
-}
-
-/* Desktop: Show videos, hide video replacement images - ONLY for pages with both video and image */
-@media (min-width: 769px) {
-  .has-video-banner .header-banner-video-image {
-    display: none;
-  }
-}
-
-/* Always visible images (desktop + mobile) */
-.header-banner-image {
-  position: fixed;
-  width: 100%;
-  height: 50vh;
-  top: 0;
-  left: 0;
-  z-index: -1; 
-  overflow: hidden;
-  pointer-events: none;
-  display: block; /* Always visible */
-  background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%); /* Loading placeholder */
-}
-
-.header-banner-image img {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  min-width: 100%;
-  min-height: 100%;
-  transform: translate(-50%, -50%);
-  object-fit: cover;
-  object-position: center;
-}
-
-/* Video replacement images (mobile only) */
-.header-banner-video-image {
-  position: fixed;
-  width: 100%;
-  height: 50vh;
-  top: 0;
-  left: 0;
-  z-index: -1; 
-  overflow: hidden;
-  pointer-events: none;
-  display: none; /* Hidden by default on desktop */
-  background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%); /* Loading placeholder */
-}
-
-.header-banner-video-image img {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  min-width: 100%;
-  min-height: 100%;
-  transform: translate(-50%, -50%);
-  object-fit: cover;
-  object-position: center;
-}
-
-/* Your existing .header-banner-overlay */
-.header-banner-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%; /* This element's height is already 40vh due to its parent */
-  z-index: 2; /* Ensure this is above the video/image but below your h1 */
-
-  /* Modified background gradient */
-  background: linear-gradient(
-    to bottom,
-    rgba(0, 0, 0, 0.55) 0%, /* Starts with your dark overlay opacity */
-    rgba(0, 0, 0, 0.55) calc(100% - 15vh), /* Holds that opacity until 15vh from the bottom */
-    var(--background-color) 100% /* Fades to your background color at the very bottom */
-  );
-  /* Note: calc(100% - 15vh) ensures the transition starts exactly 15vh from the bottom */
-}
-
-.header-banner-content {
-  position: relative;
-  width: auto;
-  max-width: 90%;
-  padding: 2% 4%;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  text-transform: uppercase;
-  z-index: 3;
-}
-
-.fade-in {
-  animation: fadeInEffect 1s ease-out forwards;
-  animation-delay: 0s;
-  opacity: 0;
-  transform: none;
-  will-change: opacity;
-  backface-visibility: hidden;
-}
-
-@keyframes fadeInEffect {
-  0% {
-    opacity: 0;
-    transform: none; /* Explicitly ensure no unintended movement at the start */
-  }
-  100% {
-    opacity: 1;
-    transform: none; /* Explicitly ensure no unintended movement at the end */
-  }
-}
-
-/* transitition gradient from header to background color */
 .header-fixed-gradient {
-  width: 100%;
-  height: 10vh;
-  margin-top: -10vh;
-  background: linear-gradient(
-    to bottom,
-    transparent 0%,
-    var(--background-color) 100%
-  );
-}
-
-.text-shadow {
-  color: #FFFFFF;
-  text-shadow: -2px 2px 12px rgba(0, 0, 0, 0.7);
-}
-
-
-/*
-index.astro
-*/
-
-/* --- Hero Video --- */
-.video-spacer {
-  height: 90vh;
-  width: 100vw;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-  z-index: 3;
-}
-
-.index-hero-video {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 90vh;
-  z-index: -1; 
-  overflow: hidden;
-  pointer-events: none;
-}
-
-.index-hero-video video {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  min-width: 100%;
-  min-height: 100%;
-  transform: translate(-50%, -50%);
-  object-fit: cover;
-}
-
-.index-hero-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.55);
-  z-index: 2;
-}
-
-.index-hero-content {
-  position: relative;
-  width: auto;
-  max-width: 90%;
-  padding: 4%;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  text-transform: uppercase;
-  z-index: 3;
-}
-
-
-.hero-title {
-  font-size: clamp(2rem, 5vw, 4rem);
-  letter-spacing: 10px;
-  font-weight: 500;
-  
-}
-
-.hero-subtitle {
-  font-size: clamp(1rem, 2vw, 1.5rem);
-  letter-spacing: 20px;
-  font-weight: 400;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.3rem; /* space between lines on mobile */
-}
-
-.hero-subtitle span::after {
-    content: "•";
-    margin-left: 0.5rem;
-  }
-
-  .hero-subtitle span::before {
-    content: "•";
-    margin-left: 0.5rem;
-  }
-
-@media (min-width: 768px) {
-  .hero-subtitle {
-    flex-direction: row;
-    gap: 1rem;
-    margin: auto;
-  }
-
-   .hero-subtitle span::before,
-  .hero-subtitle span::after {
-    content: none;
-  }
-
-  .hero-subtitle span:not(:last-child)::after {
-    content: "•";
-    margin-left: 0.5rem;
-  }
-}
-
-
-/* --- Intro section --- */
-.intro-section h2,
-.intro-section .text-wrapper {
-  text-align: center;
-}
-
-@media (min-width: 940px) {
-  .intro-section h2 {
-    text-align: right;
-  }
-
-  .intro-section .text-wrapper {
-    text-align: left;
-  }
-
-}
-
-/* --- engagements section --- */
-/* engagements slider > slider.css */
-
-
-/* --- clients section --- */
-/* Logos Clients*/
-.brand-logos-gallery {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
-.brand-logos-gallery img {
-  width: 70px; 
-  height: 70px; 
-  object-fit: contain; 
-  margin: 0.3rem 1.1rem;
-}
-
-@media (max-width: 940px) {
-  .brand-logos-gallery img {
-  width: 40px; 
-  height: 40px; 
-  object-fit: contain; 
-  margin: 0.3rem 0.5rem;
-}
-}
-
-/* temoignages slider > slider.css */
-
-
-/* --- blog section --- */
-@media (max-width: 940px) {
-  .diapo-jmf {
-    display: none;
-  }
-}
-
-/* recent blog slider > slider.css */
-
-/* -------------- end index.astro -------------- */
-
-
-
-/* 
-a-propos.astro
-*/
-
-.a-propos h1 {
-  font-size: clamp(1.5rem, 5vw, 1.8rem);
-}
-
-.debuts h3,
-.sequence h3 {
-  color: var(--primary-color);
-}
-
-.diapo {
-    margin-left: 0;
-  }
-
-.author-nerva {
-  font-style: italic;
-  font-size: 0.9rem;
-  margin-top: 3rem; 
-  color: var(--primary-color); 
-}
-
-@media (max-width: 940px) {
-  .debuts .title-wrapper {
-    padding: 20px;
-  }
-
-  .debuts .image-wrapper img {
-    max-height: 700px;
-  }
+  display: none;
 }
 
 
@@ -544,86 +248,5 @@ engagements.astro
   height: 1px;
   background-color: var(--primary-color);
   margin: 0.5rem auto 0.5rem auto;
-}
-
-
-/* 
-blog.astro > blog.css
-*/
-
-
-/* 
-contact.astro
-*/  
-.contact-info-grid {
-  display: flex; 
-  flex-direction: column; 
-  gap: 3rem; 
-  margin: 2rem auto; 
-}
-
-.contact-info-item {
-  display: flex; 
-  flex-direction: row;
-  align-items: center;
-  gap: 2rem; 
-}
-
-.contact-icon {
-  width: 50px; 
-  height: 50px;
-  filter: invert(100%);
-}
-
-.contact-text {
-  display: flex; 
-  flex-direction: column; 
-  gap: 0.6rem;
-  text-align: left; 
-  font-size: 1.2rem; 
-  font-weight: 400;
-  color: #eee;
-}
-
-.contact-intro-section { 
-    text-align: center;
-    max-width: 1200px;
-    margin: auto;
-}
-
-/* tablet and desktop */
-@media (min-width: 1024px) {
-  .contact-info-grid {
-    display: flex; 
-    flex-direction: row;
-  }
-
-  .contact-info-item {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-  }
-
-  .contact-text {
-    text-align: center;
-    font-size: 1.4rem; 
-  }
-}
-
-/* ----- CGU ----- */
-.cgu-text-wrapper {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem; 
-}
-
-
-/* 
-shop.astro
-*/
-.image-shop {
-  width: 100%;
-  max-width: 800px;
-  margin: auto;
 }
 

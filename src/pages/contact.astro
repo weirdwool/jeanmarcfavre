@@ -9,75 +9,75 @@ import Layout from '../layouts/Layout.astro';
   canonical="/contact/"
 >
 
-   <section class="header-banner">
-      <div class="header-banner-spacer">
-         <div class="header-banner-content">
-            <div class="side-border left"></div>
-            <div class="side-border right"></div>
-            <div class="top-border"></div>
-            <div class="bottom-border"></div>
-            <h1 class="text-shadow fade-in">Contactez-moi</h1>
-         </div>
+   <section class="page-hero">
+      <div class="page-hero__image">
+         <img src="/images/parallax/170822-Guerande-055.jpg" alt="Contact Jean-Marc Favre photographe" loading="eager">
       </div>
-      <div class="header-banner-image">
-         <img src="/images/parallax/170822-Guerande-055.jpg" alt="Vue panoramique d'Annecy" loading="eager" fetchpriority="high" decoding="async">
-         <div class="header-banner-overlay"></div>
+      <div class="page-hero__overlay"></div>
+      <div class="page-hero__content">
+         <h1 class="page-hero__title">Contact</h1>
       </div>
    </section>
 
-   
+   <div class="container pt-4 pb-5">
+      <div class="contact-container">
+         
+         <section class="contact-intro">
+            <h2 class="visually-hidden">Contactez-moi</h2>
+            <p>Que ce soit pour une <b>question</b>, un <b>commentaire</b> ou une <b>demande de collaboration</b>, je réponds généralement sous <b>24-48h</b>.</p>
+            <p>Pour les urgences ou projets avec délais serrés, contactez-moi directement par téléphone.</p>
+         </section>
 
-   <div class="header-fixed-gradient"></div>
-
-   <div class="container pt-2">  
-      
-         <section class="container-medium">
-            <h2 class="visually-hidden">Mes Coordonnées</h2>
-
-            <div class="contact-info-grid">
-
-               <address class="contact-info-item">
-                  <img src="/images/icons/phone.svg" alt="Phone icon" class="contact-icon" width="24" height="24">
-                  <div class="contact-text">
-                     <a href="tel:+33607596969">+33 6 07 59 69 69</a>
-                     <a href="tel:+33450522429">+33 4 50 52 24 29</a>
-                  </div>
-               </address>
-
-               <address class="contact-info-item">
-                  <img src="/images/icons/mail.svg" alt="Mail icon" class="contact-icon" width="24" height="24">
-                  <div class="contact-text">
-                     <a href="mailto:contact@jeanmarcfavre.com">contact@jeanmarcfavre.com</a>
-                  </div>
-               </address>
-
-               <address class="contact-info-item">
-                  <img src="/images/icons/map.svg" alt="Map icon" class="contact-icon" width="24" height="24">
-                  <div class="contact-text">
-                     <p>8 Rue de Chanteloup,</p>
-                     <p>74000 Annecy</p>
-                  </div>
-               </address>
-
+         <div class="contact-info">
+            
+            <div class="contact-card">
+               <div class="contact-card__icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                     <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                  </svg>
+               </div>
+               <div class="contact-card__content">
+                  <h3>Téléphone</h3>
+                  <a href="tel:+33607596969">+33 6 07 59 69 69</a>
+                  <a href="tel:+33450522429">+33 4 50 52 24 29</a>
+               </div>
             </div>
 
-            <div class="contact-intro-section">
-               <div class="separation-line"></div>
+            <div class="contact-card">
+               <div class="contact-card__icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                     <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                     <polyline points="22,6 12,13 2,6"></polyline>
+                  </svg>
+               </div>
+               <div class="contact-card__content">
+                  <h3>Email</h3>
+                  <a href="mailto:contact@jeanmarcfavre.com">contact@jeanmarcfavre.com</a>
+               </div>
+            </div>
 
-              <div class="text-wrap pt-4 pb-4">
-               <p>Que ce soit pour une <b>question</b>, un <b>commentaire</b> ou une <b>demande de collaboration</b>, n'hésitez pas à me contacter. Je réponds généralement sous <b>24-48h</b> aux demandes professionnelles. </p>
-               <p>Pour les urgences ou projets avec délais serrés, n'hésitez pas à me contacter directement par téléphone.</p>
-               <p>Je me déplace dans toute la région <b>Auvergne-Rhône-Alpes</b> et au-delà selon les projets. Basé à Annecy, je couvre la Savoie, la Haute-Savoie, l'Isère et les départements limitrophes.</p>
-            
-              </div>
+            <div class="contact-card">
+               <div class="contact-card__icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                     <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                     <circle cx="12" cy="10" r="3"></circle>
+                  </svg>
+               </div>
+               <div class="contact-card__content">
+                  <h3>Adresse</h3>
+                  <p>8 Rue de Chanteloup</p>
+                  <p>74000 Annecy</p>
+               </div>
+            </div>
+
          </div>
 
-
-
-
-            
+         <section class="contact-availability">
+            <p>Je me déplace dans toute la région <b>Auvergne-Rhône-Alpes</b> et au-delà selon les projets. Basé à Annecy, je couvre la Savoie, la Haute-Savoie, l'Isère et les départements limitrophes.</p>
+            <p>Sur demande, je peux également me déplacer partout en France pour vos projets photographiques et vidéos.</p>
          </section>
-      
+
       </div>
+   </div>
 </Layout>
 
