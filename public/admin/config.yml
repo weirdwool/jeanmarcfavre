@@ -76,8 +76,19 @@ collections:
           - {label: "Vidéo", name: "video", widget: "boolean", default: false}
           - {label: "Photo", name: "photo", widget: "boolean", default: false}
           - {label: "Drone", name: "drone", widget: "boolean", default: false}
-          - {label: "Sport", name: "sport", widget: "boolean", default: false}
-          - {label: "Engagement", name: "engagement", widget: "boolean", default: false}
+          - {label: "Événementiel", name: "événementiel", widget: "boolean", default: false}
+          - {label: "Studio", name: "studio", widget: "boolean", default: false}
+          - {label: "Immobilier", name: "immobilier", widget: "boolean", default: false}
+          - {label: "Industriel", name: "industriel", widget: "boolean", default: false}
+          - {label: "Tourisme", name: "tourisme", widget: "boolean", default: false}
+          - {label: "Voyage", name: "voyage", widget: "boolean", default: false}
+          - {label: "Paysage", name: "paysage", widget: "boolean", default: false}
+          - {label: "Sports", name: "sports", widget: "boolean", default: false}
+          - {label: "Associatif", name: "associatif", widget: "boolean", default: false}
+          - {label: "Divers", name: "divers", widget: "boolean", default: false}
+          - {label: "Culture", name: "culture", widget: "boolean", default: false}
+          - {label: "Gastronomie", name: "gastronomie", widget: "boolean", default: false}
+          - {label: "Musique", name: "musique", widget: "boolean", default: false}
       
       - label: "Contenu"
         name: "body"
