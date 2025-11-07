@@ -173,12 +173,228 @@ contact.astro - Mobile First
 }
 
 
-/* 
-shop.astro
-*/
-.image-shop {
+/* ========================================
+   SHOP PAGE - Mobile First
+   ======================================== */
+
+/* Shop Hero - Mobile First */
+.shop-hero {
+  text-align: center;
+  padding: 3rem 20px 2rem;
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.02) 0%,
+    transparent 100%
+  );
+}
+
+.shop-hero__title {
+  font-size: clamp(2rem, 6vw, 3rem);
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin: 0 0 1rem 0;
+  color: var(--primary-color);
+}
+
+.shop-hero__subtitle {
+  font-size: clamp(1rem, 3vw, 1.25rem);
+  color: rgba(255, 255, 255, 0.7);
+  font-weight: 300;
+  letter-spacing: 0.05em;
+  margin: 0;
+}
+
+/* Shop Coming Soon Section */
+.shop-coming-soon {
+  padding: 2rem 0 4rem;
+}
+
+@media (min-width: 768px) {
+  .shop-coming-soon {
+    padding: 3rem 0 5rem;
+  }
+}
+
+.shop-content {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+@media (min-width: 768px) {
+  .shop-content {
+    gap: 4rem;
+  }
+}
+
+/* Shop Status - Mobile First */
+.shop-status {
+  text-align: center;
+  padding: 2rem 20px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+}
+
+@media (min-width: 768px) {
+  .shop-status {
+    padding: 3rem 2rem;
+  }
+}
+
+.shop-status__icon {
+  width: 60px;
+  height: 60px;
+  margin: 0 auto 1.5rem;
+  color: var(--primary-color);
+}
+
+@media (min-width: 768px) {
+  .shop-status__icon {
+    width: 80px;
+    height: 80px;
+  }
+}
+
+.shop-status__icon svg {
   width: 100%;
-  max-width: 800px;
-  margin: auto;
+  height: 100%;
+  stroke-width: 1.5;
+}
+
+.shop-status__title {
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  font-weight: 600;
+  margin: 0 0 1rem 0;
+  color: white;
+}
+
+.shop-status__message {
+  font-size: clamp(1rem, 2.5vw, 1.15rem);
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.8);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Shop Preview - Mobile First */
+.shop-preview {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding: 0 20px;
+}
+
+@media (min-width: 1024px) {
+  .shop-preview {
+    flex-direction: row;
+    align-items: center;
+    gap: 3rem;
+    padding: 0;
+  }
+}
+
+.shop-preview__image {
+  flex: 1;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+}
+
+.shop-preview__image img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+@media (hover: hover) {
+  .shop-preview__image img {
+    transition: transform 0.4s ease;
+  }
+
+  .shop-preview__image:hover img {
+    transform: scale(1.02);
+  }
+}
+
+.shop-preview__info {
+  flex: 1;
+}
+
+.shop-preview__info h3 {
+  font-size: clamp(1.25rem, 3vw, 1.5rem);
+  font-weight: 600;
+  margin: 0 0 1.5rem 0;
+  color: var(--primary-color);
+}
+
+/* Shop Features List - Mobile First */
+.shop-features {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+@media (min-width: 768px) {
+  .shop-features {
+    gap: 1.25rem;
+  }
+}
+
+.shop-features li {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: clamp(0.95rem, 2.5vw, 1.1rem);
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.feature-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--primary-color);
+  border-radius: 50%;
+  color: var(--primary-color);
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+@media (min-width: 768px) {
+  .feature-icon {
+    width: 32px;
+    height: 32px;
+    font-size: 0.95rem;
+  }
+}
+
+/* Shop Contact - Mobile First */
+.shop-contact {
+  text-align: center;
+  padding: 2rem 20px;
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 12px;
+}
+
+@media (min-width: 768px) {
+  .shop-contact {
+    padding: 2.5rem 2rem;
+  }
+}
+
+.shop-contact p {
+  font-size: clamp(1rem, 2.5vw, 1.15rem);
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.8);
+  margin: 0;
 }
 

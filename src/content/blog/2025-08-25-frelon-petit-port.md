@@ -2,8 +2,8 @@
 title: "Frelon asiatique au Petit-Port"
 pubDate: 2025-08-25
 location: "Annecy le Vieux"
-main_image: "/blog-images/250825-Frelon-Petit-Port-1.jpg"
-gallery_url: "/galeries/blog/250825-Frelos-asiatiques/index.html"
+main_image: "/blog/blog-images/250825-Frelon-Petit-Port-1.jpg"
+gallery_url: "/blog/blog-galeries/250825-Frelos-asiatiques/index.html"
 video_url: ""
 tags:
   video: false

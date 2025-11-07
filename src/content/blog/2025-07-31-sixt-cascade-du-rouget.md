@@ -2,8 +2,8 @@
 title: "Six Fer à Cheval: cascade du Rouget"
 pubDate: 2025-07-31
 location: "Six Fer à Cheval"
-main_image: "/blog-images/250731-Sixt-Cascade-du-Rouget-15.jpg"
-gallery_url: "/galeries/blog/250731-Sixt-Cascade-du-Rouget/index.html"
+main_image: "/blog/blog-images/250731-Sixt-Cascade-du-Rouget-15.jpg"
+gallery_url: "/blog/blog-galeries/250731-Sixt-Cascade-du-Rouget/index.html"
 video_url: ""
 tags:
   video: false

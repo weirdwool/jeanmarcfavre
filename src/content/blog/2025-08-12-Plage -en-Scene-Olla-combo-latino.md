@@ -2,8 +2,8 @@
 title: "Olla! Combo Latino - Veyrier du Lac"
 pubDate: 2025-08-12
 location: "espace du Plant - Veyrier du Lac"
-main_image: "/blog-images/250812-PES-Combo-latino.jpg"
-gallery_url: "/galeries/blog/250812-PeS-Olla-Combo-Latino/index.html"
+main_image: "/blog/blog-images/250812-PES-Combo-latino.jpg"
+gallery_url: "/blog/blog-galeries/250812-PeS-Olla-Combo-Latino/index.html"
 video_url: ""
 tags:
   video: false

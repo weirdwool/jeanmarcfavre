@@ -2,8 +2,8 @@
 title: "Fête du lac d'Annecy"
 pubDate: 2025-08-02
 location: "Annecy"
-main_image: "/blog-images/250802-Fete-du-lac-16.jpg"
-gallery_url: "/galeries/blog/250802-Fete-du-lac/index.html"
+main_image: "/blog/blog-images/250802-Fete-du-lac-16.jpg"
+gallery_url: "/blog/blog-galeries/250802-Fete-du-lac/index.html"
 video_url: ""
 tags:
   video: false

@@ -34,7 +34,7 @@ activeTags: activeTags,
 <Layout 
   title="Blog Photo Drone Annecy | Actualités Photographie - Jean-Marc Favre"
   description="Blog d'un photographe professionnel à Annecy. Actualités, projets photo et drone, conseils, coulisses des shootings en Haute-Savoie. Plus de 40 ans d'expérience."
-  image="/images/collages/blog-760x881.png"
+  image="/blog/blog-760x881.png"
   canonical="/blog/"
 >
    <div class="header-spacer"></div>
@@ -67,7 +67,7 @@ activeTags: activeTags,
        
 
         <div class="image-wrapper">
-            <img src="/images/collages/blog-760x881.png" alt="portrait de Jean-Marc Favre">
+            <img src="/blog/blog-760x881.png" alt="portrait de Jean-Marc Favre">
         </div>
         
       </aside>
@@ -300,16 +300,16 @@ activeTags: activeTags,
      };
    
      const handlePostLinkClick = (event) => {
-        // Check if screen width is mobile (less than 768px)
-        if (window.innerWidth < 768) {
-          // On mobile, let the link work normally (open in new page)
-          return;
-        }
-        
-        // On desktop/tablet, prevent default and open modal
-        event.preventDefault();
-        const postUrl = event.currentTarget.href;
-        openModal(postUrl);
+       // Check if screen width is mobile (less than 1024px)
+       if (window.innerWidth < 1024) {
+         // On mobile/tablet, let the link work normally (open slug page)
+         return;
+       }
+       
+       // On desktop (1024px+), prevent default and open modal
+       event.preventDefault();
+       const postUrl = event.currentTarget.href;
+       openModal(postUrl);
      };
    
      modalNavigation.addEventListener('click', (event) => {

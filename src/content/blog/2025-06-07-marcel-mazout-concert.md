@@ -2,8 +2,8 @@
 title: "Concert Marcel Mazout - Seynod"
 pubDate: 2025-06-07
 location: "La Savoyarde, Talloires"
-main_image: "/blog-images/250607-Marcel-Mazout.jpg"
-gallery_url: "/galeries/blog/250607-Marcel-Mazout/index.html"
+main_image: "/blog/blog-images/250607-Marcel-Mazout.jpg"
+gallery_url: "/blog/blog-galeries/250607-Marcel-Mazout/index.html"
 video_url: ""
 tags:
   video: false

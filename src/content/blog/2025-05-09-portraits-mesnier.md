@@ -2,8 +2,8 @@
 title: "Séance portraits - Mesnier "
 pubDate: 2025-05-09
 location: "Annecy"
-main_image: "/blog-images/250509-mesnier-19.jpg-800x1200-742x647.jpeg"
-gallery_url: "/galeries/blog/250509-Portrait-Mesnier/index.html"
+main_image: "/blog/blog-images/250509-mesnier-19.jpg-800x1200-742x647.jpeg"
+gallery_url: "/blog/blog-galeries/250509-Portrait-Mesnier/index.html"
 video_url: ""
 tags:
   video: false

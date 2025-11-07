@@ -2,8 +2,8 @@
 title: "Espérance III-vue drone"
 pubDate: 2025-05-29
 location: "Lac Annecy"
-main_image: "/blog-images/250529-Espérance3-drone.jpg"
-gallery_url: "/galeries/blog/250529-EsperanceIII-drone/index.html"
+main_image: "/blog/blog-images/250529-Espérance3-drone.jpg"
+gallery_url: "/blog/blog-galeries/250529-EsperanceIII-drone/index.html"
 video_url: ""
 tags:
   video: false

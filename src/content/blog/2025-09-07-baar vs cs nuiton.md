@@ -2,8 +2,8 @@
 title: "BAAR Annecy vs CS Nuiton"
 pubDate: 2025-09-07
 location: "Annecy"
-main_image: "/blog-images/250907-BAAR-CS-Nuiton.jpg"
-gallery_url: "/galeries/blog/250907-BAAR-CS-Nuiton/index.html"
+main_image: "/blog/blog-images/250907-BAAR-CS-Nuiton.jpg"
+gallery_url: "/blog/blog-galeries/250907-BAAR-CS-Nuiton/index.html"
 video_url: ""
 tags:
   video: false

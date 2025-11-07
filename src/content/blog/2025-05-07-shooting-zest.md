@@ -2,8 +2,8 @@
 title: "Shooting Zest"
 pubDate: 2025-05-07
 location: ""
-main_image: "/blog-images/250507-petit-zest-152.jpg-1200x800-800x533.jpeg"
-gallery_url: "/galeries/blog/250507-Zest/index.html"
+main_image: "/blog/blog-images/250507-petit-zest-152.jpg-1200x800-800x533.jpeg"
+gallery_url: "/blog/blog-galeries/250507-Zest/index.html"
 video_url: ""
 tags:
   video: false

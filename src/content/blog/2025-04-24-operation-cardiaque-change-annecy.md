@@ -2,8 +2,8 @@
 title: "Opération cardiaque - Change Annecy"
 pubDate: 2025-04-24
 location: "Annecy"
-main_image: "/blog-images/250428-becker-operation-4.jpg-1200x900-800x600.jpeg"
-gallery_url: "/galeries/blog/250428-Change-Becker/index.html"
+main_image: "/blog/blog-images/250428-becker-operation-4.jpg-1200x900-800x600.jpeg"
+gallery_url: "/blog/blog-galeries/250428-Change-Becker/index.html"
 video_url: ""
 tags:
   video: false

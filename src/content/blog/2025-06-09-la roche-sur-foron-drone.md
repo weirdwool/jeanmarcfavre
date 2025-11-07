@@ -2,8 +2,8 @@
 title: "La Roche sur Foron: vue drone"
 pubDate: 2025-06-09
 location: "La Roche sur Foron"
-main_image: "/blog-images/250609-la-roche-drone.jpg"
-gallery_url: "/galeries/blog/250609-La-Roche/index.html"
+main_image: "/blog/blog-images/250609-la-roche-drone.jpg"
+gallery_url: "/blog/blog-galeries/250609-La-Roche/index.html"
 video_url: ""
 tags:
   video: false

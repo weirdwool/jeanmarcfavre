@@ -2,8 +2,8 @@
 title: "Harmonie Municipale Espérance III"
 pubDate: 2025-05-11
 location: "Annecy"
-main_image: "/blog-images/250511-esperance3-harmoniecran-2.jpg-2000x1500-800x600.jpeg"
-gallery_url: "/galeries/blog/250511-Esperance3-Harmonie/index.html"
+main_image: "/blog/blog-images/250511-esperance3-harmoniecran-2.jpg-2000x1500-800x600.jpeg"
+gallery_url: "/blog/blog-galeries/250511-Esperance3-Harmonie/index.html"
 video_url: ""
 tags:
   video: false

@@ -2,8 +2,8 @@
 title: "Les Petites Etoiles aux fourneaux"
 pubDate: 2025-04-11
 location: "Poisy"
-main_image: "/blog-images/250411-npe-plat-22.jpg-1200x1200-800x800.jpeg"
-gallery_url: "/galeries/blog/250411-Petites-etoiles-fourneaux/index.html"
+main_image: "/blog/blog-images/250411-npe-plat-22.jpg-1200x1200-800x800.jpeg"
+gallery_url: "/blog/blog-galeries/250411-Petites-etoiles-fourneaux/index.html"
 video_url: ""
 tags:
   video: false

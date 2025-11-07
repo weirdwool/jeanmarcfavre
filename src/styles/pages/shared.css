@@ -39,7 +39,7 @@
   background: linear-gradient(
     to bottom,
     rgba(0, 0, 0, 0.4) 0%,
-    rgba(0, 0, 0, 0.5) 60%,
+    rgba(0, 0, 0, 0.5) 70%,
     rgba(0, 0, 0, 0.7) 100%
   );
   pointer-events: none;
@@ -108,22 +108,12 @@
 /* ========================================
    DESKTOP (1200px+)
    ======================================== */
-@media (min-width: 1200px) {
+@media (min-width: 1024px) {
   .page-hero {
     height: 45vh;
     min-height: 350px;
     max-height: 600px;
     margin-bottom: 4rem;
-  }
-
-  /* Lighter overlay on desktop */
-  .page-hero__overlay {
-    background: linear-gradient(
-      to bottom,
-      rgba(0, 0, 0, 0.3) 0%,
-      rgba(0, 0, 0, 0.4) 60%,
-      rgba(0, 0, 0, 0.6) 100%
-    );
   }
 
   .page-hero__title::after {
@@ -156,7 +146,7 @@
 Common css for photo.astro, drone.astro and video.astro
 */
 
-.prestations h2 {
+.prestations-section h2 {
   font-size: clamp(1.5rem, 5vw, 2.2rem);
 }
 

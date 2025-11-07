@@ -2,8 +2,8 @@
 title: "Veyrier Route de l'Altesse"
 pubDate: 2025-09-06
 location: "Veyrier - Annecy"
-main_image: "/blog-images/250906-route-Altesse-84.jpg"
-gallery_url: "/galeries/blog/250906-route-Altesse/index.html"
+main_image: "/blog/blog-images/250906-route-Altesse-84.jpg"
+gallery_url: "/blog/blog-galeries/250906-route-Altesse/index.html"
 video_url: ""
 tags:
   video: false

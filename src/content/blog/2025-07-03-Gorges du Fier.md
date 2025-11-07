@@ -2,8 +2,8 @@
 title: "Lovagny - Gorges du Fier"
 pubDate: 2025-07-03
 location: "Lovagny"
-main_image: "/blog-images/250703-GorgesduFier-14.jpg"
-gallery_url: "/galeries/blog/250703-Gorges-du-Fier/index.html"
+main_image: "/blog/blog-images/250703-GorgesduFier-14.jpg"
+gallery_url: "/blog/blog-galeries/250703-Gorges-du-Fier/index.html"
 video_url: ""
 tags:
   video: false

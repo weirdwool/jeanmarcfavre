@@ -2,8 +2,8 @@
 title: "Emblême de Genève: le Jet d'Eau"
 pubDate: 2025-07-18
 location: "Genève"
-main_image: "/blog-images/250718-Geneve-jet-drone-5.jpg"
-gallery_url: "/galeries/blog/250718-Geneve-Jet-eau/index.html"
+main_image: "/blog/blog-images/250718-Geneve-jet-drone-5.jpg"
+gallery_url: "/blog/blog-galeries/250718-Geneve-Jet-eau/index.html"
 video_url: ""
 tags:
   video: false

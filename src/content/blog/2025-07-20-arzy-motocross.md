@@ -2,8 +2,8 @@
 title: "Arzy Motocross"
 pubDate: 2025-07-20
 location: "Arzy - Sillingy"
-main_image: "/blog-images/250720-Arzy-motocross-33.jpg"
-gallery_url: "/galeries/blog/250720-Arzy-Motocross/index.html"
+main_image: "/blog/blog-images/250720-Arzy-motocross-33.jpg"
+gallery_url: "/blog/blog-galeries/250720-Arzy-Motocross/index.html"
 video_url: ""
 tags:
   video: false

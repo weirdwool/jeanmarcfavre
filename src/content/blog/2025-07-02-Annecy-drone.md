@@ -2,8 +2,8 @@
 title: "Annecy centre - drone"
 pubDate: 2025-07-02
 location: "Annecy"
-main_image: "/blog-images/250702-Annecy-Chateau-drone-9.jpg"
-gallery_url: "/galeries/blog/250702-Annecy-drone/index.html"
+main_image: "/blog/blog-images/250702-Annecy-Chateau-drone-9.jpg"
+gallery_url: "/blog/blog-galeries/250702-Annecy-drone/index.html"
 video_url: ""
 tags:
   video: false

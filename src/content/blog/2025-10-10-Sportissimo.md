@@ -2,8 +2,8 @@
 title: "Soirée de gala Sportissimo"
 pubDate: 2025-10-10
 location: "Rochexpo - La Roche sur Foron"
-main_image: "/blog-images/251010-Sportissimo.jpg"
-gallery_url: "/galeries/blog/251010-Sportissimo/index.html"
+main_image: "/blog/blog-images/251010-Sportissimo.jpg"
+gallery_url: "/blog/blog-galeries/251010-Sportissimo/index.html"
 video_url: ""
 tags:
   video: false

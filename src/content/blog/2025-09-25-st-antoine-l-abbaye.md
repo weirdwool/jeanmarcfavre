@@ -2,8 +2,8 @@
 title: "St Antoine l'Abbaye"
 pubDate: 2025-09-25
 location: "St-Antoine l'Abbaye"
-main_image: "/blog-images/250925-St-Antoine-Abbaye.jpg"
-gallery_url: "/galeries/blog/250925-St-Antoine-lAbbaye/index.html"
+main_image: "/blog/blog-images/250925-St-Antoine-Abbaye.jpg"
+gallery_url: "/blog/blog-galeries/250925-St-Antoine-lAbbaye/index.html"
 video_url: ""
 tags:
   video: false

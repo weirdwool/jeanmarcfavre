@@ -2,8 +2,8 @@
 title: "Club ski nautique Sevrier"
 pubDate: 2025-09-14
 location: "Sévrier - Lac Annecy"
-main_image: "/blog-images/250914-Oasis.jpg"
-gallery_url: "/galeries/blog/250914-Oasis-Pierre-Ballon/index.html"
+main_image: "/blog/blog-images/250914-Oasis.jpg"
+gallery_url: "/blog/blog-galeries/250914-Oasis-Pierre-Ballon/index.html"
 video_url: ""
 tags:
   video: false

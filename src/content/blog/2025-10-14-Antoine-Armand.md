@@ -2,8 +2,8 @@
 title: "Antoine Armand candidat "
 pubDate: 2025-10-14
 location: "Annecy"
-main_image: "/blog-images/251014-Armand-Antoine.jpg"
-gallery_url: "/galeries/blog/251014-Armand-Craig/index.html"
+main_image: "/blog/blog-images/251014-Armand-Antoine.jpg"
+gallery_url: "/blog/blog-galeries/251014-Armand-Craig/index.html"
 video_url: ""
 tags:
   video: false

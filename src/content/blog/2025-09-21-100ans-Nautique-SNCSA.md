@@ -2,8 +2,8 @@
 title: "100 ans Nautique Boats au SNCSA"
 pubDate: 2025-09-21
 location: "Lac Annecy - Sévrier"
-main_image: "/blog-images/250921-Nautique-wakesurf.jpg"
-gallery_url: "/galeries/blog/250921-100ans-Nautique-SNCSA/index.html"
+main_image: "/blog/blog-images/250921-Nautique-wakesurf.jpg"
+gallery_url: "/blog/blog-galeries/250921-100ans-Nautique-SNCSA/index.html"
 video_url: ""
 tags:
   video: false

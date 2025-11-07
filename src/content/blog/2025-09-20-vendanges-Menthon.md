@@ -2,8 +2,8 @@
 title: "Vendanges 2025 Menthon St Bernard"
 pubDate: 2025-09-20
 location: "Menthon St Bernard"
-main_image: "/blog-images/250920-Menthon-Vendange.jpg"
-gallery_url: "/galeries/blog/250920-Vendange-Menthon/index.html"
+main_image: "/blog/blog-images/250920-Menthon-Vendange.jpg"
+gallery_url: "/blog/blog-galeries/250920-Vendange-Menthon/index.html"
 video_url: ""
 tags:
   video: false

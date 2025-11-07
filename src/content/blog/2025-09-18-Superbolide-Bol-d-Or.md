@@ -2,8 +2,8 @@
 title: "Superbolide - Bol d'Or"
 pubDate: 2025-09-18
 location: "Castellet - Circuit Paul Ricard"
-main_image: "/blog-images/250919-Superbolide-loge.jpg"
-gallery_url: "/galeries/blog/250918-Superbolide-Bol-d-Or/index.html"
+main_image: "/blog/blog-images/250919-Superbolide-loge.jpg"
+gallery_url: "/blog/blog-galeries/250918-Superbolide-Bol-d-Or/index.html"
 video_url: ""
 tags:
   video: false

@@ -2,8 +2,8 @@
 title: "Coupe de France foot, Meythet-Poisy"
 pubDate: 2025-09-14
 location: "Meythet"
-main_image: "/blog-images/250914-CdF-foot-Meythet-Poisy.jpg"
-gallery_url: "/galeries/blog/250914-CdF-foot-Meythet-Poisy/index.html"
+main_image: "/blog/blog-images/250914-CdF-foot-Meythet-Poisy.jpg"
+gallery_url: "/blog/blog-galeries/250914-CdF-foot-Meythet-Poisy/index.html"
 video_url: ""
 tags:
   video: false

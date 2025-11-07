@@ -74,7 +74,7 @@ const blogSchemaData = {
 
       <article class="article-content">
 
-         <div class="title-wrapper">
+         <header class="title-wrapper">
             <h1>{entry.data.title}</h1>
             <p class="pub-date post-date">
                <time datetime={entry.data.pubDate.toISOString()}>
@@ -95,10 +95,10 @@ const blogSchemaData = {
                ))}
             </div>
             )}
-         </div>
+         </header>
 
          {entry.data.main_image && (
-         <div class="image-wrapper mb-2">
+         <figure class="image-wrapper mb-2">
             <img
                class="post-header-image"
                src={entry.data.main_image}
@@ -106,14 +106,14 @@ const blogSchemaData = {
                width="1200"
                height="675"
                />
-         </div>
+         </figure>
          )}
 
-         <div class="post-content text-wrapper">
+         <section class="post-content text-wrapper">
             <Content />
-         </div>
+         </section>
 
-         <div class="post-media-extras">
+         <section class="post-media-extras">
             {entry.data.gallery_url && (
             <div class="post-gallery">
                <div class="gallery-header">
@@ -156,12 +156,12 @@ const blogSchemaData = {
                ></iframe>
             </div>
             )}
-         </div>
+         </section>
          
       </article>
 
       {/* Enhanced Navigation - works in both modal and full page */}
-      <div class="post-navigation">
+      <nav class="post-navigation">
          <div class="navigation-cards">
             {prevPost && (
             <a href={`/blog/${prevPost.data.pubDate.getFullYear()}/${(prevPost.data.pubDate.getMonth() + 1).toString().padStart(2, '0')}/${prevPost.data.pubDate.getDate().toString().padStart(2, '0')}/${prevPost.slug.replace(/^\d{4}-\d{2}-\d{2}-/, '')}/`} class="nav-card nav-link prev-post">
@@ -201,7 +201,7 @@ const blogSchemaData = {
             </a>
             )}
          </div>
-      </div>
+      </nav>
 
    </div>
 

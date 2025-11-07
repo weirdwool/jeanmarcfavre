@@ -2,8 +2,8 @@
 title: "L'asso A Chacun Son Everest fête ses 30 ans."
 pubDate: 2024-11-06
 location: "La Roche sur Foron"
-main_image: "/blog-images/241109-acse-salle-11.jpg-1200x900-800x600.jpeg"
-gallery_url: "/galeries/blog/241109-ACSE/index.html"
+main_image: "/blog/blog-images/241109-acse-salle-11.jpg-1200x900-800x600.jpeg"
+gallery_url: "/blog/blog-galeries/241109-ACSE/index.html"
 video_url: "https://www.youtube.com/watch?v=ri9Zv2DQoqM&t=30s"
 tags:
   video: false

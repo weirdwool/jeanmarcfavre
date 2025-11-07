@@ -2,8 +2,8 @@
 title: "Salon de la Moto - Superbolide"
 pubDate: 2024-03-09
 location: "Lyon"
-main_image: "/blog-images/240308-superbolide-family-19-1200x800-800x533.jpeg"
-gallery_url: "/galeries/blog/240309-Superbolide/index.html"
+main_image: "/blog/blog-images/240308-superbolide-family-19-1200x800-800x533.jpeg"
+gallery_url: "/blog/blog-galeries/240309-Superbolide/index.html"
 video_url: ""
 tags:
   video: false

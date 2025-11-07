@@ -2,8 +2,8 @@
 title: "Dragon Boat - lac d'Annecy"
 pubDate: 2025-05-24
 location: "Lac d'Annecy"
-main_image: "/blog-images/250524-DragonBoat-drone.jpg"
-gallery_url: "/galeries/blog/250524-Dragon-Boat/index.html"
+main_image: "/blog/blog-images/250524-DragonBoat-drone.jpg"
+gallery_url: "/blog/blog-galeries/250524-Dragon-Boat/index.html"
 video_url: ""
 tags:
   video: false

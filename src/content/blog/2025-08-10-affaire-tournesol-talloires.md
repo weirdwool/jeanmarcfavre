@@ -2,8 +2,8 @@
 title: "Concert Affaire Tourne'sol - Talloires"
 pubDate: 2025-08-10
 location: "La Savoyarde, Talloires"
-main_image: "/blog-images/250810-Affaire-Tournesol-3.jpg"
-gallery_url: "/galeries/blog/250810-Affaire-Tournesol-Talloires/index.html"
+main_image: "/blog/blog-images/250810-Affaire-Tournesol-3.jpg"
+gallery_url: "/blog/blog-galeries/250810-Affaire-Tournesol-Talloires/index.html"
 video_url: ""
 tags:
   video: false

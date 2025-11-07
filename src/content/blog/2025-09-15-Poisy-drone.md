@@ -2,8 +2,8 @@
 title: "Poisy - drone"
 pubDate: 2025-09-15
 location: "Poisy"
-main_image: "/blog-images/250915-Poisy-drone.jpg"
-gallery_url: "/galeries/blog/250915-Poisy-drone/index.html"
+main_image: "/blog/blog-images/250915-Poisy-drone.jpg"
+gallery_url: "/blog/blog-galeries/250915-Poisy-drone/index.html"
 video_url: ""
 tags:
   video: false

@@ -2,8 +2,8 @@
 title: "Concert TSFO - Les Tilleuls"
 pubDate: 2025-05-02
 location: "Bar des tilleuls, Annecy"
-main_image: "/blog-images/250502-tsfo-tilleuls-75.jpg"
-gallery_url: "/galeries/blog/250502-TSFO-Les-Tilleuls/index.html"
+main_image: "/blog/blog-images/250502-tsfo-tilleuls-75.jpg"
+gallery_url: "/blog/blog-galeries/250502-TSFO-Les-Tilleuls/index.html"
 video_url: ""
 tags:
   video: false

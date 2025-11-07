@@ -2,8 +2,8 @@
 title: "Glisse en Coeur - Le Grand-Bornand"
 pubDate: 2025-03-23
 location: "Grand-Bornand"
-main_image: "/blog-images/250322-gec-drone-cheque-4.jpg-1200x900-800x600.jpeg"
-gallery_url: "/galeries/blog/250323-Glisse-en-coeur/index.html"
+main_image: "/blog/blog-images/250322-gec-drone-cheque-4.jpg-1200x900-800x600.jpeg"
+gallery_url: "/blog/blog-galeries/250323-Glisse-en-coeur/index.html"
 video_url: ""
 tags:
   video: false

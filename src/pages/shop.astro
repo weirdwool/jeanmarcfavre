@@ -8,9 +8,63 @@ import Layout from "../layouts/Layout.astro";
   canonical="/shop/"
 >
   <div class="header-spacer"></div>
-  <div class="container-medium shop-container text-center">
-    <h1>Boutique</h1>
-    <p>La boutique est en cours de préparation et sera bientôt disponible !</p>
-    <img src="/images/shop-1394x837.jpg" alt="trois photos imprimées et encadrées" class="image-shop">
-  </div>
+  
+  <section class="shop-hero">
+    <div class="container">
+      <div class="shop-hero__content">
+        <h1 class="shop-hero__title">Boutique</h1>
+        <p class="shop-hero__subtitle">Tirages photographiques d'art</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="shop-coming-soon">
+    <div class="container-medium">
+      <div class="shop-content">
+        <div class="shop-status">
+          <div class="shop-status__icon">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          </div>
+          <h2 class="shop-status__title">Bientôt disponible</h2>
+          <p class="shop-status__message">
+            La boutique est actuellement en cours de préparation. Vous pourrez bientôt commander des tirages d'art de mes photographies.
+          </p>
+        </div>
+
+        <div class="shop-preview">
+          <div class="shop-preview__image">
+            <img src="/images/shop-1394x837.jpg" alt="Tirages photographiques encadrés" loading="lazy">
+          </div>
+          <div class="shop-preview__info">
+            <h3>Ce qui vous attend</h3>
+            <ul class="shop-features">
+              <li>
+                <span class="feature-icon">✓</span>
+                <span>Tirages d'art haute qualité</span>
+              </li>
+              <li>
+                <span class="feature-icon">✓</span>
+                <span>Formats personnalisables</span>
+              </li>
+              <li>
+                <span class="feature-icon">✓</span>
+                <span>Encadrement professionnel</span>
+              </li>
+              <li>
+                <span class="feature-icon">✓</span>
+                <span>Livraison sécurisée</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="shop-contact">
+          <p>Pour toute demande de tirage personnalisé, n'hésitez pas à <a href="/contact" class="link-text">me contacter</a> directement.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
 </Layout>

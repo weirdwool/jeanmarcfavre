@@ -2,8 +2,8 @@
 title: "BAAR Annecy vs Pezenas"
 pubDate: 2025-06-01
 location: "Annecy"
-main_image: "/blog-images/250601-USAR-Pezenas.jpg"
-gallery_url: "/galeries/blog/250601-USAR-Pezenas/index.html"
+main_image: "/blog/blog-images/250601-USAR-Pezenas.jpg"
+gallery_url: "/blog/blog-galeries/250601-USAR-Pezenas/index.html"
 video_url: ""
 tags:
   video: false

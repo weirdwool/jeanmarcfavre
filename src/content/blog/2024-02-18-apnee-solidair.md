@@ -2,7 +2,7 @@
 title: "Apnée Solid'air- Sensibilisation aux dons d'organes"
 pubDate: 2024-02-18
 location: "Plaine Joux, Lac Vert"
-main_image: "/blog-images/240218-lac-vert-nico-jobaze-1-1368x912-800x533.jpeg"
+main_image: "/blog/blog-images/240218-lac-vert-nico-jobaze-1-1368x912-800x533.jpeg"
 gallery_url: ""
 video_url: "https://vimeo.com/917307166"
 tags:

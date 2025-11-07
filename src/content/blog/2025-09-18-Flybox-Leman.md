@@ -2,8 +2,8 @@
 title: "Flybox - 3ème journée d'essais"
 pubDate: 2025-09-18
 location: "Thonon - Lac Leman"
-main_image: "/blog-images/250918-Flybox.jpg"
-gallery_url: "/galeries/blog/250918-Flybox/index.html"
+main_image: "/blog/blog-images/250918-Flybox.jpg"
+gallery_url: "/blog/blog-galeries/250918-Flybox/index.html"
 video_url: ""
 tags:
   video: false

@@ -2,8 +2,8 @@
 title: "Trièves - drone"
 pubDate: 2024-12-24
 location: "Triève"
-main_image: "/blog-images/241226-trie-ves-15.jpg-1200x800-800x533.jpeg"
-gallery_url: "/galeries/blog/241224-Trieves/index.html"
+main_image: "/blog/blog-images/241226-trie-ves-15.jpg-1200x800-800x533.jpeg"
+gallery_url: "/blog/blog-galeries/241224-Trieves/index.html"
 video_url: ""
 tags:
   video: false

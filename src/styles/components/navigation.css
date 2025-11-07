@@ -286,7 +286,7 @@ input[type="checkbox"]:checked ~ #overlay .menu-overlay-nav .socials-wrapper {
     position: fixed;
     top: 0;
     left: 0;
-    z-index: 10;
+    z-index: 1000;
   }
 
   .menu-default-nav ul {

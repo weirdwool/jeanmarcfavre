@@ -2,8 +2,8 @@
 title: "Ivoire vue du ciel"
 pubDate: 2025-07-18
 location: "Ivoire"
-main_image: "/blog-images/250718-Ivoire-drone-9.jpg"
-gallery_url: "/galeries/blog/250718-Ivoire-drone/index.html"
+main_image: "/blog/blog-images/250718-Ivoire-drone-9.jpg"
+gallery_url: "/blog/blog-galeries/250718-Ivoire-drone/index.html"
 video_url: ""
 tags:
   video: false

@@ -2,8 +2,8 @@
 title: "Perene-CHANGE - drone"
 pubDate: 2025-09-15
 location: "Annecy - Metz-Tessy"
-main_image: "/blog-images/250915-Perene-usine-drone.jpg"
-gallery_url: "/galeries/blog/250915-Metz-Tessy-CHANGE-Perene/index.html"
+main_image: "/blog/blog-images/250915-Perene-usine-drone.jpg"
+gallery_url: "/blog/blog-galeries/250915-Metz-Tessy-CHANGE-Perene/index.html"
 video_url: ""
 tags:
   video: false

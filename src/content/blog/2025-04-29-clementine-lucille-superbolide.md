@@ -2,8 +2,8 @@
 title: "Clémentine Lucine - Superbolide"
 pubDate: 2025-04-29
 location: "Annecy"
-main_image: "/blog-images/250429-superbolide-lucine-clementine-49.jpg-1200x800-800x533.jpeg"
-gallery_url: "/galeries/blog/250429-Superbolide-Clem/index.html"
+main_image: "/blog/blog-images/250429-superbolide-lucine-clementine-49.jpg-1200x800-800x533.jpeg"
+gallery_url: "/blog/blog-galeries/250429-Superbolide-Clem/index.html"
 video_url: ""
 tags:
   video: false

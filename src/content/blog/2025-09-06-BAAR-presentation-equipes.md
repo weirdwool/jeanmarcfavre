@@ -2,8 +2,8 @@
 title: "BAAR Annecy, présentation des Equipes"
 pubDate: 2025-09-06
 location: "Annecy"
-main_image: "/blog-images/250906-BAAR-Fed1.jpg"
-gallery_url: "/galeries/blog/250906-BAAR-groupe/index.html"
+main_image: "/blog/blog-images/250906-BAAR-Fed1.jpg"
+gallery_url: "/blog/blog-galeries/250906-BAAR-groupe/index.html"
 video_url: ""
 tags:
   video: false

@@ -2,8 +2,8 @@
 title: "BBQ fin de saison au SNCSA"
 pubDate: 2025-09-28
 location: "Lac Annecy - Sévrier"
-main_image: "/blog-images/250928-Khesia-Dalla-Costa.jpg"
-gallery_url: "/galeries/blog/250928-SNCSA-BBQ/index.html"
+main_image: "/blog/blog-images/250928-Khesia-Dalla-Costa.jpg"
+gallery_url: "/blog/blog-galeries/250928-SNCSA-BBQ/index.html"
 video_url: ""
 tags:
   video: false

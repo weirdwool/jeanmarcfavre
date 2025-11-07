@@ -2,8 +2,8 @@
 title: "Morille du Lac"
 pubDate: 2025-04-23
 location: "St Jorioz"
-main_image: "/blog-images/250423-morille-girard-pierre-3.jpg-1200x800-800x533.jpeg"
-gallery_url: "/galeries/blog/250423-Morille-du-lac/index.html"
+main_image: "/blog/blog-images/250423-morille-girard-pierre-3.jpg-1200x800-800x533.jpeg"
+gallery_url: "/blog/blog-galeries/250423-Morille-du-lac/index.html"
 video_url: ""
 tags:
   video: false

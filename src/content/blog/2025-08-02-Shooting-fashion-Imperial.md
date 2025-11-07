@@ -2,8 +2,8 @@
 title: "Séance famille-jardin Impérial "
 pubDate: 2025-08-02
 location: "Annecy - Jardins Impérial"
-main_image: "/blog-images/250802-Redon-Veronique-115.jpg"
-gallery_url: "/galeries/blog/250802-Shooting-fashion-Imperial/index.html"
+main_image: "/blog/blog-images/250802-Redon-Veronique-115.jpg"
+gallery_url: "/blog/blog-galeries/250802-Shooting-fashion-Imperial/index.html"
 video_url: ""
 tags:
   video: false

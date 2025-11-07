@@ -2,8 +2,8 @@
 title: "Pierre Margara chez son fondeur Adobati"
 pubDate: 2025-09-25
 location: "St Marcel les Valences"
-main_image: "/blog-images/250925-Adobati-patine.jpg"
-gallery_url: "/galeries/blog/250925-fonderie-Adobati/index.html"
+main_image: "/blog/blog-images/250925-Adobati-patine.jpg"
+gallery_url: "/blog/blog-galeries/250925-fonderie-Adobati/index.html"
 video_url: ""
 tags:
   video: false

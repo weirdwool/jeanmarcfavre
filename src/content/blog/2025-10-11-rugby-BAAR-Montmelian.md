@@ -2,8 +2,8 @@
 title: "BAAR Annecy vs Montmelian"
 pubDate: 2025-10-11
 location: "Annecy"
-main_image: "/blog-images/251011-BAAR-Montmelian.jpg"
-gallery_url: "/galeries/blog/251011-BAAR-Montmelian/index.html"
+main_image: "/blog/blog-images/251011-BAAR-Montmelian.jpg"
+gallery_url: "/blog/blog-galeries/251011-BAAR-Montmelian/index.html"
 video_url: ""
 tags:
   video: false

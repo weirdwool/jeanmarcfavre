@@ -2,8 +2,8 @@
 title: "Annecy - drone"
 pubDate: 2025-08-30
 location: "Annecy"
-main_image: "/blog-images/250802-Annecy-lac.jpg"
-gallery_url: "/galeries/blog/250830-Annecy-drone/index.html"
+main_image: "/blog/blog-images/250802-Annecy-lac.jpg"
+gallery_url: "/blog/blog-galeries/250830-Annecy-drone/index.html"
 video_url: ""
 tags:
   video: false

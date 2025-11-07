@@ -2,8 +2,8 @@
 title: "Pearl Eden des Lys"
 pubDate: 2025-05-26
 location: "Sallenoves - Chilly"
-main_image: "/blog-images/250525-Poulain.jpg"
-gallery_url: "/galeries/blog/250525-Pearl-Eden-des-Lys/index.html"
+main_image: "/blog/blog-images/250525-Poulain.jpg"
+gallery_url: "/blog/blog-galeries/250525-Pearl-Eden-des-Lys/index.html"
 video_url: ""
 tags:
   video: false

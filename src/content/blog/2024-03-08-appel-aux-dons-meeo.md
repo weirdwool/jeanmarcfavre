@@ -2,7 +2,7 @@
 title: "Appel aux dons - MéeO"
 pubDate: 2024-03-08
 location: "Annecy le Vieux"
-main_image: "/blog-images/210319-210319-meeo-gec-13-1200x800-800x533.jpeg"
+main_image: "/blog/blog-images/210319-210319-meeo-gec-13-1200x800-800x533.jpeg"
 gallery_url: ""
 video_url: "https://vimeo.com/21056159?share=copy"
 tags:

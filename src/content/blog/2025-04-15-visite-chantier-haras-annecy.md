@@ -2,8 +2,8 @@
 title: "Visite Chantier - Haras Annecy"
 pubDate: 2025-04-15
 location: "Annecy"
-main_image: "/blog-images/250415-haras-visite-5.jpg-1200x800-800x533.jpeg"
-gallery_url: "/galeries/blog/250415-Visite-presse-Haras-Annecy/index.html"
+main_image: "/blog/blog-images/250415-haras-visite-5.jpg-1200x800-800x533.jpeg"
+gallery_url: "/blog/blog-galeries/250415-Visite-presse-Haras-Annecy/index.html"
 video_url: ""
 tags:
   video: false

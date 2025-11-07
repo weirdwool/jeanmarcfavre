@@ -2,8 +2,8 @@
 title: "Tournage long métrage - Samy"
 pubDate: 2025-03-30
 location: "Mennecy"
-main_image: "/blog-images/250430-samy-18.jpg-1200x800-800x533.jpeg"
-gallery_url: "/galeries/blog/250430-Tournage-Samy/index.html"
+main_image: "/blog/blog-images/250430-samy-18.jpg-1200x800-800x533.jpeg"
+gallery_url: "/blog/blog-galeries/250430-Tournage-Samy/index.html"
 video_url: ""
 tags:
   video: false

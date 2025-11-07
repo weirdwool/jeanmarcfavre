@@ -2,8 +2,8 @@
 title: "Biclope - Escalade - drone"
 pubDate: 2025-05-17
 location: "Annecy-Chavoires"
-main_image: "/blog-images/250517-Biclope-grimpe-Colombo-Marie.jpg"
-gallery_url: "/galeries/blog/250517-Varappe-Biclope/index.html"
+main_image: "/blog/blog-images/250517-Biclope-grimpe-Colombo-Marie.jpg"
+gallery_url: "/blog/blog-galeries/250517-Varappe-Biclope/index.html"
 video_url: ""
 tags:
   video: false

@@ -2,8 +2,8 @@
 title: "Savoies drone: Chateau de Faverges"
 pubDate: 2025-06-27
 location: "Faverges"
-main_image: "/blog-images/250627-Chateau-Faverges-drone.jpg"
-gallery_url: "/galeries/blog/250627-Chateau-Faverges-drone/index.html"
+main_image: "/blog/blog-images/250627-Chateau-Faverges-drone.jpg"
+gallery_url: "/blog/blog-galeries/250627-Chateau-Faverges-drone/index.html"
 video_url: ""
 tags:
   video: false

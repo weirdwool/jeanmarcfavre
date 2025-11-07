@@ -2,7 +2,7 @@
 title: "Suivi Chantier Pré Billy - Teractem"
 pubDate: 2024-03-07
 location: "Pringy"
-main_image: "/blog-images/240307-pre-billy-159-900x750-800x667.jpeg"
+main_image: "/blog/blog-images/240307-pre-billy-159-900x750-800x667.jpeg"
 gallery_url: ""
 video_url: "https://vimeo.com/921759558"
 tags:

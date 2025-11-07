@@ -2,8 +2,8 @@
 title: "Visite aérienne drone de Cuvat"
 pubDate: 2025-07-12
 location: "Cuvat"
-main_image: "/blog-images/250712-Cuvat-drone-6.jpg"
-gallery_url: "/galeries/blog/250712-Cuvat-drone/index.html"
+main_image: "/blog/blog-images/250712-Cuvat-drone-6.jpg"
+gallery_url: "/blog/blog-galeries/250712-Cuvat-drone/index.html"
 video_url: ""
 tags:
   video: false

@@ -2,8 +2,8 @@
 title: "BAAR Annecy vs Aviron Gruissan"
 pubDate: 2025-09-20
 location: "Annecy"
-main_image: "/blog-images/250920-BAAR-Gruissan.jpg"
-gallery_url: "/galeries/blog/250920-BAAR-Gruissan/index.html"
+main_image: "/blog/blog-images/250920-BAAR-Gruissan.jpg"
+gallery_url: "/blog/blog-galeries/250920-BAAR-Gruissan/index.html"
 video_url: ""
 tags:
   video: false

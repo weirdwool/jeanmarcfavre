@@ -2,8 +2,8 @@
 title: "Annecy le Vieux - drone"
 pubDate: 2025-08-22
 location: "Annecy le Vieux"
-main_image: "/blog-images/250708-Annecy-le-vieux-drone-6.jpg"
-gallery_url: "/galeries/blog/250822-Annecy-le-Vieux-drone/index.html"
+main_image: "/blog/blog-images/250708-Annecy-le-vieux-drone-6.jpg"
+gallery_url: "/blog/blog-galeries/250822-Annecy-le-Vieux-drone/index.html"
 video_url: ""
 tags:
   video: false

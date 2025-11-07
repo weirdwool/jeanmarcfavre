@@ -2,8 +2,8 @@
 title: "Salon Events & Meetings"
 pubDate: 2025-10-14
 location: "Kotel Mercure - Synod"
-main_image: "/blog-images/251014-Events&Meetings.jpg"
-gallery_url: "/galeries/blog/251014-Events&Meetings/index.html"
+main_image: "/blog/blog-images/251014-Events&Meetings.jpg"
+gallery_url: "/blog/blog-galeries/251014-Events&Meetings/index.html"
 video_url: ""
 tags:
   video: false

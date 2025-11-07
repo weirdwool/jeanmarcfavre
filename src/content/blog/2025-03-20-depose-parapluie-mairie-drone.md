@@ -2,8 +2,8 @@
 title: "Dépose parapluie Mairie - Drone"
 pubDate: 2025-03-20
 location: "Annecy"
-main_image: "/blog-images/250320-mairie-parapluie-8.jpg-1200x900-800x600.jpeg"
-gallery_url: "/galeries/blog/250320-Depose-parapluie-mairie/index.html"
+main_image: "/blog/blog-images/250320-mairie-parapluie-8.jpg-1200x900-800x600.jpeg"
+gallery_url: "/blog/blog-galeries/250320-Depose-parapluie-mairie/index.html"
 video_url: ""
 tags:
   video: false

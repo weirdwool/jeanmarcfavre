@@ -2,8 +2,8 @@
 title: "Savoie drone: Chateau de Miolans"
 pubDate: 2025-06-27
 location: "Miolans"
-main_image: "/blog-images/250627-Chateau-Miolans-drone-24.jpg"
-gallery_url: "/galeries/blog/250627-Chateau Miolans-drone/index.html"
+main_image: "/blog/blog-images/250627-Chateau-Miolans-drone-24.jpg"
+gallery_url: "/blog/blog-galeries/250627-Chateau Miolans-drone/index.html"
 video_url: ""
 tags:
   video: false

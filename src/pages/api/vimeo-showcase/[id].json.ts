@@ -34,7 +34,12 @@ export async function getStaticPaths() {
       if (!response.ok) {
         const errorText = await response.text();
         console.error(`Vimeo API Error during build for showcase ${showcaseId}: Status ${response.status}, Body: ${errorText}`);
-        continue; // Skip this ID if it fails to fetch
+        // Return empty videos array instead of skipping
+        paths.push({
+          params: { id: showcaseId },
+          props: { videos: [] }
+        });
+        continue;
       }
 
       const data = await response.json();
@@ -54,7 +59,12 @@ export async function getStaticPaths() {
       });
 
     } catch (error) {
-      console.error(`Server error during build fetching Vimeo videos for ${showcaseId}:`, error);
+      console.warn(`Server error during build fetching Vimeo videos for ${showcaseId}. Using empty data.`);
+      // Return empty videos array on SSL or network errors
+      paths.push({
+        params: { id: showcaseId },
+        props: { videos: [] }
+      });
     }
   }
   return paths;
@@ -62,7 +72,8 @@ export async function getStaticPaths() {
 
 // Modify the GET handler to receive data from props OR fetch on-demand in dev
 export const GET: APIRoute = async ({ props, params }) => {
-  let { videos } = props || {};
+  // In dev mode, props might be undefined, so we fetch on-demand
+  let videos = props?.videos;
 
   // Fallback for dev mode: fetch on-demand if videos not pre-rendered
   if (!videos && params.id && VIMEO_ACCESS_TOKEN) {

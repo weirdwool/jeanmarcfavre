@@ -79,7 +79,9 @@ const uniqueId = `vimeo-showcase-${Math.random().toString(36).substring(2, 9)}`;
     try {
         const apiUrl = `${window.location.origin}/api/vimeo-showcase/${showcaseId}.json`;
         console.log('Fetching from:', apiUrl);
-        const apiResponse = await fetch(apiUrl);
+        const apiResponse = await fetch(apiUrl, {
+            cache: 'force-cache' // Cache the API response
+        });
 
         if (!apiResponse.ok) {
             console.error('API Response not OK:', apiResponse.status);

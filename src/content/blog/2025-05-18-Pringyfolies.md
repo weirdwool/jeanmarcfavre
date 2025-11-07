@@ -2,8 +2,8 @@
 title: "Pringy Folies et marché des créateurs"
 pubDate: 2025-05-18
 location: "Pringy"
-main_image: "/blog-images/250518-Pringy-Folies-Highline.jpg"
-gallery_url: "/galeries/blog/250518-Pringy-Folies/index.html"
+main_image: "/blog/blog-images/250518-Pringy-Folies-Highline.jpg"
+gallery_url: "/blog/blog-galeries/250518-Pringy-Folies/index.html"
 video_url: "https://vimeo.com/1095988667"
 tags:
   video: true

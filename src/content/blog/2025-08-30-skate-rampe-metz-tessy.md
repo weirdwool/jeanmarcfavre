@@ -2,8 +2,8 @@
 title: "Skate big rampe Metz-Tessy"
 pubDate: 2025-08-30
 location: "Metz-Tessy"
-main_image: "/blog-images/250830-Skate-Brichet-Joris-34.jpg"
-gallery_url: "/galeries/blog/250830-Skate-Metz-Tessy/index.html"
+main_image: "/blog/blog-images/250830-Skate-Brichet-Joris-34.jpg"
+gallery_url: "/blog/blog-galeries/250830-Skate-Metz-Tessy/index.html"
 video_url: ""
 tags:
   video: false
