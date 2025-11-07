@@ -6,12 +6,3 @@
 
 [build.environment]
   NODE_VERSION = "18"
-
-# Enable pretty URLs (clean URLs without .html)
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
-  
-# This makes Netlify serve index.html for directory paths
-# So /blog/ serves /blog/index.html automatically
