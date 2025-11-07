@@ -10,7 +10,7 @@
 .blog-container {
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 1.5rem;
   padding: 15px;
   width: 100%;
   min-height: calc(100vh - var(--header-height, 0px) - var(--footer-height, 0px) - 4rem);
@@ -157,7 +157,7 @@
 .posts-grid {
   display: flex;
   flex-wrap: wrap;
-  gap: 2rem;
+  gap: 1.5rem;
   justify-content: center;
   align-items: flex-start;
   width: 100%;

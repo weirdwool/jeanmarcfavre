@@ -35,10 +35,11 @@ const { Content } = await render(entry);
 
 <Layout title={entry.data.title}>
    <div class="header-spacer"></div>
+   
    <article class="container-medium">
       <div class="row">
          <div class="col-md-4">
-            <div class="text-wrap text-right mt-1">
+            <header class="text-wrap text-right mt-1">
                <div class="title-wrapper">
                   <h1>{entry.data.title}</h1>
                {entry.data.subtitle &&
@@ -53,14 +54,14 @@ const { Content } = await render(entry);
                   <p><a href="#gallery" class="link">Galerie photo</a></p>
               )}
                </div>
-            </div>
+            </header>
          </div>
          <div class="col-md-8">
-            <div class="text-wrapper mb-5">
+            <section class="text-wrapper mb-5">
                <Content />
-            </div>
+            </section>
             {(entry.data.secondary_image || entry.data.main_image) && (
-            <div class="image-wrapper mb-4">
+            <figure class="image-wrapper mb-4">
                <img
                src={entry.data.secondary_image || entry.data.main_image}
                alt={entry.data.title}
@@ -68,12 +69,13 @@ const { Content } = await render(entry);
                height="800"
                class="image-wrapper"
                />
-            </div>
+            </figure>
             )}
          </div>
       </div>
+      
       {entry.data.gallery_url && (
-      <section id="gallery">
+      <section id="gallery" class="engagement-gallery">
          <div class="gallery-header">
             <h2 class="visually-hidden">Galerie - {entry.data.title}</h2>
             <div class="gallery-actions">
