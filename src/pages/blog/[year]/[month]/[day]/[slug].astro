@@ -6,29 +6,40 @@ import { getCollection, type CollectionEntry, render } from 'astro:content';
 export async function getStaticPaths() {
 const blogEntries = await getCollection('blog');
 // --- THIS LINE WAS MISSING/COMMENTED OUT ---
-const sortedEntries = blogEntries.sort((a: CollectionEntry<'blog'>, b: CollectionEntry<'blog'>) => a.data.pubDate.getTime() - b.data.pubDate.getTime());
+const sortedEntries = blogEntries
+  .slice()
+  .sort((a: CollectionEntry<'blog'>, b: CollectionEntry<'blog'>) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
 // ------------------------------------------
 return sortedEntries.map((entry: CollectionEntry<'blog'>, index: number) => {
-const pubDate = entry.data.pubDate;
-const year = pubDate.getFullYear().toString();
-const month = (pubDate.getMonth() + 1).toString().padStart(2, '0');
-const day = pubDate.getDate().toString().padStart(2, '0');
-const prevPost: CollectionEntry<'blog'> | undefined = sortedEntries[index - 1];
-const nextPost: CollectionEntry<'blog'> | undefined = sortedEntries[index + 1];
-// Create a cleaner slug by removing the date prefix from the filename
-const cleanSlug = entry.slug.replace(/^\d{4}-\d{2}-\d{2}-/, '');
-return {
-params: { year, month, day, slug: cleanSlug },
-props: { entry, prevPost, nextPost },
-};
+  const pubDate = entry.data.pubDate;
+  const year = pubDate.getFullYear().toString();
+  const month = (pubDate.getMonth() + 1).toString().padStart(2, '0');
+  const day = pubDate.getDate().toString().padStart(2, '0');
+  const newerPost: CollectionEntry<'blog'> | undefined = sortedEntries[index - 1];
+  const olderPost: CollectionEntry<'blog'> | undefined = sortedEntries[index + 1];
+  const cleanSlug = entry.slug.replace(/^\d{4}-\d{2}-\d{2}-/, '');
+  return {
+    params: { year, month, day, slug: cleanSlug },
+    props: { entry, newerPost, olderPost },
+  };
 });
 }
+
+function buildPostUrl(post: CollectionEntry<'blog'>) {
+  const pubDate = post.data.pubDate;
+  const year = pubDate.getFullYear().toString();
+  const month = (pubDate.getMonth() + 1).toString().padStart(2, '0');
+  const day = pubDate.getDate().toString().padStart(2, '0');
+  const slug = post.slug.replace(/^\d{4}-\d{2}-\d{2}-/, '');
+  return `/blog/${year}/${month}/${day}/${slug}/`;
+}
+
 interface Props {
 entry: CollectionEntry<'blog'>;
-prevPost?: CollectionEntry<'blog'>;
-nextPost?: CollectionEntry<'blog'>;
+newerPost?: CollectionEntry<'blog'>;
+olderPost?: CollectionEntry<'blog'>;
 }
-const { entry, prevPost, nextPost } = Astro.props as Props;
+const { entry, newerPost, olderPost } = Astro.props as Props;
 if (!entry) {
 // Entry is undefined, this should not happen in normal operation
 }
@@ -163,43 +174,57 @@ const blogSchemaData = {
       {/* Enhanced Navigation - works in both modal and full page */}
       <nav class="post-navigation">
          <div class="navigation-cards">
-            {prevPost && (
-            <a href={`/blog/${prevPost.data.pubDate.getFullYear()}/${(prevPost.data.pubDate.getMonth() + 1).toString().padStart(2, '0')}/${prevPost.data.pubDate.getDate().toString().padStart(2, '0')}/${prevPost.slug.replace(/^\d{4}-\d{2}-\d{2}-/, '')}/`} class="nav-card nav-link prev-post">
-               <div class="nav-card-direction">← Précédent</div>
-               <div class="nav-card-body">
-                  <div class="nav-card-image">
-                     {prevPost.data.main_image && (
-                        <img src={prevPost.data.main_image} alt={prevPost.data.title} loading="lazy" />
-                     )}
-                  </div>
-                  <div class="nav-card-content">
-                     <h3 class="nav-card-title">{prevPost.data.title}</h3>
-                     <div class="nav-card-meta">
-                        <time>{prevPost.data.pubDate.toLocaleDateString('fr-FR', { day: 'numeric', month: 'short', year: 'numeric' })}</time>{prevPost.data.location && <span>&nbsp;&nbsp;//&nbsp;&nbsp;{prevPost.data.location}</span>}
+            <div class="nav-card-wrapper">
+               {newerPost ? (
+               <a class="nav-card nav-link newer-post" href={buildPostUrl(newerPost)}>
+                  <div class="nav-card-direction">← Plus récent</div>
+                  <div class="nav-card-body">
+                     <div class="nav-card-image">
+                        {newerPost.data.main_image && (
+                           <img src={newerPost.data.main_image} alt={newerPost.data.title} loading="lazy" />
+                        )}
+                     </div>
+                     <div class="nav-card-content">
+                        <h3 class="nav-card-title">{newerPost.data.title}</h3>
+                        <div class="nav-card-meta">
+                           <time>{newerPost.data.pubDate.toLocaleDateString('fr-FR', { day: 'numeric', month: 'short', year: 'numeric' })}</time>{newerPost.data.location && <span>&nbsp;&nbsp;//&nbsp;&nbsp;{newerPost.data.location}</span>}
+                        </div>
                      </div>
                   </div>
+               </a>
+               ) : (
+               <div class="nav-card nav-card-empty newer-post">
+                  <div class="nav-card-direction">← Plus récent</div>
+                  <div class="nav-card-empty-message">Pas d'article plus récent</div>
                </div>
-            </a>
-            )}
-            
-            {nextPost && (
-            <a href={`/blog/${nextPost.data.pubDate.getFullYear()}/${(nextPost.data.pubDate.getMonth() + 1).toString().padStart(2, '0')}/${nextPost.data.pubDate.getDate().toString().padStart(2, '0')}/${nextPost.slug.replace(/^\d{4}-\d{2}-\d{2}-/, '')}/`} class="nav-card nav-link next-post">
-               <div class="nav-card-direction">Suivant →</div>
-               <div class="nav-card-body">
-                  <div class="nav-card-content">
-                     <h3 class="nav-card-title">{nextPost.data.title}</h3>
-                     <div class="nav-card-meta">
-                        <time>{nextPost.data.pubDate.toLocaleDateString('fr-FR', { day: 'numeric', month: 'short', year: 'numeric' })}</time>{nextPost.data.location && <span>&nbsp;&nbsp;//&nbsp;&nbsp;{nextPost.data.location}</span>}
+               )}
+            </div>
+
+            <div class="nav-card-wrapper">
+               {olderPost ? (
+               <a class="nav-card nav-link older-post" href={buildPostUrl(olderPost)}>
+                  <div class="nav-card-direction">Plus ancien →</div>
+                  <div class="nav-card-body">
+                     <div class="nav-card-content">
+                        <h3 class="nav-card-title">{olderPost.data.title}</h3>
+                        <div class="nav-card-meta">
+                           <time>{olderPost.data.pubDate.toLocaleDateString('fr-FR', { day: 'numeric', month: 'short', year: 'numeric' })}</time>{olderPost.data.location && <span>&nbsp;&nbsp;//&nbsp;&nbsp;{olderPost.data.location}</span>}
+                        </div>
+                     </div>
+                     <div class="nav-card-image">
+                        {olderPost.data.main_image && (
+                           <img src={olderPost.data.main_image} alt={olderPost.data.title} loading="lazy" />
+                        )}
                      </div>
                   </div>
-                  <div class="nav-card-image">
-                     {nextPost.data.main_image && (
-                        <img src={nextPost.data.main_image} alt={nextPost.data.title} loading="lazy" />
-                     )}
-                  </div>
+               </a>
+               ) : (
+               <div class="nav-card nav-card-empty older-post">
+                  <div class="nav-card-direction">Plus ancien →</div>
+                  <div class="nav-card-empty-message">Pas d'article plus ancien</div>
                </div>
-            </a>
-            )}
+               )}
+            </div>
          </div>
       </nav>
 

@@ -3,6 +3,7 @@ import Layout from '../layouts/Layout.astro';
 import StructuredData from '../components/StructuredData.astro';
 import { getCollection, type CollectionEntry, type SchemaContext } from 'astro:content';
 import { collections } from '../content/config';
+import '../styles/pages/blog.css';
 
 const blogSchema = typeof collections.blog.schema === 'function'
 ? collections.blog.schema({} as SchemaContext)
@@ -37,7 +38,8 @@ activeTags: activeTags,
   image="/blog/blog-760x881.png"
   canonical="/blog/"
 >
-   <div class="header-spacer"></div>
+<div class="header-spacer"></div>
+
    <div class="blog-container">
 
       <aside class="sidebar align-center">

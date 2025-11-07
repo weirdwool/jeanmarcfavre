@@ -1,7 +1,7 @@
 ---
 title: "Salon Events & Meetings"
-pubDate: 2025-10-14
-location: "Kotel Mercure - Synod"
+pubDate: 2025-10-14T14:00:00
+location: "Hotel Mercure - Seynod"
 main_image: "/blog/blog-images/251014-Events&Meetings.jpg"
 gallery_url: "/blog/blog-galeries/251014-Events&Meetings/index.html"
 video_url: ""
