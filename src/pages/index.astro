@@ -107,7 +107,7 @@ function getBlogPostUrl(post: CollectionEntry<'blog'>) {
    >
 </section>
 
-<section class="engagements-section container pt-5 pb-5">
+<section class="engagements-section-index container pt-5 pb-5">
    <div class="container-content">
       <div class="title-wrapper link-flex pb-2">
          <h2>Mes Engagements</h2>
@@ -121,10 +121,10 @@ function getBlogPostUrl(post: CollectionEntry<'blog'>) {
 
    <div class="container-slider-slider">
             <div class="slider-slider-wrapper">
-            <div class="engagements-slider-track slider-track">
+            <div class="engagements-index-slider-track slider-track">
                {allEngagements.map((item: CollectionEntry<'engagements'>) => ( 
-               <a href={`/engagements/${item.slug}`} class="engagement-item slider-item">
-                  <div class="engagement-image-wrapper">
+               <a href={`/engagements/${item.slug}`} class="engagements-index-item slider-item">
+                  <div class="engagements-index-image-wrapper">
                      {item.data.main_image && (
                      <img
                         src={item.data.main_image}
@@ -137,9 +137,9 @@ function getBlogPostUrl(post: CollectionEntry<'blog'>) {
                      <div class="gradient-overlay"></div>
                   </div>
                   
-                  <div class="engagement-item-header">
-                     <h2 class="engagement-item-title">{item.data.title}</h2>
-                     <h3 class="engagement-item-subtitle">{item.data.subtitle}</h3>
+                  <div class="engagements-index-item-header">
+                     <h2 class="engagements-index-item-title">{item.data.title}</h2>
+                     <h3 class="engagements-index-item-subtitle">{item.data.subtitle}</h3>
                   </div>
               </a>
                ))}
@@ -148,10 +148,10 @@ function getBlogPostUrl(post: CollectionEntry<'blog'>) {
          <div class="slider-navigation">
             <div class="separation-line-gradient"></div>
             <div class="slider-navigation-arrows">
-               <button id="prevEngagement" class="slider-arrow prev-arrow" aria-label="Engagement précédent">
+               <button id="prevEngagementIndex" class="slider-arrow prev-arrow" aria-label="Engagement précédent">
                ⟵
                </button>
-               <button id="nextEngagement" class="slider-arrow next-arrow" aria-label="Engagement suivant">
+               <button id="nextEngagementIndex" class="slider-arrow next-arrow" aria-label="Engagement suivant">
                ⟶
                </button>
             </div>
@@ -445,7 +445,7 @@ function getBlogPostUrl(post: CollectionEntry<'blog'>) {
    // Initialize the "Engagements" slider
    document.addEventListener('DOMContentLoaded', () => {
      let engagementScrollAmount = 0;
-     const firstEngagementItem = document.querySelector('.engagements-slider-track .slider-item');
+     const firstEngagementItem = document.querySelector('.engagements-index-slider-track .slider-item');
      if (firstEngagementItem) {
        // Calculate scroll amount based on item width + right margin
        const itemWidth = firstEngagementItem.offsetWidth;
@@ -457,9 +457,9 @@ function getBlogPostUrl(post: CollectionEntry<'blog'>) {
      }
    
      initializeSlider(
-       '.engagements-slider-track',
-       'prevEngagement',
-       'nextEngagement',
+       '.engagements-index-slider-track',
+       'prevEngagementIndex',
+       'nextEngagementIndex',
        engagementScrollAmount
      );
    

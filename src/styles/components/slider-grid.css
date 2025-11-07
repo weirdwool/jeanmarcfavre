@@ -58,7 +58,7 @@
   scroll-behavior: smooth;
   scrollbar-width: none;
   -ms-overflow-style: none;
-  gap: 20px;
+  gap: 1.5rem;
   padding: 0 15px;
   align-items: stretch;
 }
@@ -98,17 +98,17 @@
 }
 
 /* ========================================
-   ENGAGEMENT GRID
+   ENGAGEMENTS CONTAINER
    Mobile: Slider | Desktop: Grid (auto-fit)
    ======================================== */
 
 /* Base text alignment */
-.engagement-grid {
+.engagements-container {
   text-align: center;
 }
 
 /* MOBILE (default): Slider layout */
-.engagement-grid {
+.engagements-container {
   display: flex;
   overflow-x: auto;
   scroll-behavior: smooth;
@@ -119,12 +119,12 @@
   align-items: stretch;
 }
 
-.engagement-grid::-webkit-scrollbar {
+.engagements-container::-webkit-scrollbar {
   display: none;
 }
 
 /* MOBILE: Card styles for slider */
-.engagement-grid .card {
+.engagements-container .card {
   flex: 0 0 360px; /* Fixed width - shows 1 card + peek */
   min-height: 700px;
   display: flex;
@@ -134,7 +134,7 @@
 
 /* DESKTOP (1024px+): Grid Conversion */
 @media (min-width: 1024px) {
-  .engagement-grid[data-layout="grid"] {
+  .engagements-container[data-layout="grid"] {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 25px;
@@ -142,14 +142,8 @@
     padding: 0;
   }
 
-  /* Specific grids - smaller cards */
-  #associations-grid[data-layout="grid"],
-  #friends-grid[data-layout="grid"] {
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  }
-
   /* Reset flex properties for grid items */
-  .engagement-grid[data-layout="grid"] .card {
+  .engagements-container[data-layout="grid"] .card {
     flex: none;
     max-width: none;
     margin-right: 0;
@@ -175,10 +169,10 @@
   padding-right: 20px;
 }
 
-/* Hide arrows for grids on desktop */
+/* Hide arrows for grids on desktop (no scrolling needed) */
 @media (min-width: 1024px) {
-  .showcase-grid[data-layout="grid"] ~ .slider-navigation,
-  .engagement-grid[data-layout="grid"] ~ .slider-navigation {
+  .slider-grid-wrapper:has(.showcase-grid[data-layout="grid"]) ~ .slider-navigation,
+  .slider-grid-wrapper:has(.engagements-container[data-layout="grid"]) ~ .slider-navigation {
     display: none;
   }
 }
@@ -404,5 +398,63 @@
 
   .showcase-subtitle {
     font-size: 20px;
+  }
+}
+
+/* ========================================
+   ENGAGEMENTS PAGE - Specific Section Styles
+   ======================================== */
+
+/* Section-specific styles for engagements.astro page */
+
+/* Engagements Section - 3 cards per row on desktop */
+.engagements-section .engagements-container .card {
+  /* Mobile: card width in slider */
+  flex: 0 0 360px;
+}
+
+@media (min-width: 1024px) {
+  .engagements-section .engagements-container[data-layout="grid"] {
+    /* Desktop: 3 columns per row */
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  }
+}
+
+/* Associations Section - 4 cards per row on desktop */
+.associations-section .engagements-container .card {
+  /* Mobile: card width in slider */
+  flex: 0 0 360px;
+}
+
+@media (min-width: 1024px) {
+  .associations-section .engagements-container[data-layout="grid"] {
+    /* Desktop: 4 columns per row */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  }
+}
+
+/* Amis Section - 4 cards per row on desktop */
+.amis-section .engagements-container .card {
+  /* Mobile: card width in slider */
+  flex: 0 0 360px;
+}
+
+@media (min-width: 1024px) {
+  .amis-section .engagements-container[data-layout="grid"] {
+    /* Desktop: 4 columns per row */
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  }
+}
+
+/* Showcase Grid - Customize card widths (used in photo/video pages) */
+.showcase-grid .card {
+  /* Mobile: card width in slider */
+  flex: 0 0 380px;
+}
+
+@media (min-width: 1024px) {
+  .showcase-grid[data-layout="grid"] {
+    /* Desktop: grid column width */
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
   }
 }
