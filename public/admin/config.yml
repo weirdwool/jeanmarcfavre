@@ -1,15 +1,13 @@
 # Decap CMS Configuration for Jean-Marc Favre Blog
 # This file defines the CMS structure, collections, and fields
 
-# Backend configuration - using GitHub
+# Backend configuration - using GitHub with OAuth
 backend:
   name: github
   repo: weirdwool/jeanmarcfavre
   branch: main
-  
-# Netlify Identity for authentication  
-# When you enable Netlify Identity, users can log in to the CMS
-# You'll need to enable this in Netlify dashboard after deployment
+  base_url: https://api.netlify.com
+  auth_endpoint: auth
 
 # Media files configuration
 media_folder: "public/blog/blog-images"  # Where uploaded images will be saved
