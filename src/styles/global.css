@@ -165,7 +165,6 @@ address {
 .two-column-text {
   columns: 1; /* Single column on mobile */
   column-gap: 0;
-  padding: 20px;
 }
 
 @media (min-width: 1024px) {
