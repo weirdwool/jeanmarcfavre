@@ -1,25 +1,16 @@
 <!DOCTYPE html>
 <html lang="fr">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Tina CMS</title>
-  <script type="module">
-    import { TinaCMS } from "https://esm.sh/tinacms@2.2.7"
-    
-    const cms = new TinaCMS({
-      clientId: '1b3e810a-ad61-42fe-9c1c-d2a330e7e30e',
-      branch: 'main',
-      token: '9d52f8159e90f26c8e1a9eb52b76d32504bbdfd5',
-      build: {
-        publicFolder: 'public',
-        outputFolder: 'admin'
-      }
-    })
-  </script>
-</head>
-<body>
-  <div id="root"></div>
-</body>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Tina CMS</title>
+    <script>
+      // Redirect to TinaCloud admin with your project
+      window.location.href = "https://app.tina.io/projects/1b3e810a-ad61-42fe-9c1c-d2a330e7e30e/edit";
+    </script>
+  </head>
+  <body>
+    <p>Redirecting to Tina CMS...</p>
+    <p>If not redirected, <a href="https://app.tina.io/projects/1b3e810a-ad61-42fe-9c1c-d2a330e7e30e/edit">click here</a></p>
+  </body>
 </html>
-
