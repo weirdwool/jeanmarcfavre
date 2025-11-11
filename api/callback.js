@@ -37,26 +37,44 @@ export default async (req, res) => {
         <title>Authorization Success</title>
       </head>
       <body>
+        <h2>Authorization successful!</h2>
+        <p>Completing login...</p>
         <script>
           (function() {
-            const data = {
-              token: "${token}",
-              provider: "github"
-            };
-            
-            if (window.opener) {
-              window.opener.postMessage(
-                "authorization:github:success:" + JSON.stringify(data),
-                "*"
-              );
+            function sendMessage() {
+              if (!window.opener) {
+                console.error('No window.opener found');
+                document.body.innerHTML += '<p style="color:red;">Error: No parent window found. Please close this window and try again.</p>';
+                return;
+              }
+
+              const message = 'authorization:github:success:' + JSON.stringify({
+                token: "${token}",
+                provider: "github"
+              });
+              
+              console.log('Sending message to parent:', message);
+              window.opener.postMessage(message, window.location.origin);
+              
+              // Try with wildcard origin as backup
+              setTimeout(function() {
+                window.opener.postMessage(message, "*");
+                console.log('Message sent, closing window in 2 seconds...');
+                
+                setTimeout(function() {
+                  window.close();
+                }, 2000);
+              }, 500);
             }
             
-            setTimeout(function() {
-              window.close();
-            }, 1000);
+            // Wait for page to fully load
+            if (document.readyState === 'complete') {
+              sendMessage();
+            } else {
+              window.addEventListener('load', sendMessage);
+            }
           })();
         </script>
-        <p>Authorization successful! Redirecting...</p>
       </body>
       </html>
     `;
