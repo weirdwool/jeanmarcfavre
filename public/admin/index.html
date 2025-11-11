@@ -9,5 +9,117 @@
 <body>
   <!-- Include the script in your page -->
   <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+  
+  <!-- Inline configuration -->
+  <script>
+    CMS.init({
+      config: {
+        backend: {
+          name: 'github',
+          repo: 'weirdwool/jeanmarcfavre',
+          branch: 'main',
+          base_url: 'https://api.netlify.com',
+          auth_endpoint: 'auth',
+          site_id: '9c9c3551-90d4-4e69-8870-0e2be01c38be'
+        },
+        media_folder: 'public/blog/blog-images',
+        public_folder: '/blog/blog-images',
+        locale: 'fr',
+        collections: [
+          {
+            name: 'blog',
+            label: 'Blog Posts',
+            folder: 'src/content/blog',
+            create: true,
+            slug: '{{year}}-{{month}}-{{day}}-{{slug}}',
+            format: 'frontmatter',
+            sortable_fields: ['pubDate', 'title'],
+            sort: 'pubDate:desc',
+            fields: [
+              {
+                label: 'Titre',
+                name: 'title',
+                widget: 'string',
+                required: true,
+                hint: 'Le titre de votre article'
+              },
+              {
+                label: 'Date de publication',
+                name: 'pubDate',
+                widget: 'datetime',
+                format: 'YYYY-MM-DD',
+                date_format: 'DD/MM/YYYY',
+                time_format: false,
+                required: true,
+                default: ''
+              },
+              {
+                label: 'Lieu',
+                name: 'location',
+                widget: 'string',
+                required: false,
+                hint: 'Exemple: Annecy, Grand-Bornand, etc.'
+              },
+              {
+                label: 'Image principale',
+                name: 'main_image',
+                widget: 'image',
+                required: true,
+                hint: "L'image qui apparaîtra sur la page blog et en haut de l'article",
+                media_folder: '/public/blog/blog-images',
+                public_folder: '/blog/blog-images'
+              },
+              {
+                label: 'URL Galerie Lightroom',
+                name: 'gallery_url',
+                widget: 'string',
+                required: false,
+                hint: 'Exemple: /blog/blog-galeries/250323-Glisse-en-coeur/index.html',
+                pattern: ['^(/blog/blog-galeries/.*|)$', 'Doit commencer par /blog/blog-galeries/ ou être vide']
+              },
+              {
+                label: 'URL Vidéo Vimeo',
+                name: 'video_url',
+                widget: 'string',
+                required: false,
+                hint: 'Exemple: https://vimeo.com/123456789'
+              },
+              {
+                label: 'Tags',
+                name: 'tags',
+                widget: 'object',
+                collapsed: true,
+                fields: [
+                  { label: 'Vidéo', name: 'video', widget: 'boolean', default: false },
+                  { label: 'Photo', name: 'photo', widget: 'boolean', default: false },
+                  { label: 'Drone', name: 'drone', widget: 'boolean', default: false },
+                  { label: 'Événementiel', name: 'événementiel', widget: 'boolean', default: false },
+                  { label: 'Studio', name: 'studio', widget: 'boolean', default: false },
+                  { label: 'Immobilier', name: 'immobilier', widget: 'boolean', default: false },
+                  { label: 'Industriel', name: 'industriel', widget: 'boolean', default: false },
+                  { label: 'Tourisme', name: 'tourisme', widget: 'boolean', default: false },
+                  { label: 'Voyage', name: 'voyage', widget: 'boolean', default: false },
+                  { label: 'Paysage', name: 'paysage', widget: 'boolean', default: false },
+                  { label: 'Sports', name: 'sports', widget: 'boolean', default: false },
+                  { label: 'Associatif', name: 'associatif', widget: 'boolean', default: false },
+                  { label: 'Divers', name: 'divers', widget: 'boolean', default: false },
+                  { label: 'Culture', name: 'culture', widget: 'boolean', default: false },
+                  { label: 'Gastronomie', name: 'gastronomie', widget: 'boolean', default: false },
+                  { label: 'Musique', name: 'musique', widget: 'boolean', default: false }
+                ]
+              },
+              {
+                label: 'Contenu',
+                name: 'body',
+                widget: 'markdown',
+                required: true,
+                hint: 'Le contenu principal de votre article'
+              }
+            ]
+          }
+        ]
+      }
+    });
+  </script>
 </body>
 </html>
