@@ -8,6 +8,7 @@ backend:
   branch: main
   base_url: https://api.netlify.com
   auth_endpoint: auth
+  site_id: 9c9c3551-90d4-4e69-8870-0e2be01c38be
 
 # Media files configuration
 media_folder: "public/blog/blog-images"  # Where uploaded images will be saved
