@@ -1,5 +1,5 @@
 export default async (req, res) => {
-  const { code } = req.query;
+  const { code, state } = req.query;
   
   if (!code) {
     return res.status(400).send('No code provided');
@@ -28,60 +28,54 @@ export default async (req, res) => {
     }
 
     const token = data.access_token;
+    
+    // Construct the exact message format Decap CMS expects
+    const content = {
+      token: token,
+      provider: 'github'
+    };
+    
+    const message = `authorization:github:success:${JSON.stringify(content)}`;
 
-    // Send response that closes the popup and sends token to parent window
+    // Send response with inline script
     const html = `
       <!DOCTYPE html>
       <html>
       <head>
-        <title>Authorization Success</title>
-      </head>
-      <body>
-        <h2>Authorization successful!</h2>
-        <p>Completing login...</p>
+        <title>Authorization Complete</title>
         <script>
           (function() {
-            function sendMessage() {
-              if (!window.opener) {
-                console.error('No window.opener found');
-                document.body.innerHTML += '<p style="color:red;">Error: No parent window found. Please close this window and try again.</p>';
-                return;
-              }
-
-              const messageData = 'authorization:github:success:' + JSON.stringify({
-                token: "${token}",
-                provider: "github"
-              });
-              
-              console.log('Sending message to parent:', messageData);
-              
-              // Send message with both formats to ensure compatibility
-              window.opener.postMessage(messageData, "*");
-              
-              // Also try object format
-              window.opener.postMessage({
-                type: 'authorization:github:success',
-                payload: {
-                  token: "${token}",
-                  provider: "github"
-                }
-              }, "*");
-              
-              console.log('Messages sent, closing window in 3 seconds...');
-              
-              setTimeout(function() {
-                window.close();
-              }, 3000);
+            function receiveMessage(e) {
+              console.log("Received message from parent:", e);
+              window.removeEventListener("message", receiveMessage);
             }
             
-            // Wait for page to fully load
-            if (document.readyState === 'complete') {
-              sendMessage();
-            } else {
-              window.addEventListener('load', sendMessage);
+            window.addEventListener("message", receiveMessage);
+            
+            var message = ${JSON.stringify(message)};
+            var origin = "${req.headers.origin || '*'}";
+            
+            console.log("Posting message:", message);
+            console.log("To origin:", origin);
+            
+            if (window.opener) {
+              window.opener.postMessage(message, origin);
+              
+              // Fallback with wildcard
+              setTimeout(function() {
+                window.opener.postMessage(message, "*");
+              }, 100);
             }
+            
+            setTimeout(function() {
+              window.close();
+            }, 1000);
           })();
         </script>
+      </head>
+      <body>
+        <h3>Authorization successful!</h3>
+        <p>This window will close automatically...</p>
       </body>
       </html>
     `;
@@ -90,6 +84,6 @@ export default async (req, res) => {
     res.status(200).send(html);
   } catch (error) {
     console.error('OAuth error:', error);
-    res.status(500).send('Authentication failed');
+    res.status(500).send(`Authentication failed: ${error.message}`);
   }
 };
