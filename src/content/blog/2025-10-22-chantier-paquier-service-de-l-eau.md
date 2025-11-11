@@ -24,4 +24,4 @@ tags:
   musique: false
 ---
 
-On arrive presque au bout du chantier déclenché par les services de l'eau du GRAND ANNECY, sur l'esplanade du Paquier : les canalisations est connexions sont en cours de branchement. La salle technique va bientot être terminée, ne reste qu'à raccorder cela au réseau existant. Impossible pour moi de descendre dans la salle, donc je m'y promène par procuration grâce a mon DJI mini4pro
+On arrive presque au bout du chantier déclenché par les services de l'eau du Grand Annecy sur l'esplanade du Paquier : les canalisations et connexions sont en cours de branchement. La salle technique va bientot être terminée, ne reste qu'à raccorder cela au réseau existant. Impossible pour moi de descendre dans la salle, donc je m'y promène par procuration grâce a mon drone DJI mini4pro
