@@ -6,8 +6,6 @@ backend:
   name: github
   repo: weirdwool/jeanmarcfavre
   branch: main
-  base_url: https://api.netlify.com
-  auth_endpoint: auth
 
 # Media files configuration
 media_folder: "public/blog/blog-images"  # Where uploaded images will be saved
