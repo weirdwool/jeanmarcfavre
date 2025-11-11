@@ -28,3 +28,5 @@ public/galeries/
 public/blog-images/
 public/archives/
 public/videos/
+
+node_modules

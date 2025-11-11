@@ -16,6 +16,7 @@
     "tinacms": "^2.9.1"
   },
   "devDependencies": {
-    "@astrojs/markdown-remark": "^6.3.5"
+    "@astrojs/markdown-remark": "^6.3.5",
+    "@types/node": "^24.10.0"
   }
 }
