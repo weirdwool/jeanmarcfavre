@@ -39,17 +39,24 @@ export default async (req, res) => {
       <body>
         <script>
           (function() {
-            window.opener.postMessage(
-              'authorization:github:success:${JSON.stringify({
-                token: token,
-                provider: 'github'
-              })}',
-              window.location.origin
-            );
-            window.close();
+            const data = {
+              token: "${token}",
+              provider: "github"
+            };
+            
+            if (window.opener) {
+              window.opener.postMessage(
+                "authorization:github:success:" + JSON.stringify(data),
+                "*"
+              );
+            }
+            
+            setTimeout(function() {
+              window.close();
+            }, 1000);
           })();
         </script>
-        <p>Authorization successful! This window should close automatically.</p>
+        <p>Authorization successful! Redirecting...</p>
       </body>
       </html>
     `;
