@@ -6,9 +6,8 @@ backend:
   name: github
   repo: weirdwool/jeanmarcfavre
   branch: main
-  base_url: https://api.netlify.com
-  auth_endpoint: auth
-  site_domain: jeanmarcfavre.vercel.app
+  base_url: https://jeanmarcfavre.vercel.app
+  auth_endpoint: /api/auth
 
 # Media files configuration
 media_folder: "public/blog/blog-images"  # Where uploaded images will be saved
