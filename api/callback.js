@@ -1,6 +1,6 @@
-const simpleOauth2 = require('simple-oauth2');
+import simpleOauth2 from 'simple-oauth2';
 
-module.exports = async (req, res) => {
+export default async (req, res) => {
   const oauth2 = simpleOauth2.create({
     client: {
       id: process.env.GITHUB_CLIENT_ID,
