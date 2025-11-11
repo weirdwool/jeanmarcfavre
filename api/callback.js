@@ -1,29 +1,36 @@
-import simpleOauth2 from 'simple-oauth2';
-
 export default async (req, res) => {
-  const oauth2 = simpleOauth2.create({
-    client: {
-      id: process.env.GITHUB_CLIENT_ID,
-      secret: process.env.GITHUB_CLIENT_SECRET,
-    },
-    auth: {
-      tokenHost: 'https://github.com',
-      tokenPath: '/login/oauth/access_token',
-      authorizePath: '/login/oauth/authorize',
-    },
-  });
-
   const { code } = req.query;
+  
+  if (!code) {
+    return res.status(400).send('No code provided');
+  }
 
   try {
-    const result = await oauth2.authorizationCode.getToken({
-      code,
-      redirect_uri: `${process.env.VERCEL_URL || 'https://jeanmarcfavre.vercel.app'}/api/callback`,
+    // Exchange code for access token
+    const tokenResponse = await fetch('https://github.com/login/oauth/access_token', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+      },
+      body: JSON.stringify({
+        client_id: process.env.GITHUB_CLIENT_ID,
+        client_secret: process.env.GITHUB_CLIENT_SECRET,
+        code: code,
+        redirect_uri: 'https://jeanmarcfavre.vercel.app/api/callback',
+      }),
     });
 
-    const token = oauth2.accessToken.create(result);
+    const data = await tokenResponse.json();
+    
+    if (data.error) {
+      return res.status(400).send(`GitHub error: ${data.error_description || data.error}`);
+    }
 
-    const responseBody = `
+    const token = data.access_token;
+
+    // Send response that closes the popup and sends token to parent window
+    const html = `
       <!DOCTYPE html>
       <html>
       <head>
@@ -34,7 +41,7 @@ export default async (req, res) => {
           (function() {
             window.opener.postMessage(
               'authorization:github:success:${JSON.stringify({
-                token: token.token.access_token,
+                token: token,
                 provider: 'github'
               })}',
               window.location.origin
@@ -42,13 +49,15 @@ export default async (req, res) => {
             window.close();
           })();
         </script>
+        <p>Authorization successful! This window should close automatically.</p>
       </body>
       </html>
     `;
 
-    res.send(responseBody);
+    res.setHeader('Content-Type', 'text/html');
+    res.status(200).send(html);
   } catch (error) {
+    console.error('OAuth error:', error);
     res.status(500).send('Authentication failed');
   }
 };
-
