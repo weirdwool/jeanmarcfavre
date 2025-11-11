@@ -5,8 +5,10 @@ export default defineConfig({
   branch: "main",
   
   // Tina Cloud credentials for authentication
-  clientId: "11270f41-ea51-4aa4-8952-89257bac03fa",
-  token: "0260843eb5dc668215413a7bc6cf80c37cbb47fb",
+  // Temporarily commented out to allow initial build
+  // Once deployed, uncomment these and complete Step 4 in Tina Cloud
+  // clientId: "11270f41-ea51-4aa4-8952-89257bac03fa",
+  // token: "0260843eb5dc668215413a7bc6cf80c37cbb47fb",
   
   build: {
     outputFolder: "admin",
