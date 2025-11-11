@@ -1,49 +1,93 @@
 import { defineConfig } from "tinacms";
 
-// Your hosting provider likely exposes this as an environment variable
-const branch =
-  process.env.GITHUB_BRANCH ||
-  process.env.VERCEL_GIT_COMMIT_REF ||
-  process.env.HEAD ||
-  "main";
+const branch = process.env.HEAD || process.env.VERCEL_GIT_COMMIT_REF || "main";
 
 export default defineConfig({
   branch,
-
-  // Get this from tina.io
-  clientId: process.env.NEXT_PUBLIC_TINA_CLIENT_ID,
-  // Get this from tina.io
-  token: process.env.TINA_TOKEN,
+  clientId: "1b3e810a-ad61-42fe-9c1c-d2a330e7e30e",
+  token: "9d52f8159e90f26c8e1a9eb52b76d32504bbdfd5",
 
   build: {
     outputFolder: "admin",
     publicFolder: "public",
   },
+  
   media: {
     tina: {
-      mediaRoot: "",
+      mediaRoot: "blog/blog-images",
       publicFolder: "public",
     },
   },
-  // See docs on content modeling for more info on how to setup new content models: https://tina.io/docs/r/content-modelling-collections/
+  
   schema: {
     collections: [
       {
-        name: "post",
-        label: "Posts",
-        path: "content/posts",
+        name: "blog",
+        label: "Blog Posts",
+        path: "src/content/blog",
+        format: "md",
         fields: [
           {
             type: "string",
             name: "title",
-            label: "Title",
+            label: "Titre",
             isTitle: true,
             required: true,
           },
           {
+            type: "datetime",
+            name: "pubDate",
+            label: "Date de publication",
+            required: true,
+          },
+          {
+            type: "string",
+            name: "location",
+            label: "Lieu",
+          },
+          {
+            type: "image",
+            name: "main_image",
+            label: "Image principale",
+            required: true,
+          },
+          {
+            type: "string",
+            name: "gallery_url",
+            label: "URL Galerie Lightroom",
+          },
+          {
+            type: "string",
+            name: "video_url",
+            label: "URL Vidéo Vimeo",
+          },
+          {
+            type: "object",
+            name: "tags",
+            label: "Tags",
+            fields: [
+              { type: "boolean", name: "video", label: "Vidéo" },
+              { type: "boolean", name: "photo", label: "Photo" },
+              { type: "boolean", name: "drone", label: "Drone" },
+              { type: "boolean", name: "evenementiel", label: "Événementiel" },
+              { type: "boolean", name: "studio", label: "Studio" },
+              { type: "boolean", name: "immobilier", label: "Immobilier" },
+              { type: "boolean", name: "industriel", label: "Industriel" },
+              { type: "boolean", name: "tourisme", label: "Tourisme" },
+              { type: "boolean", name: "voyage", label: "Voyage" },
+              { type: "boolean", name: "paysage", label: "Paysage" },
+              { type: "boolean", name: "sports", label: "Sports" },
+              { type: "boolean", name: "associatif", label: "Associatif" },
+              { type: "boolean", name: "divers", label: "Divers" },
+              { type: "boolean", name: "culture", label: "Culture" },
+              { type: "boolean", name: "gastronomie", label: "Gastronomie" },
+              { type: "boolean", name: "musique", label: "Musique" },
+            ],
+          },
+          {
             type: "rich-text",
             name: "body",
-            label: "Body",
+            label: "Contenu",
             isBody: true,
           },
         ],
