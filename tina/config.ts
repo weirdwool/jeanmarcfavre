@@ -27,6 +27,8 @@ export default defineConfig({
         label: "Blog Posts",
         path: "src/content/blog",
         format: "md",
+        defaultSortField: "pubDate",
+        defaultSortDirection: "desc",
         ui: {
           filename: {
             readonly: true,
