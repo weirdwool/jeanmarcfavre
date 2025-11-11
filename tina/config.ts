@@ -5,10 +5,8 @@ export default defineConfig({
   branch: "main",
   
   // Tina Cloud credentials for authentication
-  // Temporarily commented out to allow initial build
-  // Once deployed, uncomment these and complete Step 4 in Tina Cloud
-  // clientId: "11270f41-ea51-4aa4-8952-89257bac03fa",
-  // token: "0260843eb5dc668215413a7bc6cf80c37cbb47fb",
+  clientId: "11270f41-ea51-4aa4-8952-89257bac03fa",
+  token: "0260843eb5dc668215413a7bc6cf80c37cbb47fb",
   
   build: {
     outputFolder: "admin",
@@ -47,6 +45,33 @@ export default defineConfig({
               return `${year}-${month}-${day}-${title}`;
             },
           },
+        },
+        defaultItem: {
+          title: "",
+          pubDate: new Date().toISOString(),
+          location: "",
+          main_image: "",
+          gallery_url: "",
+          video_url: "",
+          tags: {
+            video: false,
+            photo: false,
+            drone: false,
+            v_nementiel: false,
+            studio: false,
+            immobilier: false,
+            industriel: false,
+            tourisme: false,
+            voyage: false,
+            paysage: false,
+            sports: false,
+            associatif: false,
+            divers: false,
+            culture: false,
+            gastronomie: false,
+            musique: false,
+          },
+          body: "",
         },
         fields: [
           {
@@ -88,105 +113,29 @@ export default defineConfig({
           {
             type: "object",
             name: "tags",
-            label: "Tags (Cochez les catégories appropriées)",
-            description: "Sélectionnez tous les tags qui correspondent à votre article",
+            label: "Tags (Cochez les catégories qui s'appliquent)",
             fields: [
+              { type: "boolean", name: "video", label: "Vidéo" },
+              { type: "boolean", name: "photo", label: "Photo" },
+              { type: "boolean", name: "drone", label: "Drone" },
               { 
                 type: "boolean", 
-                name: "video", 
-                label: "📹 Vidéo",
-                description: "Contient une vidéo"
+                name: "v_nementiel",
+                nameOverride: "événementiel",
+                label: "Événementiel" 
               },
-              { 
-                type: "boolean", 
-                name: "photo", 
-                label: "📷 Photo",
-                description: "Reportage photo"
-              },
-              { 
-                type: "boolean", 
-                name: "drone", 
-                label: "🚁 Drone",
-                description: "Prise de vue aérienne"
-              },
-              { 
-                type: "boolean", 
-                name: "evenementiel", 
-                label: "🎉 Événementiel",
-                description: "Événement, fête, spectacle"
-              },
-              { 
-                type: "boolean", 
-                name: "studio", 
-                label: "🎬 Studio",
-                description: "Prise de vue en studio"
-              },
-              { 
-                type: "boolean", 
-                name: "immobilier", 
-                label: "🏠 Immobilier",
-                description: "Architecture, bâtiment"
-              },
-              { 
-                type: "boolean", 
-                name: "industriel", 
-                label: "🏭 Industriel",
-                description: "Site industriel, usine"
-              },
-              { 
-                type: "boolean", 
-                name: "tourisme", 
-                label: "🗺️ Tourisme",
-                description: "Destination touristique"
-              },
-              { 
-                type: "boolean", 
-                name: "voyage", 
-                label: "✈️ Voyage",
-                description: "Voyage, déplacement"
-              },
-              { 
-                type: "boolean", 
-                name: "paysage", 
-                label: "🏔️ Paysage",
-                description: "Nature, montagne, lac"
-              },
-              { 
-                type: "boolean", 
-                name: "sports", 
-                label: "⚽ Sports",
-                description: "Activité sportive"
-              },
-              { 
-                type: "boolean", 
-                name: "associatif", 
-                label: "🤝 Associatif",
-                description: "Association, bénévolat"
-              },
-              { 
-                type: "boolean", 
-                name: "divers", 
-                label: "📦 Divers",
-                description: "Autre catégorie"
-              },
-              { 
-                type: "boolean", 
-                name: "culture", 
-                label: "🎭 Culture",
-                description: "Culturel, art, théâtre"
-              },
-              { 
-                type: "boolean", 
-                name: "gastronomie", 
-                label: "🍽️ Gastronomie",
-                description: "Cuisine, restaurant"
-              },
-              { 
-                type: "boolean", 
-                name: "musique", 
-                label: "🎵 Musique",
-                description: "Concert, musique"
-              },
+              { type: "boolean", name: "studio", label: "Studio" },
+              { type: "boolean", name: "immobilier", label: "Immobilier" },
+              { type: "boolean", name: "industriel", label: "Industriel" },
+              { type: "boolean", name: "tourisme", label: "Tourisme" },
+              { type: "boolean", name: "voyage", label: "Voyage" },
+              { type: "boolean", name: "paysage", label: "Paysage" },
+              { type: "boolean", name: "sports", label: "Sports" },
+              { type: "boolean", name: "associatif", label: "Associatif" },
+              { type: "boolean", name: "divers", label: "Divers" },
+              { type: "boolean", name: "culture", label: "Culture" },
+              { type: "boolean", name: "gastronomie", label: "Gastronomie" },
+              { type: "boolean", name: "musique", label: "Musique" },
             ],
           },
           {
