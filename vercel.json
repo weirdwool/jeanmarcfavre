@@ -7,7 +7,11 @@
       "headers": [
         {
           "key": "Content-Type",
-          "value": "application/x-yaml"
+          "value": "text/yaml"
+        },
+        {
+          "key": "Access-Control-Allow-Origin",
+          "value": "*"
         }
       ]
     }
