@@ -4,7 +4,7 @@ export default defineConfig({
   branch: "main",
   clientId: "11270f41-ea51-4aa4-8952-89257bac03fa",
   token: "0260843eb5dc668215413a7bc6cf80c37cbb47fb",
-
+  
   build: {
     outputFolder: "admin",
     publicFolder: "public",
