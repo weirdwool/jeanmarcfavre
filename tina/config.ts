@@ -5,7 +5,7 @@ export default defineConfig({
   clientId: "11270f41-ea51-4aa4-8952-89257bac03fa",
   token: "0260843eb5dc668215413a7bc6cf80c37cbb47fb",
   
-  contentApiUrlOverride: `https://content.tinajs.io/content/11270f41-ea51-4aa4-8952-89257bac03fa/github/main`,
+  contentApiUrlOverride: "https://content.tinajs.io/1.0/content/11270f41-ea51-4aa4-8952-89257bac03fa/github/main",
   
   build: {
     outputFolder: "admin",
