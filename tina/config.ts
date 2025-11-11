@@ -33,13 +33,28 @@ export default defineConfig({
             readonly: true,
             slugify: (values) => {
               // Auto-generate filename from date and title
-              const date = values?.pubDate ? new Date(values.pubDate) : new Date();
+              let date;
+              if (values?.pubDate) {
+                // Handle both ISO string and Date object
+                date = typeof values.pubDate === 'string' 
+                  ? new Date(values.pubDate) 
+                  : values.pubDate;
+              } else {
+                date = new Date();
+              }
+              
+              // Validate the date
+              if (isNaN(date.getTime())) {
+                date = new Date();
+              }
+              
               const year = date.getFullYear();
               const month = String(date.getMonth() + 1).padStart(2, '0');
               const day = String(date.getDate()).padStart(2, '0');
               const title = values?.title
                 ? values.title
                     .toLowerCase()
+                    .normalize('NFD').replace(/[\u0300-\u036f]/g, '') // Remove accents
                     .replace(/[^a-z0-9]+/g, '-')
                     .replace(/(^-|-$)/g, '')
                 : 'nouveau-post';
