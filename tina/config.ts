@@ -27,8 +27,6 @@ export default defineConfig({
         label: "Blog Posts",
         path: "src/content/blog",
         format: "md",
-        defaultSortField: "pubDate",
-        defaultSortDirection: "desc",
         ui: {
           filename: {
             readonly: true,
@@ -78,18 +76,12 @@ export default defineConfig({
             name: "gallery_url",
             label: "URL Galerie Lightroom",
             description: "Exemple: /blog/blog-galeries/251028-Thonon-port/index.html",
-            ui: {
-              placeholder: "/blog/blog-galeries/votre-dossier/index.html",
-            },
           },
           {
             type: "string",
             name: "video_url",
             label: "URL Vidéo Vimeo",
             description: "Exemple: https://vimeo.com/123456789",
-            ui: {
-              placeholder: "https://vimeo.com/123456789",
-            },
           },
           {
             type: "object",
