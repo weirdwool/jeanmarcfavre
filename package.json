@@ -11,7 +11,9 @@
   "dependencies": {
     "@astrojs/react": "^4.3.0",
     "@astrojs/sitemap": "^3.6.0",
-    "astro": "^5.11.0"
+    "@tinacms/cli": "^1.12.0",
+    "astro": "^5.11.0",
+    "tinacms": "^2.9.1"
   },
   "devDependencies": {
     "@astrojs/markdown-remark": "^6.3.5"
