@@ -48,23 +48,30 @@ export default async (req, res) => {
                 return;
               }
 
-              const message = 'authorization:github:success:' + JSON.stringify({
+              const messageData = 'authorization:github:success:' + JSON.stringify({
                 token: "${token}",
                 provider: "github"
               });
               
-              console.log('Sending message to parent:', message);
-              window.opener.postMessage(message, window.location.origin);
+              console.log('Sending message to parent:', messageData);
               
-              // Try with wildcard origin as backup
+              // Send message with both formats to ensure compatibility
+              window.opener.postMessage(messageData, "*");
+              
+              // Also try object format
+              window.opener.postMessage({
+                type: 'authorization:github:success',
+                payload: {
+                  token: "${token}",
+                  provider: "github"
+                }
+              }, "*");
+              
+              console.log('Messages sent, closing window in 3 seconds...');
+              
               setTimeout(function() {
-                window.opener.postMessage(message, "*");
-                console.log('Message sent, closing window in 2 seconds...');
-                
-                setTimeout(function() {
-                  window.close();
-                }, 2000);
-              }, 500);
+                window.close();
+              }, 3000);
             }
             
             // Wait for page to fully load
