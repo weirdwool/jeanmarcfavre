@@ -1,5 +1,16 @@
 {
   "cleanUrls": true,
-  "trailingSlash": false
+  "trailingSlash": false,
+  "headers": [
+    {
+      "source": "/admin/config.yml",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "application/x-yaml"
+        }
+      ]
+    }
+  ]
 }
 
