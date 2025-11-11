@@ -11,6 +11,7 @@ export default defineConfig({
   build: {
     outputFolder: "admin",
     publicFolder: "public",
+    skipCloudCheck: true,
   },
   
   media: {
