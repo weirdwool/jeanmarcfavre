@@ -24,6 +24,8 @@ collections:
     create: true  # Allow users to create new posts
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}"  # Filename template
     format: "frontmatter"
+    sortable_fields: ['pubDate', 'title']  # Allow sorting by date or title
+    sort: 'pubDate:desc'  # Default sort: most recent publication date first
     fields:  # The fields for each blog post
       
       - label: "Titre"
