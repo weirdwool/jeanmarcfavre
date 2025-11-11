@@ -11,7 +11,8 @@
   "dependencies": {
     "@astrojs/react": "^4.3.0",
     "@astrojs/sitemap": "^3.6.0",
-    "astro": "^5.11.0"
+    "astro": "^5.11.0",
+    "simple-oauth2": "^5.1.0"
   },
   "devDependencies": {
     "@astrojs/markdown-remark": "^6.3.5"
