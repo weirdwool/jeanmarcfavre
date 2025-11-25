@@ -1,7 +1,7 @@
 ---
 title: "Skate Big Rampe"
 pubDate: 2025-11-08T00:00:00.000Z
-
+location: "Pringy"
 main_image: "/blog/blog-images/251108-Postec-rampe.jpg"
 gallery_url: "/blog/blog-galeries/251108-Skate-Big-rampe/index.html"
 
