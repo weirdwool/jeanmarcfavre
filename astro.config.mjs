@@ -6,7 +6,7 @@ import sitemap from '@astrojs/sitemap';
 // https://astro.build/config
 export default defineConfig({
   site: 'https://jeanmarcfavre.com',
-  output: 'static',
+  output: 'server', // Server mode to support API routes
   integrations: [
     react(),
     sitemap({

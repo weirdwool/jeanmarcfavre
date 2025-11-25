@@ -1,0 +1,18 @@
+---
+import AdminLayout from '../layouts/AdminLayout.astro';
+import Admin from '../components/Admin.tsx';
+
+// Check authentication
+const authCookie = Astro.cookies.get('admin_auth');
+const isAuthenticated = !!authCookie?.value;
+
+// If not authenticated, redirect to login
+if (!isAuthenticated) {
+  return Astro.redirect('/admin-login', 302);
+}
+---
+
+<AdminLayout title="Administration - Blog">
+  <Admin client:load />
+</AdminLayout>
+

@@ -16,6 +16,7 @@ import Footer from '../components/Footer.astro';
 
 interface Props {
   isIndexPage?: boolean;
+  hasHero?: boolean; // Pages with hero images (photo, drone, video, engagements, contact)
   title?: string;
   preloadImage?: string;
   description?: string;
@@ -24,7 +25,8 @@ interface Props {
 }
 
 const { 
-  isIndexPage = false, 
+  isIndexPage = false,
+  hasHero = false, // Default to false - will be true for pages with hero images
   title = 'Jean-Marc Favre - Photographe Drone Annecy | Photo Vidéo Haute-Savoie', 
   preloadImage,
   description = 'Photographe professionnel et pilote de drone certifié à Annecy. 40 ans d\'expérience en photo, vidéo et drone. Services pour entreprises, mariages et événements en Haute-Savoie.',
@@ -87,9 +89,10 @@ const fullImageUrl = new URL(image, siteUrl).href;
         )}
     </head>
 
-    <body class:list={{ 'is-index-page': isIndexPage }}>
+    <body class:list={{ 'is-index-page': isIndexPage, 'has-hero': hasHero || isIndexPage }}>
         <Menu />
         <main>
+            {!(hasHero || isIndexPage) && <div class="header-spacer"></div>}
     		<slot />
   		</main>
         <Footer />

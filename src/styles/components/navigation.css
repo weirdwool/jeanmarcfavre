@@ -2,9 +2,9 @@
 MENU - Mobile First Approach
 */
 
-/* override spacer on index page */
-.is-index-page .header-spacer {
-  height: 0; /* Collapse the spacer when .is-index-page is on the body */
+/* Hide spacer on pages with hero images (index, photo, drone, video, engagements, contact) */
+.has-hero .header-spacer {
+  display: none; /* Hide the spacer when page has hero image */
 }
 
 /* Logo Signature - Mobile First */

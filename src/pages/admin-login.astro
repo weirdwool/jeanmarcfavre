@@ -1,0 +1,12 @@
+---
+import AdminLayout from '../layouts/AdminLayout.astro';
+import LoginForm from '../components/LoginForm.tsx';
+import '../styles/pages/login.css';
+---
+
+<AdminLayout title="Connexion - Administration">
+  <div class="login-container">
+    <LoginForm client:load />
+  </div>
+</AdminLayout>
+

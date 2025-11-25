@@ -6,6 +6,7 @@ const allEngagements = await getCollection('engagements');
 allEngagements.sort((a: CollectionEntry<'engagements'>, b: CollectionEntry<'engagements'>) => a.data.title.localeCompare(b.data.title));
 ---
 <Layout 
+  hasHero={true}
   title="Engagements Associatifs Annecy | Projets Solidaires - Jean-Marc Favre"
   description="Mes engagements photographiques avec les associations d'Annecy : MéeO, Glisse en Coeur, BAAR Rugby, Espérance III. Photographie solidaire et associative."
   preloadImage="/images/parallax/061128-Annecy-01.jpg"
