@@ -30,22 +30,23 @@
 }
 
 .btn-logout {
-  padding: 0.5rem 1.25rem;
+  padding: 0.35rem 0.85rem;
   background: #000000;
   color: var(--primary-color);
-  border: 2px solid var(--primary-color);
-  border-radius: 8px;
+  border: 1px solid #dd8100;
+  border-radius: 6px;
   cursor: pointer;
   font-weight: 600;
-  font-size: 0.875rem;
+  font-size: 0.7rem;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   text-transform: uppercase;
   letter-spacing: 0.5px;
+  box-sizing: border-box;
 }
 
 .btn-logout:hover {
   background: rgba(221, 129, 0, 0.1);
-  transform: translateY(-2px);
+  border-color: #e7591c;
   box-shadow: 0 4px 12px rgba(221, 129, 0, 0.3);
 }
 
@@ -71,6 +72,12 @@
   gap: 0.5rem;
 }
 
+.btn.btn-logout {
+  border: 1px solid #dd8100 !important;
+  padding: 0.35rem 0.85rem !important;
+  font-size: 0.7rem !important;
+}
+
 .btn-primary {
   background: linear-gradient(135deg, #e7591c 0%, #dd8100 100%);
   color: white;
@@ -81,32 +88,15 @@
   font-size: 0.875rem;
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  position: relative;
-  overflow: hidden;
   text-transform: uppercase;
   letter-spacing: 0.5px;
   box-shadow: 0 4px 12px rgba(221, 129, 0, 0.3);
 }
 
-.btn-primary::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-  transition: left 0.6s;
-}
-
-.btn-primary:hover::before {
-  left: 100%;
-}
-
 .btn-primary:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(221, 129, 0, 0.4);
-  filter: brightness(1.1);
+  box-shadow: 0 6px 16px rgba(221, 129, 0, 0.5);
+  filter: brightness(1.05);
+  background: linear-gradient(135deg, #f0692c 0%, #ed9120 100%);
 }
 
 .btn-success {
@@ -194,10 +184,10 @@
 }
 
 .admin-form-container {
-  background: rgba(0, 0, 0, 0.4);
+  background: white;
   padding: 2.5rem;
   border-radius: 8px;
-  border: 1px solid rgba(221, 129, 0, 0.2);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   margin-bottom: 2rem;
 }
 
@@ -205,10 +195,14 @@
   margin-top: 0;
   margin-bottom: 2rem;
   font-size: 1.75rem;
-  color: var(--primary-color);
-  font-weight: 500;
+  background: linear-gradient(135deg, #e7591c 0%, #dd8100 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 600;
   text-transform: uppercase;
   font-family: "Outfit", sans-serif;
+  letter-spacing: 0.1em;
 }
 
 .form-grid {
@@ -223,10 +217,12 @@
 
 .form-label {
   display: block;
-  margin-bottom: 0.5rem;
-  font-weight: 500;
-  color: #cecece;
-  font-size: 0.95rem;
+  margin-bottom: 0.75rem;
+  font-weight: 600;
+  color: #1a202c;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .form-label.required::after {
@@ -237,27 +233,131 @@
 .form-input,
 .form-textarea {
   width: 100%;
-  padding: 0.875rem;
-  border: 1px solid rgba(221, 129, 0, 0.3);
-  border-radius: 4px;
+  padding: 1rem;
+  border: 2px solid #e5e7eb;
+  border-radius: 6px;
   font-size: 1rem;
   font-family: inherit;
-  transition: all 0.2s ease;
-  background: rgba(0, 0, 0, 0.3);
-  color: #cecece;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  background: #fafafa;
+  color: #1a202c;
 }
 
 .form-input:focus,
 .form-textarea:focus {
   outline: none;
+  border-color: #dd8100;
+  background: white;
+  box-shadow: 0 0 0 4px rgba(221, 129, 0, 0.1);
+  transform: translateY(-1px);
+}
+
+.markdown-editor-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  border: 2px solid #e5e7eb;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.markdown-editor-left {
+  display: flex;
+  flex-direction: column;
+}
+
+.markdown-toolbar {
+  display: flex;
+  gap: 0.5rem;
+  padding: 0.5rem;
+  background: #f9fafb;
+  border-bottom: 2px solid #e5e7eb;
+}
+
+.toolbar-btn {
+  padding: 0.5rem 0.75rem;
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.875rem;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 36px;
+}
+
+.toolbar-btn:hover {
+  background: #f3f4f6;
   border-color: var(--primary-color);
-  background: rgba(0, 0, 0, 0.5);
-  box-shadow: 0 0 0 3px rgba(221, 129, 0, 0.1);
+  color: var(--primary-color);
+}
+
+.toolbar-btn strong {
+  font-weight: 700;
+}
+
+.toolbar-btn em {
+  font-style: italic;
 }
 
 .form-textarea {
-  resize: vertical;
-  min-height: 150px;
+  resize: none;
+  min-height: 300px;
+  border: none;
+  border-radius: 0;
+  padding: 1rem;
+}
+
+.markdown-preview {
+  display: flex;
+  flex-direction: column;
+  background: #fafafa;
+  border-left: 2px solid #e5e7eb;
+}
+
+.markdown-preview-header {
+  padding: 0.75rem 1rem;
+  background: #f9fafb;
+  border-bottom: 2px solid #e5e7eb;
+  font-weight: 600;
+  font-size: 0.875rem;
+  color: #6b7280;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.markdown-preview-content {
+  padding: 1rem;
+  overflow-y: auto;
+  min-height: 300px;
+  max-height: 500px;
+  color: #1a202c;
+  line-height: 1.6;
+}
+
+.markdown-preview-content p {
+  margin: 0 0 1rem 0;
+}
+
+.markdown-preview-content strong {
+  font-weight: 700;
+}
+
+.markdown-preview-content em {
+  font-style: italic;
+}
+
+.markdown-preview-content a {
+  color: var(--primary-color);
+  text-decoration: underline;
+}
+
+.markdown-preview-content hr {
+  border: none;
+  border-top: 2px solid #e5e7eb;
+  margin: 1.5rem 0;
 }
 
 .tags-grid {
@@ -265,9 +365,9 @@
   grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
   gap: 0.75rem;
   padding: 1rem;
-  background: rgba(0, 0, 0, 0.3);
-  border-radius: 4px;
-  border: 1px solid rgba(221, 129, 0, 0.2);
+  background: #f9fafb;
+  border-radius: 6px;
+  border: 2px solid #e5e7eb;
 }
 
 .tag-checkbox {
@@ -277,30 +377,76 @@
   padding: 0.5rem;
   cursor: pointer;
   border-radius: 4px;
-  transition: background 0.2s ease;
+  transition: all 0.2s ease;
+  border: 2px solid #e5e7eb;
+  background: white;
 }
 
 .tag-checkbox:hover {
-  background: rgba(221, 129, 0, 0.1);
+  background: rgba(221, 129, 0, 0.05);
+  border-color: rgba(221, 129, 0, 0.3);
 }
 
 .tag-checkbox input[type="checkbox"] {
-  width: 18px;
-  height: 18px;
+  width: 20px;
+  height: 20px;
   cursor: pointer;
   accent-color: var(--primary-color);
+  flex-shrink: 0;
+}
+
+.tag-checkbox:has(input[type="checkbox"]:checked) {
+  background: rgba(221, 129, 0, 0.1);
+  border-color: var(--primary-color);
+  font-weight: 600;
 }
 
 .tag-checkbox span {
   font-size: 0.95rem;
-  color: #cecece;
+  color: #1a202c;
   user-select: none;
+}
+
+.tag-checkbox:has(input[type="checkbox"]:checked) span {
+  color: var(--primary-color);
 }
 
 .form-actions {
   margin-top: 2rem;
   display: flex;
+  justify-content: space-between;
+  align-items: center;
   gap: 1rem;
+}
+
+.form-actions-left {
+  display: flex;
+  gap: 1rem;
+}
+
+.btn-delete {
+  background: white;
+  color: #dc2626;
+  border: 2px solid #dc2626;
+  border-radius: 8px;
+  padding: 0.75rem 1.5rem;
+  font-weight: 600;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.btn-delete:hover:not(:disabled) {
+  background: #dc2626;
+  color: white;
+  box-shadow: 0 4px 12px rgba(220, 38, 38, 0.3);
+}
+
+.btn-delete:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
 }
 
 .posts-list {
@@ -404,32 +550,15 @@
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   flex-shrink: 0;
   font-size: 0.875rem;
-  position: relative;
-  overflow: hidden;
   text-transform: uppercase;
   letter-spacing: 0.5px;
   box-shadow: 0 4px 12px rgba(221, 129, 0, 0.3);
 }
 
-.btn-edit::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-  transition: left 0.6s;
-}
-
-.btn-edit:hover::before {
-  left: 100%;
-}
-
 .btn-edit:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(221, 129, 0, 0.4);
-  filter: brightness(1.1);
+  box-shadow: 0 6px 16px rgba(221, 129, 0, 0.5);
+  filter: brightness(1.05);
+  background: linear-gradient(135deg, #f0692c 0%, #ed9120 100%);
 }
 
 .pagination {

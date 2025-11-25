@@ -46,7 +46,7 @@ if (!entry) {
 const { Content } = await render(entry);
 
 // Create description from the content (first 155 characters)
-const description = entry.body.substring(0, 155).trim() + '...';
+const description = (entry.body || '').substring(0, 155).trim() + (entry.body && entry.body.length > 155 ? '...' : '');
 
 // Create full URL for this blog post
 const pubDate = entry.data.pubDate;

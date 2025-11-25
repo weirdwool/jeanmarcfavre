@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import ReactMarkdown from 'react-markdown';
 
 interface BlogPost {
   slug: string;
@@ -75,6 +76,7 @@ export default function Admin() {
   const [galleryFolder, setGalleryFolder] = useState<FileList | null>(null);
   const [currentPage, setCurrentPage] = useState(1);
   const postsPerPage = 20;
+  const [deleting, setDeleting] = useState(false);
 
   // Load posts on mount and check auth
   useEffect(() => {
@@ -324,6 +326,44 @@ export default function Admin() {
     }
   };
 
+  const handleDelete = async () => {
+    if (!editingPost) return;
+
+    // First confirmation
+    const firstConfirm = window.confirm(
+      `Êtes-vous sûr de vouloir supprimer l'article "${editingPost.title}" ?`
+    );
+    if (!firstConfirm) return;
+
+    // Second confirmation
+    const secondConfirm = window.confirm(
+      'Cette action est irréversible. Confirmez-vous la suppression ?'
+    );
+    if (!secondConfirm) return;
+
+    try {
+      setDeleting(true);
+      const response = await fetch(`/api/blog-posts/${editingPost.slug}`, {
+        method: 'DELETE',
+      });
+
+      if (response.ok) {
+        setMessage({ type: 'success', text: 'Article supprimé avec succès' });
+        setShowForm(false);
+        setEditingPost(null);
+        // Reload posts
+        loadPosts();
+      } else {
+        const error = await response.json();
+        setMessage({ type: 'error', text: error.error || 'Erreur lors de la suppression' });
+      }
+    } catch (error) {
+      setMessage({ type: 'error', text: 'Erreur lors de la suppression' });
+    } finally {
+      setDeleting(false);
+    }
+  };
+
   if (loading) {
     return (
       <div className="loading">
@@ -470,33 +510,138 @@ export default function Admin() {
 
             <div className="form-group">
               <label className="form-label">Contenu</label>
-              <textarea
-                value={formData.body}
-                onChange={(e) => setFormData({ ...formData, body: e.target.value })}
-                rows={10}
-                className="form-textarea"
-              />
+              <div className="markdown-editor-container">
+                <div className="markdown-editor-left">
+                  <div className="markdown-toolbar">
+                    <button
+                      type="button"
+                      onClick={() => {
+                        const textarea = document.querySelector('.form-textarea') as HTMLTextAreaElement;
+                        if (!textarea) return;
+                        const start = textarea.selectionStart;
+                        const end = textarea.selectionEnd;
+                        const selectedText = formData.body.substring(start, end);
+                        const newText = formData.body.substring(0, start) + `**${selectedText || 'texte en gras'}**` + formData.body.substring(end);
+                        setFormData({ ...formData, body: newText });
+                        setTimeout(() => {
+                          textarea.focus();
+                          const newPos = start + (selectedText ? 2 : 12);
+                          textarea.setSelectionRange(newPos, newPos + (selectedText ? selectedText.length : 0));
+                        }, 0);
+                      }}
+                      className="toolbar-btn"
+                      title="Gras"
+                    >
+                      <strong>B</strong>
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        const textarea = document.querySelector('.form-textarea') as HTMLTextAreaElement;
+                        if (!textarea) return;
+                        const start = textarea.selectionStart;
+                        const end = textarea.selectionEnd;
+                        const selectedText = formData.body.substring(start, end);
+                        const newText = formData.body.substring(0, start) + `*${selectedText || 'texte en italique'}*` + formData.body.substring(end);
+                        setFormData({ ...formData, body: newText });
+                        setTimeout(() => {
+                          textarea.focus();
+                          const newPos = start + (selectedText ? 1 : 18);
+                          textarea.setSelectionRange(newPos, newPos + (selectedText ? selectedText.length : 0));
+                        }, 0);
+                      }}
+                      className="toolbar-btn"
+                      title="Italique"
+                    >
+                      <em>I</em>
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        const textarea = document.querySelector('.form-textarea') as HTMLTextAreaElement;
+                        if (!textarea) return;
+                        const start = textarea.selectionStart;
+                        const end = textarea.selectionEnd;
+                        const selectedText = formData.body.substring(start, end);
+                        const newText = formData.body.substring(0, start) + `[${selectedText || 'texte du lien'}](url)` + formData.body.substring(end);
+                        setFormData({ ...formData, body: newText });
+                        setTimeout(() => {
+                          textarea.focus();
+                          const newPos = start + (selectedText ? selectedText.length + 1 : 19);
+                          textarea.setSelectionRange(newPos, newPos + 3);
+                        }, 0);
+                      }}
+                      className="toolbar-btn"
+                      title="Lien"
+                    >
+                      🔗
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        const textarea = document.querySelector('.form-textarea') as HTMLTextAreaElement;
+                        if (!textarea) return;
+                        const start = textarea.selectionStart;
+                        const newText = formData.body.substring(0, start) + '\n\n---\n\n' + formData.body.substring(start);
+                        setFormData({ ...formData, body: newText });
+                        setTimeout(() => {
+                          textarea.focus();
+                          textarea.setSelectionRange(start + 5, start + 5);
+                        }, 0);
+                      }}
+                      className="toolbar-btn"
+                      title="Séparateur"
+                    >
+                      ─
+                    </button>
+                  </div>
+                  <textarea
+                    value={formData.body}
+                    onChange={(e) => setFormData({ ...formData, body: e.target.value })}
+                    rows={10}
+                    className="form-textarea"
+                    placeholder="Écrivez votre contenu en markdown ici..."
+                  />
+                </div>
+                <div className="markdown-preview">
+                  <div className="markdown-preview-header">Aperçu</div>
+                  <div className="markdown-preview-content">
+                    <ReactMarkdown>{formData.body || '*Aperçu du contenu apparaîtra ici...*'}</ReactMarkdown>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
 
           <div className="form-actions">
-            <button
-              onClick={handleSave}
-              disabled={saving}
-              className="btn btn-success"
-            >
-              {saving ? 'Sauvegarde...' : 'Enregistrer'}
-            </button>
-            <button
-              onClick={() => {
-                setShowForm(false);
-                setEditingPost(null);
-                setMessage(null);
-              }}
-              className="btn btn-secondary"
-            >
-              Annuler
-            </button>
+            <div className="form-actions-left">
+              <button
+                onClick={handleSave}
+                disabled={saving}
+                className="btn btn-success"
+              >
+                {saving ? 'Sauvegarde...' : 'Enregistrer'}
+              </button>
+              <button
+                onClick={() => {
+                  setShowForm(false);
+                  setEditingPost(null);
+                  setMessage(null);
+                }}
+                className="btn btn-secondary"
+              >
+                Annuler
+              </button>
+            </div>
+            {editingPost && (
+              <button
+                onClick={handleDelete}
+                disabled={deleting}
+                className="btn btn-delete"
+              >
+                {deleting ? 'Suppression...' : 'Supprimer'}
+              </button>
+            )}
           </div>
         </div>
       ) : (
@@ -556,7 +701,7 @@ export default function Admin() {
                 disabled={currentPage === 1}
                 className="pagination-btn"
               >
-                ← Précédent
+                &lt;
               </button>
               <span className="pagination-info">
                 Page {currentPage} sur {Math.ceil(posts.length / postsPerPage)}
@@ -566,7 +711,7 @@ export default function Admin() {
                 disabled={currentPage >= Math.ceil(posts.length / postsPerPage)}
                 className="pagination-btn"
               >
-                Suivant →
+                &gt;
               </button>
             </div>
           )}

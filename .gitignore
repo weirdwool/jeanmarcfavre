@@ -29,4 +29,7 @@ public/blog-images/
 public/archives/
 public/videos/
 
+# Documentation (excluded from build)
+docs/
+
 node_modules
