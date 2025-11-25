@@ -2,14 +2,14 @@
 import { defineConfig } from 'astro/config';
 import react from "@astrojs/react";
 import sitemap from '@astrojs/sitemap';
-import vercel from '@astrojs/vercel/serverless';
+import node from '@astrojs/node';
 
 // https://astro.build/config
 export default defineConfig({
   site: 'https://jeanmarcfavre.com',
   output: 'server', // Server mode to support API routes
-  adapter: vercel({
-    includeFiles: ['./public/**'],
+  adapter: node({
+    mode: 'standalone'
   }),
   publicDir: 'public',
   integrations: [
