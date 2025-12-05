@@ -13,7 +13,11 @@ export default defineConfig({
   integrations: [
     react(),
     sitemap({
-      filter: (page) => !page.includes('/api/') && !page.includes('/docs/'),
+      filter: (page) => 
+        !page.includes('/api/') && 
+        !page.includes('/docs/') && 
+        !page.includes('/admin-login') && 
+        !page.includes('/admin-blog'),
       customPages: [],
     })
   ],

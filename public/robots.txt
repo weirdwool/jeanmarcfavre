@@ -1,5 +1,8 @@
 User-agent: *
 Allow: /
+Disallow: /admin-login
+Disallow: /admin-blog
+Disallow: /api/
 
 Sitemap: https://jeanmarcfavre.com/sitemap-index.xml
 
