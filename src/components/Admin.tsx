@@ -169,6 +169,16 @@ export default function Admin() {
       return;
     }
 
+    if (!formData.location.trim()) {
+      setMessage({ type: 'error', text: 'Le lieu est obligatoire' });
+      return;
+    }
+
+    if (!formData.main_image.trim()) {
+      setMessage({ type: 'error', text: 'L\'image principale est obligatoire' });
+      return;
+    }
+
     setSaving(true);
     setMessage(null);
 
@@ -416,17 +426,18 @@ export default function Admin() {
             </div>
 
             <div className="form-group">
-              <label className="form-label">Lieu</label>
+              <label className="form-label required">Lieu</label>
               <input
                 type="text"
                 value={formData.location}
                 onChange={(e) => setFormData({ ...formData, location: e.target.value })}
                 className="form-input"
+                required
               />
             </div>
 
             <div className="form-group">
-              <label className="form-label">Image principale</label>
+              <label className="form-label required">Image principale</label>
               <div style={{ display: 'flex', gap: '1rem', alignItems: 'flex-end' }}>
                 <div style={{ flex: 1 }}>
                   <input
@@ -435,6 +446,7 @@ export default function Admin() {
                     onChange={(e) => setFormData({ ...formData, main_image: e.target.value })}
                     placeholder="/blog/blog-images/..."
                     className="form-input"
+                    required
                   />
                 </div>
                 <div>
@@ -502,6 +514,9 @@ export default function Admin() {
                   Téléversement en cours...
                 </p>
               )}
+              <p style={{ marginTop: '0.5rem', fontSize: '0.85rem', color: '#888', fontStyle: 'italic' }}>
+                ⚠️ La date de publication doit être définie en premier (elle est utilisée pour générer le nom du fichier).
+              </p>
             </div>
 
             <div className="form-group">
