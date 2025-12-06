@@ -114,10 +114,10 @@ export const POST: APIRoute = async ({ request }) => {
     const frontmatter = `---
 title: ${JSON.stringify(title)}
 pubDate: ${new Date(pubDate).toISOString()}
-${location ? `location: ${JSON.stringify(location)}` : ''}
-${main_image ? `main_image: ${JSON.stringify(main_image)}` : ''}
-${gallery_url ? `gallery_url: ${JSON.stringify(gallery_url)}` : ''}
-${video_url ? `video_url: ${JSON.stringify(video_url)}` : ''}
+${location && location.trim() ? `location: ${JSON.stringify(location)}` : ''}
+${main_image && main_image.trim() ? `main_image: ${JSON.stringify(main_image)}` : ''}
+${gallery_url && gallery_url.trim() ? `gallery_url: ${JSON.stringify(gallery_url)}` : ''}
+${video_url && video_url.trim() ? `video_url: ${JSON.stringify(video_url)}` : ''}
 tags:
 ${Object.entries(tags || {}).map(([key, value]) => `  ${key}: ${value}`).join('\n')}
 ---
@@ -188,10 +188,10 @@ export const PUT: APIRoute = async ({ request }) => {
     const frontmatter = `---
 title: ${JSON.stringify(title)}
 pubDate: ${new Date(pubDate).toISOString()}
-${location ? `location: ${JSON.stringify(location)}` : ''}
-${main_image ? `main_image: ${JSON.stringify(main_image)}` : ''}
-${gallery_url ? `gallery_url: ${JSON.stringify(gallery_url)}` : ''}
-${video_url ? `video_url: ${JSON.stringify(video_url)}` : ''}
+${location && location.trim() ? `location: ${JSON.stringify(location)}` : ''}
+${main_image && main_image.trim() ? `main_image: ${JSON.stringify(main_image)}` : ''}
+${gallery_url && gallery_url.trim() ? `gallery_url: ${JSON.stringify(gallery_url)}` : ''}
+${video_url && video_url.trim() ? `video_url: ${JSON.stringify(video_url)}` : ''}
 tags:
 ${Object.entries(tags || {}).map(([key, value]) => `  ${key}: ${value}`).join('\n')}
 ---
