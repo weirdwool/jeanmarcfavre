@@ -74,6 +74,7 @@ export default function Admin() {
   const [message, setMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
   const [uploadingGallery, setUploadingGallery] = useState(false);
   const [galleryFolder, setGalleryFolder] = useState<FileList | null>(null);
+  const [uploadingImage, setUploadingImage] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const postsPerPage = 20;
   const [deleting, setDeleting] = useState(false);
@@ -426,13 +427,81 @@ export default function Admin() {
 
             <div className="form-group">
               <label className="form-label">Image principale</label>
-              <input
-                type="text"
-                value={formData.main_image}
-                onChange={(e) => setFormData({ ...formData, main_image: e.target.value })}
-                placeholder="/blog/blog-images/..."
-                className="form-input"
-              />
+              <div style={{ display: 'flex', gap: '1rem', alignItems: 'flex-end' }}>
+                <div style={{ flex: 1 }}>
+                  <input
+                    type="text"
+                    value={formData.main_image}
+                    onChange={(e) => setFormData({ ...formData, main_image: e.target.value })}
+                    placeholder="/blog/blog-images/..."
+                    className="form-input"
+                  />
+                </div>
+                <div>
+                  <label className="btn btn-secondary" style={{ margin: 0 }}>
+                    📷 Téléverser une image
+                    <input
+                      type="file"
+                      accept="image/*"
+                      onChange={async (e) => {
+                        const file = e.target.files?.[0];
+                        if (!file) return;
+
+                        if (!formData.pubDate) {
+                          setMessage({ type: 'error', text: 'Veuillez d\'abord sélectionner une date de publication' });
+                          return;
+                        }
+
+                        setUploadingImage(true);
+                        setMessage(null);
+
+                        try {
+                          const uploadFormData = new FormData();
+                          uploadFormData.append('file', file);
+                          uploadFormData.append('date', formData.pubDate);
+
+                          const response = await fetch('/api/upload-blog-image', {
+                            method: 'POST',
+                            body: uploadFormData,
+                          });
+
+                          if (!response.ok) {
+                            const error = await response.json();
+                            setMessage({ type: 'error', text: error.message || 'Erreur lors du téléversement' });
+                            return;
+                          }
+
+                          const result = await response.json();
+                          
+                          if (result.success) {
+                            // Auto-fill the image path
+                            setFormData(prev => ({
+                              ...prev,
+                              main_image: result.path,
+                            }));
+                            setMessage({ type: 'success', text: `Image téléversée avec succès: ${result.filename}` });
+                          } else {
+                            setMessage({ type: 'error', text: result.message || 'Erreur lors du téléversement' });
+                          }
+                        } catch (error) {
+                          setMessage({ type: 'error', text: 'Erreur de connexion' });
+                        } finally {
+                          setUploadingImage(false);
+                          // Reset the input so the same file can be selected again if needed
+                          e.target.value = '';
+                        }
+                      }}
+                      style={{ display: 'none' }}
+                      disabled={uploadingImage}
+                    />
+                  </label>
+                </div>
+              </div>
+              {uploadingImage && (
+                <p style={{ marginTop: '0.5rem', fontSize: '0.9rem', color: '#666' }}>
+                  Téléversement en cours...
+                </p>
+              )}
             </div>
 
             <div className="form-group">
