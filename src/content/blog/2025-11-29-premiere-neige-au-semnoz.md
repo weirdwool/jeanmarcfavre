@@ -2,7 +2,7 @@
 title: "Première neige au Semnoz"
 pubDate: 2025-11-29
 location: "Le Semnoz"
-main_image: "/blog/blog-images/251129-Alambic-Ambiance-16.jpg"
+main_image: "/blog/blog-images/241109-ACSE.jpg"
 
 video_url: ''
 tags:
