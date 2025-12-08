@@ -243,10 +243,22 @@ ${body || ''}
     const filePath = path.join(process.cwd(), 'src', 'content', 'blog', `${slug}.md`);
     
     try {
+      // Check if file exists and if content has changed
+      let contentChanged = true;
+      try {
+        const existingContent = await fs.readFile(filePath, 'utf-8');
+        if (existingContent === frontmatter) {
+          contentChanged = false;
+        }
+      } catch (readError) {
+        // File doesn't exist, so content has changed (it's new)
+        contentChanged = true;
+      }
+      
       await fs.writeFile(filePath, frontmatter, 'utf-8');
       
-      // If GitHub token is available, also commit to GitHub for automatic deployment
-      if (GITHUB_TOKEN) {
+      // Only commit to GitHub if content actually changed
+      if (GITHUB_TOKEN && contentChanged) {
         try {
           await commitToGitHub(slug, frontmatter, 'update');
         } catch (githubError) {
@@ -260,8 +272,20 @@ ${body || ''}
         headers: { 'Content-Type': 'application/json' },
       });
     } catch (writeError) {
-      // If local write fails, try GitHub API directly
-      if (GITHUB_TOKEN) {
+      // If local write fails, check if content changed before trying GitHub API
+      let contentChanged = true;
+      try {
+        const existingContent = await fs.readFile(filePath, 'utf-8');
+        if (existingContent === frontmatter) {
+          contentChanged = false;
+        }
+      } catch (readError) {
+        // File doesn't exist or can't be read, assume content changed
+        contentChanged = true;
+      }
+      
+      // Only try GitHub API if content actually changed
+      if (GITHUB_TOKEN && contentChanged) {
         try {
           await commitToGitHub(slug, frontmatter, 'update');
           return new Response(JSON.stringify({ success: true, slug, message: 'Committed to GitHub' }), {
@@ -271,6 +295,14 @@ ${body || ''}
         } catch (githubError) {
           console.error('GitHub commit failed:', githubError);
         }
+      }
+      
+      // If no changes, return success without committing
+      if (!contentChanged) {
+        return new Response(JSON.stringify({ success: true, slug, message: 'No changes detected' }), {
+          status: 200,
+          headers: { 'Content-Type': 'application/json' },
+        });
       }
       
       // Fallback: return markdown for download
