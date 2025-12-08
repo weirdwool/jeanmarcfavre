@@ -68,35 +68,6 @@ async function fileToBase64(file: File): Promise<string> {
   return buffer.toString('base64');
 }
 
-// Generate filename from date and original filename
-function generateFilename(date: string, originalFilename: string): string {
-  // Always use the date from the form
-  const dateObj = new Date(date);
-  const year = String(dateObj.getFullYear()).slice(-2);
-  const month = String(dateObj.getMonth() + 1).padStart(2, '0');
-  const day = String(dateObj.getDate()).padStart(2, '0');
-  
-  // Get extension from original filename (preserve case)
-  const extension = originalFilename.split('.').pop() || 'jpg';
-  
-  // Get base name without extension and remove any existing date prefix
-  let baseName = originalFilename.replace(/\.[^/.]+$/, '');
-  
-  // Remove any existing date prefix (6 digits + hyphen) from the beginning
-  baseName = baseName.replace(/^\d{6}-/i, '');
-  
-  // Clean the base name (remove special chars, keep alphanumeric, hyphens, and preserve case)
-  // Only normalize accents but keep original case
-  const cleanBaseName = baseName
-    .normalize('NFD')
-    .replace(/[\u0300-\u036f]/g, '') // Remove accents but keep case
-    .replace(/[^a-zA-Z0-9-]+/g, '-') // Keep letters (both cases), numbers, and hyphens
-    .replace(/(^-|-$)/g, '')
-    .substring(0, 30);
-  
-  return `${year}${month}${day}-${cleanBaseName}.${extension}`;
-}
-
 export const POST: APIRoute = async ({ request }) => {
   try {
     if (!GITHUB_TOKEN) {
@@ -114,7 +85,7 @@ export const POST: APIRoute = async ({ request }) => {
 
     const formData = await request.formData();
     const file = formData.get('file') as File;
-    const date = formData.get('date') as string; // Publication date for filename
+    const date = formData.get('date') as string; // Date is sent but not used for filename
     
     if (!file) {
       return new Response(
@@ -126,18 +97,8 @@ export const POST: APIRoute = async ({ request }) => {
       );
     }
 
-    if (!date) {
-      return new Response(
-        JSON.stringify({ success: false, message: 'La date est requise pour générer le nom du fichier' }),
-        {
-          status: 400,
-          headers: { 'Content-Type': 'application/json' },
-        }
-      );
-    }
-
-    // Generate filename
-    const filename = generateFilename(date, file.name);
+    // Use original filename exactly as uploaded (no modifications)
+    const filename = file.name;
     const repoPath = `public/blog/blog-images/${filename}`;
     
     // Read file content as base64

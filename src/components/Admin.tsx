@@ -245,35 +245,24 @@ export default function Admin() {
     setMessage(null);
 
     try {
-      // Find the index.html file to determine the gallery folder name
-      let galleryName = '';
+      // Always generate gallery name from form date and title (like image uploads)
       const files: File[] = Array.from(galleryFolder);
       
-      // Look for index.html to get the folder structure
-      const indexFile = files.find(f => f.name === 'index.html');
-      if (indexFile && (indexFile as any).webkitRelativePath) {
-        // Extract folder name from path like "gallery-name/index.html"
-        const pathParts = (indexFile as any).webkitRelativePath.split('/');
-        galleryName = pathParts[0];
-      } else if (files.length > 0 && (files[0] as any).webkitRelativePath) {
-        // Use first file's path to get folder name
-        const pathParts = (files[0] as any).webkitRelativePath.split('/');
-        galleryName = pathParts[0];
-      } else {
-        // Fallback: use a generated name based on date and title
-        const date = new Date(formData.pubDate);
-        const year = date.getFullYear();
-        const month = String(date.getMonth() + 1).padStart(2, '0');
-        const day = String(date.getDate()).padStart(2, '0');
-        const titleSlug = formData.title
-          .toLowerCase()
-          .normalize('NFD')
-          .replace(/[\u0300-\u036f]/g, '')
-          .replace(/[^a-z0-9]+/g, '-')
-          .replace(/(^-|-$)/g, '')
-          .substring(0, 30);
-        galleryName = `${year}${month}${day}-${titleSlug}`;
-      }
+      // Generate gallery name from date and title
+      const date = new Date(formData.pubDate);
+      const year = String(date.getFullYear()).slice(-2);
+      const month = String(date.getMonth() + 1).padStart(2, '0');
+      const day = String(date.getDate()).padStart(2, '0');
+      
+      // Get base name from title, preserving case
+      let titleSlug = formData.title
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '') // Remove accents but keep case
+        .replace(/[^a-zA-Z0-9-]+/g, '-') // Keep letters (both cases), numbers, and hyphens
+        .replace(/(^-|-$)/g, '')
+        .substring(0, 30);
+      
+      const galleryName = `${year}${month}${day}-${titleSlug}`;
 
       // Create FormData with all files
       const uploadFormData = new FormData();
