@@ -26,7 +26,8 @@ pnpm-debug.log*
 
 # Large media files (host these separately, not in git)
 public/galeries/
-public/blog-images/
+public/blog/blog-galeries/
+public/blog/blog-images/
 public/archives/
 public/videos/
 
