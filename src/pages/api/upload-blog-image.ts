@@ -76,21 +76,21 @@ function generateFilename(date: string, originalFilename: string): string {
   const month = String(dateObj.getMonth() + 1).padStart(2, '0');
   const day = String(dateObj.getDate()).padStart(2, '0');
   
-  // Get extension from original filename
-  const extension = originalFilename.split('.').pop()?.toLowerCase() || 'jpg';
+  // Get extension from original filename (preserve case)
+  const extension = originalFilename.split('.').pop() || 'jpg';
   
   // Get base name without extension and remove any existing date prefix
   let baseName = originalFilename.replace(/\.[^/.]+$/, '');
   
   // Remove any existing date prefix (6 digits + hyphen) from the beginning
-  baseName = baseName.replace(/^\d{6}-/, '');
+  baseName = baseName.replace(/^\d{6}-/i, '');
   
-  // Clean the base name (remove special chars, keep alphanumeric and hyphens)
+  // Clean the base name (remove special chars, keep alphanumeric, hyphens, and preserve case)
+  // Only normalize accents but keep original case
   const cleanBaseName = baseName
-    .toLowerCase()
     .normalize('NFD')
-    .replace(/[\u0300-\u036f]/g, '')
-    .replace(/[^a-z0-9-]+/g, '-')
+    .replace(/[\u0300-\u036f]/g, '') // Remove accents but keep case
+    .replace(/[^a-zA-Z0-9-]+/g, '-') // Keep letters (both cases), numbers, and hyphens
     .replace(/(^-|-$)/g, '')
     .substring(0, 30);
   
