@@ -2,8 +2,8 @@
 title: Port de Thonon à l'automne
 pubDate: 2025-11-08
 location: Thonon les Bains
-main_image: /blog/blog-images/251028-thonon-port.jpg
-gallery_url: /blog/blog-galeries/251028-Thonon-port/index.html
+main_image: "/blog/blog-images/251028-thonon-port.jpg"
+gallery_url: "/blog/blog-galeries/251028-Thonon-port/index.html"
 video_url: ""
 tags:
   musique: false

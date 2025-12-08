@@ -110,16 +110,36 @@ export const POST: APIRoute = async ({ request }) => {
     const data = await request.json();
     const { slug, title, pubDate, location, main_image, gallery_url, video_url, tags, body } = data;
 
+    // Format date as YYYY-MM-DD
+    const dateObj = new Date(pubDate);
+    const year = dateObj.getFullYear();
+    const month = String(dateObj.getMonth() + 1).padStart(2, '0');
+    const day = String(dateObj.getDate()).padStart(2, '0');
+    const formattedDate = `${year}-${month}-${day}`;
+
+    // All available tags from schema (in order)
+    const allTagKeys = [
+      'associatif', 'culture', 'divers', 'drone', 'événementiel',
+      'gastronomie', 'immobilier', 'industriel', 'musique', 'paysage',
+      'sports', 'studio', 'tourisme', 'video', 'voyage'
+    ];
+
+    // Generate tags section with all tags (false if not set)
+    const tagsSection = allTagKeys.map(key => {
+      const value = tags && tags[key] ? tags[key] : false;
+      return `  ${key}: ${value}`;
+    }).join('\n');
+
     // Generate markdown content
     const frontmatter = `---
 title: ${JSON.stringify(title)}
-pubDate: ${new Date(pubDate).toISOString()}
-${location && location.trim() ? `location: ${JSON.stringify(location)}` : ''}
-${main_image && main_image.trim() ? `main_image: ${main_image.trim()}` : ''}
-${gallery_url && gallery_url.trim() ? `gallery_url: ${gallery_url.trim()}` : ''}
-${video_url && video_url.trim() ? `video_url: ${JSON.stringify(video_url)}` : ''}
+pubDate: ${formattedDate}
+${location && location.trim() ? `location: ${JSON.stringify(location.trim())}` : ''}
+${main_image && main_image.trim() ? `main_image: ${JSON.stringify(main_image.trim())}` : ''}
+${gallery_url && gallery_url.trim() ? `gallery_url: ${JSON.stringify(gallery_url.trim())}` : ''}
+video_url: ${video_url && video_url.trim() ? JSON.stringify(video_url) : "''"}
 tags:
-${Object.entries(tags || {}).map(([key, value]) => `  ${key}: ${value}`).join('\n')}
+${tagsSection}
 ---
 
 ${body || ''}
@@ -184,16 +204,36 @@ export const PUT: APIRoute = async ({ request }) => {
     const data = await request.json();
     const { slug, title, pubDate, location, main_image, gallery_url, video_url, tags, body } = data;
 
+    // Format date as YYYY-MM-DD
+    const dateObj = new Date(pubDate);
+    const year = dateObj.getFullYear();
+    const month = String(dateObj.getMonth() + 1).padStart(2, '0');
+    const day = String(dateObj.getDate()).padStart(2, '0');
+    const formattedDate = `${year}-${month}-${day}`;
+
+    // All available tags from schema (in order)
+    const allTagKeys = [
+      'associatif', 'culture', 'divers', 'drone', 'événementiel',
+      'gastronomie', 'immobilier', 'industriel', 'musique', 'paysage',
+      'sports', 'studio', 'tourisme', 'video', 'voyage'
+    ];
+
+    // Generate tags section with all tags (false if not set)
+    const tagsSection = allTagKeys.map(key => {
+      const value = tags && tags[key] ? tags[key] : false;
+      return `  ${key}: ${value}`;
+    }).join('\n');
+
     // Generate markdown content
     const frontmatter = `---
 title: ${JSON.stringify(title)}
-pubDate: ${new Date(pubDate).toISOString()}
-${location && location.trim() ? `location: ${JSON.stringify(location)}` : ''}
-${main_image && main_image.trim() ? `main_image: ${main_image.trim()}` : ''}
-${gallery_url && gallery_url.trim() ? `gallery_url: ${gallery_url.trim()}` : ''}
-${video_url && video_url.trim() ? `video_url: ${JSON.stringify(video_url)}` : ''}
+pubDate: ${formattedDate}
+${location && location.trim() ? `location: ${JSON.stringify(location.trim())}` : ''}
+${main_image && main_image.trim() ? `main_image: ${JSON.stringify(main_image.trim())}` : ''}
+${gallery_url && gallery_url.trim() ? `gallery_url: ${JSON.stringify(gallery_url.trim())}` : ''}
+video_url: ${video_url && video_url.trim() ? JSON.stringify(video_url) : "''"}
 tags:
-${Object.entries(tags || {}).map(([key, value]) => `  ${key}: ${value}`).join('\n')}
+${tagsSection}
 ---
 
 ${body || ''}
