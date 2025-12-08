@@ -72,9 +72,8 @@ export default function Admin() {
   });
   const [saving, setSaving] = useState(false);
   const [message, setMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
-  const [uploadingGallery, setUploadingGallery] = useState(false);
   const [galleryFolder, setGalleryFolder] = useState<FileList | null>(null);
-  const [uploadingImage, setUploadingImage] = useState(false);
+  const [selectedImageFile, setSelectedImageFile] = useState<File | null>(null);
   const [currentPage, setCurrentPage] = useState(1);
   const postsPerPage = 20;
   const [deleting, setDeleting] = useState(false);
@@ -116,6 +115,8 @@ export default function Admin() {
       tags: post.tags || {},
       body: post.body || '',
     });
+    setSelectedImageFile(null);
+    setGalleryFolder(null);
     setShowForm(true);
   };
 
@@ -131,6 +132,8 @@ export default function Admin() {
       tags: {},
       body: '',
     });
+    setSelectedImageFile(null);
+    setGalleryFolder(null);
     setShowForm(true);
   };
 
@@ -174,13 +177,102 @@ export default function Admin() {
       return;
     }
 
+    // Upload image if a new one was selected
+    if (selectedImageFile) {
+      try {
+        setMessage({ type: 'success', text: 'Téléversement de l\'image en cours...' });
+        const uploadFormData = new FormData();
+        uploadFormData.append('file', selectedImageFile);
+
+        const imageResponse = await fetch('/api/upload-blog-image', {
+          method: 'POST',
+          body: uploadFormData,
+        });
+
+        if (!imageResponse.ok) {
+          const error = await imageResponse.json();
+          setMessage({ type: 'error', text: error.message || 'Erreur lors du téléversement de l\'image' });
+          return;
+        }
+
+        const imageResult = await imageResponse.json();
+        if (imageResult.success) {
+          setFormData(prev => ({
+            ...prev,
+            main_image: imageResult.path,
+          }));
+        } else {
+          setMessage({ type: 'error', text: imageResult.message || 'Erreur lors du téléversement de l\'image' });
+          return;
+        }
+      } catch (error: any) {
+        setMessage({ type: 'error', text: error.message || 'Erreur de connexion lors du téléversement de l\'image' });
+        return;
+      }
+    }
+
     if (!formData.main_image.trim()) {
       setMessage({ type: 'error', text: 'L\'image principale est obligatoire' });
       return;
     }
 
+    // Upload gallery if one was selected
+    if (galleryFolder && galleryFolder.length > 0) {
+      try {
+        setMessage({ type: 'success', text: 'Téléversement de la galerie en cours...' });
+        const files: File[] = Array.from(galleryFolder);
+        
+        // Generate gallery name from date and title
+        const date = new Date(formData.pubDate);
+        const year = String(date.getFullYear()).slice(-2);
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const day = String(date.getDate()).padStart(2, '0');
+        
+        let titleSlug = formData.title
+          .normalize('NFD')
+          .replace(/[\u0300-\u036f]/g, '')
+          .replace(/[^a-zA-Z0-9-]+/g, '-')
+          .replace(/(^-|-$)/g, '')
+          .substring(0, 30);
+        
+        const galleryName = `${year}${month}${day}-${titleSlug}`;
+
+        const uploadFormData = new FormData();
+        uploadFormData.append('galleryName', galleryName);
+        files.forEach((file) => {
+          const relativePath = (file as any).webkitRelativePath || file.name;
+          uploadFormData.append('files', file, relativePath);
+        });
+
+        const galleryResponse = await fetch('/api/upload-gallery', {
+          method: 'POST',
+          body: uploadFormData,
+        });
+
+        if (!galleryResponse.ok) {
+          const error = await galleryResponse.json();
+          setMessage({ type: 'error', text: error.message || 'Erreur lors du téléversement de la galerie' });
+          return;
+        }
+
+        const galleryResult = await galleryResponse.json();
+        if (galleryResult.success) {
+          setFormData(prev => ({
+            ...prev,
+            gallery_url: `/blog/blog-galeries/${galleryName}/index.html`,
+          }));
+        } else {
+          setMessage({ type: 'error', text: galleryResult.message || 'Erreur lors du téléversement de la galerie' });
+          return;
+        }
+      } catch (error: any) {
+        setMessage({ type: 'error', text: error.message || 'Erreur de connexion lors du téléversement de la galerie' });
+        return;
+      }
+    }
+
     setSaving(true);
-    setMessage(null);
+    setMessage({ type: 'success', text: 'Sauvegarde en cours...' });
 
     try {
       const slug = editingPost ? editingPost.slug : generateSlug(formData.title, formData.pubDate);
@@ -207,6 +299,8 @@ export default function Admin() {
         setMessage({ type: 'success', text: editingPost ? 'Article modifié avec succès!' : 'Article créé avec succès!' });
         setShowForm(false);
         setEditingPost(null);
+        setSelectedImageFile(null);
+        setGalleryFolder(null);
         await loadPosts();
       } else if (result.markdown) {
         // File write not available - provide download option
@@ -225,6 +319,8 @@ export default function Admin() {
         });
         setShowForm(false);
         setEditingPost(null);
+        setSelectedImageFile(null);
+        setGalleryFolder(null);
       } else {
         setMessage({ type: 'error', text: result.message || result.error || 'Erreur lors de la sauvegarde' });
       }
@@ -232,75 +328,6 @@ export default function Admin() {
       setMessage({ type: 'error', text: 'Erreur de connexion' });
     } finally {
       setSaving(false);
-    }
-  };
-
-  const handleUploadGallery = async () => {
-    if (!galleryFolder || galleryFolder.length === 0) {
-      setMessage({ type: 'error', text: 'Veuillez sélectionner un dossier' });
-      return;
-    }
-
-    setUploadingGallery(true);
-    setMessage(null);
-
-    try {
-      // Always generate gallery name from form date and title (like image uploads)
-      const files: File[] = Array.from(galleryFolder);
-      
-      // Generate gallery name from date and title
-      const date = new Date(formData.pubDate);
-      const year = String(date.getFullYear()).slice(-2);
-      const month = String(date.getMonth() + 1).padStart(2, '0');
-      const day = String(date.getDate()).padStart(2, '0');
-      
-      // Get base name from title, preserving case
-      let titleSlug = formData.title
-        .normalize('NFD')
-        .replace(/[\u0300-\u036f]/g, '') // Remove accents but keep case
-        .replace(/[^a-zA-Z0-9-]+/g, '-') // Keep letters (both cases), numbers, and hyphens
-        .replace(/(^-|-$)/g, '')
-        .substring(0, 30);
-      
-      const galleryName = `${year}${month}${day}-${titleSlug}`;
-
-      // Create FormData with all files
-      const uploadFormData = new FormData();
-      uploadFormData.append('galleryName', galleryName);
-      files.forEach((file) => {
-        // Preserve relative path structure
-        const relativePath = (file as any).webkitRelativePath || file.name;
-        uploadFormData.append('files', file, relativePath);
-      });
-
-      const response = await fetch('/api/upload-gallery', {
-        method: 'POST',
-        body: uploadFormData,
-      });
-
-      if (!response.ok) {
-        const error = await response.json();
-        setMessage({ type: 'error', text: error.message || 'Erreur lors du téléversement' });
-        return;
-      }
-
-      const result = await response.json();
-      
-      if (result.success) {
-        // Auto-fill the gallery URL
-        setFormData(prev => ({
-          ...prev,
-          gallery_url: `/blog/blog-galeries/${galleryName}/index.html`,
-        }));
-        setMessage({ type: 'success', text: `Galerie téléversée avec succès! URL: /blog/blog-galeries/${galleryName}/index.html` });
-        setGalleryFolder(null);
-      } else {
-        setMessage({ type: 'error', text: result.message || 'Erreur lors du téléversement' });
-      }
-    } catch (error) {
-      setMessage({ type: 'error', text: 'Erreur de connexion' });
-    } finally {
-      setUploadingGallery(false);
     }
   };
 
@@ -440,71 +467,39 @@ export default function Admin() {
                 </div>
                 <div>
                   <label className="btn btn-secondary" style={{ margin: 0 }}>
-                    📷 Téléverser une image
+                    📷 Choisir une image
                     <input
                       type="file"
                       accept="image/*"
-                      onChange={async (e) => {
+                      onChange={(e) => {
                         const file = e.target.files?.[0];
                         if (!file) return;
 
-                        if (!formData.pubDate) {
-                          setMessage({ type: 'error', text: 'Veuillez d\'abord sélectionner une date de publication' });
+                        // Check file size
+                        const maxSizeBytes = 1.5 * 1024 * 1024; // 1.5MB
+                        if (file.size > maxSizeBytes) {
+                          const fileSizeMB = (file.size / 1024 / 1024).toFixed(1);
+                          setMessage({ 
+                            type: 'error', 
+                            text: `Le fichier est trop volumineux (${fileSizeMB}MB). La taille maximale est de 1.5MB.` 
+                          });
+                          e.target.value = '';
                           return;
                         }
 
-                        setUploadingImage(true);
-                        setMessage(null);
-
-                        try {
-                          const uploadFormData = new FormData();
-                          uploadFormData.append('file', file);
-                          uploadFormData.append('date', formData.pubDate);
-
-                          const response = await fetch('/api/upload-blog-image', {
-                            method: 'POST',
-                            body: uploadFormData,
-                          });
-
-                          if (!response.ok) {
-                            const error = await response.json();
-                            setMessage({ type: 'error', text: error.message || 'Erreur lors du téléversement' });
-                            return;
-                          }
-
-                          const result = await response.json();
-                          
-                          if (result.success) {
-                            // Auto-fill the image path
-                            setFormData(prev => ({
-                              ...prev,
-                              main_image: result.path,
-                            }));
-                            setMessage({ type: 'success', text: `Image téléversée avec succès: ${result.filename}` });
-                          } else {
-                            setMessage({ type: 'error', text: result.message || 'Erreur lors du téléversement' });
-                          }
-                        } catch (error: any) {
-                          console.error('Upload error:', error);
-                          setMessage({ 
-                            type: 'error', 
-                            text: error.message || 'Erreur de connexion. Vérifiez votre connexion internet et réessayez.' 
-                          });
-                        } finally {
-                          setUploadingImage(false);
-                          // Reset the input so the same file can be selected again if needed
-                          e.target.value = '';
-                        }
+                        setSelectedImageFile(file);
+                        setMessage({ type: 'success', text: `Image sélectionnée: ${file.name}. Elle sera téléversée lors de l'enregistrement.` });
+                        e.target.value = '';
                       }}
                       style={{ display: 'none' }}
-                      disabled={uploadingImage}
+                      disabled={saving}
                     />
                   </label>
                 </div>
               </div>
-              {uploadingImage && (
+              {selectedImageFile && (
                 <p style={{ marginTop: '0.5rem', fontSize: '0.9rem', color: '#666' }}>
-                  Téléversement en cours...
+                  Image sélectionnée: {selectedImageFile.name}
                 </p>
               )}
               <p style={{ marginTop: '0.5rem', fontSize: '0.85rem', color: '#888', fontStyle: 'italic' }}>
@@ -526,7 +521,7 @@ export default function Admin() {
                 </div>
                 <div>
                   <label className="btn btn-secondary" style={{ margin: 0 }}>
-                    📁 Téléverser un dossier
+                    📁 Choisir un dossier
                     <input
                       type="file"
                       {...({ webkitdirectory: '', directory: '' } as any)}
@@ -534,26 +529,20 @@ export default function Admin() {
                       onChange={(e) => {
                         if (e.target.files && e.target.files.length > 0) {
                           setGalleryFolder(e.target.files);
+                          setMessage({ type: 'success', text: `${e.target.files.length} fichiers sélectionnés. La galerie sera téléversée lors de l'enregistrement.` });
                         }
                       }}
                       style={{ display: 'none' }}
+                      disabled={saving}
                     />
                   </label>
                 </div>
               </div>
               {galleryFolder && (
                 <div className="gallery-upload-section">
-                  <p className="gallery-upload-info">
-                    {galleryFolder.length} fichiers sélectionnés
+                  <p className="gallery-upload-info" style={{ marginTop: '0.5rem', fontSize: '0.9rem', color: '#666' }}>
+                    {galleryFolder.length} fichiers sélectionnés - La galerie sera téléversée lors de l'enregistrement
                   </p>
-                  <button
-                    onClick={handleUploadGallery}
-                    disabled={uploadingGallery}
-                    className="btn btn-success"
-                    style={{ fontSize: '0.9rem', padding: '0.5rem 1rem' }}
-                  >
-                    {uploadingGallery ? 'Téléversement...' : 'Téléverser la galerie'}
-                  </button>
                 </div>
               )}
             </div>
@@ -703,6 +692,8 @@ export default function Admin() {
                 onClick={() => {
                   setShowForm(false);
                   setEditingPost(null);
+                  setSelectedImageFile(null);
+                  setGalleryFolder(null);
                   setMessage(null);
                 }}
                 className="btn btn-secondary"

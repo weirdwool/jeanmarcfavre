@@ -10,12 +10,12 @@ const GITHUB_BRANCH = 'main';
 const GITHUB_TOKEN = import.meta.env.GITHUB_TOKEN;
 
 // Helper function to commit file to GitHub
-async function commitFileToGitHub(filePath: string, content: string, message: string) {
+async function commitFileToGitHub(filePath: string, base64Content: string, message: string) {
   if (!GITHUB_TOKEN) {
     throw new Error('GITHUB_TOKEN not configured');
   }
 
-  const base64Content = Buffer.from(content, 'utf-8').toString('base64');
+  // base64Content is already base64-encoded for binary files
   
   // Check if file exists to get SHA for updates
   let fileSha: string | null = null;
