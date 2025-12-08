@@ -450,80 +450,74 @@ export default function Admin() {
             </div>
 
             <div className="form-group">
-              <label className="form-label required">Date de publication</label>
-              <input
-                type="date"
-                value={formData.pubDate}
-                onChange={(e) => setFormData({ ...formData, pubDate: e.target.value })}
-                className="form-input"
-                required
-              />
-            </div>
-
-            <div className="form-group">
-              <label className="form-label required">Lieu</label>
-              <input
-                type="text"
-                value={formData.location}
-                onChange={(e) => setFormData({ ...formData, location: e.target.value })}
-                className="form-input"
-                required
-              />
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+                <div>
+                  <label className="form-label required">Date de publication</label>
+                  <input
+                    type="date"
+                    value={formData.pubDate}
+                    onChange={(e) => setFormData({ ...formData, pubDate: e.target.value })}
+                    className="form-input"
+                    required
+                  />
+                </div>
+                <div>
+                  <label className="form-label required">Lieu</label>
+                  <input
+                    type="text"
+                    value={formData.location}
+                    onChange={(e) => setFormData({ ...formData, location: e.target.value })}
+                    className="form-input"
+                    required
+                  />
+                </div>
+              </div>
             </div>
 
             <div className="form-group">
               <label className="form-label required">Image principale</label>
-              <div style={{ display: 'flex', gap: '1rem', alignItems: 'flex-start', flexWrap: 'wrap' }}>
-                <div>
-                  <label className="btn btn-secondary" style={{ margin: 0 }}>
-                    📷 Choisir une image
-                    <input
-                      type="file"
-                      accept="image/*"
-                      onChange={(e) => {
-                        const file = e.target.files?.[0];
-                        if (!file) return;
+              <div>
+                <label className="btn btn-success" style={{ margin: 0 }}>
+                  📷 Choisir une image
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={(e) => {
+                      const file = e.target.files?.[0];
+                      if (!file) return;
 
-                        // Check file size
-                        const maxSizeBytes = 1.5 * 1024 * 1024; // 1.5MB
-                        if (file.size > maxSizeBytes) {
-                          const fileSizeMB = (file.size / 1024 / 1024).toFixed(1);
-                          setMessage({ 
-                            type: 'error', 
-                            text: `Le fichier est trop volumineux (${fileSizeMB}MB). La taille maximale est de 1.5MB.` 
-                          });
-                          e.target.value = '';
-                          return;
-                        }
-
-                        // Cleanup previous preview URL
-                        if (imagePreviewUrl) {
-                          URL.revokeObjectURL(imagePreviewUrl);
-                        }
-                        
-                        setSelectedImageFile(file);
-                        // Create preview URL
-                        const previewUrl = URL.createObjectURL(file);
-                        setImagePreviewUrl(previewUrl);
-                        
-                        // Auto-generate path
-                        const path = `/blog/blog-images/${file.name}`;
-                        setFormData(prev => ({ ...prev, main_image: path }));
-                        setMessage({ type: 'success', text: `Image sélectionnée: ${file.name}. Elle sera téléversée lors de l'enregistrement.` });
+                      // Check file size
+                      const maxSizeBytes = 1.5 * 1024 * 1024; // 1.5MB
+                      if (file.size > maxSizeBytes) {
+                        const fileSizeMB = (file.size / 1024 / 1024).toFixed(1);
+                        setMessage({ 
+                          type: 'error', 
+                          text: `Le fichier est trop volumineux (${fileSizeMB}MB). La taille maximale est de 1.5MB.` 
+                        });
                         e.target.value = '';
-                      }}
-                      style={{ display: 'none' }}
-                      disabled={saving}
-                    />
-                  </label>
-                </div>
-                {formData.main_image && (
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flex: 1, minWidth: '200px' }}>
-                    <span style={{ fontSize: '0.9rem', color: '#666', fontStyle: 'italic' }}>
-                      {formData.main_image}
-                    </span>
-                  </div>
-                )}
+                        return;
+                      }
+
+                      // Cleanup previous preview URL
+                      if (imagePreviewUrl) {
+                        URL.revokeObjectURL(imagePreviewUrl);
+                      }
+                      
+                      setSelectedImageFile(file);
+                      // Create preview URL
+                      const previewUrl = URL.createObjectURL(file);
+                      setImagePreviewUrl(previewUrl);
+                      
+                      // Auto-generate path
+                      const path = `/blog/blog-images/${file.name}`;
+                      setFormData(prev => ({ ...prev, main_image: path }));
+                      setMessage({ type: 'success', text: `Image sélectionnée: ${file.name}. Elle sera téléversée lors de l'enregistrement.` });
+                      e.target.value = '';
+                    }}
+                    style={{ display: 'none' }}
+                    disabled={saving}
+                  />
+                </label>
               </div>
               {imagePreviewUrl && selectedImageFile && (
                 <div style={{ marginTop: '1rem' }}>
@@ -564,54 +558,55 @@ export default function Admin() {
               <p style={{ marginTop: '0.5rem', fontSize: '0.85rem', color: '#888', fontStyle: 'italic' }}>
                 ⚠️ Taille maximale : 1.5MB. Les images doivent être optimisées avant le téléversement.
               </p>
+              {formData.main_image && (
+                <p style={{ marginTop: '0.5rem', fontSize: '0.9rem', color: '#666', fontStyle: 'italic' }}>
+                  {formData.main_image}
+                </p>
+              )}
             </div>
 
             <div className="form-group">
               <label className="form-label">Galerie Lightroom</label>
-              <div style={{ display: 'flex', gap: '1rem', alignItems: 'center', flexWrap: 'wrap' }}>
-                <div>
-                  <label className="btn btn-secondary" style={{ margin: 0 }}>
-                    📁 Choisir un dossier
-                    <input
-                      type="file"
-                      {...({ webkitdirectory: '', directory: '' } as any)}
-                      multiple
-                      onChange={(e) => {
-                        if (e.target.files && e.target.files.length > 0) {
-                          setGalleryFolder(e.target.files);
-                          // Auto-generate gallery path from date and title
-                          const date = new Date(formData.pubDate);
-                          const year = String(date.getFullYear()).slice(-2);
-                          const month = String(date.getMonth() + 1).padStart(2, '0');
-                          const day = String(date.getDate()).padStart(2, '0');
-                          let titleSlug = formData.title
-                            .normalize('NFD')
-                            .replace(/[\u0300-\u036f]/g, '')
-                            .replace(/[^a-zA-Z0-9-]+/g, '-')
-                            .replace(/(^-|-$)/g, '')
-                            .substring(0, 30);
-                          const galleryName = `${year}${month}${day}-${titleSlug}`;
-                          const galleryPath = `/blog/blog-galeries/${galleryName}/index.html`;
-                          setFormData(prev => ({ ...prev, gallery_url: galleryPath }));
-                          setMessage({ type: 'success', text: `${e.target.files.length} fichiers sélectionnés. La galerie sera téléversée lors de l'enregistrement.` });
-                        }
-                      }}
-                      style={{ display: 'none' }}
-                      disabled={saving}
-                    />
-                  </label>
-                </div>
-                {formData.gallery_url && (
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flex: 1, minWidth: '200px' }}>
-                    <span style={{ fontSize: '0.9rem', color: '#666', fontStyle: 'italic' }}>
-                      {formData.gallery_url}
-                    </span>
-                  </div>
-                )}
+              <div>
+                <label className="btn btn-success" style={{ margin: 0 }}>
+                  📁 Choisir un dossier
+                  <input
+                    type="file"
+                    {...({ webkitdirectory: '', directory: '' } as any)}
+                    multiple
+                    onChange={(e) => {
+                      if (e.target.files && e.target.files.length > 0) {
+                        setGalleryFolder(e.target.files);
+                        // Auto-generate gallery path from date and title
+                        const date = new Date(formData.pubDate);
+                        const year = String(date.getFullYear()).slice(-2);
+                        const month = String(date.getMonth() + 1).padStart(2, '0');
+                        const day = String(date.getDate()).padStart(2, '0');
+                        let titleSlug = formData.title
+                          .normalize('NFD')
+                          .replace(/[\u0300-\u036f]/g, '')
+                          .replace(/[^a-zA-Z0-9-]+/g, '-')
+                          .replace(/(^-|-$)/g, '')
+                          .substring(0, 30);
+                        const galleryName = `${year}${month}${day}-${titleSlug}`;
+                        const galleryPath = `/blog/blog-galeries/${galleryName}/index.html`;
+                        setFormData(prev => ({ ...prev, gallery_url: galleryPath }));
+                        setMessage({ type: 'success', text: `${e.target.files.length} fichiers sélectionnés. La galerie sera téléversée lors de l'enregistrement.` });
+                      }
+                    }}
+                    style={{ display: 'none' }}
+                    disabled={saving}
+                  />
+                </label>
               </div>
               {galleryFolder && (
                 <p style={{ marginTop: '0.5rem', fontSize: '0.9rem', color: '#666' }}>
                   {galleryFolder.length} fichiers sélectionnés - La galerie sera téléversée lors de l'enregistrement
+                </p>
+              )}
+              {formData.gallery_url && (
+                <p style={{ marginTop: '0.5rem', fontSize: '0.9rem', color: '#666', fontStyle: 'italic' }}>
+                  {formData.gallery_url}
                 </p>
               )}
             </div>
