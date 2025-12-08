@@ -101,14 +101,14 @@ export const POST: APIRoute = async ({ request }) => {
     const filename = file.name;
     const repoPath = `public/blog/blog-images/${filename}`;
     
-    // Check file size (GitHub API has a 100MB limit, but base64 encoding increases size by ~33%)
-    // So we limit to ~75MB to be safe
-    const maxSizeBytes = 75 * 1024 * 1024; // 75MB
+    // Check file size - images should be optimized, limit to 1.5MB
+    const maxSizeBytes = 1.5 * 1024 * 1024; // 1.5MB
     if (file.size > maxSizeBytes) {
+      const fileSizeMB = (file.size / 1024 / 1024).toFixed(1);
       return new Response(
         JSON.stringify({ 
           success: false, 
-          message: `Le fichier est trop volumineux (${Math.round(file.size / 1024 / 1024)}MB). La taille maximale est de 75MB.` 
+          message: `Le fichier est trop volumineux (${fileSizeMB}MB). La taille maximale est de 1.5MB. Veuillez optimiser l'image avant de la téléverser.` 
         }),
         {
           status: 400,

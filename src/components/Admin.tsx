@@ -507,6 +507,9 @@ export default function Admin() {
                   Téléversement en cours...
                 </p>
               )}
+              <p style={{ marginTop: '0.5rem', fontSize: '0.85rem', color: '#888', fontStyle: 'italic' }}>
+                ⚠️ Taille maximale : 1.5MB. Les images doivent être optimisées avant le téléversement.
+              </p>
             </div>
 
             <div className="form-group">
