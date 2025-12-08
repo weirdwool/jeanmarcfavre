@@ -10,12 +10,12 @@ const GITHUB_BRANCH = 'main';
 const GITHUB_TOKEN = import.meta.env.GITHUB_TOKEN;
 
 // Helper function to commit file to GitHub
-async function commitFileToGitHub(filePath: string, base64Content: string, message: string) {
+async function commitFileToGitHub(filePath: string, content: string, message: string) {
   if (!GITHUB_TOKEN) {
     throw new Error('GITHUB_TOKEN not configured');
   }
 
-  // base64Content is already base64-encoded for binary files
+  const base64Content = Buffer.from(content, 'utf-8').toString('base64');
   
   // Check if file exists to get SHA for updates
   let fileSha: string | null = null;
@@ -134,21 +134,20 @@ export const POST: APIRoute = async ({ request }) => {
       const repoPath = `public/blog/blog-galeries/${galleryName}/${relativePath}`;
       
       // Read file content
-      let base64Content: string;
+      let fileContent: string;
       if (file.type.startsWith('text/') || file.name.endsWith('.html') || file.name.endsWith('.css') || file.name.endsWith('.js')) {
-        // Text files: read as UTF-8 and encode
-        const text = await file.text();
-        base64Content = Buffer.from(text, 'utf-8').toString('base64');
+        // Text files: read as UTF-8 text
+        fileContent = await file.text();
       } else {
-        // Binary files (images): read as base64
-        base64Content = await fileToBase64(file);
+        // Binary files (images): read as base64 string
+        fileContent = await fileToBase64(file);
         // Remove data URL prefix if present
-        if (base64Content.includes(',')) {
-          base64Content = base64Content.split(',')[1];
+        if (fileContent.includes(',')) {
+          fileContent = fileContent.split(',')[1];
         }
       }
 
-      // Write file locally first (for development)
+      // Write file locally first (for development) - KEEP THIS
       const localFilePath = path.join(process.cwd(), 'public', 'blog', 'blog-galeries', galleryName, relativePath);
       try {
         // Ensure directory exists
@@ -156,11 +155,10 @@ export const POST: APIRoute = async ({ request }) => {
         // Write the file
         if (file.type.startsWith('text/') || file.name.endsWith('.html') || file.name.endsWith('.css') || file.name.endsWith('.js')) {
           // Text files: write as text
-          const text = await file.text();
-          await fs.writeFile(localFilePath, text, 'utf-8');
+          await fs.writeFile(localFilePath, fileContent, 'utf-8');
         } else {
-          // Binary files: write as buffer
-          const fileBuffer = Buffer.from(await file.arrayBuffer());
+          // Binary files: write as buffer (decode from base64)
+          const fileBuffer = Buffer.from(fileContent, 'base64');
           await fs.writeFile(localFilePath, fileBuffer);
         }
       } catch (localWriteError) {
@@ -168,12 +166,65 @@ export const POST: APIRoute = async ({ request }) => {
         // Continue anyway - GitHub commit will still work
       }
 
-      // Commit to GitHub
-      return commitFileToGitHub(
-        repoPath,
-        base64Content,
-        `Upload gallery: ${galleryName} - ${relativePath}`
-      );
+      // Commit to GitHub - OLD WAY: commitFileToGitHub converts content to base64
+      // For text files: pass text, it will be converted to base64
+      // For binary files: pass base64 string, but commitFileToGitHub will try to convert it again
+      // So we need to handle binary files differently
+      if (file.type.startsWith('text/') || file.name.endsWith('.html') || file.name.endsWith('.css') || file.name.endsWith('.js')) {
+        return commitFileToGitHub(repoPath, fileContent, `Upload gallery: ${galleryName} - ${relativePath}`);
+      } else {
+        // For binary files, commitFileToGitHub expects UTF-8 but we have base64
+        // We need to bypass commitFileToGitHub's conversion and send base64 directly
+        if (!GITHUB_TOKEN) {
+          throw new Error('GITHUB_TOKEN not configured');
+        }
+        
+        // Get file SHA if exists
+        let fileSha: string | null = null;
+        try {
+          const getFileResponse = await fetch(
+            `https://api.github.com/repos/${GITHUB_REPO}/contents/${repoPath}?ref=${GITHUB_BRANCH}`,
+            {
+              headers: {
+                'Authorization': `token ${GITHUB_TOKEN}`,
+                'Accept': 'application/vnd.github.v3+json',
+              },
+            }
+          );
+          if (getFileResponse.ok) {
+            const fileData = await getFileResponse.json();
+            fileSha = fileData.sha;
+          }
+        } catch (error) {
+          // File doesn't exist, that's okay
+        }
+
+        // Commit binary file directly with base64 content
+        const commitResponse = await fetch(
+          `https://api.github.com/repos/${GITHUB_REPO}/contents/${repoPath}`,
+          {
+            method: 'PUT',
+            headers: {
+              'Authorization': `token ${GITHUB_TOKEN}`,
+              'Accept': 'application/vnd.github.v3+json',
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              message: `Upload gallery: ${galleryName} - ${relativePath}`,
+              content: fileContent, // Already base64
+              branch: GITHUB_BRANCH,
+              ...(fileSha && { sha: fileSha }),
+            }),
+          }
+        );
+
+        if (!commitResponse.ok) {
+          const error = await commitResponse.json();
+          throw new Error(`GitHub API error: ${error.message || 'Unknown error'}`);
+        }
+
+        return await commitResponse.json();
+      }
     });
 
     // Wait for all uploads to complete
