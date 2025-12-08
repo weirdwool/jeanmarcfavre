@@ -1,4 +1,6 @@
 import type { APIRoute } from 'astro';
+import fs from 'fs/promises';
+import path from 'path';
 
 export const prerender = false;
 
@@ -8,12 +10,12 @@ const GITHUB_BRANCH = 'main';
 const GITHUB_TOKEN = import.meta.env.GITHUB_TOKEN;
 
 // Helper function to commit file to GitHub
-async function commitFileToGitHub(filePath: string, content: string, message: string) {
+async function commitFileToGitHub(filePath: string, base64Content: string, message: string) {
   if (!GITHUB_TOKEN) {
     throw new Error('GITHUB_TOKEN not configured');
   }
 
-  const base64Content = Buffer.from(content, 'utf-8').toString('base64');
+  // base64Content is already base64-encoded for binary files
   
   // Check if file exists to get SHA for updates
   let fileSha: string | null = null;
@@ -144,6 +146,26 @@ export const POST: APIRoute = async ({ request }) => {
         if (base64Content.includes(',')) {
           base64Content = base64Content.split(',')[1];
         }
+      }
+
+      // Write file locally first (for development)
+      const localFilePath = path.join(process.cwd(), 'public', 'blog', 'blog-galeries', galleryName, relativePath);
+      try {
+        // Ensure directory exists
+        await fs.mkdir(path.dirname(localFilePath), { recursive: true });
+        // Write the file
+        if (file.type.startsWith('text/') || file.name.endsWith('.html') || file.name.endsWith('.css') || file.name.endsWith('.js')) {
+          // Text files: write as text
+          const text = await file.text();
+          await fs.writeFile(localFilePath, text, 'utf-8');
+        } else {
+          // Binary files: write as buffer
+          const fileBuffer = Buffer.from(await file.arrayBuffer());
+          await fs.writeFile(localFilePath, fileBuffer);
+        }
+      } catch (localWriteError) {
+        console.warn('Could not write file locally:', localWriteError);
+        // Continue anyway - GitHub commit will still work
       }
 
       // Commit to GitHub
