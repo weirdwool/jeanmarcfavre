@@ -101,6 +101,22 @@ export const POST: APIRoute = async ({ request }) => {
     const filename = file.name;
     const repoPath = `public/blog/blog-images/${filename}`;
     
+    // Check file size (GitHub API has a 100MB limit, but base64 encoding increases size by ~33%)
+    // So we limit to ~75MB to be safe
+    const maxSizeBytes = 75 * 1024 * 1024; // 75MB
+    if (file.size > maxSizeBytes) {
+      return new Response(
+        JSON.stringify({ 
+          success: false, 
+          message: `Le fichier est trop volumineux (${Math.round(file.size / 1024 / 1024)}MB). La taille maximale est de 75MB.` 
+        }),
+        {
+          status: 400,
+          headers: { 'Content-Type': 'application/json' },
+        }
+      );
+    }
+    
     // Read file content as base64
     const base64Content = await fileToBase64(file);
 
@@ -128,10 +144,25 @@ export const POST: APIRoute = async ({ request }) => {
     );
   } catch (error: any) {
     console.error('Error uploading blog image:', error);
+    
+    // Provide more specific error messages
+    let errorMessage = 'Erreur lors du téléversement de l\'image';
+    if (error.message) {
+      if (error.message.includes('GITHUB_TOKEN')) {
+        errorMessage = 'Token GitHub non configuré. Veuillez contacter l\'administrateur.';
+      } else if (error.message.includes('GitHub API error')) {
+        errorMessage = `Erreur GitHub: ${error.message.replace('GitHub API error: ', '')}`;
+      } else if (error.message.includes('timeout') || error.message.includes('network')) {
+        errorMessage = 'Erreur de connexion. Vérifiez votre connexion internet et réessayez.';
+      } else {
+        errorMessage = error.message;
+      }
+    }
+    
     return new Response(
       JSON.stringify({ 
         success: false, 
-        message: error.message || 'Erreur lors du téléversement de l\'image' 
+        message: errorMessage 
       }),
       {
         status: 500,

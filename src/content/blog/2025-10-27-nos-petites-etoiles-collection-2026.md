@@ -1,6 +1,6 @@
 ---
-title: Nos Petites Etoiles collection 2026
-pubDate: 2025-10-27T00:00:00.000Z
+title: "Nos Petites Etoiles collection 2026"
+pubDate: 2025-10-27
 location: Le Semnoz - Annecy
 main_image: "/blog/blog-images/251027-NPE-Semnoz.jpg"
 gallery_url: "/blog/blog-galeries/251027-NPE-Fashion/index.html"

@@ -484,8 +484,12 @@ export default function Admin() {
                           } else {
                             setMessage({ type: 'error', text: result.message || 'Erreur lors du téléversement' });
                           }
-                        } catch (error) {
-                          setMessage({ type: 'error', text: 'Erreur de connexion' });
+                        } catch (error: any) {
+                          console.error('Upload error:', error);
+                          setMessage({ 
+                            type: 'error', 
+                            text: error.message || 'Erreur de connexion. Vérifiez votre connexion internet et réessayez.' 
+                          });
                         } finally {
                           setUploadingImage(false);
                           // Reset the input so the same file can be selected again if needed

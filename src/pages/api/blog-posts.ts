@@ -137,7 +137,7 @@ pubDate: ${formattedDate}
 ${location && location.trim() ? `location: ${JSON.stringify(location.trim())}` : ''}
 ${main_image && main_image.trim() ? `main_image: ${JSON.stringify(main_image.trim())}` : ''}
 ${gallery_url && gallery_url.trim() ? `gallery_url: ${JSON.stringify(gallery_url.trim())}` : ''}
-video_url: ${video_url && video_url.trim() ? JSON.stringify(video_url) : "''"}
+video_url: ${video_url && video_url.trim() ? JSON.stringify(video_url) : '""'}
 tags:
 ${tagsSection}
 ---
@@ -231,7 +231,7 @@ pubDate: ${formattedDate}
 ${location && location.trim() ? `location: ${JSON.stringify(location.trim())}` : ''}
 ${main_image && main_image.trim() ? `main_image: ${JSON.stringify(main_image.trim())}` : ''}
 ${gallery_url && gallery_url.trim() ? `gallery_url: ${JSON.stringify(gallery_url.trim())}` : ''}
-video_url: ${video_url && video_url.trim() ? JSON.stringify(video_url) : "''"}
+video_url: ${video_url && video_url.trim() ? JSON.stringify(video_url) : '""'}
 tags:
 ${tagsSection}
 ---

@@ -1,6 +1,6 @@
 ---
 title: Session foil au sunset
-pubDate: 2025-11-04T00:00:00.000Z
+pubDate: 2025-11-04
 location: Petit-Port - Albigny
 main_image: "/blog/blog-images/251104-Foil-Petit-Port.jpg"
 gallery_url: "/blog/blog-galeries/251104-Foil-Petit-Port/index.html"

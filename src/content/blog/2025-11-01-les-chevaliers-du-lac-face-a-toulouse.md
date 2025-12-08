@@ -1,6 +1,6 @@
 ---
 title: Les Chevaliers du Lac face à Toulouse
-pubDate: 2025-11-01T00:00:00.000Z
+pubDate: 2025-11-01
 location: Patinoire J.Régis - Annecy
 main_image: "/blog/blog-images/251101-Hockey-Chevaliers-Toulouse.jpg"
 gallery_url: "/blog/blog-galeries/251101-Hockey-Annecy-Toulouse/index.html"
