@@ -1,0 +1,11 @@
+{
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
+  "rewrites": [
+    {
+      "source": "/blog/blog-galeries/(.*)",
+      "destination": "/blog/blog-galeries/$1"
+    }
+  ]
+}
+
