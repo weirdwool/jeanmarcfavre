@@ -74,6 +74,7 @@ export default function Admin() {
   const [message, setMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
   const [galleryFolder, setGalleryFolder] = useState<FileList | null>(null);
   const [selectedImageFile, setSelectedImageFile] = useState<File | null>(null);
+  const [imagePreviewUrl, setImagePreviewUrl] = useState<string | null>(null);
   const [currentPage, setCurrentPage] = useState(1);
   const postsPerPage = 20;
   const [deleting, setDeleting] = useState(false);
@@ -104,6 +105,12 @@ export default function Admin() {
   };
 
   const handleEdit = (post: BlogPost) => {
+    // Cleanup preview URL if exists
+    if (imagePreviewUrl) {
+      URL.revokeObjectURL(imagePreviewUrl);
+      setImagePreviewUrl(null);
+    }
+    
     setEditingPost(post);
     setFormData({
       title: post.title,
@@ -121,6 +128,12 @@ export default function Admin() {
   };
 
   const handleNew = () => {
+    // Cleanup preview URL if exists
+    if (imagePreviewUrl) {
+      URL.revokeObjectURL(imagePreviewUrl);
+      setImagePreviewUrl(null);
+    }
+    
     setEditingPost(null);
     setFormData({
       title: '',
@@ -296,6 +309,12 @@ export default function Admin() {
       const result = await response.json();
       
       if (result.success) {
+        // Cleanup preview URL
+        if (imagePreviewUrl) {
+          URL.revokeObjectURL(imagePreviewUrl);
+          setImagePreviewUrl(null);
+        }
+        
         setMessage({ type: 'success', text: editingPost ? 'Article modifié avec succès!' : 'Article créé avec succès!' });
         setShowForm(false);
         setEditingPost(null);
@@ -454,17 +473,7 @@ export default function Admin() {
 
             <div className="form-group">
               <label className="form-label required">Image principale</label>
-              <div style={{ display: 'flex', gap: '1rem', alignItems: 'flex-end' }}>
-                <div style={{ flex: 1 }}>
-                  <input
-                    type="text"
-                    value={formData.main_image}
-                    onChange={(e) => setFormData({ ...formData, main_image: e.target.value })}
-                    placeholder="/blog/blog-images/..."
-                    className="form-input"
-                    required
-                  />
-                </div>
+              <div style={{ display: 'flex', gap: '1rem', alignItems: 'flex-start', flexWrap: 'wrap' }}>
                 <div>
                   <label className="btn btn-secondary" style={{ margin: 0 }}>
                     📷 Choisir une image
@@ -487,7 +496,19 @@ export default function Admin() {
                           return;
                         }
 
+                        // Cleanup previous preview URL
+                        if (imagePreviewUrl) {
+                          URL.revokeObjectURL(imagePreviewUrl);
+                        }
+                        
                         setSelectedImageFile(file);
+                        // Create preview URL
+                        const previewUrl = URL.createObjectURL(file);
+                        setImagePreviewUrl(previewUrl);
+                        
+                        // Auto-generate path
+                        const path = `/blog/blog-images/${file.name}`;
+                        setFormData(prev => ({ ...prev, main_image: path }));
                         setMessage({ type: 'success', text: `Image sélectionnée: ${file.name}. Elle sera téléversée lors de l'enregistrement.` });
                         e.target.value = '';
                       }}
@@ -496,11 +517,49 @@ export default function Admin() {
                     />
                   </label>
                 </div>
+                {formData.main_image && (
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flex: 1, minWidth: '200px' }}>
+                    <span style={{ fontSize: '0.9rem', color: '#666', fontStyle: 'italic' }}>
+                      {formData.main_image}
+                    </span>
+                  </div>
+                )}
               </div>
-              {selectedImageFile && (
-                <p style={{ marginTop: '0.5rem', fontSize: '0.9rem', color: '#666' }}>
-                  Image sélectionnée: {selectedImageFile.name}
-                </p>
+              {imagePreviewUrl && selectedImageFile && (
+                <div style={{ marginTop: '1rem' }}>
+                  <img 
+                    src={imagePreviewUrl} 
+                    alt="Preview" 
+                    style={{ 
+                      maxWidth: '100%', 
+                      maxHeight: '300px', 
+                      objectFit: 'contain',
+                      border: '1px solid #ddd',
+                      borderRadius: '4px',
+                      padding: '4px'
+                    }} 
+                  />
+                </div>
+              )}
+              {formData.main_image && !selectedImageFile && (
+                <div style={{ marginTop: '1rem' }}>
+                  <img 
+                    src={formData.main_image} 
+                    alt="Current image" 
+                    style={{ 
+                      maxWidth: '100%', 
+                      maxHeight: '300px', 
+                      objectFit: 'contain',
+                      border: '1px solid #ddd',
+                      borderRadius: '4px',
+                      padding: '4px'
+                    }}
+                    onError={(e) => {
+                      // Hide broken images
+                      (e.target as HTMLImageElement).style.display = 'none';
+                    }}
+                  />
+                </div>
               )}
               <p style={{ marginTop: '0.5rem', fontSize: '0.85rem', color: '#888', fontStyle: 'italic' }}>
                 ⚠️ Taille maximale : 1.5MB. Les images doivent être optimisées avant le téléversement.
@@ -509,16 +568,7 @@ export default function Admin() {
 
             <div className="form-group">
               <label className="form-label">Galerie Lightroom</label>
-              <div style={{ display: 'flex', gap: '1rem', alignItems: 'flex-end' }}>
-                <div style={{ flex: 1 }}>
-                  <input
-                    type="text"
-                    value={formData.gallery_url}
-                    onChange={(e) => setFormData({ ...formData, gallery_url: e.target.value })}
-                    placeholder="/blog/blog-galeries/..."
-                    className="form-input"
-                  />
-                </div>
+              <div style={{ display: 'flex', gap: '1rem', alignItems: 'center', flexWrap: 'wrap' }}>
                 <div>
                   <label className="btn btn-secondary" style={{ margin: 0 }}>
                     📁 Choisir un dossier
@@ -529,6 +579,20 @@ export default function Admin() {
                       onChange={(e) => {
                         if (e.target.files && e.target.files.length > 0) {
                           setGalleryFolder(e.target.files);
+                          // Auto-generate gallery path from date and title
+                          const date = new Date(formData.pubDate);
+                          const year = String(date.getFullYear()).slice(-2);
+                          const month = String(date.getMonth() + 1).padStart(2, '0');
+                          const day = String(date.getDate()).padStart(2, '0');
+                          let titleSlug = formData.title
+                            .normalize('NFD')
+                            .replace(/[\u0300-\u036f]/g, '')
+                            .replace(/[^a-zA-Z0-9-]+/g, '-')
+                            .replace(/(^-|-$)/g, '')
+                            .substring(0, 30);
+                          const galleryName = `${year}${month}${day}-${titleSlug}`;
+                          const galleryPath = `/blog/blog-galeries/${galleryName}/index.html`;
+                          setFormData(prev => ({ ...prev, gallery_url: galleryPath }));
                           setMessage({ type: 'success', text: `${e.target.files.length} fichiers sélectionnés. La galerie sera téléversée lors de l'enregistrement.` });
                         }
                       }}
@@ -537,13 +601,18 @@ export default function Admin() {
                     />
                   </label>
                 </div>
+                {formData.gallery_url && (
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flex: 1, minWidth: '200px' }}>
+                    <span style={{ fontSize: '0.9rem', color: '#666', fontStyle: 'italic' }}>
+                      {formData.gallery_url}
+                    </span>
+                  </div>
+                )}
               </div>
               {galleryFolder && (
-                <div className="gallery-upload-section">
-                  <p className="gallery-upload-info" style={{ marginTop: '0.5rem', fontSize: '0.9rem', color: '#666' }}>
-                    {galleryFolder.length} fichiers sélectionnés - La galerie sera téléversée lors de l'enregistrement
-                  </p>
-                </div>
+                <p style={{ marginTop: '0.5rem', fontSize: '0.9rem', color: '#666' }}>
+                  {galleryFolder.length} fichiers sélectionnés - La galerie sera téléversée lors de l'enregistrement
+                </p>
               )}
             </div>
 
@@ -690,6 +759,12 @@ export default function Admin() {
               </button>
               <button
                 onClick={() => {
+                  // Cleanup preview URL if exists
+                  if (imagePreviewUrl) {
+                    URL.revokeObjectURL(imagePreviewUrl);
+                    setImagePreviewUrl(null);
+                  }
+                  
                   setShowForm(false);
                   setEditingPost(null);
                   setSelectedImageFile(null);
