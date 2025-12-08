@@ -514,9 +514,6 @@ export default function Admin() {
                   Téléversement en cours...
                 </p>
               )}
-              <p style={{ marginTop: '0.5rem', fontSize: '0.85rem', color: '#888', fontStyle: 'italic' }}>
-                ⚠️ La date de publication doit être définie en premier (elle est utilisée pour générer le nom du fichier).
-              </p>
             </div>
 
             <div className="form-group">

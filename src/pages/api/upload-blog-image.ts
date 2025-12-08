@@ -70,6 +70,7 @@ async function fileToBase64(file: File): Promise<string> {
 
 // Generate filename from date and original filename
 function generateFilename(date: string, originalFilename: string): string {
+  // Always use the date from the form
   const dateObj = new Date(date);
   const year = String(dateObj.getFullYear()).slice(-2);
   const month = String(dateObj.getMonth() + 1).padStart(2, '0');
@@ -78,8 +79,12 @@ function generateFilename(date: string, originalFilename: string): string {
   // Get extension from original filename
   const extension = originalFilename.split('.').pop()?.toLowerCase() || 'jpg';
   
-  // Get base name without extension
-  const baseName = originalFilename.replace(/\.[^/.]+$/, '');
+  // Get base name without extension and remove any existing date prefix
+  let baseName = originalFilename.replace(/\.[^/.]+$/, '');
+  
+  // Remove any existing date prefix (6 digits + hyphen) from the beginning
+  baseName = baseName.replace(/^\d{6}-/, '');
+  
   // Clean the base name (remove special chars, keep alphanumeric and hyphens)
   const cleanBaseName = baseName
     .toLowerCase()
