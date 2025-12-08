@@ -566,68 +566,75 @@ export default function Admin() {
             </div>
 
             <div className="form-group">
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr auto 1fr', gap: '1rem', alignItems: 'start' }}>
-                <div>
-                  <label className="form-label">Galerie Lightroom</label>
+              <div style={{ 
+                background: '#f9fafb',
+                borderRadius: '6px',
+                border: '2px solid #e5e7eb',
+                padding: '1rem'
+              }}>
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr auto 1fr', gap: '1rem', alignItems: 'start' }}>
                   <div>
-                    <label className="btn btn-success" style={{ margin: 0 }}>
-                      📁 Choisir un dossier
-                      <input
-                        type="file"
-                        {...({ webkitdirectory: '', directory: '' } as any)}
-                        multiple
-                        onChange={(e) => {
-                          if (e.target.files && e.target.files.length > 0) {
-                            setGalleryFolder(e.target.files);
-                            // Auto-generate gallery path from date and title
-                            const date = new Date(formData.pubDate);
-                            const year = String(date.getFullYear()).slice(-2);
-                            const month = String(date.getMonth() + 1).padStart(2, '0');
-                            const day = String(date.getDate()).padStart(2, '0');
-                            let titleSlug = formData.title
-                              .normalize('NFD')
-                              .replace(/[\u0300-\u036f]/g, '')
-                              .replace(/[^a-zA-Z0-9-]+/g, '-')
-                              .replace(/(^-|-$)/g, '')
-                              .substring(0, 30);
-                            const galleryName = `${year}${month}${day}-${titleSlug}`;
-                            const galleryPath = `/blog/blog-galeries/${galleryName}/index.html`;
-                            setFormData(prev => ({ ...prev, gallery_url: galleryPath }));
-                            setMessage({ type: 'success', text: `${e.target.files.length} fichiers sélectionnés. La galerie sera téléversée lors de l'enregistrement.` });
-                          }
-                        }}
-                        style={{ display: 'none' }}
-                        disabled={saving}
-                      />
-                    </label>
+                    <label className="form-label">Galerie Lightroom</label>
+                    <div>
+                      <label className="btn btn-success" style={{ margin: 0 }}>
+                        📁 Choisir un dossier
+                        <input
+                          type="file"
+                          {...({ webkitdirectory: '', directory: '' } as any)}
+                          multiple
+                          onChange={(e) => {
+                            if (e.target.files && e.target.files.length > 0) {
+                              setGalleryFolder(e.target.files);
+                              // Auto-generate gallery path from date and title
+                              const date = new Date(formData.pubDate);
+                              const year = String(date.getFullYear()).slice(-2);
+                              const month = String(date.getMonth() + 1).padStart(2, '0');
+                              const day = String(date.getDate()).padStart(2, '0');
+                              let titleSlug = formData.title
+                                .normalize('NFD')
+                                .replace(/[\u0300-\u036f]/g, '')
+                                .replace(/[^a-zA-Z0-9-]+/g, '-')
+                                .replace(/(^-|-$)/g, '')
+                                .substring(0, 30);
+                              const galleryName = `${year}${month}${day}-${titleSlug}`;
+                              const galleryPath = `/blog/blog-galeries/${galleryName}/index.html`;
+                              setFormData(prev => ({ ...prev, gallery_url: galleryPath }));
+                              setMessage({ type: 'success', text: `${e.target.files.length} fichiers sélectionnés. La galerie sera téléversée lors de l'enregistrement.` });
+                            }
+                          }}
+                          style={{ display: 'none' }}
+                          disabled={saving}
+                        />
+                      </label>
+                    </div>
+                    {galleryFolder && (
+                      <p style={{ marginTop: '0.5rem', fontSize: '0.9rem', color: '#666' }}>
+                        {galleryFolder.length} fichiers sélectionnés - La galerie sera téléversée lors de l'enregistrement
+                      </p>
+                    )}
+                    {formData.gallery_url && (
+                      <p style={{ marginTop: '0.5rem', fontSize: '0.9rem', color: '#666', fontStyle: 'italic' }}>
+                        {formData.gallery_url}
+                      </p>
+                    )}
                   </div>
-                  {galleryFolder && (
-                    <p style={{ marginTop: '0.5rem', fontSize: '0.9rem', color: '#666' }}>
-                      {galleryFolder.length} fichiers sélectionnés - La galerie sera téléversée lors de l'enregistrement
-                    </p>
-                  )}
-                  {formData.gallery_url && (
-                    <p style={{ marginTop: '0.5rem', fontSize: '0.9rem', color: '#666', fontStyle: 'italic' }}>
-                      {formData.gallery_url}
-                    </p>
-                  )}
-                </div>
-                <div style={{ 
-                  width: '1px', 
-                  backgroundColor: '#666', 
-                  height: '100%', 
-                  minHeight: '60px',
-                  alignSelf: 'stretch'
-                }}></div>
-                <div>
-                  <label className="form-label">URL Vidéo Vimeo</label>
-                  <input
-                    type="url"
-                    value={formData.video_url}
-                    onChange={(e) => setFormData({ ...formData, video_url: e.target.value })}
-                    placeholder="https://vimeo.com/..."
-                    className="form-input"
-                  />
+                  <div style={{ 
+                    width: '1px', 
+                    backgroundColor: '#e5e7eb', 
+                    height: '100%', 
+                    minHeight: '60px',
+                    alignSelf: 'stretch'
+                  }}></div>
+                  <div>
+                    <label className="form-label">URL Vidéo Vimeo</label>
+                    <input
+                      type="url"
+                      value={formData.video_url}
+                      onChange={(e) => setFormData({ ...formData, video_url: e.target.value })}
+                      placeholder="https://vimeo.com/..."
+                      className="form-input"
+                    />
+                  </div>
                 </div>
               </div>
             </div>
