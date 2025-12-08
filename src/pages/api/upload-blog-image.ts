@@ -1,4 +1,6 @@
 import type { APIRoute } from 'astro';
+import fs from 'fs/promises';
+import path from 'path';
 
 export const prerender = false;
 
@@ -119,6 +121,19 @@ export const POST: APIRoute = async ({ request }) => {
     
     // Read file content as base64
     const base64Content = await fileToBase64(file);
+
+    // Write file locally first (for development)
+    const localFilePath = path.join(process.cwd(), 'public', 'blog', 'blog-images', filename);
+    try {
+      // Ensure directory exists
+      await fs.mkdir(path.dirname(localFilePath), { recursive: true });
+      // Write the file
+      const fileBuffer = Buffer.from(await file.arrayBuffer());
+      await fs.writeFile(localFilePath, fileBuffer);
+    } catch (localWriteError) {
+      console.warn('Could not write file locally:', localWriteError);
+      // Continue anyway - GitHub commit will still work
+    }
 
     // Commit to GitHub
     await commitFileToGitHub(
