@@ -161,6 +161,14 @@ export default function Admin() {
     }));
   };
 
+  // Helper function to normalize strings for accent-insensitive search
+  const normalizeForSearch = (str: string): string => {
+    return str
+      .toLowerCase()
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, ''); // Remove accents
+  };
+
   const generateSlug = (title: string, date: string): string => {
     const dateObj = new Date(date);
     const year = dateObj.getFullYear();
@@ -807,11 +815,11 @@ export default function Admin() {
               Articles ({(() => {
                 const filteredPosts = searchQuery.trim() 
                   ? posts.filter(post => {
-                      const query = searchQuery.toLowerCase();
+                      const normalizedQuery = normalizeForSearch(searchQuery);
                       return (
-                        post.title.toLowerCase().includes(query) ||
-                        (post.location && post.location.toLowerCase().includes(query)) ||
-                        (post.body && post.body.toLowerCase().includes(query))
+                        normalizeForSearch(post.title).includes(normalizedQuery) ||
+                        (post.location && normalizeForSearch(post.location).includes(normalizedQuery)) ||
+                        (post.body && normalizeForSearch(post.body).includes(normalizedQuery))
                       );
                     })
                   : posts;
@@ -842,14 +850,14 @@ export default function Admin() {
           </div>
           <div className="posts-grid">
             {(() => {
-              // Filter posts based on search query
+              // Filter posts based on search query (accent-insensitive)
               const filteredPosts = searchQuery.trim() 
                 ? posts.filter(post => {
-                    const query = searchQuery.toLowerCase();
+                    const normalizedQuery = normalizeForSearch(searchQuery);
                     return (
-                      post.title.toLowerCase().includes(query) ||
-                      (post.location && post.location.toLowerCase().includes(query)) ||
-                      (post.body && post.body.toLowerCase().includes(query))
+                      normalizeForSearch(post.title).includes(normalizedQuery) ||
+                      (post.location && normalizeForSearch(post.location).includes(normalizedQuery)) ||
+                      (post.body && normalizeForSearch(post.body).includes(normalizedQuery))
                     );
                   })
                 : posts;
@@ -899,11 +907,11 @@ export default function Admin() {
           {(() => {
             const filteredPosts = searchQuery.trim() 
               ? posts.filter(post => {
-                  const query = searchQuery.toLowerCase();
+                  const normalizedQuery = normalizeForSearch(searchQuery);
                   return (
-                    post.title.toLowerCase().includes(query) ||
-                    (post.location && post.location.toLowerCase().includes(query)) ||
-                    (post.body && post.body.toLowerCase().includes(query))
+                    normalizeForSearch(post.title).includes(normalizedQuery) ||
+                    (post.location && normalizeForSearch(post.location).includes(normalizedQuery)) ||
+                    (post.body && normalizeForSearch(post.body).includes(normalizedQuery))
                   );
                 })
               : posts;
