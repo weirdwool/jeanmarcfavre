@@ -850,11 +850,7 @@ export default function Admin() {
               const filteredPosts = searchQuery.trim() 
                 ? posts.filter(post => {
                     const normalizedQuery = normalizeForSearch(searchQuery);
-                    return (
-                      normalizeForSearch(post.title).includes(normalizedQuery) ||
-                      (post.location && normalizeForSearch(post.location).includes(normalizedQuery)) ||
-                      (post.body && normalizeForSearch(post.body).includes(normalizedQuery))
-                    );
+                    return normalizeForSearch(post.title).includes(normalizedQuery);
                   })
                 : posts;
               
@@ -904,11 +900,7 @@ export default function Admin() {
             const filteredPosts = searchQuery.trim() 
               ? posts.filter(post => {
                   const normalizedQuery = normalizeForSearch(searchQuery);
-                  return (
-                    normalizeForSearch(post.title).includes(normalizedQuery) ||
-                    (post.location && normalizeForSearch(post.location).includes(normalizedQuery)) ||
-                    (post.body && normalizeForSearch(post.body).includes(normalizedQuery))
-                  );
+                  return normalizeForSearch(post.title).includes(normalizedQuery);
                 })
               : posts;
             
