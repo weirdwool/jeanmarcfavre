@@ -1,8 +1,0 @@
-{
-  "functions": {
-    "**": {
-      "excludeFiles": "public/blog/blog-galeries/**"
-    }
-  }
-}
-
