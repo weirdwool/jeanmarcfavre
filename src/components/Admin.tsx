@@ -78,6 +78,7 @@ export default function Admin() {
   const [currentPage, setCurrentPage] = useState(1);
   const postsPerPage = 20;
   const [deleting, setDeleting] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
 
   // Load posts on mount and check auth
   useEffect(() => {
@@ -802,15 +803,60 @@ export default function Admin() {
       ) : (
         <div className="posts-list">
           <div className="posts-list-header">
-            <h2>Articles ({posts.length})</h2>
+            <h2>
+              Articles ({(() => {
+                const filteredPosts = searchQuery.trim() 
+                  ? posts.filter(post => {
+                      const query = searchQuery.toLowerCase();
+                      return (
+                        post.title.toLowerCase().includes(query) ||
+                        (post.location && post.location.toLowerCase().includes(query)) ||
+                        (post.body && post.body.toLowerCase().includes(query))
+                      );
+                    })
+                  : posts;
+                return filteredPosts.length;
+              })()}{searchQuery.trim() ? ` / ${posts.length}` : ''})
+            </h2>
+            <div style={{ display: 'flex', gap: '1rem', alignItems: 'center', flex: 1, maxWidth: '400px' }}>
+              <input
+                type="text"
+                placeholder="Rechercher un article..."
+                value={searchQuery}
+                onChange={(e) => {
+                  setSearchQuery(e.target.value);
+                  setCurrentPage(1); // Reset to first page when searching
+                }}
+                style={{
+                  flex: 1,
+                  padding: '0.5rem',
+                  borderRadius: '6px',
+                  border: '1px solid #e5e7eb',
+                  fontSize: '0.9rem'
+                }}
+              />
+            </div>
             <button onClick={handleNew} className="btn btn-primary">
               + Nouvel article
             </button>
           </div>
           <div className="posts-grid">
-            {posts
-              .slice((currentPage - 1) * postsPerPage, currentPage * postsPerPage)
-              .map(post => (
+            {(() => {
+              // Filter posts based on search query
+              const filteredPosts = searchQuery.trim() 
+                ? posts.filter(post => {
+                    const query = searchQuery.toLowerCase();
+                    return (
+                      post.title.toLowerCase().includes(query) ||
+                      (post.location && post.location.toLowerCase().includes(query)) ||
+                      (post.body && post.body.toLowerCase().includes(query))
+                    );
+                  })
+                : posts;
+              
+              return filteredPosts
+                .slice((currentPage - 1) * postsPerPage, currentPage * postsPerPage)
+                .map(post => (
               <div key={post.slug} className="post-card" onClick={() => handleEdit(post)}>
                 {post.main_image ? (
                   <img 
@@ -847,29 +893,43 @@ export default function Admin() {
                   Modifier
                 </button>
               </div>
-            ))}
+            ));
+            })()}
           </div>
-          {posts.length > postsPerPage && (
-            <div className="pagination">
-              <button
-                onClick={() => setCurrentPage((prev: number) => Math.max(1, prev - 1))}
-                disabled={currentPage === 1}
-                className="pagination-btn"
-              >
-                &lt;
-              </button>
-              <span className="pagination-info">
-                Page {currentPage} sur {Math.ceil(posts.length / postsPerPage)}
-              </span>
-              <button
-                onClick={() => setCurrentPage((prev: number) => Math.min(Math.ceil(posts.length / postsPerPage), prev + 1))}
-                disabled={currentPage >= Math.ceil(posts.length / postsPerPage)}
-                className="pagination-btn"
-              >
-                &gt;
-              </button>
-            </div>
-          )}
+          {(() => {
+            const filteredPosts = searchQuery.trim() 
+              ? posts.filter(post => {
+                  const query = searchQuery.toLowerCase();
+                  return (
+                    post.title.toLowerCase().includes(query) ||
+                    (post.location && post.location.toLowerCase().includes(query)) ||
+                    (post.body && post.body.toLowerCase().includes(query))
+                  );
+                })
+              : posts;
+            
+            return filteredPosts.length > postsPerPage && (
+              <div className="pagination">
+                <button
+                  onClick={() => setCurrentPage((prev: number) => Math.max(1, prev - 1))}
+                  disabled={currentPage === 1}
+                  className="pagination-btn"
+                >
+                  &lt;
+                </button>
+                <span className="pagination-info">
+                  Page {currentPage} sur {Math.ceil(filteredPosts.length / postsPerPage)}
+                </span>
+                <button
+                  onClick={() => setCurrentPage((prev: number) => Math.min(Math.ceil(filteredPosts.length / postsPerPage), prev + 1))}
+                  disabled={currentPage >= Math.ceil(filteredPosts.length / postsPerPage)}
+                  className="pagination-btn"
+                >
+                  &gt;
+                </button>
+              </div>
+            );
+          })()}
         </div>
       )}
     </div>
