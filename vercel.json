@@ -1,0 +1,16 @@
+{
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
+  "framework": null,
+  "rewrites": [
+    {
+      "source": "/blog/blog-images/(.*)",
+      "destination": "/blog/blog-images/$1"
+    },
+    {
+      "source": "/blog/blog-galeries/(.*)",
+      "destination": "/blog/blog-galeries/$1"
+    }
+  ]
+}
+

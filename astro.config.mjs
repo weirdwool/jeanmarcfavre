@@ -8,7 +8,14 @@ import vercel from '@astrojs/vercel/serverless';
 export default defineConfig({
   site: 'https://jeanmarcfavre.com',
   output: 'server', // Server mode to support API routes
-  adapter: vercel(),
+  adapter: vercel({
+    webAnalytics: {
+      enabled: false
+    },
+    speedInsights: {
+      enabled: false
+    }
+  }),
   publicDir: 'public',
   integrations: [
     react(),
