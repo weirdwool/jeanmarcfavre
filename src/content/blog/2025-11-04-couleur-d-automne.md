@@ -1,7 +1,7 @@
 ---
-title: Couleur d'automne
+title: "Couleur d'automne"
 pubDate: 2025-11-04
-location: Menthon - Col de Bluffy
+location: "Menthon - Col de Bluffy"
 main_image: "/blog/blog-images/251104-Chateau-Menthon-drone.jpg"
 gallery_url: "/blog/blog-galeries/251104-Couleur-automne/index.html"
 video_url: ""

@@ -1,7 +1,7 @@
 ---
 title: "Chantier Paquier, service de l''eau"
 pubDate: 2025-10-22
-location: Paquier - Annecy
+location: "Paquier - Annecy"
 main_image: "/blog/blog-images/251022-Paquier-travaux.jpg"
 gallery_url: "/blog/blog-galeries/251021-Paquier-BTP/index.html"
 video_url: ""

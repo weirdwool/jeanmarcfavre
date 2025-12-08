@@ -1,7 +1,7 @@
 ---
 title: "RCAT vs Thonon"
 pubDate: 2025-10-19
-location: Thones
+location: "Thônes"
 main_image: "/blog/blog-images/251019-RCTA-Thonon.jpg"
 gallery_url: "/blog/blog-galeries/251019-RCAT-Thonon/index.html"
 video_url: ""
