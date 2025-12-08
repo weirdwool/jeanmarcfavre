@@ -315,7 +315,7 @@ export default function Admin() {
           setImagePreviewUrl(null);
         }
         
-        setMessage({ type: 'success', text: editingPost ? 'Article modifié avec succès!' : 'Article créé avec succès!' });
+        setMessage({ type: 'success', text: (editingPost ? 'Article modifié avec succès!' : 'Article créé avec succès!') + ' Attendre quelques minutes pour le déploiement.' });
         setShowForm(false);
         setEditingPost(null);
         setSelectedImageFile(null);
@@ -394,7 +394,7 @@ export default function Admin() {
       });
 
       if (response.ok) {
-        setMessage({ type: 'success', text: 'Article supprimé avec succès' });
+        setMessage({ type: 'success', text: 'Article supprimé avec succès. Attendre quelques minutes pour le déploiement.' });
         setShowForm(false);
         setEditingPost(null);
         // Reload posts
