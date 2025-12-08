@@ -2,7 +2,7 @@
 title: "Première neige au Semnoz"
 pubDate: 2025-11-29
 location: "Le Semnoz"
-main_image: "/blog/blog-images/251129-250129-fwt-valtho-28.jpg"
+main_image: "/blog/blog-images/250129-fwt-valtho-28.jpg"
 
 video_url: ''
 tags:
