@@ -61,8 +61,24 @@ async function commitToGitHub(slug: string, content: string, action: 'create' | 
   );
 
   if (!commitResponse.ok) {
-    const error = await commitResponse.json();
-    throw new Error(`GitHub API error: ${error.message || 'Unknown error'}`);
+    let errorMessage = 'Unknown error';
+    const contentType = commitResponse.headers.get('content-type');
+    
+    if (commitResponse.status === 403) {
+      errorMessage = 'Accès refusé. Le token GitHub n\'a peut-être pas les permissions nécessaires ou a expiré.';
+    } else if (contentType && contentType.includes('application/json')) {
+      try {
+        const error = await commitResponse.json();
+        errorMessage = error.message || 'Unknown error';
+      } catch (e) {
+        // If JSON parsing fails, try to get text
+        errorMessage = await commitResponse.text() || `HTTP ${commitResponse.status}: ${commitResponse.statusText}`;
+      }
+    } else {
+      // Response is not JSON, get text instead
+      errorMessage = await commitResponse.text() || `HTTP ${commitResponse.status}: ${commitResponse.statusText}`;
+    }
+    throw new Error(`GitHub API error: ${errorMessage}`);
   }
 
   return await commitResponse.json();
@@ -369,8 +385,24 @@ async function deleteFromGitHub(slug: string) {
   );
 
   if (!deleteResponse.ok) {
-    const error = await deleteResponse.json();
-    throw new Error(`GitHub API error: ${error.message || 'Unknown error'}`);
+    let errorMessage = 'Unknown error';
+    const contentType = deleteResponse.headers.get('content-type');
+    
+    if (deleteResponse.status === 403) {
+      errorMessage = 'Accès refusé. Le token GitHub n\'a peut-être pas les permissions nécessaires ou a expiré.';
+    } else if (contentType && contentType.includes('application/json')) {
+      try {
+        const error = await deleteResponse.json();
+        errorMessage = error.message || 'Unknown error';
+      } catch (e) {
+        // If JSON parsing fails, try to get text
+        errorMessage = await deleteResponse.text() || `HTTP ${deleteResponse.status}: ${deleteResponse.statusText}`;
+      }
+    } else {
+      // Response is not JSON, get text instead
+      errorMessage = await deleteResponse.text() || `HTTP ${deleteResponse.status}: ${deleteResponse.statusText}`;
+    }
+    throw new Error(`GitHub API error: ${errorMessage}`);
   }
 
   return await deleteResponse.json();
