@@ -79,14 +79,34 @@ export default function Admin() {
   const postsPerPage = 20;
   const [deleting, setDeleting] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
+  const [availableImages, setAvailableImages] = useState<Array<{ filename: string; path: string }>>([]);
+  const [loadingImages, setLoadingImages] = useState(false);
 
-  // Load posts on mount and check auth
+  // Load posts and images on mount and check auth
   useEffect(() => {
     if (!checkAuth()) {
       return;
     }
     loadPosts();
+    loadAvailableImages();
   }, []);
+
+  const loadAvailableImages = async () => {
+    try {
+      setLoadingImages(true);
+      const response = await fetch('/api/list-blog-images');
+      if (response.ok) {
+        const data = await response.json();
+        if (data.success) {
+          setAvailableImages(data.images || []);
+        }
+      }
+    } catch (error) {
+      console.error('Error loading available images:', error);
+    } finally {
+      setLoadingImages(false);
+    }
+  };
 
   const loadPosts = async () => {
     try {
@@ -250,72 +270,8 @@ export default function Admin() {
       return;
     }
 
-    // Upload gallery if one was selected
-    if (galleryFolder && galleryFolder.length > 0) {
-      try {
-        setMessage({ type: 'success', text: 'Téléversement de la galerie en cours...' });
-        const files: File[] = Array.from(galleryFolder);
-        
-        // Generate gallery name from date and title
-        const date = new Date(formData.pubDate);
-        const year = String(date.getFullYear()).slice(-2);
-        const month = String(date.getMonth() + 1).padStart(2, '0');
-        const day = String(date.getDate()).padStart(2, '0');
-        
-        let titleSlug = formData.title
-          .normalize('NFD')
-          .replace(/[\u0300-\u036f]/g, '')
-          .replace(/[^a-zA-Z0-9-]+/g, '-')
-          .replace(/(^-|-$)/g, '')
-          .substring(0, 30);
-        
-        const galleryName = `${year}${month}${day}-${titleSlug}`;
-
-        const uploadFormData = new FormData();
-        uploadFormData.append('galleryName', galleryName);
-        files.forEach((file) => {
-          const relativePath = (file as any).webkitRelativePath || file.name;
-          uploadFormData.append('files', file, relativePath);
-        });
-
-        const galleryResponse = await fetch('/api/upload-gallery', {
-          method: 'POST',
-          body: uploadFormData,
-        });
-
-        if (!galleryResponse.ok) {
-          let errorMessage = 'Erreur lors du téléversement de la galerie';
-          try {
-            const contentType = galleryResponse.headers.get('content-type');
-            if (contentType && contentType.includes('application/json')) {
-              const error = await galleryResponse.json();
-              errorMessage = error.message || errorMessage;
-            } else {
-              const errorText = await galleryResponse.text();
-              errorMessage = errorText || `HTTP ${galleryResponse.status}: ${galleryResponse.statusText}`;
-            }
-          } catch (e) {
-            errorMessage = `HTTP ${galleryResponse.status}: ${galleryResponse.statusText}`;
-          }
-          setMessage({ type: 'error', text: errorMessage });
-          return;
-        }
-
-        const galleryResult = await galleryResponse.json();
-        if (galleryResult.success) {
-          setFormData(prev => ({
-            ...prev,
-            gallery_url: `/blog/blog-galeries/${galleryName}/index.html`,
-          }));
-        } else {
-          setMessage({ type: 'error', text: galleryResult.message || 'Erreur lors du téléversement de la galerie' });
-          return;
-        }
-      } catch (error: any) {
-        setMessage({ type: 'error', text: error.message || 'Erreur de connexion lors du téléversement de la galerie' });
-        return;
-      }
-    }
+    // Gallery is now handled manually - just construct the path if gallery_url is set
+    // No upload needed, user uploads manually to GitHub
 
     setSaving(true);
     setMessage({ type: 'success', text: 'Sauvegarde en cours...' });
@@ -373,6 +329,7 @@ export default function Admin() {
         setSelectedImageFile(null);
         setGalleryFolder(null);
         await loadPosts();
+        await loadAvailableImages(); // Reload images after upload
       } else if (result.markdown) {
         // File write not available - provide download option
         const blob = new Blob([result.markdown], { type: 'text/markdown' });
@@ -529,48 +486,85 @@ export default function Admin() {
 
             <div className="form-group">
               <label className="form-label required">Image principale</label>
-              <div>
-                <label className="btn btn-success" style={{ margin: 0 }}>
-                  📷 Choisir une image
-                  <input
-                    type="file"
-                    accept="image/*"
-                    onChange={(e) => {
-                      const file = e.target.files?.[0];
-                      if (!file) return;
+              <div style={{ display: 'flex', gap: '1rem', alignItems: 'flex-start', flexWrap: 'wrap' }}>
+                <div style={{ flex: '1', minWidth: '200px' }}>
+                  <label className="btn btn-success" style={{ margin: 0, marginBottom: '0.5rem', display: 'block' }}>
+                    📷 Téléverser une nouvelle image
+                    <input
+                      type="file"
+                      accept="image/*"
+                      onChange={(e) => {
+                        const file = e.target.files?.[0];
+                        if (!file) return;
 
-                      // Check file size
-                      const maxSizeBytes = 1.5 * 1024 * 1024; // 1.5MB
-                      if (file.size > maxSizeBytes) {
-                        const fileSizeMB = (file.size / 1024 / 1024).toFixed(1);
-                        setMessage({ 
-                          type: 'error', 
-                          text: `Le fichier est trop volumineux (${fileSizeMB}MB). La taille maximale est de 1.5MB.` 
-                        });
+                        // Check file size
+                        const maxSizeBytes = 1.5 * 1024 * 1024; // 1.5MB
+                        if (file.size > maxSizeBytes) {
+                          const fileSizeMB = (file.size / 1024 / 1024).toFixed(1);
+                          setMessage({ 
+                            type: 'error', 
+                            text: `Le fichier est trop volumineux (${fileSizeMB}MB). La taille maximale est de 1.5MB.` 
+                          });
+                          e.target.value = '';
+                          return;
+                        }
+
+                        // Cleanup previous preview URL
+                        if (imagePreviewUrl) {
+                          URL.revokeObjectURL(imagePreviewUrl);
+                        }
+                        
+                        setSelectedImageFile(file);
+                        // Create preview URL
+                        const previewUrl = URL.createObjectURL(file);
+                        setImagePreviewUrl(previewUrl);
+                        
+                        // Auto-generate path
+                        const path = `/blog/blog-images/${file.name}`;
+                        setFormData(prev => ({ ...prev, main_image: path }));
+                        setMessage({ type: 'success', text: `Image sélectionnée: ${file.name}. Elle sera téléversée lors de l'enregistrement.` });
                         e.target.value = '';
-                        return;
-                      }
-
-                      // Cleanup previous preview URL
-                      if (imagePreviewUrl) {
-                        URL.revokeObjectURL(imagePreviewUrl);
-                      }
-                      
-                      setSelectedImageFile(file);
-                      // Create preview URL
-                      const previewUrl = URL.createObjectURL(file);
-                      setImagePreviewUrl(previewUrl);
-                      
-                      // Auto-generate path
-                      const path = `/blog/blog-images/${file.name}`;
-                      setFormData(prev => ({ ...prev, main_image: path }));
-                      setMessage({ type: 'success', text: `Image sélectionnée: ${file.name}. Elle sera téléversée lors de l'enregistrement.` });
-                      e.target.value = '';
-                    }}
-                    style={{ display: 'none' }}
-                    disabled={saving}
-                  />
-                </label>
+                      }}
+                      style={{ display: 'none' }}
+                      disabled={saving}
+                    />
+                  </label>
+                  <div style={{ marginTop: '0.5rem' }}>
+                    <label className="form-label" style={{ fontSize: '0.9rem', marginBottom: '0.25rem' }}>Ou choisir une image existante :</label>
+                    <select
+                      value={formData.main_image}
+                      onChange={(e) => {
+                        const selectedPath = e.target.value;
+                        if (selectedPath) {
+                          setFormData(prev => ({ ...prev, main_image: selectedPath }));
+                          setSelectedImageFile(null);
+                          // Cleanup preview URL if it was from a file upload
+                          if (imagePreviewUrl) {
+                            URL.revokeObjectURL(imagePreviewUrl);
+                            setImagePreviewUrl(null);
+                          }
+                        } else {
+                          setFormData(prev => ({ ...prev, main_image: '' }));
+                        }
+                      }}
+                      className="form-input"
+                      style={{ width: '100%' }}
+                      disabled={saving || loadingImages}
+                    >
+                      <option value="">-- Choisir une image --</option>
+                      {availableImages.map((img) => (
+                        <option key={img.path} value={img.path}>
+                          {img.filename}
+                        </option>
+                      ))}
+                    </select>
+                    {loadingImages && (
+                      <p style={{ marginTop: '0.25rem', fontSize: '0.85rem', color: '#888', fontStyle: 'italic' }}>
+                        Chargement des images...
+                      </p>
+                    )}
+                  </div>
+                </div>
               </div>
               {imagePreviewUrl && selectedImageFile && (
                 <div style={{ marginTop: '1rem' }}>
@@ -628,46 +622,35 @@ export default function Admin() {
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr auto 1fr', gap: '1rem', alignItems: 'start' }}>
                   <div>
                     <label className="form-label">Galerie Lightroom</label>
-                    <div>
-                      <label className="btn btn-success" style={{ margin: 0 }}>
-                        📁 Choisir un dossier
-                        <input
-                          type="file"
-                          {...({ webkitdirectory: '', directory: '' } as any)}
-                          multiple
-                          onChange={(e) => {
-                            if (e.target.files && e.target.files.length > 0) {
-                              setGalleryFolder(e.target.files);
-                              // Auto-generate gallery path from date and title
-                              const date = new Date(formData.pubDate);
-                              const year = String(date.getFullYear()).slice(-2);
-                              const month = String(date.getMonth() + 1).padStart(2, '0');
-                              const day = String(date.getDate()).padStart(2, '0');
-                              let titleSlug = formData.title
-                                .normalize('NFD')
-                                .replace(/[\u0300-\u036f]/g, '')
-                                .replace(/[^a-zA-Z0-9-]+/g, '-')
-                                .replace(/(^-|-$)/g, '')
-                                .substring(0, 30);
-                              const galleryName = `${year}${month}${day}-${titleSlug}`;
-                              const galleryPath = `/blog/blog-galeries/${galleryName}/index.html`;
-                              setFormData(prev => ({ ...prev, gallery_url: galleryPath }));
-                              setMessage({ type: 'success', text: `${e.target.files.length} fichiers sélectionnés. La galerie sera téléversée lors de l'enregistrement.` });
-                            }
-                          }}
-                          style={{ display: 'none' }}
-                          disabled={saving}
-                        />
-                      </label>
+                    <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
+                      <span style={{ fontSize: '0.9rem', color: '#666' }}>/blog/blog-galeries/</span>
+                      <input
+                        type="text"
+                        value={formData.gallery_url ? formData.gallery_url.replace('/blog/blog-galeries/', '').replace('/index.html', '') : ''}
+                        onChange={(e) => {
+                          const folderName = e.target.value.trim();
+                          if (folderName) {
+                            setFormData(prev => ({ 
+                              ...prev, 
+                              gallery_url: `/blog/blog-galeries/${folderName}/index.html` 
+                            }));
+                          } else {
+                            setFormData(prev => ({ ...prev, gallery_url: '' }));
+                          }
+                        }}
+                        placeholder="nom-du-dossier"
+                        className="form-input"
+                        style={{ flex: 1 }}
+                        disabled={saving}
+                      />
+                      <span style={{ fontSize: '0.9rem', color: '#666' }}>/index.html</span>
                     </div>
-                    {galleryFolder && (
-                      <p style={{ marginTop: '0.5rem', fontSize: '0.9rem', color: '#666' }}>
-                        {galleryFolder.length} fichiers sélectionnés - La galerie sera téléversée lors de l'enregistrement
-                      </p>
-                    )}
+                    <p style={{ marginTop: '0.5rem', fontSize: '0.85rem', color: '#888', fontStyle: 'italic' }}>
+                      💡 Entrez uniquement le nom du dossier (ex: 251228-margara-expo). Le dossier doit être uploadé manuellement sur GitHub dans public/blog/blog-galeries/
+                    </p>
                     {formData.gallery_url && (
                       <p style={{ marginTop: '0.5rem', fontSize: '0.9rem', color: '#666', fontStyle: 'italic' }}>
-                        {formData.gallery_url}
+                        Chemin complet : {formData.gallery_url}
                       </p>
                     )}
                   </div>
