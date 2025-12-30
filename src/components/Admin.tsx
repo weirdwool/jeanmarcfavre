@@ -485,13 +485,13 @@ export default function Admin() {
             </div>
 
             <div className="form-group">
+              <label className="form-label required">Image principale</label>
               <div style={{ 
                 background: '#f9fafb',
                 borderRadius: '6px',
                 border: '2px solid #e5e7eb',
                 padding: '1rem'
               }}>
-                <label className="form-label required" style={{ marginBottom: '1rem', display: 'block' }}>Image principale</label>
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr auto 1fr', gap: '1rem', alignItems: 'start' }}>
                   <div>
                     <label className="form-label" style={{ fontSize: '0.9rem', marginBottom: '0.25rem' }}>Choisir image existante</label>
