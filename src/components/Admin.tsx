@@ -212,8 +212,20 @@ export default function Admin() {
         });
 
         if (!imageResponse.ok) {
-          const error = await imageResponse.json();
-          setMessage({ type: 'error', text: error.message || 'Erreur lors du téléversement de l\'image' });
+          let errorMessage = 'Erreur lors du téléversement de l\'image';
+          try {
+            const contentType = imageResponse.headers.get('content-type');
+            if (contentType && contentType.includes('application/json')) {
+              const error = await imageResponse.json();
+              errorMessage = error.message || errorMessage;
+            } else {
+              const errorText = await imageResponse.text();
+              errorMessage = errorText || `HTTP ${imageResponse.status}: ${imageResponse.statusText}`;
+            }
+          } catch (e) {
+            errorMessage = `HTTP ${imageResponse.status}: ${imageResponse.statusText}`;
+          }
+          setMessage({ type: 'error', text: errorMessage });
           return;
         }
 
@@ -272,8 +284,20 @@ export default function Admin() {
         });
 
         if (!galleryResponse.ok) {
-          const error = await galleryResponse.json();
-          setMessage({ type: 'error', text: error.message || 'Erreur lors du téléversement de la galerie' });
+          let errorMessage = 'Erreur lors du téléversement de la galerie';
+          try {
+            const contentType = galleryResponse.headers.get('content-type');
+            if (contentType && contentType.includes('application/json')) {
+              const error = await galleryResponse.json();
+              errorMessage = error.message || errorMessage;
+            } else {
+              const errorText = await galleryResponse.text();
+              errorMessage = errorText || `HTTP ${galleryResponse.status}: ${galleryResponse.statusText}`;
+            }
+          } catch (e) {
+            errorMessage = `HTTP ${galleryResponse.status}: ${galleryResponse.statusText}`;
+          }
+          setMessage({ type: 'error', text: errorMessage });
           return;
         }
 
@@ -310,8 +334,27 @@ export default function Admin() {
       });
 
       if (!response.ok) {
-        const error = await response.json();
-        setMessage({ type: 'error', text: error.message || error.error || 'Erreur lors de la sauvegarde' });
+        let errorMessage = 'Erreur lors de la sauvegarde';
+        try {
+          const contentType = response.headers.get('content-type');
+          if (contentType && contentType.includes('application/json')) {
+            const error = await response.json();
+            errorMessage = error.message || error.error || errorMessage;
+          } else {
+            const errorText = await response.text();
+            errorMessage = errorText || `HTTP ${response.status}: ${response.statusText}`;
+            // If it's a 403, provide a more helpful message
+            if (response.status === 403) {
+              errorMessage = 'Accès refusé. Le token GitHub n\'a peut-être pas les permissions nécessaires ou a expiré.';
+            }
+          }
+        } catch (e) {
+          errorMessage = `HTTP ${response.status}: ${response.statusText}`;
+          if (response.status === 403) {
+            errorMessage = 'Accès refusé. Le token GitHub n\'a peut-être pas les permissions nécessaires ou a expiré.';
+          }
+        }
+        setMessage({ type: 'error', text: errorMessage });
         return;
       }
 
@@ -352,8 +395,9 @@ export default function Admin() {
       } else {
         setMessage({ type: 'error', text: result.message || result.error || 'Erreur lors de la sauvegarde' });
       }
-    } catch (error) {
-      setMessage({ type: 'error', text: 'Erreur de connexion' });
+    } catch (error: any) {
+      const errorMessage = error?.message || error?.toString() || 'Erreur de connexion';
+      setMessage({ type: 'error', text: `Erreur: ${errorMessage}` });
     } finally {
       setSaving(false);
     }
