@@ -23,6 +23,6 @@ tags:
   voyage: false
 ---
 
-Deuxième division de hockey rencontre entre les chevaliers du lac d'Annecy et les beluga de Toulouse. Un très joli match avec beaucoup d'engagement. ANNECY a pris la marque. Dès le premier TT s'est fait rattraper dans le troisième, mais a finalement su s'imposer au but en or 5-4.
+Deuxième division de hockey: rencontre entre les Chevaliers du lac d'Annecy et les Beluga de Toulouse. Un très joli match avec beaucoup d'engagement. Annecy a pris la marque dès le premier Tiers temps, s'est fait rattraper dans le troisième, mais a finalement su s'imposer au but en or, score final 5-4.
 
- encore un beau challenge pour mon CANON R3, avec des conditions de température de lumière variables, une vitesse d'action importante des changements de direction incessants et un angle de champ réduit entre les filets et les plexis de protection.
+Encore un beau challenge pour mon CANON R3, avec des conditions de température de lumière variables, une vitesse d'action importante des changements de direction incessants et un angle de champ réduit entre les filets et les plexis de protection.
