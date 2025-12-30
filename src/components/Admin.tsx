@@ -494,6 +494,51 @@ export default function Admin() {
                 <label className="form-label required" style={{ marginBottom: '1rem', display: 'block' }}>Image principale</label>
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr auto 1fr', gap: '1rem', alignItems: 'start' }}>
                   <div>
+                    <label className="form-label" style={{ fontSize: '0.9rem', marginBottom: '0.25rem' }}>Choisir image existante</label>
+                    <select
+                      value={formData.main_image}
+                      onChange={(e) => {
+                        const selectedPath = e.target.value;
+                        if (selectedPath) {
+                          setFormData(prev => ({ ...prev, main_image: selectedPath }));
+                          setSelectedImageFile(null);
+                          // Cleanup preview URL if it was from a file upload
+                          if (imagePreviewUrl) {
+                            URL.revokeObjectURL(imagePreviewUrl);
+                            setImagePreviewUrl(null);
+                          }
+                        } else {
+                          setFormData(prev => ({ ...prev, main_image: '' }));
+                        }
+                      }}
+                      className="form-input"
+                      style={{ width: '100%' }}
+                      disabled={saving || loadingImages}
+                    >
+                      <option value="">-- Choisir une image --</option>
+                      {availableImages.map((img) => (
+                        <option key={img.path} value={img.path}>
+                          {img.filename}
+                        </option>
+                      ))}
+                    </select>
+                    <p style={{ marginTop: '0.5rem', fontSize: '0.85rem', color: '#888', fontStyle: 'italic' }}>
+                      💡 Choisir une image déjà dans le dossier blog/blog-images de GitHub
+                    </p>
+                    {loadingImages && (
+                      <p style={{ marginTop: '0.25rem', fontSize: '0.85rem', color: '#888', fontStyle: 'italic' }}>
+                        Chargement des images...
+                      </p>
+                    )}
+                  </div>
+                  <div style={{ 
+                    width: '1px', 
+                    backgroundColor: '#e5e7eb', 
+                    height: '100%', 
+                    minHeight: '60px',
+                    alignSelf: 'stretch'
+                  }}></div>
+                  <div>
                     <label className="btn btn-success" style={{ margin: 0, marginBottom: '0.5rem', display: 'block' }}>
                       📷 Téléverser une nouvelle image
                       <input
@@ -538,51 +583,6 @@ export default function Admin() {
                     <p style={{ marginTop: '0.5rem', fontSize: '0.85rem', color: '#888', fontStyle: 'italic' }}>
                       ⚠️ Taille maximale : 1.5MB. Les images doivent être optimisées avant le téléversement.
                     </p>
-                  </div>
-                  <div style={{ 
-                    width: '1px', 
-                    backgroundColor: '#e5e7eb', 
-                    height: '100%', 
-                    minHeight: '60px',
-                    alignSelf: 'stretch'
-                  }}></div>
-                  <div>
-                    <label className="form-label" style={{ fontSize: '0.9rem', marginBottom: '0.25rem' }}>Choisir image existante</label>
-                    <select
-                      value={formData.main_image}
-                      onChange={(e) => {
-                        const selectedPath = e.target.value;
-                        if (selectedPath) {
-                          setFormData(prev => ({ ...prev, main_image: selectedPath }));
-                          setSelectedImageFile(null);
-                          // Cleanup preview URL if it was from a file upload
-                          if (imagePreviewUrl) {
-                            URL.revokeObjectURL(imagePreviewUrl);
-                            setImagePreviewUrl(null);
-                          }
-                        } else {
-                          setFormData(prev => ({ ...prev, main_image: '' }));
-                        }
-                      }}
-                      className="form-input"
-                      style={{ width: '100%' }}
-                      disabled={saving || loadingImages}
-                    >
-                      <option value="">-- Choisir une image --</option>
-                      {availableImages.map((img) => (
-                        <option key={img.path} value={img.path}>
-                          {img.filename}
-                        </option>
-                      ))}
-                    </select>
-                    <p style={{ marginTop: '0.5rem', fontSize: '0.85rem', color: '#888', fontStyle: 'italic' }}>
-                      💡 Choisir une image déjà dans le dossier blog/blog-images de GitHub
-                    </p>
-                    {loadingImages && (
-                      <p style={{ marginTop: '0.25rem', fontSize: '0.85rem', color: '#888', fontStyle: 'italic' }}>
-                        Chargement des images...
-                      </p>
-                    )}
                   </div>
                 </div>
                 {formData.main_image && (
