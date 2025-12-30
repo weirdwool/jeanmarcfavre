@@ -4,7 +4,7 @@ pubDate: 2025-11-08
 location: "Pringy"
 main_image: "/blog/blog-images/251108-Postec-rampe.jpg"
 gallery_url: "/blog/blog-galeries/251108-Skate-Big-rampe/index.html"
-
+video_url: ""
 tags:
   associatif: false
   culture: false
