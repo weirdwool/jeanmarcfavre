@@ -485,14 +485,14 @@ export default function Admin() {
             </div>
 
             <div className="form-group">
-              <label className="form-label required">Image principale</label>
               <div style={{ 
                 background: '#f9fafb',
                 borderRadius: '6px',
                 border: '2px solid #e5e7eb',
                 padding: '1rem'
               }}>
-                <div style={{ display: 'flex', gap: '1rem', alignItems: 'flex-start', flexWrap: 'wrap' }}>
+                <label className="form-label required" style={{ marginBottom: '1rem', display: 'block' }}>Image principale</label>
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr auto 1fr', gap: '1rem', alignItems: 'start' }}>
                   <div>
                     <label className="btn btn-success" style={{ margin: 0, marginBottom: '0.5rem', display: 'block' }}>
                       📷 Téléverser une nouvelle image
@@ -539,8 +539,15 @@ export default function Admin() {
                       ⚠️ Taille maximale : 1.5MB. Les images doivent être optimisées avant le téléversement.
                     </p>
                   </div>
-                  <div style={{ flex: 1, minWidth: '200px' }}>
-                    <label className="form-label" style={{ fontSize: '0.9rem', marginBottom: '0.25rem' }}>Choisir dans le dossier</label>
+                  <div style={{ 
+                    width: '1px', 
+                    backgroundColor: '#e5e7eb', 
+                    height: '100%', 
+                    minHeight: '60px',
+                    alignSelf: 'stretch'
+                  }}></div>
+                  <div>
+                    <label className="form-label" style={{ fontSize: '0.9rem', marginBottom: '0.25rem' }}>Choisir image existante</label>
                     <select
                       value={formData.main_image}
                       onChange={(e) => {
@@ -568,6 +575,9 @@ export default function Admin() {
                         </option>
                       ))}
                     </select>
+                    <p style={{ marginTop: '0.5rem', fontSize: '0.85rem', color: '#888', fontStyle: 'italic' }}>
+                      💡 Choisir une image déjà dans le dossier blog/blog-images de GitHub
+                    </p>
                     {loadingImages && (
                       <p style={{ marginTop: '0.25rem', fontSize: '0.85rem', color: '#888', fontStyle: 'italic' }}>
                         Chargement des images...
@@ -580,43 +590,43 @@ export default function Admin() {
                     {formData.main_image}
                   </p>
                 )}
+                {imagePreviewUrl && selectedImageFile && (
+                  <div style={{ marginTop: '1rem' }}>
+                    <img 
+                      src={imagePreviewUrl} 
+                      alt="Preview" 
+                      style={{ 
+                        maxWidth: '100%', 
+                        maxHeight: '300px', 
+                        objectFit: 'contain',
+                        border: '1px solid #ddd',
+                        borderRadius: '4px',
+                        padding: '4px'
+                      }} 
+                    />
+                  </div>
+                )}
+                {formData.main_image && !selectedImageFile && (
+                  <div style={{ marginTop: '1rem' }}>
+                    <img 
+                      src={formData.main_image} 
+                      alt="Current image" 
+                      style={{ 
+                        maxWidth: '100%', 
+                        maxHeight: '300px', 
+                        objectFit: 'contain',
+                        border: '1px solid #ddd',
+                        borderRadius: '4px',
+                        padding: '4px'
+                      }}
+                      onError={(e) => {
+                        // Hide broken images
+                        (e.target as HTMLImageElement).style.display = 'none';
+                      }}
+                    />
+                  </div>
+                )}
               </div>
-              {imagePreviewUrl && selectedImageFile && (
-                <div style={{ marginTop: '1rem' }}>
-                  <img 
-                    src={imagePreviewUrl} 
-                    alt="Preview" 
-                    style={{ 
-                      maxWidth: '100%', 
-                      maxHeight: '300px', 
-                      objectFit: 'contain',
-                      border: '1px solid #ddd',
-                      borderRadius: '4px',
-                      padding: '4px'
-                    }} 
-                  />
-                </div>
-              )}
-              {formData.main_image && !selectedImageFile && (
-                <div style={{ marginTop: '1rem' }}>
-                  <img 
-                    src={formData.main_image} 
-                    alt="Current image" 
-                    style={{ 
-                      maxWidth: '100%', 
-                      maxHeight: '300px', 
-                      objectFit: 'contain',
-                      border: '1px solid #ddd',
-                      borderRadius: '4px',
-                      padding: '4px'
-                    }}
-                    onError={(e) => {
-                      // Hide broken images
-                      (e.target as HTMLImageElement).style.display = 'none';
-                    }}
-                  />
-                </div>
-              )}
             </div>
 
             <div className="form-group">
@@ -656,7 +666,7 @@ export default function Admin() {
                       href="https://github.com/weirdwool/jeanmarcfavre/tree/main/public/blog/blog-galeries" 
                       target="_blank" 
                       rel="noopener noreferrer" 
-                      className="btn btn-secondary" 
+                      className="btn btn-success" 
                       style={{ marginTop: '0.5rem', display: 'inline-block' }}
                     >
                       Ouvrir le dossier des galeries sur GitHub
