@@ -3,7 +3,7 @@ title: "Vernissage Expo Margara"
 pubDate: 2025-12-29
 location: "Megève"
 main_image: "/blog/blog-images/251228-Margara-expo-2.jpg"
-gallery_url: ""
+gallery_url: "/blog/blog-galeries/251228-Exposition-Margara/index.html"
 video_url: ""
 tags:
   associatif: false
