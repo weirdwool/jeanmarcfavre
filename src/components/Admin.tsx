@@ -486,84 +486,81 @@ export default function Admin() {
 
             <div className="form-group">
               <label className="form-label required">Image principale</label>
-              <div style={{ display: 'flex', gap: '1rem', alignItems: 'flex-start', flexWrap: 'wrap' }}>
-                <div style={{ flex: '1', minWidth: '200px' }}>
-                  <label className="btn btn-success" style={{ margin: 0, marginBottom: '0.5rem', display: 'block' }}>
-                    📷 Téléverser une nouvelle image
-                    <input
-                      type="file"
-                      accept="image/*"
-                      onChange={(e) => {
-                        const file = e.target.files?.[0];
-                        if (!file) return;
+              <div style={{ display: 'flex', gap: '1rem', alignItems: 'center', flexWrap: 'wrap' }}>
+                <label className="btn btn-success" style={{ margin: 0 }}>
+                  📷 Téléverser une nouvelle image
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={(e) => {
+                      const file = e.target.files?.[0];
+                      if (!file) return;
 
-                        // Check file size
-                        const maxSizeBytes = 1.5 * 1024 * 1024; // 1.5MB
-                        if (file.size > maxSizeBytes) {
-                          const fileSizeMB = (file.size / 1024 / 1024).toFixed(1);
-                          setMessage({ 
-                            type: 'error', 
-                            text: `Le fichier est trop volumineux (${fileSizeMB}MB). La taille maximale est de 1.5MB.` 
-                          });
-                          e.target.value = '';
-                          return;
-                        }
+                      // Check file size
+                      const maxSizeBytes = 1.5 * 1024 * 1024; // 1.5MB
+                      if (file.size > maxSizeBytes) {
+                        const fileSizeMB = (file.size / 1024 / 1024).toFixed(1);
+                        setMessage({ 
+                          type: 'error', 
+                          text: `Le fichier est trop volumineux (${fileSizeMB}MB). La taille maximale est de 1.5MB.` 
+                        });
+                        e.target.value = '';
+                        return;
+                      }
 
-                        // Cleanup previous preview URL
+                      // Cleanup previous preview URL
+                      if (imagePreviewUrl) {
+                        URL.revokeObjectURL(imagePreviewUrl);
+                      }
+                      
+                      setSelectedImageFile(file);
+                      // Create preview URL
+                      const previewUrl = URL.createObjectURL(file);
+                      setImagePreviewUrl(previewUrl);
+                      
+                      // Auto-generate path
+                      const path = `/blog/blog-images/${file.name}`;
+                      setFormData(prev => ({ ...prev, main_image: path }));
+                      setMessage({ type: 'success', text: `Image sélectionnée: ${file.name}. Elle sera téléversée lors de l'enregistrement.` });
+                      e.target.value = '';
+                    }}
+                    style={{ display: 'none' }}
+                    disabled={saving}
+                  />
+                </label>
+                <div style={{ flex: 1, minWidth: '200px' }}>
+                  <select
+                    value={formData.main_image}
+                    onChange={(e) => {
+                      const selectedPath = e.target.value;
+                      if (selectedPath) {
+                        setFormData(prev => ({ ...prev, main_image: selectedPath }));
+                        setSelectedImageFile(null);
+                        // Cleanup preview URL if it was from a file upload
                         if (imagePreviewUrl) {
                           URL.revokeObjectURL(imagePreviewUrl);
+                          setImagePreviewUrl(null);
                         }
-                        
-                        setSelectedImageFile(file);
-                        // Create preview URL
-                        const previewUrl = URL.createObjectURL(file);
-                        setImagePreviewUrl(previewUrl);
-                        
-                        // Auto-generate path
-                        const path = `/blog/blog-images/${file.name}`;
-                        setFormData(prev => ({ ...prev, main_image: path }));
-                        setMessage({ type: 'success', text: `Image sélectionnée: ${file.name}. Elle sera téléversée lors de l'enregistrement.` });
-                        e.target.value = '';
-                      }}
-                      style={{ display: 'none' }}
-                      disabled={saving}
-                    />
-                  </label>
-                  <div style={{ marginTop: '0.5rem' }}>
-                    <label className="form-label" style={{ fontSize: '0.9rem', marginBottom: '0.25rem' }}>Ou choisir une image existante :</label>
-                    <select
-                      value={formData.main_image}
-                      onChange={(e) => {
-                        const selectedPath = e.target.value;
-                        if (selectedPath) {
-                          setFormData(prev => ({ ...prev, main_image: selectedPath }));
-                          setSelectedImageFile(null);
-                          // Cleanup preview URL if it was from a file upload
-                          if (imagePreviewUrl) {
-                            URL.revokeObjectURL(imagePreviewUrl);
-                            setImagePreviewUrl(null);
-                          }
-                        } else {
-                          setFormData(prev => ({ ...prev, main_image: '' }));
-                        }
-                      }}
-                      className="form-input"
-                      style={{ width: '100%' }}
-                      disabled={saving || loadingImages}
-                    >
-                      <option value="">-- Choisir une image --</option>
-                      {availableImages.map((img) => (
-                        <option key={img.path} value={img.path}>
-                          {img.filename}
-                        </option>
-                      ))}
-                    </select>
-                    {loadingImages && (
-                      <p style={{ marginTop: '0.25rem', fontSize: '0.85rem', color: '#888', fontStyle: 'italic' }}>
-                        Chargement des images...
-                      </p>
-                    )}
-                  </div>
+                      } else {
+                        setFormData(prev => ({ ...prev, main_image: '' }));
+                      }
+                    }}
+                    className="form-input"
+                    style={{ width: '100%' }}
+                    disabled={saving || loadingImages}
+                  >
+                    <option value="">-- Ou choisir une image existante --</option>
+                    {availableImages.map((img) => (
+                      <option key={img.path} value={img.path}>
+                        {img.filename}
+                      </option>
+                    ))}
+                  </select>
+                  {loadingImages && (
+                    <p style={{ marginTop: '0.25rem', fontSize: '0.85rem', color: '#888', fontStyle: 'italic' }}>
+                      Chargement des images...
+                    </p>
+                  )}
                 </div>
               </div>
               {imagePreviewUrl && selectedImageFile && (
@@ -645,6 +642,15 @@ export default function Admin() {
                       />
                       <span style={{ fontSize: '0.9rem', color: '#666' }}>/index.html</span>
                     </div>
+                    <a 
+                      href="https://github.com/weirdwool/jeanmarcfavre/tree/main/public/blog/blog-galeries" 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      className="btn btn-secondary" 
+                      style={{ marginTop: '0.5rem', display: 'inline-block' }}
+                    >
+                      Ouvrir le dossier des galeries sur GitHub
+                    </a>
                     <p style={{ marginTop: '0.5rem', fontSize: '0.85rem', color: '#888', fontStyle: 'italic' }}>
                       💡 Entrez uniquement le nom du dossier (ex: 251228-margara-expo). Le dossier doit être uploadé manuellement sur GitHub dans public/blog/blog-galeries/
                     </p>
