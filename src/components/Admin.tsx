@@ -539,6 +539,7 @@ export default function Admin() {
                     alignSelf: 'stretch'
                   }}></div>
                   <div>
+                    <label className="form-label" style={{ fontSize: '0.9rem', marginBottom: '0.25rem' }}>Ajouter une nouvelle image</label>
                     <label className="btn btn-success" style={{ margin: 0, marginBottom: '0.5rem', display: 'block' }}>
                       📷 Téléverser une nouvelle image
                       <input
