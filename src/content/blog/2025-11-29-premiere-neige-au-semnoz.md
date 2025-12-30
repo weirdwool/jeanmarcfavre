@@ -2,7 +2,7 @@
 title: "Première neige au Semnoz"
 pubDate: 2025-11-29
 location: "Le Semnoz"
-main_image: "/blog/blog-images/030517-tanjung-rizal-bali-230-2000x1338.jpg"
+main_image: "/blog/blog-images/251128-Semnoz-neige-2.jpg"
 gallery_url: ""
 video_url: ""
 tags:
