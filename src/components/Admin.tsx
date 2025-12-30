@@ -445,7 +445,27 @@ export default function Admin() {
 
       {showForm ? (
         <div className="admin-form-container">
-          <h2>{editingPost ? 'Modifier l\'article' : 'Nouvel article'}</h2>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
+            <h2 style={{ margin: 0 }}>{editingPost ? 'Modifier l\'article' : 'Nouvel article'}</h2>
+            <button
+              onClick={() => {
+                // Cleanup preview URL if exists
+                if (imagePreviewUrl) {
+                  URL.revokeObjectURL(imagePreviewUrl);
+                  setImagePreviewUrl(null);
+                }
+                
+                setShowForm(false);
+                setEditingPost(null);
+                setSelectedImageFile(null);
+                setGalleryFolder(null);
+                setMessage(null);
+              }}
+              className="btn btn-secondary"
+            >
+              Annuler
+            </button>
+          </div>
 
           <div className="form-grid">
             <div className="form-group">
