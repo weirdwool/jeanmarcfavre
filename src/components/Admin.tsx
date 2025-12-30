@@ -670,7 +670,7 @@ export default function Admin() {
                       className="btn btn-success" 
                       style={{ marginTop: '0.5rem', display: 'inline-block' }}
                     >
-                      Ouvrir le dossier des galeries sur GitHub
+                      Ajouter dossier sur GitHub
                     </a>
                     <p style={{ marginTop: '0.5rem', fontSize: '0.85rem', color: '#888', fontStyle: 'italic' }}>
                       💡 Entrez uniquement le nom du dossier (ex: 251228-margara-expo). Le dossier doit être uploadé manuellement sur GitHub dans public/blog/blog-galeries/
