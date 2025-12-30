@@ -23,4 +23,4 @@ tags:
   voyage: false
 ---
 
-Ce matin, le veto pour m'installer sur la route du col de BLUFFY pour réaliser un Hyperlapse de lever de soleil sur le Chateau De Menthon. La route étant très encombrée, je décide de rester sur place et de rouler vers le col de la Forclaz est réalisé ainsi quelques très belles photos d'automne, au-dessus de la baie de Talloires
+Ce matin, je me lève tot pour m'installer sur la route du col de Bluffy pour réaliser un hyperlapse de lever de soleil sur le Chateau De Menthon. La route du retour étant très encombrée, je décide plutot de rouler vers le col de la Forclaz et réalisé ainsi quelques très belles photos d'automne, au-dessus de la baie de Talloires
