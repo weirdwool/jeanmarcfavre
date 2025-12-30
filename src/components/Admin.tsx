@@ -676,7 +676,7 @@ export default function Admin() {
                             setFormData(prev => ({ ...prev, gallery_url: '' }));
                           }
                         }}
-                        placeholder="YYMMDD-nom-du-dossier"
+                        placeholder="YYMMDD-nom-dossier"
                         className="form-input"
                         style={{ flex: 1 }}
                         disabled={saving}
