@@ -24,3 +24,4 @@ tags:
 ---
 
 Ce dimanche soir avait lieu le vernissage de l'exposition de mon ami **Pierre Margara**, le **sculpteur** emblématique de la station de Megève. C'est dans la salle Edith Allard du Palais que Pierre a présenté 90 de ses oeuvres dans une scénographie très aboutie et de grande facture. De nombreuses personnalités et collectionneurs de Pierre avaient fait le déplacement, c'est plus de 300 personnes qui ont profité du discours de la mairesse  Catherine Jullien-Brèches.
+https://pierremargara-sculpteur.com/[texte du lien](url)
