@@ -24,4 +24,4 @@ tags:
 ---
 
 Profitant de 24 heures passées entre Saone et Rhone, pendant la durée de l'évènement Danse en scène, je profite d'une accalmie pour survoler les deux fleuves et faire quelques images du superbe musée des Confluences qui s'adresse justement à la confluence des fleuves sus-nommés.
-https://museedesconfluences.fr
+[https://museedesconfluences.fr](url)
