@@ -24,3 +24,4 @@ tags:
 ---
 
 Session Photo dans des conditions déplorables de météo sur les pentes du Semnoz, sur les hauteurs d'Annecy,  pour quelques produits nouveaux dans les goodies (bonnets, hoodies) de nos Petites Etoiles, l'association qui aide les enfants hospitalisés
+[https://www.nosptitesetoiles.com](url)
