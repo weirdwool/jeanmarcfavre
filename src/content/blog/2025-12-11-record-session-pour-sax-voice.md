@@ -24,4 +24,4 @@ tags:
 ---
 
 C'est au château des Asnières, mis à notre disposition par son propriétaire, que Kty Ledoux et ses deux musiciens ont enregistré quelques morceaux de leur répertoire pour la réalisation de demos. Cet hotel un peu baroque a permis de créer une ambiance très chaude dans laquelle la musique du groupe Sax & Voice trouvait pleinement sa place.
-https://www.chateau-des-avenieres.com
+[https://www.chateau-des-avenieres.com](url)
