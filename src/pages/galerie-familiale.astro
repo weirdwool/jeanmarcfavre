@@ -66,12 +66,23 @@ import '../styles/pages/galerie-familiale.css';
     const btnNext = lightbox.querySelector('.lightbox-next');
     const btnClose = lightbox.querySelector('.lightbox-close');
 
-    // Load images from API
+    // Load images from pre-generated JSON file
     async function loadImages() {
       if (!galleryGrid) return;
       
       try {
-        const response = await fetch(`/api/list-gallery-images?folder=${GALLERY_FOLDER}`);
+        // Try to load from the pre-generated JSON file first (works in production)
+        let response = await fetch('/galerie-familiale-images.json');
+        
+        // If that fails, try the API route as fallback (for dev)
+        if (!response.ok) {
+          response = await fetch(`/api/list-gallery-images?folder=${GALLERY_FOLDER}`);
+        }
+        
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        
         const data = await response.json();
         
         if (data.success && data.images && data.images.length > 0) {
