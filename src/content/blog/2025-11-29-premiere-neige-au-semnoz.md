@@ -3,7 +3,7 @@ title: "Première neige au Semnoz"
 pubDate: 2025-11-29
 location: "Le Semnoz"
 main_image: "/blog/blog-images/251128-Semnoz-neige-2.jpg"
-gallery_url: ""
+gallery_url: "/blog/blog-galeries/251128-Semnoz-neige-drone/index.html"
 video_url: ""
 tags:
   associatif: false
@@ -23,4 +23,4 @@ tags:
   voyage: false
 ---
 
-Je profite d'une éclaircie dans la météo, un peu maussade pour aller shooter de bonheur, le sommet du Semnoz pris par la première neige de l'hiver....
+Je profite d'une éclaircie dans la météo, un peu maussade, pour aller shooter de bonne heure, le sommet du Semnoz pris par la première neige de l'hiver....
