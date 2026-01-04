@@ -72,11 +72,15 @@ import '../styles/pages/galerie-familiale.css';
       
       try {
         // Try to load from the pre-generated JSON file first (works in production)
+        console.log('Loading images from JSON file...');
         let response = await fetch('/galerie-familiale-images.json');
+        console.log('JSON file response status:', response.status);
         
         // If that fails, try the API route as fallback (for dev)
         if (!response.ok) {
+          console.log('JSON file not found, trying API route...');
           response = await fetch(`/api/list-gallery-images?folder=${GALLERY_FOLDER}`);
+          console.log('API route response status:', response.status);
         }
         
         if (!response.ok) {
@@ -84,6 +88,7 @@ import '../styles/pages/galerie-familiale.css';
         }
         
         const data = await response.json();
+        console.log('Loaded data:', { success: data.success, imageCount: data.images?.length });
         
         if (data.success && data.images && data.images.length > 0) {
           allImages = data.images;
@@ -91,6 +96,7 @@ import '../styles/pages/galerie-familiale.css';
           if (downloadAllBtn) downloadAllBtn.disabled = false;
         } else {
           const errorMsg = data.error || 'Aucune image trouvée dans la galerie.';
+          console.error('No images found:', errorMsg);
           galleryGrid.innerHTML = `
             <div class="error-message">
               <p><strong>${errorMsg}</strong></p>
@@ -107,7 +113,8 @@ import '../styles/pages/galerie-familiale.css';
           <div class="error-message">
             <p><strong>Erreur lors du chargement des images.</strong></p>
             <p style="margin-top: 1rem; font-size: 0.9rem; color: #888;">
-              Vérifiez que le dossier existe et que le serveur fonctionne correctement.
+              Erreur: ${error.message || 'Erreur inconnue'}<br>
+              Vérifiez la console du navigateur pour plus de détails.
             </p>
           </div>
         `;
