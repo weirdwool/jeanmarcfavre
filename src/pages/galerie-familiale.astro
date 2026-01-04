@@ -7,15 +7,36 @@ import path from 'path';
 // This page is hidden - not linked in navigation
 // Only accessible via direct URL
 
-// Load images list at build time
+// Load images list at build time directly from the folder
 let imagesList = [];
 try {
-  const jsonPath = path.join(process.cwd(), 'public', 'galerie-familiale-images.json');
-  const jsonContent = await fs.readFile(jsonPath, 'utf-8');
-  const data = JSON.parse(jsonContent);
-  imagesList = data.images || [];
+  const galleryFolder = '251225-Noel-St-Jean';
+  const imagesDir = path.join(process.cwd(), 'public', 'galeries', 'autre', galleryFolder);
+  const entries = await fs.readdir(imagesDir);
+  
+  const imageFiles = entries
+    .filter(file => {
+      const ext = path.extname(file).toLowerCase();
+      return ['.jpg', '.jpeg', '.png', '.gif', '.webp'].includes(ext);
+    })
+    .sort()
+    .map(file => ({
+      filename: file,
+      path: `/galeries/autre/${galleryFolder}/${file}`
+    }));
+  
+  imagesList = imageFiles;
 } catch (error) {
-  console.warn('Could not load gallery images JSON:', error);
+  console.warn('Could not load gallery images from folder:', error);
+  // Fallback: try to read from JSON file
+  try {
+    const jsonPath = path.join(process.cwd(), 'public', 'galerie-familiale-images.json');
+    const jsonContent = await fs.readFile(jsonPath, 'utf-8');
+    const data = JSON.parse(jsonContent);
+    imagesList = data.images || [];
+  } catch (jsonError) {
+    console.warn('Could not load gallery images JSON either:', jsonError);
+  }
 }
 ---
 
