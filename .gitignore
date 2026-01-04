@@ -25,7 +25,7 @@ pnpm-debug.log*
 .idea/
 
 # Large media files (host these separately, not in git)
-public/galeries/
+# public/galeries/ - Now included in Git (needed for engagements and other pages)
 public/archives/
 public/videos/
 
