@@ -1,9 +1,22 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import '../styles/pages/galerie-familiale.css';
+import fs from 'fs/promises';
+import path from 'path';
 
 // This page is hidden - not linked in navigation
 // Only accessible via direct URL
+
+// Load images list at build time
+let imagesList = [];
+try {
+  const jsonPath = path.join(process.cwd(), 'public', 'galerie-familiale-images.json');
+  const jsonContent = await fs.readFile(jsonPath, 'utf-8');
+  const data = JSON.parse(jsonContent);
+  imagesList = data.images || [];
+} catch (error) {
+  console.warn('Could not load gallery images JSON:', error);
+}
 ---
 
 <Layout 
@@ -51,9 +64,9 @@ import '../styles/pages/galerie-familiale.css';
   <!-- Load JSZip from CDN for zip creation -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
   
-  <script>
+  <script define:vars={{ imagesList }}>
     const GALLERY_FOLDER = '251225-Noel-St-Jean';
-    let allImages = [];
+    let allImages = imagesList || [];
     let currentImageIndex = 0;
 
     // DOM elements
@@ -66,58 +79,45 @@ import '../styles/pages/galerie-familiale.css';
     const btnNext = lightbox.querySelector('.lightbox-next');
     const btnClose = lightbox.querySelector('.lightbox-close');
 
-    // Load images from pre-generated JSON file
-    async function loadImages() {
+    // Load images - they're already embedded in the page at build time
+    function loadImages() {
       if (!galleryGrid) return;
       
-      try {
-        // Try to load from the pre-generated JSON file first (works in production)
-        console.log('Loading images from JSON file...');
-        let response = await fetch('/galerie-familiale-images.json');
-        console.log('JSON file response status:', response.status);
-        
-        // If that fails, try the API route as fallback (for dev)
-        if (!response.ok) {
-          console.log('JSON file not found, trying API route...');
-          response = await fetch(`/api/list-gallery-images?folder=${GALLERY_FOLDER}`);
-          console.log('API route response status:', response.status);
-        }
-        
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        
-        const data = await response.json();
-        console.log('Loaded data:', { success: data.success, imageCount: data.images?.length });
-        
-        if (data.success && data.images && data.images.length > 0) {
-          allImages = data.images;
-          renderGallery();
-          if (downloadAllBtn) downloadAllBtn.disabled = false;
-        } else {
-          const errorMsg = data.error || 'Aucune image trouvée dans la galerie.';
-          console.error('No images found:', errorMsg);
-          galleryGrid.innerHTML = `
-            <div class="error-message">
-              <p><strong>${errorMsg}</strong></p>
-              <p style="margin-top: 1rem; font-size: 0.9rem; color: #888;">
-                Le dossier <code>${GALLERY_FOLDER}</code> doit être créé dans <code>public/galeries/autre/</code><br>
-                avec les photos directement dans ce dossier.
-              </p>
-            </div>
-          `;
-        }
-      } catch (error) {
-        console.error('Error loading images:', error);
-        galleryGrid.innerHTML = `
-          <div class="error-message">
-            <p><strong>Erreur lors du chargement des images.</strong></p>
-            <p style="margin-top: 1rem; font-size: 0.9rem; color: #888;">
-              Erreur: ${error.message || 'Erreur inconnue'}<br>
-              Vérifiez la console du navigateur pour plus de détails.
-            </p>
-          </div>
-        `;
+      if (allImages && allImages.length > 0) {
+        renderGallery();
+        if (downloadAllBtn) downloadAllBtn.disabled = false;
+      } else {
+        // Fallback: try to fetch from JSON file or API
+        fetch('/galerie-familiale-images.json')
+          .then(response => response.ok ? response.json() : fetch(`/api/list-gallery-images?folder=${GALLERY_FOLDER}`).then(r => r.json()))
+          .then(data => {
+            if (data.success && data.images && data.images.length > 0) {
+              allImages = data.images;
+              renderGallery();
+              if (downloadAllBtn) downloadAllBtn.disabled = false;
+            } else {
+              galleryGrid.innerHTML = `
+                <div class="error-message">
+                  <p><strong>Aucune image trouvée dans la galerie.</strong></p>
+                  <p style="margin-top: 1rem; font-size: 0.9rem; color: #888;">
+                    Le dossier <code>${GALLERY_FOLDER}</code> doit être créé dans <code>public/galeries/autre/</code><br>
+                    avec les photos directement dans ce dossier.
+                  </p>
+                </div>
+              `;
+            }
+          })
+          .catch(error => {
+            console.error('Error loading images:', error);
+            galleryGrid.innerHTML = `
+              <div class="error-message">
+                <p><strong>Erreur lors du chargement des images.</strong></p>
+                <p style="margin-top: 1rem; font-size: 0.9rem; color: #888;">
+                  Erreur: ${error.message || 'Erreur inconnue'}
+                </p>
+              </div>
+            `;
+          });
       }
     }
 
