@@ -1,0 +1,249 @@
+---
+import Layout from '../layouts/Layout.astro';
+import '../styles/pages/galerie-familiale.css';
+
+// This page is hidden - not linked in navigation
+// Only accessible via direct URL
+---
+
+<Layout 
+  title="Noel 2025 St Jean - Galerie Familiale"
+  description="Galerie photo privée - Noël 2025 à St Jean"
+  image="/galeries/autre/251225-Noel-St-Jean/251225-Noel-St-Jean-1.jpg"
+  canonical="/galerie-familiale"
+>
+  <div class="galerie-familiale-container">
+    <header class="galerie-header">
+      <h1>Galerie Familiale</h1>
+      <div class="galerie-actions">
+        <button id="download-all-btn" class="btn-download-all" disabled>
+          📦 Télécharger toutes les photos
+        </button>
+      </div>
+    </header>
+
+    <div id="gallery-grid" class="gallery-grid">
+      <p class="loading-message">Chargement des images...</p>
+    </div>
+  </div>
+
+  <!-- Lightbox Modal -->
+  <div id="gallery-lightbox" class="gallery-lightbox" aria-hidden="true">
+    <button class="lightbox-close" aria-label="Fermer">×</button>
+    <div class="lightbox-content">
+      <div class="lightbox-nav lightbox-nav--prev">
+        <button class="lightbox-prev" aria-label="Précédent">❮</button>
+      </div>
+      <div class="lightbox-image-wrap">
+        <img class="lightbox-img" src="" alt="" />
+        <div class="lightbox-actions">
+          <a id="download-current-btn" class="btn-download-current" download>
+            ⬇️ Télécharger cette image
+          </a>
+        </div>
+      </div>
+      <div class="lightbox-nav lightbox-nav--next">
+        <button class="lightbox-next" aria-label="Suivant">❯</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Load JSZip from CDN for zip creation -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+  
+  <script>
+    const GALLERY_FOLDER = '251225-Noel-St-Jean';
+    let allImages = [];
+    let currentImageIndex = 0;
+
+    // DOM elements
+    const galleryGrid = document.getElementById('gallery-grid');
+    const lightbox = document.getElementById('gallery-lightbox');
+    const lightboxImg = lightbox.querySelector('.lightbox-img');
+    const downloadCurrentBtn = document.getElementById('download-current-btn');
+    const downloadAllBtn = document.getElementById('download-all-btn');
+    const btnPrev = lightbox.querySelector('.lightbox-prev');
+    const btnNext = lightbox.querySelector('.lightbox-next');
+    const btnClose = lightbox.querySelector('.lightbox-close');
+
+    // Load images from API
+    async function loadImages() {
+      if (!galleryGrid) return;
+      
+      try {
+        const response = await fetch(`/api/list-gallery-images?folder=${GALLERY_FOLDER}`);
+        const data = await response.json();
+        
+        if (data.success && data.images && data.images.length > 0) {
+          allImages = data.images;
+          renderGallery();
+          if (downloadAllBtn) downloadAllBtn.disabled = false;
+        } else {
+          const errorMsg = data.error || 'Aucune image trouvée dans la galerie.';
+          galleryGrid.innerHTML = `
+            <div class="error-message">
+              <p><strong>${errorMsg}</strong></p>
+              <p style="margin-top: 1rem; font-size: 0.9rem; color: #888;">
+                Le dossier <code>${GALLERY_FOLDER}</code> doit être créé dans <code>public/galeries/autre/</code><br>
+                avec les photos directement dans ce dossier.
+              </p>
+            </div>
+          `;
+        }
+      } catch (error) {
+        console.error('Error loading images:', error);
+        galleryGrid.innerHTML = `
+          <div class="error-message">
+            <p><strong>Erreur lors du chargement des images.</strong></p>
+            <p style="margin-top: 1rem; font-size: 0.9rem; color: #888;">
+              Vérifiez que le dossier existe et que le serveur fonctionne correctement.
+            </p>
+          </div>
+        `;
+      }
+    }
+
+    // Render gallery grid
+    function renderGallery() {
+      if (!galleryGrid) return;
+      
+      galleryGrid.innerHTML = '';
+      allImages.forEach((image, index) => {
+        const item = document.createElement('div');
+        item.className = 'gallery-item';
+        item.innerHTML = `
+          <img 
+            src="${image.path}" 
+            alt="${image.filename}" 
+            loading="lazy"
+            data-index="${index}"
+          />
+        `;
+        const img = item.querySelector('img');
+        if (img) {
+          img.addEventListener('click', () => openLightbox(index));
+        }
+        galleryGrid.appendChild(item);
+      });
+    }
+
+    // Lightbox functions
+    function openLightbox(index) {
+      if (!lightbox) return;
+      currentImageIndex = index;
+      updateLightbox();
+      lightbox.classList.add('is-open');
+      document.body.style.overflow = 'hidden';
+      lightbox.setAttribute('aria-hidden', 'false');
+    }
+
+    function closeLightbox() {
+      if (!lightbox) return;
+      lightbox.classList.remove('is-open');
+      document.body.style.overflow = '';
+      lightbox.setAttribute('aria-hidden', 'true');
+    }
+
+    function updateLightbox() {
+      if (allImages.length === 0 || !lightboxImg) return;
+      const image = allImages[currentImageIndex];
+      lightboxImg.src = image.path;
+      lightboxImg.alt = image.filename;
+      
+      // Update download link
+      if (downloadCurrentBtn) {
+        downloadCurrentBtn.href = image.path;
+        downloadCurrentBtn.download = image.filename;
+      }
+    }
+
+    function showNext() {
+      if (allImages.length === 0) return;
+      currentImageIndex = (currentImageIndex + 1) % allImages.length;
+      updateLightbox();
+    }
+
+    function showPrev() {
+      if (allImages.length === 0) return;
+      currentImageIndex = (currentImageIndex - 1 + allImages.length) % allImages.length;
+      updateLightbox();
+    }
+
+    // Event listeners
+    if (btnNext) btnNext.addEventListener('click', showNext);
+    if (btnPrev) btnPrev.addEventListener('click', showPrev);
+    if (btnClose) btnClose.addEventListener('click', closeLightbox);
+    if (lightbox) {
+      lightbox.addEventListener('click', (e) => {
+        if (e.target === lightbox) closeLightbox();
+      });
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (!lightbox || !lightbox.classList.contains('is-open')) return;
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowRight') showNext();
+      if (e.key === 'ArrowLeft') showPrev();
+    });
+
+    // Download all as ZIP
+    if (downloadAllBtn) {
+      downloadAllBtn.addEventListener('click', async () => {
+      if (allImages.length === 0) return;
+      
+      downloadAllBtn.disabled = true;
+      downloadAllBtn.textContent = '⏳ Création du ZIP...';
+      
+      try {
+        // Check if JSZip is available
+        if (typeof JSZip === 'undefined') {
+          throw new Error('JSZip library not loaded');
+        }
+
+        const zip = new JSZip();
+        
+        // Fetch and add each image to the zip
+        for (const image of allImages) {
+          try {
+            const response = await fetch(image.path);
+            const blob = await response.blob();
+            zip.file(image.filename, blob);
+          } catch (error) {
+            console.error(`Error fetching ${image.filename}:`, error);
+          }
+        }
+
+        // Generate zip file
+        const zipBlob = await zip.generateAsync({ type: 'blob' });
+        
+        // Download
+        const url = URL.createObjectURL(zipBlob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `${GALLERY_FOLDER}.zip`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+        
+        downloadAllBtn.textContent = '✅ Photos téléchargées !';
+        setTimeout(() => {
+          downloadAllBtn.textContent = '📦 Télécharger toutes les photos';
+          downloadAllBtn.disabled = false;
+        }, 2000);
+      } catch (error) {
+        console.error('Error creating ZIP:', error);
+        downloadAllBtn.textContent = '❌ Erreur lors de la création du ZIP';
+        setTimeout(() => {
+          downloadAllBtn.textContent = '📦 Télécharger toute la galerie (ZIP)';
+          downloadAllBtn.disabled = false;
+        }, 3000);
+      }
+      });
+    }
+
+    // Load images on page load
+    loadImages();
+  </script>
+</Layout>
+
