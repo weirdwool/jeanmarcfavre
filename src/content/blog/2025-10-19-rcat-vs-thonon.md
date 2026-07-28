@@ -6,22 +6,21 @@ main_image: "/blog/blog-images/251019-RCTA-Thonon.jpg"
 gallery_url: "/blog/blog-galeries/251019-RCAT-Thonon/index.html"
 video_url: ""
 tags:
-  video: false
-  photo: false
+  associatif: false
+  culture: false
+  divers: false
   drone: false
   événementiel: false
-  studio: false
+  gastronomie: false
   immobilier: false
   industriel: false
-  tourisme: false
-  voyage: false
+  musique: false
   paysage: false
   sports: true
-  associatif: false
-  divers: false
-  culture: false
-  gastronomie: false
-  musique: false
+  studio: false
+  tourisme: false
+  video: false
+  voyage: false
 ---
 
 Troisième Club du BAAR, le RCAT recevait Thonon, un match aprement disputé, qui a vu les gars de Thones se battrent comme des lions pour décrocher sur le fil, une victoire bien méritée.

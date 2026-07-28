@@ -4,7 +4,7 @@ pubDate: 2025-11-08
 location: "Pringy"
 main_image: "/blog/blog-images/251108-Postec-rampe.jpg"
 gallery_url: "/blog/blog-galeries/251108-Skate-Big-rampe/index.html"
-
+video_url: ""
 tags:
   associatif: false
   culture: false
@@ -23,4 +23,4 @@ tags:
   voyage: false
 ---
 
-Session Big R à la rampe de Pringy cet après-midi avec quelques anciennes gloires, mais toujours bien affûté : Joris Brichet, Terence Bougdour, Jean, Postec et Florent Viard. je profite d'une belle lumière avant le Sunset pour sortir le flash et travailler quelques pauses avec les riders qui ma foi, ont encore de beaux restes!
+Session Big R à la rampe de Pringy cet après-midi avec quelques anciennes gloires, certes, mais toujours bien affûtées : Joris Brichet, Terence Bougdour, Jean Postec et Florent Viard. , Je profite d'une belle lumière avant le Sunset pour sortir le flash et travailler quelques poses avec les riders qui, ma foi, ont encore de beaux restes !
