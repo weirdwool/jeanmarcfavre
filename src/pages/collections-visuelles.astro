@@ -1,11 +1,18 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import StructuredData from "../components/StructuredData.astro";
 ---
 <Layout 
   title="Collections Visuelles Photo | Gastronomie Culture Industrie - Jean-Marc Favre"
   description="Collections photographiques : gastronomie, culture, industrie, tourisme. Photographie professionnelle pour restaurants, hôtels et entreprises en Haute-Savoie."
   canonical="/collections-visuelles/"
 >
+<StructuredData type="ImageGallery" data={{
+  name: "Collections Visuelles — Jean-Marc Favre",
+  description: "Galeries photographiques : aériennes, gastronomie, graphisme, montgolfière, musique, séquence, studio et voyages.",
+  url: "https://www.jeanmarcfavre.com/collections-visuelles/",
+  image: "/images/collections/visuelles/170822-guerande-55-998x665.jpg"
+}} />
 
    <div class="container-collections">
       <h1 class="text-center">Collections Visuelles</h1>

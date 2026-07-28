@@ -1,0 +1,94 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import StructuredData from '../../components/StructuredData.astro';
+import { droneSectors } from '../../data/drone-sectors';
+
+export function getStaticPaths() {
+  return droneSectors.map((s) => ({
+    params: { sector: s.slug },
+    props: { sector: s },
+  }));
+}
+
+export const prerender = true;
+
+const { sector } = Astro.props;
+
+const breadcrumbs = [
+  { "@type": "ListItem", "position": 1, "name": "Accueil", "item": "https://www.jeanmarcfavre.com/" },
+  { "@type": "ListItem", "position": 2, "name": "Drone", "item": "https://www.jeanmarcfavre.com/drone/" },
+  { "@type": "ListItem", "position": 3, "name": sector.h1, "item": `https://www.jeanmarcfavre.com/drone/${sector.slug}/` },
+];
+---
+
+
+<Layout
+  hasHero={true}
+  title={sector.title}
+  description={sector.description}
+  image={sector.heroImage}
+  preloadImage={sector.heroImage}
+  canonical={`/drone/${sector.slug}/`}
+>
+  <StructuredData type="BreadcrumbList" data={{ breadcrumbs }} />
+  <script type="application/ld+json" is:inline set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": sector.h1,
+    "description": sector.description,
+    "provider": {
+      "@type": "ProfessionalService",
+      "name": "Jean-Marc Favre",
+      "url": "https://www.jeanmarcfavre.com",
+      "areaServed": ["Annecy", "Haute-Savoie", "Auvergne-Rhône-Alpes"]
+    },
+    "serviceType": "Prise de vue aérienne par drone",
+    "url": `https://www.jeanmarcfavre.com/drone/${sector.slug}/`
+  })} />
+
+  <section class="page-hero">
+    <div class="page-hero__image">
+      <img src={sector.heroImage} alt={sector.heroAlt} loading="eager">
+    </div>
+    <div class="page-hero__overlay"></div>
+    <div class="page-hero__content">
+      <h1 class="page-hero__title">{sector.h1}</h1>
+    </div>
+  </section>
+
+  <section class="geo-intro container pt-5 pb-3">
+    <div class="container-content text-center">
+      <p>{sector.intro}</p>
+    </div>
+  </section>
+
+  <section class="geo-content container pb-3">
+    <div class="container-content">
+      {sector.body.map((p) => <p>{p}</p>)}
+      <ul class="geo-list">
+        {sector.bullets.map((b) => <li>{b}</li>)}
+      </ul>
+      <p>Pilote certifié DGAC depuis 2012 · Base <a href="/annecy/" class="link-text">Annecy</a> · <a href="/haute-savoie/" class="link-text">Haute-Savoie</a> · <a href="/pourquoi-nous-choisir/" class="link-text">Pourquoi nous choisir</a>.</p>
+    </div>
+  </section>
+
+  <section class="geo-zones container pb-4">
+    <div class="container-content">
+      <h2>Voir aussi</h2>
+      <ul class="drone-sectors__list drone-sectors__list--inline">
+        <li><a href="/drone/">Toutes les prestations drone</a></li>
+        {sector.related.map((r) => (
+          <li><a href={r.href}>{r.label}</a></li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section class="geo-cta container pt-3 pb-5">
+    <div class="container-content text-center">
+      <h2>Un projet {sector.h1.toLowerCase()} ?</h2>
+      <p>Décrivez votre besoin — devis gratuit, réponse sous 24–48h.</p>
+      <a href="/#contact" class="link" aria-label={`Contacter pour ${sector.h1}`}>Contactez-nous</a>
+    </div>
+  </section>
+</Layout>

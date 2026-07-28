@@ -1,0 +1,112 @@
+---
+import Layout from '../layouts/Layout.astro';
+import StructuredData from '../components/StructuredData.astro';
+
+const breadcrumbs = [
+  { "@type": "ListItem", "position": 1, "name": "Accueil", "item": "https://www.jeanmarcfavre.com/" },
+  { "@type": "ListItem", "position": 2, "name": "Haute-Savoie", "item": "https://www.jeanmarcfavre.com/haute-savoie/" },
+];
+---
+
+<Layout
+  hasHero={true}
+  title="Photographe & Pilote Drone en Haute-Savoie | Annecy, Stations, Lac"
+  description="Studio photo, vidéo et drone certifié DGAC en Haute-Savoie. Interventions Annecy, Chamonix, La Clusaz, Grand-Bornand, Megève et tout le département."
+  image="/images/collections/region/Alpes-Les-Drus-13.jpg"
+  preloadImage="/images/collections/region/Alpes-Les-Drus-13.jpg"
+  canonical="/haute-savoie/"
+>
+  <StructuredData type="LocalBusiness" />
+  <StructuredData type="BreadcrumbList" data={{ breadcrumbs }} />
+  <script type="application/ld+json" is:inline set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": "Photo, vidéo et drone en Haute-Savoie",
+    "serviceType": ["Photographie professionnelle", "Prise de vue aérienne par drone", "Production vidéo"],
+    "provider": {
+      "@type": "ProfessionalService",
+      "name": "Jean-Marc Favre",
+      "url": "https://www.jeanmarcfavre.com"
+    },
+    "areaServed": {
+      "@type": "AdministrativeArea",
+      "name": "Haute-Savoie",
+      "containedInPlace": {
+        "@type": "AdministrativeArea",
+        "name": "Auvergne-Rhône-Alpes"
+      }
+    },
+    "url": "https://www.jeanmarcfavre.com/haute-savoie/"
+  })} />
+
+  <section class="page-hero">
+    <div class="page-hero__image">
+      <img src="/images/collections/region/Alpes-Les-Drus-13.jpg" alt="Les Drus dans le massif du Mont-Blanc, Haute-Savoie" width="1200" height="800" loading="eager">
+    </div>
+    <div class="page-hero__overlay"></div>
+    <div class="page-hero__content">
+      <h1 class="page-hero__title">Haute-Savoie</h1>
+    </div>
+  </section>
+
+  <section class="geo-intro container pt-5 pb-3">
+    <div class="container-content text-center">
+      <h2>Photo, vidéo &amp; drone en <b>Haute-Savoie</b></h2>
+      <p>Depuis la base d’Annecy, déplacements sur tout le département : lac, stations, vallées, massifs. Un interlocuteur unique pour l’image au sol et aérienne, avec certification DGAC.</p>
+    </div>
+  </section>
+
+  <section class="geo-services container pb-4">
+    <div class="container-medium">
+      <div class="geo-services__grid">
+        <a href="/photo/" class="geo-service-card">
+          <h3>Photo Haute-Savoie</h3>
+          <p>Sports, patrimoine, événements, marques outdoor et reportages montagne.</p>
+          <span class="link">En savoir plus</span>
+        </a>
+        <a href="/drone/" class="geo-service-card">
+          <h3>Drone Haute-Savoie</h3>
+          <p>Vues aériennes pour stations, promoteurs, OT, collectivités et industrie.</p>
+          <span class="link">En savoir plus</span>
+        </a>
+        <a href="/video/" class="geo-service-card">
+          <h3>Vidéo Haute-Savoie</h3>
+          <p>Contenus touristiques, corporate et événementiels adaptés au territoire alpin.</p>
+          <span class="link">En savoir plus</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="geo-content container pb-4">
+    <div class="container-content">
+      <h2>Un territoire exigeant pour l’image</h2>
+      <p>La Haute-Savoie mêle lac, montagne, stations et zones urbaines. Les missions y demandent anticipation (météo, altitude, réglementation drone) et un regard habitué aux paysages alpins.</p>
+      <p>Secteurs régulièrement couverts :</p>
+      <ul class="geo-list">
+        <li>Bassin d’<a href="/annecy" class="link-text">Annecy</a> et lac</li>
+        <li>Stations : La Clusaz, Le Grand-Bornand, Manigod, et plus largement Aravis / Mont-Blanc</li>
+        <li>Tourisme, OT et hébergements</li>
+        <li>Immobilier, chantiers, collectivités</li>
+        <li>Événements sportifs et culturels</li>
+      </ul>
+      <p>Références et garanties professionnelles : <a href="/pourquoi-nous-choisir" class="link-text">Pourquoi nous choisir</a>. Galeries région : <a href="/collections-region-aura" class="link-text">Collections AURA</a>.</p>
+    </div>
+  </section>
+
+  <section class="geo-zones container pb-4">
+    <div class="container-content">
+      <h2>Villes &amp; zones desservies</h2>
+      <p>Annecy et agglomération, Thonon, Évian, Bonneville, Cluses, Sallanches, Chamonix, Megève, La Clusaz, Le Grand-Bornand, Morzine, Les Gets — et déplacements en Savoie / Auvergne-Rhône-Alpes selon le projet.</p>
+      <p>Prochaine étape du maillage géo : pages dédiées par ville (Chamonix, Megève, etc.).</p>
+    </div>
+  </section>
+
+  <section class="geo-cta container pt-3 pb-5">
+    <div class="container-content text-center">
+      <h2>Un projet en Haute-Savoie ?</h2>
+      <p>Que vous soyez à Annecy, en station ou ailleurs dans le 74 — décrivons votre besoin. Devis gratuit.</p>
+      <a href="/#contact" class="link" aria-label="Contacter pour un projet en Haute-Savoie">Contactez-nous</a>
+    </div>
+  </section>
+</Layout>

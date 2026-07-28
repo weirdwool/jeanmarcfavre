@@ -75,12 +75,14 @@
 }
 
 @media (min-width: 1024px) {
-  .slider-track {
-    gap: 2rem;
-  }
+  
 
   .slider-item {
-    flex: 0 0 350px; /* Slightly wider on desktop */
+    flex: 0 0 350px;
+  }
+
+  .testimonial-item.slider-item {
+    flex: 0 0 500px;
   }
 }
 
@@ -263,25 +265,25 @@
 
 .testimonial-item {
   justify-content: space-between;
-  width: 400px;
+  width: 600px;
   height: auto;
   border-radius: 20px;
   border: 1px solid var(--secondary-color);
   background: rgba(255, 255, 255, 0.05);
-  padding: 2rem;
+  padding: 1.5rem;
 }
 
 .testimonial-text {
-  font-size: 0.85rem;
+  font-size: 0.75rem;
   font-weight: normal;
   text-align: center;
   color: rgb(155, 155, 155);
-  margin-bottom: 1rem;
+  margin-bottom: 0.75rem;
   line-height: 1.5;
 }
 
 .testimonial-author {
-  font-size: 1rem;
+  font-size: 0.85rem;
   font-weight: 400;
   margin-top: auto;
   color: var(--primary-color);
@@ -289,7 +291,7 @@
 }
 
 .testimonial-job {
-  font-size: 0.8rem;
+  font-size: 0.7rem;
   color: darkgrey;
   text-align: right;
   font-style: italic;

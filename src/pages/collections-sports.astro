@@ -1,5 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import StructuredData from "../components/StructuredData.astro";
 ---
 
 <Layout 
@@ -8,6 +9,12 @@ import Layout from "../layouts/Layout.astro";
   preloadImage="/galeries/sports/best-of/images/large/MICHAUD-Seb-158.jpg"
   canonical="/collections-sports/"
 >
+<StructuredData type="ImageGallery" data={{
+  name: "Collections Sports — Jean-Marc Favre",
+  description: "Galeries photo sports : best of, aériens, collectifs, hiver, mécaniques, nautiques et terrestres.",
+  url: "https://www.jeanmarcfavre.com/collections-sports/",
+  image: "/images/collections/sports/030907-coudrayalex-1-998x1497.jpg"
+}} />
 
    <div class="container-collections">
       <h1 class="text-center">Collections Sports</h1>

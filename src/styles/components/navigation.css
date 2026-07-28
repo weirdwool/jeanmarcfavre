@@ -326,7 +326,7 @@ footer {
   width: 100%;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
 }
 
 .footer-brand-wrapper {
@@ -342,15 +342,68 @@ footer {
 .footer-navs {
   display: flex;
   flex-direction: column;
-  gap: 0; /* No gap when stacked */
+  gap: 2rem;
+  width: 100%;
+  align-items: flex-start;
 }
 
 .footer-nav {
-  text-align: center;
+  text-align: left;
+}
+
+.footer-nav__title {
+  margin: 0 0 0.65rem;
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.45);
+}
+
+.footer-nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
 }
 
 .footer-nav a {
-  margin-bottom: 1rem;
+  position: relative;
+  display: inline-block;
+  width: fit-content;
+  color: rgba(255, 255, 255, 0.78);
+  text-decoration: none;
+  text-transform: none;
+  letter-spacing: 0.01em;
+  font-size: 0.78rem;
+  font-weight: 400;
+  line-height: 1.35;
+  transition: color 0.25s ease;
+}
+
+.footer-nav a::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 100%;
+  height: 1px;
+  background: currentColor;
+  pointer-events: none;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.55s cubic-bezier(0.24, 0.43, 0.15, 0.97);
+}
+
+.footer-nav a:hover {
+  color: var(--primary-color);
+}
+
+.footer-nav a:hover::before {
+  transform: scaleX(1);
+  transform-origin: left;
 }
 
 /* Contact Info Styling - Mobile First */
@@ -400,6 +453,16 @@ footer {
   border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
+.footer-copy a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.footer-copy a:hover {
+  color: var(--primary-color);
+}
+
 .footer-copy .separator {
   margin: 0 1rem;
   color: inherit;
@@ -440,31 +503,41 @@ footer {
 /* ========================================
    MEDIA QUERY: Footer Desktop (1200px and above)
    ======================================== */
-@media (min-width: 1200px) {
-  /* Navigation columns side by side */
+@media (min-width: 768px) {
   .footer-navs {
     flex-direction: row;
-    gap: 4rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 2.5rem 3.5rem;
   }
 
-  /* Footer row layout */
+  .footer-nav {
+    text-align: left;
+    flex: 0 1 auto;
+    min-width: 9.5rem;
+  }
+}
+
+@media (min-width: 1200px) {
+  .footer-navs {
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    gap: 3.5rem;
+  }
+
   .footer-row {
     flex-direction: row;
-    gap: 8rem;
-    align-items: center;
+    gap: 5rem;
+    align-items: flex-start;
   }
 
   .footer-brand-wrapper {
-    border-bottom: none; /* Remove mobile border */
+    border-bottom: none;
     padding-bottom: 0;
     margin-bottom: 0;
   }
-  
-  .footer-nav {
-    text-align: left;
-  }
 
-  /* Contact info for desktop */
   .contact-label {
     font-size: 0.75rem;
   }

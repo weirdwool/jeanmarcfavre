@@ -1,0 +1,111 @@
+---
+import Layout from '../layouts/Layout.astro';
+import StructuredData from '../components/StructuredData.astro';
+
+const breadcrumbs = [
+  { "@type": "ListItem", "position": 1, "name": "Accueil", "item": "https://www.jeanmarcfavre.com/" },
+  { "@type": "ListItem", "position": 2, "name": "Annecy", "item": "https://www.jeanmarcfavre.com/annecy/" },
+];
+---
+
+<Layout
+  hasHero={true}
+  title="Photographe & Pilote Drone à Annecy | Photo Vidéo Aérienne — Haute-Savoie"
+  description="Photographe et pilote de drone certifié DGAC à Annecy. Photo, vidéo et prises de vue aériennes pour collectivités, immobilier, tourisme et événements autour du lac d'Annecy."
+  image="/images/collections/region/061128-annecy-1-2000x1083.jpg"
+  preloadImage="/images/collections/region/061128-annecy-1-2000x1083.jpg"
+  canonical="/annecy/"
+>
+  <StructuredData type="LocalBusiness" />
+  <StructuredData type="BreadcrumbList" data={{ breadcrumbs }} />
+  <script type="application/ld+json" is:inline set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": "Photo, vidéo et drone à Annecy",
+    "serviceType": ["Photographie professionnelle", "Prise de vue aérienne par drone", "Production vidéo"],
+    "provider": {
+      "@type": "ProfessionalService",
+      "name": "Jean-Marc Favre",
+      "url": "https://www.jeanmarcfavre.com"
+    },
+    "areaServed": {
+      "@type": "City",
+      "name": "Annecy",
+      "containedInPlace": {
+        "@type": "AdministrativeArea",
+        "name": "Haute-Savoie"
+      }
+    },
+    "url": "https://www.jeanmarcfavre.com/annecy/"
+  })} />
+
+  <section class="page-hero">
+    <div class="page-hero__image">
+      <img src="/images/collections/region/061128-annecy-1-2000x1083.jpg" alt="Vue du lac d'Annecy et de la vieille ville" width="2000" height="1083" loading="eager">
+    </div>
+    <div class="page-hero__overlay"></div>
+    <div class="page-hero__content">
+      <h1 class="page-hero__title">Annecy</h1>
+    </div>
+  </section>
+
+  <section class="geo-intro container pt-5 pb-3">
+    <div class="container-content text-center">
+      <h2>Photo, vidéo &amp; drone <b>à Annecy</b></h2>
+      <p>Basé à Annecy, le studio intervient sur tout le bassin annecien — vieille ville, lac, Semnoz, Parmelan, communes du Grand Annecy — pour des images professionnelles au sol et en l’air.</p>
+    </div>
+  </section>
+
+  <section class="geo-services container pb-4">
+    <div class="container-medium">
+      <div class="geo-services__grid">
+        <a href="/photo/" class="geo-service-card">
+          <h3>Photo à Annecy</h3>
+          <p>Reportages, événements, portraits, patrimoine et mise en valeur du territoire annecien.</p>
+          <span class="link">En savoir plus</span>
+        </a>
+        <a href="/drone/" class="geo-service-card">
+          <h3>Drone à Annecy</h3>
+          <p>Prises de vue aériennes certifiées DGAC : immobilier, chantiers, tourisme, collectivités.</p>
+          <span class="link">En savoir plus</span>
+        </a>
+        <a href="/video/" class="geo-service-card">
+          <h3>Vidéo à Annecy</h3>
+          <p>Films institutionnels, clips touristiques, couverture d’événements autour du lac.</p>
+          <span class="link">En savoir plus</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="geo-content container pb-4">
+    <div class="container-content">
+      <h2>Pourquoi un photographe / pilote drone local à Annecy ?</h2>
+      <p>Annecy cumule des contraintes et des atouts : centre dense, lac, relief, zones réglementées pour le vol. Connaître le terrain — autorisations, météo alpine, angles sur le lac et la vieille ville — fait gagner du temps et de la qualité sur chaque tournage.</p>
+      <p>Depuis plus de dix ans de pratique drone (certification DGAC) et quatre décennies de photographie, les missions locales couvrent notamment :</p>
+      <ul class="geo-list">
+        <li>Collectivités et Grand Annecy (communication, événements, suivi urbain)</li>
+        <li>Immobilier et promoteurs (vues aériennes, suivi de chantier)</li>
+        <li>Tourisme et hôtellerie (lac, montagnes, stations proches)</li>
+        <li>Presse et audiovisuel (France TV, FR3, Dauphiné Libéré)</li>
+      </ul>
+      <p>Pour le détail des références et de l’expérience : <a href="/pourquoi-nous-choisir" class="link-text">Pourquoi nous choisir</a>.</p>
+    </div>
+  </section>
+
+  <section class="geo-zones container pb-4">
+    <div class="container-content">
+      <h2>Zone d’intervention autour d’Annecy</h2>
+      <p>Au-delà de la ville : Annecy-le-Vieux, Cran-Gevrier, Seynod, Sevrier, Veyrier, Talloires, Menthon, Duingt, et plus largement toute la <a href="/haute-savoie" class="link-text">Haute-Savoie</a>.</p>
+      <p>Collections photo locales : <a href="/collections-region-aura#annecy-gallery" class="link-text">galerie Annecy</a>.</p>
+    </div>
+  </section>
+
+  <section class="geo-cta container pt-3 pb-5">
+    <div class="container-content text-center">
+      <h2>Un projet à Annecy ?</h2>
+      <p>Devis gratuit, réponse sous 24–48h. Photo, vidéo ou drone — parlons de votre besoin.</p>
+      <a href="/#contact" class="link" aria-label="Contacter pour un projet à Annecy">Contactez-nous</a>
+    </div>
+  </section>
+</Layout>

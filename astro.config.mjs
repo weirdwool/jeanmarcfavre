@@ -20,10 +20,11 @@ export default defineConfig({
   integrations: [
     react(),
     sitemap({
-      filter: (page) => 
-        !page.includes('/api/') && 
-        !page.includes('/docs/') && 
-        !page.includes('/admin-login') && 
+      filter: (page) =>
+        !page.includes('/api/') &&
+        !page.includes('/docs/') &&
+        !page.includes('/admin') &&
+        !page.includes('/admin-login') &&
         !page.includes('/admin-blog'),
       customPages: [],
     })

@@ -1,6 +1,6 @@
 ---
 interface Props {
-  type: 'LocalBusiness' | 'BlogPosting' | 'ImageGallery' | 'BreadcrumbList';
+  type: 'LocalBusiness' | 'BlogPosting' | 'ImageGallery' | 'BreadcrumbList' | 'ImageObject';
   data?: any;
 }
 
@@ -17,7 +17,11 @@ if (type === 'LocalBusiness') {
     ...baseSchema,
     "@type": "ProfessionalService",
     "name": "Jean-Marc Favre - Photographe & Pilote de Drone",
-    "image": "https://www.jeanmarcfavre.com/images/jmf2-998x665.jpg",
+    "image": {
+      "@type": "ImageObject",
+      "url": "https://www.jeanmarcfavre.com/images/jmf2-998x665.jpg",
+      "caption": "Jean-Marc Favre, photographe et pilote de drone professionnel à Annecy"
+    },
     "description": "Photographe professionnel et pilote de drone certifié à Annecy. 40 ans d'expérience en photographie sportive, événementielle, drone et vidéo.",
     "address": {
       "@type": "PostalAddress",
@@ -58,11 +62,20 @@ if (type === 'LocalBusiness') {
     ]
   };
 } else if (type === 'BlogPosting') {
+  const imageUrl = data.image
+    ? (data.image.startsWith('http') ? data.image : `https://www.jeanmarcfavre.com${data.image}`)
+    : undefined;
   schema = {
     ...baseSchema,
     "@type": "BlogPosting",
     "headline": data.title,
-    "image": data.image,
+    ...(imageUrl && {
+      "image": {
+        "@type": "ImageObject",
+        "url": imageUrl,
+        "caption": data.title
+      }
+    }),
     "datePublished": data.datePublished,
     "dateModified": data.dateModified || data.datePublished,
     "author": {
@@ -90,10 +103,38 @@ if (type === 'LocalBusiness') {
     "@type": "ImageGallery",
     "name": data.name,
     "description": data.description,
+    "url": data.url,
     "author": {
       "@type": "Person",
+      "name": "Jean-Marc Favre",
+      "url": "https://www.jeanmarcfavre.com"
+    },
+    ...(data.image && {
+      "image": {
+        "@type": "ImageObject",
+        "url": data.image.startsWith('http') ? data.image : `https://www.jeanmarcfavre.com${data.image}`,
+        "caption": data.name
+      }
+    })
+  };
+} else if (type === 'ImageObject') {
+  schema = {
+    ...baseSchema,
+    "@type": "ImageObject",
+    "url": data.url?.startsWith('http') ? data.url : `https://www.jeanmarcfavre.com${data.url}`,
+    "caption": data.caption,
+    "name": data.name || data.caption,
+    "creditText": "Jean-Marc Favre",
+    "creator": {
+      "@type": "Person",
       "name": "Jean-Marc Favre"
-    }
+    },
+    ...(data.contentLocation && {
+      "contentLocation": {
+        "@type": "Place",
+        "name": data.contentLocation
+      }
+    })
   };
 } else if (type === 'BreadcrumbList') {
   schema = {
@@ -104,5 +145,6 @@ if (type === 'LocalBusiness') {
 }
 ---
 
-<script type="application/ld+json" set:html={JSON.stringify(schema)} />
-
+{schema && (
+  <script type="application/ld+json" is:inline set:html={JSON.stringify(schema)} />
+)}

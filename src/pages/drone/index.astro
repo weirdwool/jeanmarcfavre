@@ -1,7 +1,39 @@
 ---
-import Layout from "../layouts/Layout.astro";
-import VimeoShowcase from "../components/VimeoShowcase.astro"; 
+import Layout from "../../layouts/Layout.astro";
+import VimeoShowcase from "../../components/VimeoShowcase.astro"; 
+import StructuredData from "../../components/StructuredData.astro";
+import FaqSection from "../../components/FaqSection.astro";
 
+const droneFaqs = [
+  {
+    question: "Êtes-vous certifié pour voler en drone professionnel ?",
+    answer: "Oui. Pilote certifié depuis 2012, assuré et inscrit auprès de la DGAC (Alphatango). J’opère en scénarios S1/S3 et en catégorie Spécifique pour les missions plus complexes.",
+  },
+  {
+    question: "Peut-on filmer au-dessus du lac d’Annecy avec un drone ?",
+    answer: "Cela dépend de la zone, de l’altitude et des restrictions du moment (espace aérien, proximité d’aérodromes, zones sensibles). Chaque mission fait l’objet d’une vérification réglementaire avant le vol.",
+  },
+  {
+    question: "Quelles autorisations pour un tournage drone en centre-ville ?",
+    answer: "Selon le lieu, il peut falloir une déclaration ou une autorisation (préfecture, mairie, gestionnaire de site). Je prends en charge l’analyse réglementaire et les démarches nécessaires pour votre projet.",
+  },
+  {
+    question: "Combien coûte une prestation drone ?",
+    answer: "Le tarif dépend de la durée, du lieu, du type de livraison (photo, vidéo 4K, montage) et des contraintes de vol. Un devis personnalisé est établi après échange sur votre brief — réponse sous 24–48h.",
+  },
+  {
+    question: "Dans quelles zones intervenez-vous ?",
+    answer: "Base à Annecy, interventions en Haute-Savoie, Savoie et plus largement en Auvergne-Rhône-Alpes (stations, lacs, collectivités, entreprises). Déplacements plus lointains selon le projet.",
+  },
+  {
+    question: "Proposez-vous du drone pour l’immobilier ?",
+    answer: "Oui — vues aériennes de biens, terrains et programmes. Voir la page dédiée drone immobilier, ainsi que les autres secteurs (tourisme, collectivités, hôtellerie, etc.).",
+  },
+  {
+    question: "Livrez-vous photos et vidéos montées ?",
+    answer: "Oui. Captation photo haute résolution et vidéo 4K, avec montage en interne selon le brief (annonce, site web, film corporate, réseaux sociaux).",
+  },
+];
 ---
 
 <Layout 
@@ -12,6 +44,12 @@ import VimeoShowcase from "../components/VimeoShowcase.astro";
   preloadImage="/images/parallax/131024-besancon-1-1200x800.jpg"
   canonical="/drone/"
 >
+<StructuredData type="ImageObject" data={{
+  url: "/images/parallax/131024-besancon-1-1200x800.jpg",
+  caption: "Prise de vue aérienne par drone certifié DGAC — Jean-Marc Favre",
+  name: "Drone — Jean-Marc Favre",
+  contentLocation: "Auvergne-Rhône-Alpes"
+}} />
 
    <section class="page-hero">
       <div class="page-hero__image">
@@ -36,6 +74,21 @@ import VimeoShowcase from "../components/VimeoShowcase.astro";
                </p>
             </div>
             
+            <div class="separation-line-gradient"></div>
+            <div class="drone-sectors text-wrapper">
+               <h3 class="text-center">Prestations par secteur</h3>
+               <ul class="drone-sectors__list">
+                  <li><a href="/drone/immobilier/">Drone immobilier</a></li>
+                  <li><a href="/drone/tourisme/">Drone tourisme</a></li>
+                  <li><a href="/drone/collectivites/">Drone collectivités</a></li>
+                  <li><a href="/drone/evenementiel/">Drone événementiel</a></li>
+                  <li><a href="/drone/stations-de-ski/">Drone stations de ski</a></li>
+                  <li><a href="/drone/entreprises/">Drone entreprises</a></li>
+                  <li><a href="/drone/hotellerie/">Drone hôtellerie</a></li>
+                  <li><a href="/drone/industrie/">Drone industrie</a></li>
+               </ul>
+            </div>
+
             <div class="separation-line-gradient"></div>
             <div class="text-wrapper">
                <h3 class="text-center">Zones d’intervention</h3>
@@ -67,7 +120,7 @@ import VimeoShowcase from "../components/VimeoShowcase.astro";
                </ul>
             </div>
             <p class="text-center mb-2">
-               <b><a class="link-text" href="/contact">Contactez-moi</a> pour toute information supplémentaire ainsi que pour discuter de votre projet et obtenir un devis personnalisé.</b>
+               <b><a class="link-text" href="/#contact">Contactez-moi</a> pour toute information supplémentaire ainsi que pour discuter de votre projet et obtenir un devis personnalisé.</b>
             </p>
          </div>
    </div>
@@ -92,7 +145,7 @@ import VimeoShowcase from "../components/VimeoShowcase.astro";
       <div class="parallax-banner-overlay"></div> 
       <img 
          src="/images/parallax/131024-besancon-1-1200x800.jpg" 
-         alt="Drone au dessus de Besancon" 
+         alt="Prise de vue aérienne par drone au-dessus de Besançon" 
          class="parallax-mobile-img" 
          loading="lazy"
       >
@@ -103,6 +156,7 @@ import VimeoShowcase from "../components/VimeoShowcase.astro";
       <div class="text-wrapper text-center mb-3">
             <p>En 2011, je découvre grâce à mon ami «Nocomp», pionnier dans le monde du drone, cette pratique qui me rappelle les sensations des sports extrêmes que j'affectionnais tant. Inspiré par cette nouvelle passion, je deviens <b>pilote de drone certifié en 2012, assuré et inscrit auprès de la Direction Générale de l'Aviation Civile (DGAC) ainsi que sur la plateforme Alphatango.</b></p>
             <p>Je pilote des aéronefs homologués par la DGAC, ce qui me permet d'opérer sous les <b>scénarios de vol S1 et S3</b>. Depuis 2020, je suis également qualifié pour opérer dans la <b>catégorie Spécifique</b> , adaptée à des missions plus complexes. Fort de cette expertise, je vous promets des prestations de haute qualité, réalisées en toute sécurité et dans le respect total de la régulation de l'espace aérien.</p>
+            <p>Interventions locales : <a href="/annecy" class="link-text">drone à Annecy</a> · <a href="/haute-savoie" class="link-text">drone en Haute-Savoie</a>.</p>
       </div>
    </div>
 
@@ -121,7 +175,7 @@ import VimeoShowcase from "../components/VimeoShowcase.astro";
          </div>
          <div class="gear-logos">
             <a href="https://www.dji.com" target="_blank" rel="noopener noreferrer" aria-label="Visit DJI official website">
-               <img src="/logo/gear/dji.svg" alt="Dji Logo">
+               <img src="/logo/gear/dji.svg" alt="DJI" loading="lazy">
             </a>
          </div>
    </div>
@@ -157,6 +211,8 @@ import VimeoShowcase from "../components/VimeoShowcase.astro";
       </div>
    </div>
 </section>
+
+<FaqSection items={droneFaqs} />
 
 </Layout>
 

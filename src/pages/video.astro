@@ -2,6 +2,35 @@
 import Layout from "../layouts/Layout.astro";
 import VimeoShowcase from "../components/VimeoShowcase.astro"; 
 import ShowcaseVideo from '../components/ShowcaseVideo.astro';
+import StructuredData from '../components/StructuredData.astro';
+import FaqSection from '../components/FaqSection.astro';
+
+const videoFaqs = [
+  {
+    question: "Quels types de vidéos réalisez-vous ?",
+    answer: "Événements, reportages institutionnels, documentaires, interviews, tutoriels, captation de spectacles/conférences, et contenus pour les réseaux sociaux — de la conception au montage.",
+  },
+  {
+    question: "Pouvez-vous combiner vidéo au sol et drone ?",
+    answer: "Oui. Beaucoup de projets mélangent captation sol et prises de vue aériennes pour un rendu plus vivant. Les contraintes réglementaires drone sont gérées en amont.",
+  },
+  {
+    question: "Combien coûte une production vidéo ?",
+    answer: "Le budget dépend de la durée de tournage, du montage, des déplacements et d’éventuelles options (drone, multi-caméras). Un devis personnalisé est établi après le brief.",
+  },
+  {
+    question: "Sous quel délai livrez-vous le film ?",
+    answer: "Un court format réseaux sociaux peut être livré rapidement ; un film corporate ou reportage demande généralement plus de temps de montage. Le délai est validé avant le tournage.",
+  },
+  {
+    question: "Dans quelles zones filmez-vous ?",
+    answer: "Base à Annecy, tournages en Haute-Savoie, Savoie et Auvergne-Rhône-Alpes. Déplacements plus lointains possibles selon le projet.",
+  },
+  {
+    question: "Proposez-vous des formats adaptés aux réseaux sociaux ?",
+    answer: "Oui — formats verticaux ou carrés, versions courtes et versions longues, selon vos plateformes (Instagram, LinkedIn, YouTube, site web).",
+  },
+];
 ---
 
 <Layout 
@@ -12,6 +41,12 @@ import ShowcaseVideo from '../components/ShowcaseVideo.astro';
   preloadImage="/images/parallax/180218-nazare-surf-725-1142x758.jpg"
   canonical="/video/"
 >
+<StructuredData type="ImageObject" data={{
+  url: "/images/parallax/180218-nazare-surf-725-1142x758.jpg",
+  caption: "Production vidéo professionnelle — Jean-Marc Favre",
+  name: "Vidéo — Jean-Marc Favre",
+  contentLocation: "Annecy, Haute-Savoie"
+}} />
 
    <section class="page-hero">
       <div class="page-hero__image">
@@ -44,7 +79,7 @@ import ShowcaseVideo from '../components/ShowcaseVideo.astro';
                </ul>
             </div>
             <p class="text-center">
-               <b><a class="link-text" href="/contact">Contactez-moi</a> pour toute information supplémentaire ainsi que pour discuter de votre projet et obtenir un devis personnalisé ajusté au plus près.</b>
+               <b><a class="link-text" href="/#contact">Contactez-moi</a> pour toute information supplémentaire ainsi que pour discuter de votre projet et obtenir un devis personnalisé ajusté au plus près.</b>
             </p>
          </div>
    </div>
@@ -95,5 +130,7 @@ import ShowcaseVideo from '../components/ShowcaseVideo.astro';
       </div>
    </div>
 </section>
+
+<FaqSection items={videoFaqs} />
 
 </Layout>

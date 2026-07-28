@@ -62,13 +62,13 @@ activeTags: activeTags,
 
         <div class="search-input-wrapper">
                <input type="search" id="search-input" placeholder="Rechercher un post..." />
-               <img src="/images/icons/search.svg" alt="Search icon" class="search-icon" />
+               <img src="/images/icons/search.svg" alt="" aria-hidden="true" class="search-icon" width="20" height="20" />
         </div>
          
        
 
         <div class="image-wrapper">
-            <img src="/blog/blog-760x881.png" alt="portrait de Jean-Marc Favre">
+            <img src="/blog/blog-760x881.png" alt="Portrait de Jean-Marc Favre, photographe à Annecy" width="760" height="881" loading="lazy">
         </div>
         
       </aside>
@@ -94,7 +94,7 @@ activeTags: activeTags,
             >
             <a href={postUrl} class="post-link">
                <div class="image-wrapper">
-                  <img src={post.data.main_image} alt={post.data.title} />
+                  <img src={post.data.main_image} alt={post.data.title} width="600" height="400" loading="lazy" />
                   <div class="post-card-img-overlay"></div>
                </div>
                

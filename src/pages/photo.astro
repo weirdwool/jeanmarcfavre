@@ -1,6 +1,35 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import ShowcasePhoto from '../components/ShowcasePhoto.astro'; // <--- ADD THIS LINE
+import ShowcasePhoto from '../components/ShowcasePhoto.astro';
+import StructuredData from '../components/StructuredData.astro';
+import FaqSection from '../components/FaqSection.astro';
+
+const photoFaqs = [
+  {
+    question: "Quels types de photographie proposez-vous ?",
+    answer: "Portraits, corporate, immobilier & architecture, culinaire, sport, événementiel, lifestyle, mode/lookbook, contenu web et réseaux sociaux — avec une approche créative adaptée à chaque brief.",
+  },
+  {
+    question: "Combien coûte une séance photo ?",
+    answer: "Les forfaits débutent à 280 € HT. Un devis précis est établi selon la durée, le lieu, le nombre d’images livrées et le niveau de retouche. Contactez-moi pour un chiffrage sous 24–48h.",
+  },
+  {
+    question: "Intervenez-vous uniquement à Annecy ?",
+    answer: "Non. Basé à Annecy, j’interviens en Haute-Savoie, Savoie et dans toute la région Auvergne-Rhône-Alpes — et plus loin selon le projet.",
+  },
+  {
+    question: "Sous quel délai recevrai-je les photos ?",
+    answer: "Selon le volume et le type de retouche, la livraison se fait généralement sous quelques jours à deux semaines. Un planning est confirmé avant le shooting.",
+  },
+  {
+    question: "Travaillez-vous en studio et en extérieur ?",
+    answer: "Oui. Studio (éclairage Profoto / Multiblitz) et reportage extérieur, y compris prises de vue aquatiques avec caisson étanche professionnel.",
+  },
+  {
+    question: "Puis-je utiliser les images sur mon site et mes réseaux ?",
+    answer: "Oui, les droits d’usage sont définis dans le devis selon vos besoins (web, print, campagne, banque d’images). On précise le cadre avant la prestation.",
+  },
+];
 ---
 <Layout 
   hasHero={true}
@@ -10,6 +39,12 @@ import ShowcasePhoto from '../components/ShowcasePhoto.astro'; // <--- ADD THIS 
   preloadImage="/images/parallax/296200072.jpg"
   canonical="/photo/"
 >
+<StructuredData type="ImageObject" data={{
+  url: "/images/parallax/296200072.jpg",
+  caption: "Photographie professionnelle par Jean-Marc Favre à Annecy",
+  name: "Photo — Jean-Marc Favre",
+  contentLocation: "Annecy, Haute-Savoie"
+}} />
 
 <section class="page-hero">
       <div class="page-hero__image">
@@ -46,7 +81,7 @@ import ShowcasePhoto from '../components/ShowcasePhoto.astro'; // <--- ADD THIS 
                </ul>
             </div>
             <p class="text-center">
-               <b>Si vous recherchez un photographe professionnel, <a class="link-text" href="/contact">contactez-moi</a> pour discuter de votre projet.</b>
+               <b>Si vous recherchez un photographe professionnel, <a class="link-text" href="/#contact">contactez-moi</a> pour discuter de votre projet.</b>
             </p>
          </div>
    </div>
@@ -78,63 +113,63 @@ import ShowcasePhoto from '../components/ShowcasePhoto.astro'; // <--- ADD THIS 
       <div class="slider-slider-wrapper">
                <div class="collections-visuelles-slider-track slider-track">
                   <a href="/collections-visuelles#aeriennes-gallery" class="collections-slider-card slider-item">
-                     <img src="/images/collections/visuelles/170822-guerande-55-998x665.jpg" alt="Drone" />
+                     <img src="/images/collections/visuelles/170822-guerande-55-998x665.jpg" alt="Photographie aérienne par drone des marais salants de Guérande" width="998" height="665" loading="lazy" />
                      <div class="collections-slider-overlay">
                         <h3 class="collections-slider-title">Aériennes</h3>
                         <span class="collections-slider-link" aria-label="Voir la galerie pour">Voir la galerie</span>
                      </div>
                   </a>
                   <a href="/collections-visuelles#gastronomie" class="collections-slider-card slider-item">
-                     <img src="/images/collections/visuelles/jmf-gastro-4-998x664.jpg" alt="photo culinaire" />
+                     <img src="/images/collections/visuelles/jmf-gastro-4-998x664.jpg" alt="Photographie culinaire gastronomique professionnelle" width="998" height="664" loading="lazy" />
                      <div class="collections-slider-overlay">
                         <h3 class="collections-slider-title">Gastronomie</h3>
                         <span class="collections-slider-link" aria-label="Voir la galerie pour">Voir la galerie</span>
                      </div>
                   </a>
                   <a href="/collections-visuelles#graphisme-gallery" class="collections-slider-card slider-item">
-                     <img src="/images/collections/visuelles/sochoc-5-700x504.jpg" alt="photo graphique" />
+                     <img src="/images/collections/visuelles/sochoc-5-700x504.jpg" alt="Photographie graphique et créative" width="700" height="504" loading="lazy" />
                      <div class="collections-slider-overlay">
                         <h3 class="collections-slider-title">Graphisme</h3>
                         <span class="collections-slider-link" aria-label="Voir la galerie pour">Voir la galerie</span>
                      </div>
                   </a>
                   <a href="/collections-visuelles#montgolfiere-gallery" class="collections-slider-card slider-item">
-                     <img src="/images/collections/visuelles/200815-Montgolfiere-20.jpg" alt="photo montgolfière" />
+                     <img src="/images/collections/visuelles/200815-Montgolfiere-20.jpg" alt="Photographie de montgolfière en vol" width="998" height="665" loading="lazy" />
                      <div class="collections-slider-overlay">
                         <h3 class="collections-slider-title">Montgolfière</h3>
                         <span class="collections-slider-link" aria-label="Voir la galerie pour">Voir la galerie</span>
                      </div>
                   </a>
                   <a href="/collections-visuelles#musique-gallery" class="collections-slider-card slider-item">
-                     <img src="/images/collections/visuelles/musique-768x1148.png" alt="photo concert" />
+                     <img src="/images/collections/visuelles/musique-768x1148.png" alt="Photographie de concert et scène musicale" width="768" height="1148" loading="lazy" />
                      <div class="collections-slider-overlay">
                         <h3 class="collections-slider-title">Musique</h3>
                         <span class="collections-slider-link" aria-label="Voir la galerie pour">Voir la galerie</span>
                      </div>
                   </a>
                   <a href="/collections-visuelles#salins-gallery" class="collections-slider-card slider-item">
-                     <img src="/images/collections/visuelles/170822-BatzsurMer-036.jpg" alt="photo salins" />
+                     <img src="/images/collections/visuelles/170822-BatzsurMer-036.jpg" alt="Photographie des Salins du Midi à Batz-sur-Mer" width="998" height="665" loading="lazy" />
                      <div class="collections-slider-overlay">
                         <h3 class="collections-slider-title">Salins du Midi</h3>
                         <span class="collections-slider-link" aria-label="Voir la galerie pour">Voir la galerie</span>
                      </div>
                   </a>
                   <a href="/collections-visuelles#sequence-gallery" class="collections-slider-card slider-item">
-                     <img src="/images/collections/visuelles/100503346-850x1200.jpg" alt="photo sequence snowboard" />
+                     <img src="/images/collections/visuelles/100503346-850x1200.jpg" alt="Séquence photographique snowboard en action" width="850" height="1200" loading="lazy" />
                      <div class="collections-slider-overlay">
                         <h3 class="collections-slider-title">Séquence</h3>
                         <span class="collections-slider-link" aria-label="Voir la galerie pour">Voir la galerie</span>
                      </div>
                   </a>
                   <a href="/collections-visuelles#studio-gallery" class="collections-slider-card slider-item">
-                     <img src="/images/collections/visuelles/image-276-998x665.jpg" alt="photo studio" />
+                     <img src="/images/collections/visuelles/image-276-998x665.jpg" alt="Photographie studio professionnelle" width="998" height="665" loading="lazy" />
                      <div class="collections-slider-overlay">
                         <h3 class="collections-slider-title">Studio</h3>
                         <span class="collections-slider-link" aria-label="Voir la galerie pour">Voir la galerie</span>
                      </div>
                   </a>
                   <a href="/collections-visuelles#voyages-gallery" class="collections-slider-card slider-item">
-                     <img src="/images/collections/visuelles/061113-egypte-1-998x665.jpg" alt="photo voyage montagnes egypte" />
+                     <img src="/images/collections/visuelles/061113-egypte-1-998x665.jpg" alt="Photographie de voyage en Égypte - paysages de montagne" width="998" height="665" loading="lazy" />
                      <div class="collections-slider-overlay">
                         <h3 class="collections-slider-title">Voyages</h3>
                         <span class="collections-slider-link" aria-label="Voir la galerie pour">Voir la galerie</span>
@@ -167,56 +202,56 @@ import ShowcasePhoto from '../components/ShowcasePhoto.astro'; // <--- ADD THIS 
       <div class="slider-slider-wrapper">
          <div class="collections-region-slider-track slider-track">
                   <a href="/collections-region-aura#annecy-gallery" class="collections-slider-card slider-item">
-                     <img src="/images/collections/region/061128-annecy-1-2000x1083.jpg" alt="Annecy" />
+                     <img src="/images/collections/region/061128-annecy-1-2000x1083.jpg" alt="Vue du lac d'Annecy et de la vieille ville" width="2000" height="1083" loading="lazy" />
                      <div class="collections-slider-overlay">
                         <h3 class="collections-slider-title">Annecy</h3>
                         <span class="collections-slider-link" aria-label="Voir la galerie pour">Voir la galerie</span>
                      </div>
                   </a>
                   <a href="/collections-region-aura#chamonix-gallery" class="collections-slider-card slider-item">
-                     <img src="/images/collections/region/100916-FalV-Randonnee-07.jpg" alt="Chamonix" />
+                     <img src="/images/collections/region/100916-FalV-Randonnee-07.jpg" alt="Randonnée et paysage de montagne à Chamonix" width="1200" height="800" loading="lazy" />
                      <div class="collections-slider-overlay">
                         <h3 class="collections-slider-title">Chamonix</h3>
                         <span class="collections-slider-link" aria-label="Voir la galerie pour">Voir la galerie</span>
                      </div>
                   </a>
                   <a href="/collections-region-aura#chateaux-gallery" class="collections-slider-card slider-item">
-                     <img src="/images/collections/region/130716-Chateau_de_Duingt-14.jpg" alt="Chateaux" />
+                     <img src="/images/collections/region/130716-Chateau_de_Duingt-14.jpg" alt="Château de Duingt sur le lac d'Annecy" width="1200" height="800" loading="lazy" />
                      <div class="collections-slider-overlay">
                         <h3 class="collections-slider-title">Chateaux</h3>
                         <span class="collections-slider-link" aria-label="Voir la galerie pour">Voir la galerie</span>
                      </div>
                   </a>
                   <a href="/collections-region-aura#event-gallery" class="collections-slider-card slider-item">
-                     <img src="/images/collections/region/171006-SoshBigAir-64.jpg" alt="Evenement" />
+                     <img src="/images/collections/region/171006-SoshBigAir-64.jpg" alt="Événement sportif Sosh Big Air en Haute-Savoie" width="1200" height="800" loading="lazy" />
                      <div class="collections-slider-overlay">
                         <h3 class="collections-slider-title">Event</h3>
                         <span class="collections-slider-link" aria-label="Voir la galerie pour">Voir la galerie</span>
                      </div>
                   </a>
                   <a href="/collections-region-aura#lacs-gallery" class="collections-slider-card slider-item">
-                     <img src="/images/collections/region/130818-Se_vrier-42.jpg" alt="Lacs" />
+                     <img src="/images/collections/region/130818-Se_vrier-42.jpg" alt="Lac d'Annecy depuis Sévrier" width="1200" height="800" loading="lazy" />
                      <div class="collections-slider-overlay">
                         <h3 class="collections-slider-title">Lacs</h3>
                         <span class="collections-slider-link" aria-label="Voir la galerie pour">Voir la galerie</span>
                      </div>
                   </a>
                   <a href="/collections-region-aura#montagnes-gallery" class="collections-slider-card slider-item">
-                     <img src="/images/collections/region/Alpes-Les-Drus-13.jpg" alt="Montagnes" />
+                     <img src="/images/collections/region/Alpes-Les-Drus-13.jpg" alt="Les Drus dans le massif du Mont-Blanc" width="1200" height="800" loading="lazy" />
                      <div class="collections-slider-overlay">
                         <h3 class="collections-slider-title">Montagnes</h3>
                         <span class="collections-slider-link" aria-label="Voir la galerie pour">Voir la galerie</span>
                      </div>
                   </a>
                   <a href="/collections-region-aura#monuments-gallery" class="collections-slider-card slider-item">
-                     <img src="/images/collections/region/200809-Glieres-monument-3.jpg" alt="Monuments" />
+                     <img src="/images/collections/region/200809-Glieres-monument-3.jpg" alt="Monument national des Glières en Haute-Savoie" width="1200" height="800" loading="lazy" />
                      <div class="collections-slider-overlay">
                         <h3 class="collections-slider-title">Monuments</h3>
                         <span class="collections-slider-link" aria-label="Voir la galerie pour">Voir la galerie</span>
                      </div>
                   </a>
                   <a href="/collections-region-aura#ponts-gallery" class="collections-slider-card slider-item">
-                     <img src="/images/collections/region/130826-Pont_de_la_Caille-03.jpg" alt="Ponts" />
+                     <img src="/images/collections/region/130826-Pont_de_la_Caille-03.jpg" alt="Pont de la Caille en Haute-Savoie" width="1200" height="800" loading="lazy" />
                      <div class="collections-slider-overlay">
                         <h3 class="collections-slider-title">Ponts</h3>
                         <span class="collections-slider-link" aria-label="Voir la galerie pour">Voir la galerie</span>
@@ -249,49 +284,49 @@ import ShowcasePhoto from '../components/ShowcasePhoto.astro'; // <--- ADD THIS 
       <div class="slider-slider-wrapper">
          <div class="collections-sports-slider-track slider-track">
                   <a href="/collections-sports#sports-bestof-gallery" class="collections-slider-card slider-item">
-                     <img src="/images/collections/sports/030907-coudrayalex-1-998x1497.jpg" alt="Sports Best Of" />
+                     <img src="/images/collections/sports/030907-coudrayalex-1-998x1497.jpg" alt="Best of photographie sportive - sports de glisse" width="998" height="1497" loading="lazy" />
                      <div class="collections-slider-overlay">
                         <h3 class="collections-slider-title">Best Of</h3>
                         <span class="collections-slider-link" aria-label="Voir la galerie pour">Voir la galerie</span>
                      </div>
                   </a>
                   <a href="/collections-sports#sports-aeriens" class="collections-slider-card slider-item">
-                     <img src="/images/collections/sports/130700674.jpg" alt="Sports Aériens" />
+                     <img src="/images/collections/sports/130700674.jpg" alt="Photographie de sports aériens" width="998" height="665" loading="lazy" />
                      <div class="collections-slider-overlay">
                         <h3 class="collections-slider-title">Sports Aériens</h3>
                         <span class="collections-slider-link" aria-label="Voir la galerie pour">Voir la galerie</span>
                      </div>
                   </a>
                   <a href="/collections-sports#sports-collectifs" class="collections-slider-card slider-item">
-                     <img src="/images/collections/sports/164202402.jpg" alt="Sports Collectifs" />
+                     <img src="/images/collections/sports/164202402.jpg" alt="Photographie de sports collectifs" width="998" height="665" loading="lazy" />
                      <div class="collections-slider-overlay">
                         <h3 class="collections-slider-title">Sports Collectifs</h3>
                         <span class="collections-slider-link" aria-label="Voir la galerie pour">Voir la galerie</span>
                      </div>
                   </a>
                   <a href="/collections-sports#sports-hiver" class="collections-slider-card slider-item">
-                     <img src="/images/collections/sports/10100086-010.jpg" alt="Sports d'Hiver" />
+                     <img src="/images/collections/sports/10100086-010.jpg" alt="Photographie de sports d'hiver en Alpes" width="998" height="665" loading="lazy" />
                      <div class="collections-slider-overlay">
                         <h3 class="collections-slider-title">Sports d'Hiver</h3>
                         <span class="collections-slider-link" aria-label="Voir la galerie pour">Voir la galerie</span>
                      </div>
                   </a>
                   <a href="/collections-sports#sports-mecaniques" class="collections-slider-card slider-item">
-                     <img src="/images/collections/sports/230916-BoldOr23-Masson-1.jpg" alt="Sports Mécaniques" />
+                     <img src="/images/collections/sports/230916-BoldOr23-Masson-1.jpg" alt="Photographie sports mécaniques - Bol d'Or" width="998" height="665" loading="lazy" />
                      <div class="collections-slider-overlay">
                         <h3 class="collections-slider-title">Sports Mécaniques</h3>
                         <span class="collections-slider-link" aria-label="Voir la galerie pour">Voir la galerie</span>
                      </div>
                   </a>
                   <a href="/collections-sports#sports-nautiques" class="collections-slider-card slider-item">
-                     <img src="/images/collections/sports/11441664-029.jpg" alt="Sports Nautiques" />
+                     <img src="/images/collections/sports/11441664-029.jpg" alt="Photographie de sports nautiques" width="998" height="665" loading="lazy" />
                      <div class="collections-slider-overlay">
                         <h3 class="collections-slider-title">Sports Nautiques</h3>
                         <span class="collections-slider-link" aria-label="Voir la galerie pour">Voir la galerie</span>
                      </div>
                   </a>
                   <a href="/collections-sports#sports-terrestres" class="collections-slider-card slider-item">
-                     <img src="/images/collections/sports/150501325.jpg" alt="Sports Terrestres" />
+                     <img src="/images/collections/sports/150501325.jpg" alt="Photographie de sports terrestres" width="998" height="665" loading="lazy" />
                      <div class="collections-slider-overlay">
                         <h3 class="collections-slider-title">Sports Terrestres</h3>
                         <span class="collections-slider-link" aria-label="Voir la galerie pour">Voir la galerie</span>
@@ -325,17 +360,19 @@ import ShowcasePhoto from '../components/ShowcasePhoto.astro'; // <--- ADD THIS 
          </div>
          <div class="gear-logos">
             <a href="https://global.canon/" target="_blank" rel="noopener noreferrer" aria-label="Visit Canon official website">
-               <img src="/logo/gear/canon.svg" alt="Canon Logo">
+               <img src="/logo/gear/canon.svg" alt="Canon" loading="lazy">
             </a>
             <a href="https://profoto.com/" target="_blank" rel="noopener noreferrer" aria-label="Visit Profoto official website">
-               <img src="/logo/gear/profoto.svg" alt="Profoto Logo">
+               <img src="/logo/gear/profoto.svg" alt="Profoto" loading="lazy">
             </a>
             <a href="https://www.multiblitz.com/" target="_blank" rel="noopener noreferrer" aria-label="Visit Multiblitz official website">
-               <img src="/logo/gear/multiblitz.svg" alt="Multiblitz Logo">
+               <img src="/logo/gear/multiblitz.svg" alt="Multiblitz" loading="lazy">
             </a>
          </div>
    </div>
 </section>
+
+<FaqSection items={photoFaqs} />
    
    
 </Layout>

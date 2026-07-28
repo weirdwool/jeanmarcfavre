@@ -114,6 +114,7 @@ const blogSchemaData = {
                alt={entry.data.title}
                width="1200"
                height="675"
+               loading="eager"
                />
          </figure>
          )}
@@ -179,7 +180,7 @@ const blogSchemaData = {
                   <div class="nav-card-body">
                      <div class="nav-card-image">
                         {newerPost.data.main_image && (
-                           <img src={newerPost.data.main_image} alt={newerPost.data.title} loading="lazy" />
+                           <img src={newerPost.data.main_image} alt={newerPost.data.title} width="400" height="300" loading="lazy" />
                         )}
                      </div>
                      <div class="nav-card-content">
@@ -211,7 +212,7 @@ const blogSchemaData = {
                      </div>
                      <div class="nav-card-image">
                         {olderPost.data.main_image && (
-                           <img src={olderPost.data.main_image} alt={olderPost.data.title} loading="lazy" />
+                           <img src={olderPost.data.main_image} alt={olderPost.data.title} width="400" height="300" loading="lazy" />
                         )}
                      </div>
                   </div>

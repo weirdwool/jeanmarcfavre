@@ -1,5 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import StructuredData from "../components/StructuredData.astro";
 ---
 
 <Layout 
@@ -7,6 +8,12 @@ import Layout from "../layouts/Layout.astro";
   description="Collection de photographies de la région Auvergne-Rhône-Alpes. Lac d'Annecy, massifs alpins, paysages de Haute-Savoie et Savoie."
   canonical="/collections-region-aura/"
 >
+<StructuredData type="ImageGallery" data={{
+  name: "Collections Région Auvergne-Rhône-Alpes — Jean-Marc Favre",
+  description: "Galeries photo : Annecy, Chamonix, châteaux, lacs, montagnes, monuments et ponts de Haute-Savoie et Savoie.",
+  url: "https://www.jeanmarcfavre.com/collections-region-aura/",
+  image: "/images/collections/region/061128-annecy-1-2000x1083.jpg"
+}} />
 
   <div class="container-collections">
     <h1 class="text-center">Collections Région AURA</h1>
