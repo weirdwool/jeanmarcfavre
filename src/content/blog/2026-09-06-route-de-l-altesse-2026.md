@@ -2,7 +2,7 @@
 title: "Route de l'Altesse-2026"
 pubDate: 2026-09-06
 location: "Annecy rive Est"
-main_image: "/blog/blog-images/260912-Esperance3-drone-6.jpg"
+main_image: "/blog/blog-images/260906-Route-Altesse-drone-5.jpg"
 gallery_url: "/blog/blog-galeries/260906-Route-de-l-Altesse-2026/index.html"
 video_url: ""
 tags:
