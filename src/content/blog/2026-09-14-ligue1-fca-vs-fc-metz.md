@@ -1,6 +1,6 @@
 ---
 title: "Ligue 1 : FCA vs FC Metz"
-pubDate: 2026-09-14
+pubDate: 2026-08-29
 location: "Annecy"
 main_image: "/blog/blog-images/260829-FCA-Metz-16.jpg"
 gallery_url: "/blog/blog-galeries/260829-Ligue1-FCA-Metz/index.html"
