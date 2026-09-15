@@ -1,5 +1,5 @@
 ---
-title: "Soirée astrophotographie sur Espérance III"
+title: "Soirée astrophoto sur Espérance III"
 pubDate: 2026-09-10
 location: "Talloires"
 main_image: "/blog/blog-images/260910-Esperance3-Nocturne-21.jpg"
