@@ -1,6 +1,6 @@
 ---
 title: "Port de Thonon à l'automne"
-pubDate: 2025-11-08
+pubDate: 2025-10-28
 location: "Thonon les Bains"
 main_image: "/blog/blog-images/251028-thonon-port.jpg"
 gallery_url: "/blog/blog-galeries/251028-Thonon-port/index.html"
@@ -23,4 +23,4 @@ tags:
   voyage: false
 ---
 
-Bénéfice d'un déplacement à Thonon pour le compte de FlyBox., je réalise quelques images plus perso. Je profite des lumières splendides et du vol de mon drone pour faire quelques images du port de Thonon au soleil couchant.
+Bénéfice d'un déplacement à Thonon pour le compte de FlyBox, je réalise quelques images plus perso. Je profite des lumières splendides et du vol de mon drone pour faire quelques images du port de Thonon au soleil couchant.
