@@ -2,7 +2,7 @@
 title: "Musikabor : Swing Chronik sur EsperanceIII"
 pubDate: 2026-09-12
 location: "Annecy"
-main_image: "/blog/blog-images/260912-Esperance3-drone-10.jpg"
+main_image: "/blog/blog-images/260912-Esperance3-Tresalest-3.jpg"
 gallery_url: "/blog/blog-galeries/260912-Musikabor-Esperance3/index.html"
 video_url: ""
 tags:
