@@ -4,7 +4,7 @@ pubDate: 2026-09-06
 location: "Annecy rive Est"
 main_image: "/blog/blog-images/260906-Route-Altesse-drone-5.jpg"
 gallery_url: "/blog/blog-galeries/260906-Route-de-l-Altesse-2026/index.html"
-video_url: ""
+video_url: "https://vimeo.com/1227842190?share=copy&fl=sv&fe=ci"
 tags:
   associatif: true
   culture: false
