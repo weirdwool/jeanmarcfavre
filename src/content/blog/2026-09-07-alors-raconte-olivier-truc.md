@@ -23,6 +23,8 @@ tags:
   voyage: false
 ---
 
-Alors raconte tenait salon ce 7 septembre au bar de la Chapelle à Cran-Gevrier sur la commune d'ANNECY, l'occasion de rencontrer un auteur prolifique et passionnant,, Olivier Truc, pour son polar nordique "Base Toundra"  mais aussi d'écouter Denis Rodi et Lee Broz, accompagné par Paul Ketterer au piano. Un joli moment d'échange, sous la houlette de Serge Delemontex
+Alors raconte tenait salon ce 7 septembre au bar de la Chapelle à Cran-Gevrier sur la commune d'ANNECY, l'occasion de rencontrer un auteur prolifique et passionnant,, Olivier Truc, pour son polar nordique "Base Toundra"  mais aussi d'écouter Denis Rodi et Lee Broz, accompagné par Paul Ketterer au piano. Un joli moment d'échange, sous la houlette de Serge Delemontex.
+
 [Alors raconte !](https://www.alorsraconte.fr/)
+
 [Bar la Chapelle](https://www.lachapelle-annecy.com/bar-la-chapelle/)
