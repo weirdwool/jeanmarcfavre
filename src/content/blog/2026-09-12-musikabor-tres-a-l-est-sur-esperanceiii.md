@@ -1,5 +1,5 @@
 ---
-title: "Musikabor : Très à l'Est sur EspéranceIII"
+title: "Musikabor : \"Très à l'Est\" sur EspéranceIII"
 pubDate: 2026-09-12
 location: "Annecy"
 main_image: "/blog/blog-images/260912-Esperance3-Tresalest-3.jpg"
