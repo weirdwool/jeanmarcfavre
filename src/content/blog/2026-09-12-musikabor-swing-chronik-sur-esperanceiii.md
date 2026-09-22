@@ -1,5 +1,5 @@
 ---
-title: "Musikabor : Swing Chronik sur EsperanceIII"
+title: "Musikabor : Swing Chroniq sur EsperanceIII"
 pubDate: 2026-09-04
 location: "Annecy"
 main_image: "/blog/blog-images/260912-Esperance3-drone-10.jpg"
