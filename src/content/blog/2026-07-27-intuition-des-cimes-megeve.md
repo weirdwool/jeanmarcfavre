@@ -2,8 +2,8 @@
 title: "Intuition des Cimes-Megève"
 pubDate: 2026-07-27
 location: "Megève"
-main_image: "/blog/blog-images/260727-Margara-expo-vernissage-69.jpg"
-gallery_url: "/blog/blog-galeries/260727-Intuition des Cimes-Megeve/index.html"
+main_image: "/blog/blog-images/251228-Margara-expo-2.jpg"
+gallery_url: "/blog/blog-galeries/260727-Intuition-des-Cimes-Megeve/index.html"
 video_url: ""
 tags:
   associatif: false
