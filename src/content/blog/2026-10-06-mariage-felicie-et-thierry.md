@@ -23,4 +23,4 @@ tags:
   voyage: false
 ---
 
-Le mariage, fort sympathique de mon amie Félicie, la fondatrice de l'école Meeo, avec un vrai bourguignon, Thierry. Un moment joyeux et très festif, dans une ambiance pastorale.
+Le mariage, fort sympathique de mon amie Félicie, la fondatrice de l'école Meeo, avec un vrai bourguignon, Thierry pour un moment joyeux et très festif, dans une ambiance pastorale.
