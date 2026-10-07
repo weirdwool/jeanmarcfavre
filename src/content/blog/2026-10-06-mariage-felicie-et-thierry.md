@@ -3,7 +3,7 @@ title: "Mariage Félicie et Thierry"
 pubDate: 2026-10-06
 location: "Jugy"
 main_image: "/blog/blog-images/261003-Fee_Thierry-mariage-43.jpg"
-gallery_url: "/blog/blog-galeries/261003-261003-Mariage-Fee&Thierry/index.html"
+gallery_url: "/blog/blog-galeries/261003-Mariage-Fee&Thierry/index.html"
 video_url: ""
 tags:
   associatif: false
