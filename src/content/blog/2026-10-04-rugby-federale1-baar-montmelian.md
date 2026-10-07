@@ -3,7 +3,7 @@ title: "Rugby Fédérale1 BAAR - Montmélian"
 pubDate: 2026-10-04
 location: "Annecy"
 main_image: "/blog/blog-images/261004-BAAR-Montmelian-6.jpg"
-gallery_url: "/blog/blog-galeries/261004-261004-Rugby-Fed1-Baar-Montmelian/index.html"
+gallery_url: "/blog/blog-galeries/261004-Rugby-Fed1-Baar-Montmelian/index.html"
 video_url: ""
 tags:
   associatif: true
