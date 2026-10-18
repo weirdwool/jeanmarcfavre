@@ -2,7 +2,7 @@
 title: "Tunnel sous le Jardin de l'Europe"
 pubDate: 2026-10-09
 location: "Annecy"
-main_image: "/blog/blog-images/261009-GA-Tunnelier-2.jpg"
+main_image: "/blog/blog-images/261009-GA-Tunnelier-10.jpg"
 gallery_url: "/blog/blog-galeries/261009-GA-Tunnelier/index.html"
 video_url: ""
 tags:
