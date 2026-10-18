@@ -1,6 +1,6 @@
 ---
 title: "Vernissage Pierre Margara"
-pubDate: 2026-10-18
+pubDate: 2026-10-17
 location: "Megève"
 main_image: "/blog/blog-images/261016-Margara-Picot-4.jpg"
 gallery_url: "/blog/blog-galeries/261016-Margara-vernissage/index.html"
