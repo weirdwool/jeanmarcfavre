@@ -23,4 +23,4 @@ tags:
   voyage: false
 ---
 
-C'est dans la salle Catherine Allard, du palais, des festivals de Megève, que Pierre Margara recevait ses amis, collectionneurs et notables de la station pour le vernissage de la troisième partie de son exposition, "les œuvres, monumentales". Un retour sur presque 60 ans de carrière et la réalisation de nombreuses pièces monumentales en Savoie et Haute-Savoie, mais aussi sur l'ensemble du territoire français.
+C'est dans la salle Catherine Allard, du Palais des Festivals de Megève, que Pierre Margara recevait ses amis, collectionneurs et notables de la station pour le vernissage de la troisième partie de son exposition, "les œuvres, monumentales". En présence du maire Jean-Noel Picot, retour sur presque 60 ans de carrière et la réalisation de nombreuses pièces monumentales en Savoie et Haute-Savoie, mais aussi sur l'ensemble du territoire français.
