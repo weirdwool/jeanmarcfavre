@@ -24,4 +24,4 @@ tags:
 ---
 
 Vendredi 9 octobre, le fonds de dotation Sportissimo réunissait à Rochexpo de grandes figures du sport international, des chefs d’entreprise, des artistes et de jeunes espoirs sportifs. Une soirée placée sous le signe de la transmission, de la générosité et de l’engagement, avec la présentation d’une nouvelle promotion de talents accompagnés par des entreprises mécènes.
-
+[https://www.sportissimo.fr/](url)
