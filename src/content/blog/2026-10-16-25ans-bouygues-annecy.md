@@ -23,4 +23,5 @@ tags:
   voyage: false
 ---
 
-Pour le compte de l'agence Cosmik Jump, je réalise le reportage de la soirée des 25 ans de l'agence Bouygues d'Annecy et la signature du contrat pour la réalisation du village olympique, 2032 qui va être réalisé à Saint-Jean de six
+Pour le compte de l'agence Cosmik Jump, je réalise le reportage de la soirée des 25 ans de l'agence Bouygues d'Annecy et la signature du contrat pour la réalisation du village olympique, 2032 qui va être réalisé à Saint-Jean de Six.
+[https://www.cosmik-jump.com/](url)
