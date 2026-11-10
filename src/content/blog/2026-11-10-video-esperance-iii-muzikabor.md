@@ -1,6 +1,6 @@
 ---
 title: "Video Espérance III Muzikabor"
-pubDate: 2026-11-10
+pubDate: 2026-11-08
 location: "Annecy"
 main_image: "/blog/blog-images/Voilier-au-coucher-du-soleil-lacustre2.jpg"
 gallery_url: ""
