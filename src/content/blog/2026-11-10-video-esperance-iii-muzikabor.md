@@ -23,4 +23,4 @@ tags:
   voyage: false
 ---
 
-La vidéo, résumé en moins de quatre minutes, des concerts qui se sont tenus à bord  d'Espérance III durant la saison 2026. Une succession de moment magique, où le temps suspens son cours dans les paysages magnifiques du lac d'Annecy.
+La vidéo résume en moins de quatre minutes les concerts qui se sont tenus à bord d'Espérance III durant la saison 2026. Une succession de moments magiques, où le temps suspens son cours dans les paysages magnifiques du lac d'Annecy.
